@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <!-- <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+
+    <!-- <meta name="viewport" content="width=1024"> -->
+
+    <link rel="shortcut icon" href="">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="codemirror/codemirror-5.60.0/lib/codemirror.css">
+    <link rel="stylesheet" href="codemirror/codemirror-5.60.0/theme/night.css">
+    <link rel="stylesheet" href="codemirror/codemirror-5.60.0/theme/midnight.css">
+    <script src="codemirror/codemirror-5.60.0/lib/codemirror.js"></script>
+    <script src="codemirror/codemirror-5.60.0/mode/javascript/javascript.js"></script>
+
+    <title>Gen-Art-Lab-02</title>
+
+  </head>
+
+  <body>
+
+    
+
+    <div id="container">
+
+      <!-- <div>window-container</div> -->
+      <!-- <div class="window-frame">
+        <button class="frame-button" id="Minimize-Button">&minus;</button>
+        <button class="frame-button" id="Maximize-Button">&square;</button>
+        <button class="frame-button" id="Close-Button">&#10005; </button>
+      </div> -->
+
+      <div class="app-container">
+
+        <!-- DRAWING -->
+        <div class="app-container-item">
+
+          <!-- THE CANVASES -->
+          <div id="drawing-container">
+
+            
+            <canvas class="myCanvas" id="canvas4Wall"></canvas>  
+            <canvas class="myCanvas" id="canvas4WallShadow"></canvas> 
+            <canvas class="myCanvas" id="canvas4Shadow"></canvas>
+          
+            <canvas class="myCanvas" id="canvas0"></canvas>  
+            <canvas class="myCanvas" id="canvas1"></canvas>
+            <canvas class="myCanvas" id="canvas2"></canvas>
+            <canvas class="myCanvas" id="canvas3"></canvas>
+            <canvas class="myCanvas" id="canvas4"></canvas>
+            <canvas class="myCanvas" id="canvas5"></canvas>
+            <canvas class="myCanvas" id="canvas6"></canvas>
+            <canvas class="myCanvas" id="canvas7"></canvas>
+
+            <canvas class="myCanvas" id="canvas4Frame"></canvas>  
+            <canvas class="myCanvas" id="canvas4WallShot"></canvas>           
+
+          </div>        
+        
+        </div>
+
+        <!-- GUI -->
+        <div class="app-container-item">
+
+          <!-- THE GUI -->
+          <div class="input-form-container" id="input-form-container">
+
+            <!-- TABS -->
+            <div class="tab-bar" id="tabs">
+              <button class="tablinks" id="Tab99_Button" name="MainTab">Main</button>
+              <button class="tablinks" id="Tab98_Button" name="DocPropsTab">Doc Props</button>
+
+              <h1>Layers</h1>
+              <!-- <button class="tablinks" id="Tab98_Button" name="LayersTab">Layers</button> -->
+
+              <div class="tab-bar-layers-container" id="tab-bar-layers-container">
+              </div>
+
+              <div class="layer_add_delete_container" id="add_delete_layer_buttons">
+                <button class="layer_list_add_delete_buttons" id="LayerList_Add_Button" >+</button>
+                <button class="layer_list_add_delete_buttons" id="LayerList_AddToEnd_Button" >+_</button>
+
+                <button class="layer_list_add_delete_buttons" id="LayerList_Delete_Button" >-</button>
+                <button class="layer_list_add_delete_buttons" id="LayerList_Delete_Button" ></button>
+
+                <button class="layer_list_add_delete_buttons" id="LayerList_MoveUp_Button"   >^</button>
+                <button class="layer_list_add_delete_buttons" id="LayerList_MoveDown_Button" >v</button>
+              </div>
+
+            </div>
+
+            <!-- INPUT FORM -->
+            <div id="input-form">
+
+              <!-- Main -->
+              <div id="Tab99" class="tabcontent">
+
+                <h4>Project Import</h4>
+                <div class="subsection">
+                  <div class="grid-container-Nx2">
+                    <div class="grid-item">
+                      <h5>Project Name</h5>
+                      <input type="text" class="filename-input" id="fpath"></input>
+                    </div>
+
+                    <div class="grid-item">
+                      <h5></h5>
+                      <button type="button" class="reseed" id="read-json-button">Open Project</button>
+                    </div> 
+                  </div>
+                </div>
+
+                
+                <h4>Export Properties</h4>
+                <div class="subsection">
+                  <div class="grid-container-Nx2">
+
+                    <!-- <div class="grid-item">
+                      <h5>Export DPI</h5>
+                      <input type="number" id="exportDPI"></input>
+                    </div> -->
+
+                    <div class="grid-item">                    
+                      <h5></h5>
+                      <button type="button" class="reseed" id="save-img-button">SaveImg</button> 
+                    </div>                       
+
+                  </div> 
+                </div>
+                
+                <div>
+                  <a id="save_img_link"></a>
+                </div>
+
+                <h4>Save Project</h4>
+                <div class="subsection">
+                  <div class="grid-container-Nx1">
+                    <!-- <p>Be really sure of what you're doing before you press this button!</p> -->
+                    <button type="button" class="reseed" id="save-json-button">Save Project (!!!)</button>  
+                  </div>
+                </div>
+
+                
+
+              </div>
+
+              <!-- Doc Properties -->
+              <div id="Tab98" class="tabcontent">
+                <h2>Document Properties</h2>
+
+              </div>
+
+              <div id="Tab97" class="tabcontent">
+
+                <div id="UIandCodeTab">
+
+                  <!-- <button type="button" class="reseed" id="openControlsPanel_Button">Controls</button> 
+                  <button type="button" class="reseed" id="openCodePanel_Button">Code</button>   -->
+
+                  Controls <input type="range" class="on-off" min="0" max="1" step:="1" value="0" id="ControlsCodeToggle"></input>  Code
+
+                  <button type="button" class="reseed" id="eval_code_button">Eval</button>  
+                  <button type="button" class="reseed" id="save_code_button">Save & Eval</button>  
+                  <button type="button" class="reseed" id="load_code_button">Load</button>  
+                  <!-- <input type="text" id="load_code_name_input"></input>  -->
+
+                </div>
+
+                <input class="TabModule_Input_InTab" name="LayerGeomInput">
+
+                <div id="Tab97ControlsPanel"></div>
+                <div id="Tab97CodePanel"></div>
+
+              </div>             
+
+            </div>              
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <script>
+        
+        // code_editor = document.getElementById("code_editor")
+        // editor = CodeMirror.fromTextArea(code_editor, {
+        //   lineNumbers: true,
+        //   mode: "javascript",
+        //   theme: "midnight",
+        // });
+        // editor.setSize(null,"15rem");
+
+      </script>
+
+
+    </div>
+
+
+    <!-- Utilities -->
+    <script src="js/utilities01.js"></script>
+    <script src="js/jsUtilities.js"></script>
+    <script src="js/setTheme.js"></script>
+    <script src="js/updateDocObject.js"></script>
+    <script src="js/addLayer.js"></script>
+    <script src="js/randomizeParams.js"></script>
+    <script src="js/save2svg.js"></script>
+    <script src="js/codeEditorStuff.js"></script>
+    <script src="js/fromAlgorithm2Code.js"></script>
+
+    <!-- Doc -->
+    <script src="js/docDict.js"></script>
+
+    <!-- Basic Shape Drawing Functions -->
+    <script src="js/drawCircle.js"></script>
+    <script src="js/drawPath.js"></script>
+    <script src="js/drawEllipse.js"></script>
+    <script src="js/drawBezierPath.js"></script>
+    <!-- <script src="js/drawBlob.js"></script> -->
+    <!-- <script src="js/drawCircleBrushed_02.js"></script> -->
+
+    <!-- ALGORITHMS -->
+    <!-- <script src="js/algorithms/trinket_06.js"></script>
+    <script src="js/algorithms/signature_01.js"></script>
+    <script src="js/algorithms/randomCircs_03.js"></script>
+    <script src="js/algorithms/stars_01.js"></script>
+    <script src="js/algorithms/fractalCirc_03.js"></script>
+    <script src="js/algorithms/clouds_01.js"></script>
+    <script src="js/algorithms/circleBrushed_01.js"></script> -->
+
+    <!-- Main Scripts -->
+    <script src="js/makeGUI_Sections.js"></script>
+    <script src="js/sketch.js"></script>
+    <script src="js/readWrite.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/tabsScript.js"></script>  
+    <script src="js/dashboard.js"></script>
+    <script src="js/saveImg.js"></script>
+    
+    
+  </body>
+</html>
+
