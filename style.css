@@ -637,12 +637,12 @@ button.redraw:active {
   /* width: 10rem; */
   grid-row-gap: 1.5rem;
   grid-column-gap: 1rem;
-  margin-bottom:2rem;
+  /* margin-bottom:2rem; */
   justify-items: start;
   /* justify-content: start; */
   align-items: center;
   /* align-content: center; */
-  padding: 1.0rem 0.1rem;
+  padding: 0.5rem 0.5rem;
   /* background-color: var(--clr-subsection); */
   /* border: solid black var(--borderThickness); */
   border-top: 1px solid var(--clr-subsection-border);

@@ -33,14 +33,7 @@ function drawBezierPath(bezierPath,xOffset,yOffset,lineWidth,hue,sat,lit,fillMod
 
         ctx.bezierCurveTo( xc1,yc1, xc2,yc2, x2,y2 );
 
-
-
-        // ctx.save();
-            // circle = {loc:[xc1,yc1], rad:0.01};
-
-            // drawCircle(circle,0,0,0.005,hue+180,sat,lit,"fill",ctx);
-
-        // ctx.restore();
+        // console.log(bezierPath);
 
     }
 
@@ -56,7 +49,7 @@ function drawBezierPath(bezierPath,xOffset,yOffset,lineWidth,hue,sat,lit,fillMod
     }
 
 
-
+    // STUFF FOR DRAWING REFERENCE POINTS
     if(referencePointsOn==0) {
         return;
     }

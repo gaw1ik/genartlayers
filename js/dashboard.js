@@ -15,6 +15,7 @@ window.onload = function () {
   // make the BIG OL' array of code_editors, CodeEditors.
   CodeEditors = [];
   ParamsEditors = [];
+  ControlsDict = [];
 
 
 

@@ -29,19 +29,23 @@ function addCodeEditor(layer) {
 
   // Do the CodeMirror Stuff to convert the text_area to a CodeMirror editor
   // for params edior
-  let params_editor = CodeMirror.fromTextArea(text_area_params, {
+  var params_editor = CodeMirror.fromTextArea(text_area_params, {
     lineNumbers: true,
     mode: "javascript",
     theme: "midnight",
+    // autoRefresh:true,
   });
   params_editor.setSize(null,"15vh");
+  params_editor.refresh();
   // for code editor
-  let code_editor = CodeMirror.fromTextArea(text_area_code, {
+  var code_editor = CodeMirror.fromTextArea(text_area_code, {
     lineNumbers: true,
     mode: "javascript",
     theme: "midnight",
+    // autoRefresh:true,
   });
   code_editor.setSize(null,"55vh");
+  code_editor.refresh();
 
 
   // add the new code editor to the BIG OL' array of code_editors, CodeEditor.
@@ -71,7 +75,7 @@ function addTabButton(layer) {
   tabs_button.innerText = layerIndex + ". " + layer.geometry;
   document.getElementById("tab-bar-layers-container").appendChild(tabs_button);
   
-  // Attach an event listener to the tab button
+  // Attach an event listener to the tab button.
   tabs_button.addEventListener("click", openTab);
 
 }
@@ -99,10 +103,6 @@ function onAddLayerButtonClick(){
   Tabs.splice(newLayerIndex, 0, layer); // insert layer into Layers Array at newLayerIndex (gobal variable)
 
   addCodeEditor(layer);
-
-
-      // layer.codeEditor = code_editor;
-
 
   
   updateLayers();

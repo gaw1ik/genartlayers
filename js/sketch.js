@@ -12,14 +12,9 @@ function onObjectPropertyInput() {
   updateObjectPropertyIndicator(this);
 
   var propertyName = getPropertyNameFromInput("Property",this)
-  var calc = layer.object[propertyName].calc
+  // var calc = layer.object[propertyName].calc
 
-  // Run CALC. Note that I'm not utilizing the calc VS draw functionality at the moment to keep things simple.
-  if(calc==1){
-    calcTab(layer);
-  } else {  
-    drawTab(layer)
-  }
+  drawTab(layer);
 
 }
 
@@ -70,7 +65,7 @@ function drawTab(layer) {
   ctx[layer.ctxIndex].clearRect(0, 0, w, h); 
 
   // make a new random number generator
-  if(layer.object.seed===undefined) {
+  if(layer.object.seed === undefined) {
     var seed = 1;
   } else {
     seed = layer.object.seed.value;
@@ -80,7 +75,7 @@ function drawTab(layer) {
   // console.log("in drawTab, myrng(1) = ",myrng(1));
 
   // draw on canvas
-  window["draw_" + layer.geometry]( ctx[layer.ctxIndex] );
+  window["draw_" + layer.geometry]( ctx[layer.ctxIndex], layer );
   
 }
 

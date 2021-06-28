@@ -71,24 +71,23 @@ function assignToControls(layer) {
   for (let i = 0; i < keys.length; i++) {
 
     var key = keys[i];
-    // console.log("i=",i)
-    // console.log("key=",key)
-    // console.log("object=",object)
-    // console.log("object.key=",object.key)
 
-    var id = object[key].inputID;
+    var id = ControlsDict[key].inputID;
 
-    // console.log("id=",id)
+    // console.log("id",id)
 
-    if (id != null) {
-      // if it's a control then do the thing (otherwise it's a non-control property (like segs or maxBranchPerc) without attributes like min, max, etc.)
+    var input = document.getElementById(id);
 
-      var input = document.getElementById(id);
+    
+
+    if(object[key].value === undefined) {
+      object[key].value = ControlsDict.default;
+    } else {      
       input.value = object[key].value;
-
-      // console.log(id,"value:",object[key].value,key); ///////////////////////////////
     }
+    
   }
+  
 }
 
 
@@ -100,8 +99,10 @@ function assignToControls(layer) {
 
 // for saving to JSON
 var saveJsonButton = document.getElementById("save-json-button");
+saveJsonButton.addEventListener("click", saveProject);
+  
 
-saveJsonButton.addEventListener("click", function () {
+function saveProject () {
 
   var fPathEntry = document.getElementById("fpath");
   var fpath = fPathEntry.value;
@@ -112,9 +113,9 @@ saveJsonButton.addEventListener("click", function () {
   if(confirmation==false) return;
 
 
-  var newTabs = getParamsOnly(Tabs);
+  // var newTabs = getParamsOnly(Tabs);
 
-  let data = JSON.stringify({ doc1: doc1, Tabs: newTabs });
+  let data = JSON.stringify({ doc1: doc1, Tabs: Tabs });
 
   // fs.writeFileSync("C:/Users/Brian/OneDrive/Documents/Gen-Art-Studio/Projects/" + fpath + ".json", data );
   console.log("saved to JSON");
@@ -122,7 +123,7 @@ saveJsonButton.addEventListener("click", function () {
   localStorage.setItem(fpath, data);
   // console.log("saved to local storage");
 
-});
+}
 
 
 
@@ -177,32 +178,27 @@ function getParamsOnly(Tabs) {
 
 
 
-
-
 // for reading from JSON
 var readJsonButton = document.getElementById("read-json-button");
-
-readJsonButton.addEventListener("click", function () {
-  
-  console.log("**Read from JSON**");
+readJsonButton.addEventListener("click", loadProject );
 
 
-  // let rawdata = fs.readFileSync('tree1.json');
+function loadProject() {
+
+  console.log("**Load Project**");
+
+
+  /////////////////////////////////////////////// Bring in file info, and the then file data
   var fPathEntry = document.getElementById("fpath");
   var fpath = fPathEntry.value;
 
-  
-
   var rawData = localStorage.getItem(fpath);
 
-  console.log("rawData",rawData);
-
-  parsedData = JSON.parse(rawData);
-
-  console.log("parsedData",parsedData);
+  var parsedData = JSON.parse(rawData);
 
 
-  // Bring in the Doc object
+
+  //////////////////////////////////////////////// Bring in the Doc object
   var newDoc = docDict();
 
   doc1 = parsedData.doc1;
@@ -237,34 +233,124 @@ readJsonButton.addEventListener("click", function () {
 
 
 
-  // bring in the Tabs object.
-  let newTabs = Object.values( parsedData.Tabs );
+  /////////////////////////////////////////////// Bring in the Tabs object.
+  Tabs = Object.values( parsedData.Tabs );  
+  // console.log("Tabs", Tabs);
 
+  for (let i = 0; i < Tabs.length; i++) {
+
+    var layer = Tabs[i];
+
+    addCodeEditor(layer);
+
+    addTabButton(layer);
+
+    // // get the layer attributes
+    // var layerIndex = layer.ctxIndex;
+    // var geometry = layer.geometry;
+
+    // Load the algorithm for this layer. Also evaluates the code so it's usable.
+    loadAlgorithm(layer);
+
+    
+
+    // bringInLayer(layer);
   
-
-  console.log("newTabs",newTabs);
-
-  // return;
-
-  // Bring in info from the Tabs object to make tab guis, make geometry objects, assign to controls...
-  Tabs = newTabs; // initially, let's just set Tabs = newTabs
-  for (let i = 0; i < newTabs.length; i++) {
-
-    var layer = newTabs[i];
-
-    // console.log("reading in Tab", i ,"with geometry", layer.geometry);
-    // console.log("layer", layer);
-    // onAddLayerButtonClick();
-    
-    bringInLayer(layer);
-    
   }
 
   updateLayers();
 
   handleResize();
 
-});
+}
+
+
+
+
+
+// for reading from JSON
+// var readJsonButton = document.getElementById("read-json-button");
+
+
+// // the old readJASON function...
+// readJsonButton.addEventListener("click", function () {
+  
+//   console.log("**Read from JSON**");
+
+
+//   // let rawdata = fs.readFileSync('tree1.json');
+//   var fPathEntry = document.getElementById("fpath");
+//   var fpath = fPathEntry.value;
+
+  
+
+//   var rawData = localStorage.getItem(fpath);
+
+//   console.log("rawData",rawData);
+
+//   parsedData = JSON.parse(rawData);
+
+//   console.log("parsedData",parsedData);
+
+
+//   // Bring in the Doc object
+//   var newDoc = docDict();
+
+//   doc1 = parsedData.doc1;
+//   var keys = Object.keys(doc1);
+
+//   // document object
+//   for (let i = 0; i < keys.length; i++) {
+
+//     var parameter = keys[i]
+
+//     if(newDoc[parameter]==null){
+//       console.warn("the parameter ",parameter, "was not found in the prototype object for newDoc");
+//     } else {
+//       parameter = keys[i];
+//       newDoc[parameter].value = doc1[parameter].value;
+//     }
+
+//   }
+
+//   doc1 = newDoc;
+
+//   var keys = Object.keys(doc1);
+//   for (let i = 0; i < keys.length; i++) {
+//     var key = keys[i];
+//     var inputID = "doc_" + "Property" + key + "_Input";
+//     // console.log("key",key)
+//     var element = document.getElementById(inputID);
+//     element.value = doc1[key].value;
+//     updateObjectPropertyIndicator(element);
+
+//   }
+
+
+
+
+//   // bring in the Tabs object.
+//   let newTabs = Object.values( parsedData.Tabs );  
+
+//   // console.log("newTabs",newTabs);
+
+//   // return;
+
+//   // Bring in info from the Tabs object to make tab guis, make geometry objects, assign to controls...
+//   Tabs = newTabs; // initially, let's just set Tabs = newTabs
+//   for (let i = 0; i < newTabs.length; i++) {
+
+//     var layer = newTabs[i];
+    
+//     bringInLayer(layer);
+    
+//   }
+
+//   updateLayers();
+
+//   handleResize();
+
+// });
 
 
 
@@ -279,12 +365,9 @@ function bringInLayer(layer) {
   if(layer.geometry=="") {return;}
 
 
-  // get the layerIndex
+  // get the layer attributes
   var layerIndex = layer.ctxIndex;
   var geometry = layer.geometry;
-
-  
-
 
 
   // Get the algorithm out of local storage, and put it in the code editors.
@@ -296,11 +379,9 @@ function bringInLayer(layer) {
   params_editor.setValue( algorithm.params );
   code_editor.setValue( algorithm.drawFunction );
 
-
   
   // evaluate the algorithm so that it's actually usable (excerpt from the function evalAlgorithm(), but without the assignment to the object, ...
   // so that the object doesn't end up with the default values or undefined shit.)
-  var geometry = layer.geometry;
 
   var object_dict_code = fromParams2Code(layer);
   window.eval(object_dict_code);

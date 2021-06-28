@@ -8,15 +8,17 @@ function fromDrawFunction2Code(layer) {
     var layerIndex = layer.ctxIndex;
 
     // code snippet starts with the function declaration
-    var code_snippet = "function draw_" + geometry + "( ctx ) {\n";
+    var code_snippet = "function draw_" + geometry + "( ctx, layer ) {\n";
 
-    var keys = Object.keys(object);
+    var keys = Object.keys(ControlsDict);
 
     for(let i=0; i<keys.length; i++) {
 
         var key = keys[i];
 
-        code_snippet = code_snippet + "var " + key + " = parseFloat(" + geometry + "." + key + ".value, 10 ); \n";
+        // code_snippet = code_snippet + "var " + key + " = parseFloat(" + geometry + "." + key + ".value, 10 ); \n";
+
+        code_snippet = code_snippet + "var " + key + " = " + "layer.object." + key + ".value" + "; \n";
 
     }
 
@@ -53,7 +55,7 @@ function fromParams2Code(layer) {
 
     code_snippet = code_snippet + geometry + " = { \n"
 
-    console.log("layerIndex",layerIndex);
+    // console.log("layerIndex",layerIndex);
 
     var params_editor = ParamsEditors[layerIndex];
 
@@ -73,8 +75,15 @@ function fromParams2Code(layer) {
 
 
 
+function fromAlgorithm2Code(layer) {
 
+    fromParams2Code(layer);
 
+    ControlsDict = window[geometry + "Dict"]();
+
+    fromDrawFunction2Code(layer);
+
+}
 
 
 

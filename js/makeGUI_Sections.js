@@ -47,17 +47,6 @@ function makeGUICodePanel(layer) {
 
   var layerIndex = layer.ctxIndex;
 
-  // clear out the layer...
-  // var Tab97 = document.getElementById("Tab97");
-  // removeAllChildNodesExcept(Tab97);
-  // var Tab97CodePanel = document.getElementById("Tab97CodePanel");
-  // removeAllChildNodesExceptCode(Tab97CodePanel);
-
-  // Append text_area it to Tab97InnerPanel
-  // var text_area = document.getElementById("text_area_" + "Layer" + layerIndex);
-  // var Tab97InnerPanel = document.getElementById("Tab97InnerPanel");
-  // Tab97InnerPanel.appendChild(text_area);
-  // text_area.style.display = "block";
 
   // make the Controls Panel invisible.
   let Tab97ControlsPanel = document.getElementById("Tab97ControlsPanel");
@@ -118,6 +107,9 @@ function makeGUIControlsPanel(layer) {
   console.log("makeGUIControlsPanel");
 
   var layerIndex = layer.ctxIndex;
+  var geometry = layer.geometry;
+
+
 
 
   // make the Code Panel invisible.
@@ -133,21 +125,18 @@ function makeGUIControlsPanel(layer) {
   removeAllChildNodes(Tab97ControlsPanel);
 
   
-  // // make all the code mirror editors invisible
-  // var CodeMirror = document.getElementsByClassName("CodeMirror cm-s-midnight");
-  // for(let i=0; i<CodeMirror.length; i++){
-  //   CodeMirror[i].style.display = "none";
-  // }
-  
 
   var tabNameExtension = "Tab97";  
 
-  var object = layer.object;
+  // var object = layer.object;
+
+
 
   // tabElement = document.getElementById("Tab97");
   tabElement = document.getElementById("Tab97ControlsPanel");
 
   var layerGeomInputs = document.getElementsByName("LayerGeomInput");
+  // console.log("layerGeomInputs",layerGeomInputs);
   var layerGeomInput = layerGeomInputs[0];
   var layerGeomInputID = tabNameExtension + "_Layer" + layerIndex + "_LayerGeomInput";
   layerGeomInput.id = layerGeomInputID;
@@ -155,17 +144,29 @@ function makeGUIControlsPanel(layer) {
   layerGeomInput.value = layer.geometry;
 
 
+  console.log("geometry",geometry);
+
+  // if the geometry hasnt been defined yet, skip everything else
+  if(geometry=="") {return;}
+  // console.log("geometry", geometry);
+  ControlsDict = window[geometry + "Dict"]();
+
+
 
   // get the parameter keys
-  var keys = Object.keys(object);
+  var keys = Object.keys(ControlsDict);
 
-  // for each parameter add and set up an input in the input-form
+  console.log("keys",keys);
+
+  // for each parameter add and set up an input in the controls panel.
   for (let i = 0; i < keys.length; i++) {
 
     var key = keys[i];
 
-    // if it's the first iteration and it's neither a section header or a header only (kinda shitty if statement)
-    if(i==0 && (object[key].type == "range" || object[key].type == "number")) {
+    console.log("key",key);
+
+    // // if it's the first iteration and it's neither a section header or a header only (sorry, kind of a shitty if statement...)
+    // if(i==0 && (object[key].type == "range" || object[key].type == "number")) {
 
       var input_section = document.createElement("DIV")
       var nColumns = 2
@@ -173,48 +174,64 @@ function makeGUIControlsPanel(layer) {
 
       tabElement.appendChild(input_section);
 
-    }
+    // }
 
-    if(object[key].type == "header_only") {
-      var section_header = document.createElement("H2")
-      section_header.innerText = object[key].title
-      tabElement.appendChild(section_header)
-    }
+    // if(object[key].type == "header_only") {
+    //   var section_header = document.createElement("H2")
+    //   section_header.innerText = object[key].title
+    //   tabElement.appendChild(section_header)
+    // }
 
-    if(object[key].type == "section_header") {
+    // if(object[key].type == "section_header") {
 
-      var section_header = document.createElement("H4")
-      section_header.innerText = object[key].title;
+    //   var section_header = document.createElement("H4")
+    //   section_header.innerText = object[key].title;
 
-      var input_section = document.createElement("DIV")
-      // var nColumns = object[key].columns
-      var nColumns = 2
-      input_section.className = "grid-container-Nx" + nColumns
+    //   var input_section = document.createElement("DIV")
+    //   // var nColumns = object[key].columns
+    //   var nColumns = 2
+    //   input_section.className = "grid-container-Nx" + nColumns
 
-      tabElement.appendChild(section_header);
-      tabElement.appendChild(input_section);
-    }
+    //   tabElement.appendChild(section_header);
+    //   tabElement.appendChild(input_section);
+    // }
 
-    if (object[key].type == "range" || object[key].type == "number") { // if it's a control then do the thing (otherwise it's a non-control property without attributes like min, max, etc.)
+    // if (object[key].type == "range" || object[key].type == "number") { // if it's a control then do the thing (otherwise it's a non-control property without attributes like min, max, etc.)
 
-      var div = document.createElement("DIV");
+      // var div = document.createElement("DIV");
       var input = document.createElement("INPUT");
       var label = document.createElement("H5");
 
       // handles adding the value indicator
-      if (object[key].class == "on-off") {
+      if (ControlsDict[key].class == "on-off") {
         label.innerText = key;
-      } else if (object[key].class == null) {
+      } else if (ControlsDict[key].class == null) {
         label.innerText = key;
       } else {
         label.innerText = key + "()";
       }
       
 
-      input.type = object[key].type;
-
-      if (object[key].class != null) {
-        input.className = object[key].class;
+      // select the HTML type and CSS className for the input based on the "class" attribute that the user has defined...
+      // input.type = object[key].type; (delete this?)
+      if (ControlsDict[key].class == "number") {
+        input.type = "number";
+        input.className = "number";
+      } else if (ControlsDict[key].class == "slider") {
+        input.type = "range";
+        input.className = "slider";
+      } else if (ControlsDict[key].class == "slider-hue") {
+        input.type = "range";
+        input.className = "slider-hue";
+      } else if (ControlsDict[key].class == "slider-sat") {
+        input.type = "range";
+        input.className = "slider-sat";
+      } else if (ControlsDict[key].class == "slider-lit") {
+        input.type = "range";
+        input.className = "slider-lit";
+      } else if (ControlsDict[key].class == "on-off") {
+        input.type = "range";
+        input.className = "on-off";
       }
 
       var propertyName = key;
@@ -222,10 +239,11 @@ function makeGUIControlsPanel(layer) {
 
       // assign stuff to the object's various attributes...
       input.id = inputID; // add the Tab Name to the input ID so it looks like Tab_1_01, for instance
-      input.min = object[key].min;
-      input.max = object[key].max;
-      input.step = object[key].step;
-      // and assigning the value is a lil' more complicated...
+      input.min = ControlsDict[key].min;
+      input.max = ControlsDict[key].max;
+      input.step = ControlsDict[key].step;
+      // and assigning the value is a lil' more complicated... If it's undefined, set it to the default value, otherwise set it to the value.
+      var object = layer.object;
       if(object[key].value===undefined) {
         input.value = object[key].default;
       } else {
@@ -233,7 +251,7 @@ function makeGUIControlsPanel(layer) {
       }
       
 
-      object[key].inputID = input.id;
+      ControlsDict[key].inputID = input.id;
 
       input.addEventListener("input", onObjectPropertyInput);
 
@@ -247,7 +265,7 @@ function makeGUIControlsPanel(layer) {
 
       updateObjectPropertyIndicator(input);
 
-    }
+    
   }
 
   assignToControls(layer); // can you delete this??????????????????????????????????????????????????????????????????????????????
