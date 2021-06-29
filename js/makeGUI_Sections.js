@@ -1,3 +1,4 @@
+////////////////////////////////////////////////////////////////////
 function onLayerGeomInput() {
 
   var layerIndex = getNamedIndexOfElement("Layer",this);
@@ -38,9 +39,47 @@ function onLayerGeomInput() {
 
 
 
+//////////////////////////////////////////////////////////////////// I'm pretty sure I don't use this anywhere and can delete...
+// function assignToControls(layer) {
+//   // console.log("object:",object);
+
+//   var tabID = layer.name;
+//   var geometry = layer.geometry;
+
+//   // var object = window[geometry + tabID];
+//   var object = layer.object;
+
+//   // console.log("geometry + tabID:",geometry + tabID);
+
+//   var keys = Object.keys(object);
+
+//   for (let i = 0; i < keys.length; i++) {
+
+//     var key = keys[i];
+
+//     var id = ControlsDict[key].inputID;
+
+//     // console.log("id",id)
+
+//     var input = document.getElementById(id);
+
+    
+
+//     if(object[key].value === undefined) {
+//       object[key].value = ControlsDict.default;
+//     } else {      
+//       input.value = object[key].value;
+//     }
+    
+//   }
+  
+// }
 
 
 
+
+
+////////////////////////////////////////////////////////////////////
 function makeGUICodePanel(layer) {
 
   console.log("makeGUICodePanel")
@@ -100,8 +139,7 @@ function makeGUICodePanel(layer) {
 
 
 
-
-// need to rename this to "makeGUIControlsPanel"
+////////////////////////////////////////////////////////////////////
 function makeGUIControlsPanel(layer) {
 
   console.log("makeGUIControlsPanel");
@@ -144,7 +182,7 @@ function makeGUIControlsPanel(layer) {
   layerGeomInput.value = layer.geometry;
 
 
-  console.log("geometry",geometry);
+  // console.log("geometry",geometry);
 
   // if the geometry hasnt been defined yet, skip everything else
   if(geometry=="") {return;}
@@ -156,14 +194,14 @@ function makeGUIControlsPanel(layer) {
   // get the parameter keys
   var keys = Object.keys(ControlsDict);
 
-  console.log("keys",keys);
+  // console.log("keys",keys);
 
   // for each parameter add and set up an input in the controls panel.
   for (let i = 0; i < keys.length; i++) {
 
     var key = keys[i];
 
-    console.log("key",key);
+    // console.log("key",key);
 
     // // if it's the first iteration and it's neither a section header or a header only (sorry, kind of a shitty if statement...)
     // if(i==0 && (object[key].type == "range" || object[key].type == "number")) {
@@ -268,6 +306,6 @@ function makeGUIControlsPanel(layer) {
     
   }
 
-  assignToControls(layer); // can you delete this??????????????????????????????????????????????????????????????????????????????
+  // assignToControls(layer); // can you delete this??????????????????????????????????????????????????????????????????????????????
 
 }

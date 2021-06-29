@@ -2,6 +2,7 @@
 // handles the window.onload tasks and also sets up event handlers
 
 window.onload = function () {
+
   console.log("**Window Loaded**");
 
   // useful constant
@@ -12,10 +13,23 @@ window.onload = function () {
   PIo32 = Math.PI/32;
   PIo64 = Math.PI/64;
 
+
   // make the BIG OL' array of code_editors, CodeEditors.
   CodeEditors = [];
   ParamsEditors = [];
   ControlsDict = [];
+
+
+  // Retrieve the ApplicationData object out of local storagea.
+  var ApplicationDataJSON = localStorage.getItem("ApplicationData");
+  ApplicationData = JSON.parse(ApplicationDataJSON);
+  var recentSavedProjects = ApplicationData.recentSavedProjects;
+  var recent_projects_list = document.getElementById("recent-projects-list");
+  var text = "";
+  for(let i=0; i<recentSavedProjects.length; i++) {
+    text = text + recentSavedProjects[i] + ", ";
+  }
+  recent_projects_list.innerText = text;
 
 
 
@@ -151,14 +165,12 @@ function attachTabButtonEventListeners() {
 //   setTheme_input.addEventListener("change", setTheme);
 // });
 
-// saveImg Event Handler
-document.addEventListener("DOMContentLoaded", function () {
-  SaveImgButton = document.getElementById("save-img-button");
+// // saveImg Event Handler
+// document.addEventListener("DOMContentLoaded", function () {
+//   SaveImgButton = document.getElementById("save-img-button");
 
-  SaveImgButton.addEventListener("click", saveImg);
-});
-
-
+//   SaveImgButton.addEventListener("click", saveImg);
+// });
 
 
 
@@ -180,22 +192,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-currentLayerIndex = 0;
-LayerList_Add_Button = document.getElementById("LayerList_Add_Button");
-LayerList_Add_Button.addEventListener("click", onAddLayerButtonClick);
-
-// LayerList_AddToEnd_Button = document.getElementById("LayerList_AddToEnd_Button");
-// LayerList_AddToEnd_Button.addEventListener("click", onAddToEndLayerButtonClick);
-
-// LayerList_Delete_Button = document.getElementById("LayerList_Delete_Button");
-// LayerList_Delete_Button.addEventListener("click", onDeleteLayerButtonClick);
 
 
-// LayerList_MoveUp_Button = document.getElementById("LayerList_MoveUp_Button");
-// LayerList_MoveUp_Button.addEventListener("click", onMoveUpLayerButtonClick);
 
-// LayerList_MoveDown_Button = document.getElementById("LayerList_MoveDown_Button");
-// LayerList_MoveDown_Button.addEventListener("click", onMoveDownLayerButtonClick);
 
 // // Slider Sat Hue Change Handler
 // // document.addEventListener('DOMContentLoaded', function() {

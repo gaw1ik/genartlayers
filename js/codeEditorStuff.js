@@ -41,8 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Attach event listeners for evaluating and loading code
-eval_code_button = document.getElementById("eval_code_button");
-eval_code_button.addEventListener("click",onEvalAlgorithmButtonClick);
+// BG: Pretty sure I don't need the evalOnly function anymore. It's always save&eval.
+// eval_code_button = document.getElementById("eval_code_button");
+// eval_code_button.addEventListener("click",onEvalAlgorithmButtonClick);
 
 save_code_button = document.getElementById("save_code_button");
 save_code_button.addEventListener("click",onSaveAndEvalAlgorithmButtonClick);
@@ -55,8 +56,10 @@ load_code_button.addEventListener("click",onLoadAlgorithmButtonClick);
 
 function evalAlgorithm(layer) {
 
+  // get the geometry
   var geometry = layer.geometry;
 
+  // get the dict code and evaluate it
   var object_dict_code = fromParams2Code(layer);
   window.eval(object_dict_code);
 
@@ -64,19 +67,44 @@ function evalAlgorithm(layer) {
   // layer.object = window[geometry + "Dict"]();
   ControlsDict = window[geometry + "Dict"]();
 
-  // update the object parameter values to have the default values if they don't already have values.
-  // this catches parameters that were newly added.
-  var object = layer.object;
+
+  // For params that are newly added: Make a new dict for the param (object[key]) and set its value to the default.
+  // BG: BUT we also need to get rid of params that no longer exist. Like, let's say I change param "alpha" to be called "alpha2". I want to bring in "alpha2", but also get rid of the original "alpha".
+  var oldObject = layer.object;
+  var newObject = {};
   var keys = Object.keys(ControlsDict);
+
   for(let i=0; i<keys.length; i++) {
     var key = keys[i];
-    if(object[key] === undefined) {
-      object[key] = {};
-      object[key].value = ControlsDict.default;
+    newObject[key] = {};
+    if(oldObject[key]) {
+      newObject[key].value = oldObject[key].value;
+    } else {
+      newObject[key].value = ControlsDict[key].default;
     }
   }
 
+  // for(let i=0; i<keys.length; i++) {
+  //   var key = keys[i];
+  //   if(object[key] === undefined) {
+  //     object[key] = {};
+  //     object[key].value = ControlsDict.default;
+  //   }
+  // }
 
+  // now we loop through the object keys and check to see if they still exist in the ControlsDict
+  // var keys = Object.keys(object);
+  // for(let i=0; i<keys.length; i++) {
+  //   var key = keys[i];
+  //   if(ControlsDict[key] === undefined) {
+  //     delete object[key];
+  //   }
+  // }
+
+  layer.object = newObject;
+
+
+  // get the draw function code and evaluate it
   var draw_function_code = fromDrawFunction2Code(layer);
   window.eval(draw_function_code);
 

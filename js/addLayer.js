@@ -1,3 +1,25 @@
+currentLayerIndex = 0;
+LayerList_Add_Button = document.getElementById("LayerList_Add_Button");
+LayerList_Add_Button.addEventListener("click", onAddLayerButtonClick);
+
+// LayerList_AddToEnd_Button = document.getElementById("LayerList_AddToEnd_Button");
+// LayerList_AddToEnd_Button.addEventListener("click", onAddToEndLayerButtonClick);
+
+LayerList_Delete_Button = document.getElementById("LayerList_Delete_Button");
+LayerList_Delete_Button.addEventListener("click", onDeleteLayerButtonClick);
+
+
+// LayerList_MoveUp_Button = document.getElementById("LayerList_MoveUp_Button");
+// LayerList_MoveUp_Button.addEventListener("click", onMoveUpLayerButtonClick);
+
+// LayerList_MoveDown_Button = document.getElementById("LayerList_MoveDown_Button");
+// LayerList_MoveDown_Button.addEventListener("click", onMoveDownLayerButtonClick);
+
+
+
+
+
+
 function addCodeEditor(layer) {
 
   var newLayerIndex = layer.ctxIndex;
@@ -44,7 +66,7 @@ function addCodeEditor(layer) {
     theme: "midnight",
     // autoRefresh:true,
   });
-  code_editor.setSize(null,"55vh");
+  code_editor.setSize(null,"50vh");
   code_editor.refresh();
 
 
@@ -196,8 +218,22 @@ function onMoveDownLayerButtonClick() {
 function onDeleteLayerButtonClick(){
 
   Tabs.splice(currentLayerIndex, 1);
+
+  // add the new code editor to the BIG OL' array of code_editors, CodeEditor.
+  CodeEditors.splice(currentLayerIndex, 1);
+  ParamsEditors.splice(currentLayerIndex, 1);
   
+  // clear the canvas on the layer that was just deleted
+  ctx[currentLayerIndex].clearRect(0,0,w,h);
+
   updateLayers();
+
+  console.log("Tab97" + "_Layer" + (currentLayerIndex-1) + "_Button");
+  // Unless the layer you are deleting is the 0th layer, open the tab below the one you just deleted.
+  if(currentLayerIndex>0){
+    document.getElementById("Tab97" + "_Layer" + (currentLayerIndex-1) + "_Button").click();
+  }
+
 }
 
 

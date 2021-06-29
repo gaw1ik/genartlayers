@@ -55,40 +55,7 @@ function assignFromControls(object) {
 
 
 
-function assignToControls(layer) {
-  // console.log("object:",object);
 
-  var tabID = layer.name;
-  var geometry = layer.geometry;
-
-  // var object = window[geometry + tabID];
-  var object = layer.object;
-
-  // console.log("geometry + tabID:",geometry + tabID);
-
-  var keys = Object.keys(object);
-
-  for (let i = 0; i < keys.length; i++) {
-
-    var key = keys[i];
-
-    var id = ControlsDict[key].inputID;
-
-    // console.log("id",id)
-
-    var input = document.getElementById(id);
-
-    
-
-    if(object[key].value === undefined) {
-      object[key].value = ControlsDict.default;
-    } else {      
-      input.value = object[key].value;
-    }
-    
-  }
-  
-}
 
 
 
@@ -105,11 +72,11 @@ saveJsonButton.addEventListener("click", saveProject);
 function saveProject () {
 
   var fPathEntry = document.getElementById("fpath");
-  var fpath = fPathEntry.value;
+  var projName = fPathEntry.value;
   
 
   // confirmation message stuff.
-  var confirmation = confirm("Are you sure you want to overwrite '" + fpath +"' ?");
+  var confirmation = confirm("Are you sure you want to overwrite '" + projName +"' ?");
   if(confirmation==false) return;
 
 
@@ -120,8 +87,27 @@ function saveProject () {
   // fs.writeFileSync("C:/Users/Brian/OneDrive/Documents/Gen-Art-Studio/Projects/" + fpath + ".json", data );
   console.log("saved to JSON");
   // 
-  localStorage.setItem(fpath, data);
+  localStorage.setItem(projName, data);
   // console.log("saved to local storage");
+
+  // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array...
+  // and then update recentSavedProjects to have the most reent 8.
+  var recentSavedProjects = ApplicationData.recentSavedProjects;
+  var yep = 1;
+  for(let i=0; i<recentSavedProjects.length; i++){
+    if( projName == recentSavedProjects[i] ) {
+      yep = 0;
+    }
+  }
+  if( yep == 1 ) {
+    recentSavedProjects.splice(0,0,projName);
+  }
+  // most recent 8.
+  recentSavedProjects = ApplicationData.recentSavedProjects.slice(0,8); 
+  ApplicationData.recentSavedProjects = recentSavedProjects;
+  // save ApplicationData to local storage
+  let ApplicationDataJSON = JSON.stringify(ApplicationData);
+  localStorage.setItem("ApplicationData", ApplicationDataJSON);
 
 }
 
