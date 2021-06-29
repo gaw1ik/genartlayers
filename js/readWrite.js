@@ -223,6 +223,14 @@ function loadProject() {
   Tabs = Object.values( parsedData.Tabs );  
   // console.log("Tabs", Tabs);
 
+  // Clear out the CodeEditors and ParamsEditors objects AND remove all the HTML CodeMirror Elements in this layer (otherwise they stick around and eff' stuff up).
+  CodeEditors = [];
+  ParamsEditors = [];
+  var Tab97CodePanel = document.getElementById("Tab97CodePanel");
+  removeAllChildNodes(Tab97CodePanel);
+
+
+  // for each layer add a code editor, add a tab button, and load the algorithm.
   for (let i = 0; i < Tabs.length; i++) {
 
     var layer = Tabs[i];
@@ -231,16 +239,8 @@ function loadProject() {
 
     addTabButton(layer);
 
-    // // get the layer attributes
-    // var layerIndex = layer.ctxIndex;
-    // var geometry = layer.geometry;
-
     // Load the algorithm for this layer. Also evaluates the code so it's usable.
     loadAlgorithm(layer);
-
-    
-
-    // bringInLayer(layer);
   
   }
 

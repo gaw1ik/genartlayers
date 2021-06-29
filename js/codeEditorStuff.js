@@ -127,7 +127,7 @@ function onEvalAlgorithmButtonClick() {
 
 
 
-
+///////////////////////////////////////////////////////////////////
 function onSaveAndEvalAlgorithmButtonClick(){
 
   // get the code name
@@ -149,10 +149,13 @@ function onSaveAndEvalAlgorithmButtonClick(){
   params_editor = ParamsEditors[currentLayerIndex];
 
 
+  console.log("params_editor.getValue()", params_editor.getValue());
   // Get the algorithm from the code editors.
   var algorithm = {};
   algorithm.params = params_editor.getValue();
   algorithm.drawFunction = code_editor.getValue();
+
+  
 
 
   // Convert the algorithm to a JSON object and save to local storage.
@@ -169,7 +172,7 @@ function onSaveAndEvalAlgorithmButtonClick(){
 
 
 
-
+///////////////////////////////////////////////////////////////////
 function onLoadAlgorithmButtonClick() {
 
   // get the current layer.
@@ -185,7 +188,7 @@ function onLoadAlgorithmButtonClick() {
   // console.log("load_code_name",load_code_name);
   layer.geometry = load_code_name;
 
-  // console.log("layer.geometry",layer.geometry);
+  console.log("layer.geometry",layer.geometry);
 
   loadAlgorithm(layer);
 
@@ -213,7 +216,7 @@ function loadAlgorithm(layer) {
   var algorithmJSON = localStorage.getItem(geometry);
   var algorithm = JSON.parse(algorithmJSON);
 
-  // console.log("geometry",geometry);
+  console.log("algorithm.params",algorithm.params);
 
   params_editor.setValue( algorithm.params );
   code_editor.setValue( algorithm.drawFunction );
@@ -271,7 +274,12 @@ function loadAlgorithm(layer) {
   // finish by recalculating/redrawing everything
   drawTab(layer);
 
-  makeGUIControlsPanel(layer);
+  var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
+  if(ControlsCodeToggle.value==1) {
+    makeGUICodePanel(layer);
+  } else {
+    makeGUIControlsPanel(layer);
+  }
 
 
 }

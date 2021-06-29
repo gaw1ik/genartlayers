@@ -222,6 +222,12 @@ function onDeleteLayerButtonClick(){
   // add the new code editor to the BIG OL' array of code_editors, CodeEditor.
   CodeEditors.splice(currentLayerIndex, 1);
   ParamsEditors.splice(currentLayerIndex, 1);
+  var id = "text_area_params_Layer" + currentLayerIndex;
+  var text_area_params = document.getElementById(id);
+  id = "text_area_code_Layer" + currentLayerIndex;
+  var text_area_code = document.getElementById(id);
+  text_area_code.remove();
+  text_area_params.remove();
   
   // clear the canvas on the layer that was just deleted
   ctx[currentLayerIndex].clearRect(0,0,w,h);
