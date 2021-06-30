@@ -102,15 +102,28 @@ function makeGUICodePanel(layer) {
   var CodeMirrors = document.getElementsByClassName("CodeMirror cm-s-midnight");
   for(let i=0; i<CodeMirrors.length; i++){
     CodeMirrors[i].style.display = "none";
-    
   }  
-  // this layer's params editor
-  CodeMirrors[2*layerIndex  ].style.display = "block";
-  // this layer's code editor
-  CodeMirrors[2*layerIndex+1].style.display = "block";
 
-  console.log("2*layerIndex  ",2*layerIndex  );
-  console.log("2*layerIndex+1",2*layerIndex+1);
+  // var header = document.createElement("h3");
+  // header.innerText = "Params";
+  // Tab97CodePanel.appendChild(header);
+
+  // this layer's params editor
+  var params_editor_element = CodeMirrors[2*layerIndex  ];
+  params_editor_element.style.display = "block";
+  var params_editor_object = ParamsEditors[layerIndex];
+  params_editor_object.refresh();
+
+  // header = document.createElement("h3");
+  // header.innerText = "DrawFunction";
+  // Tab97CodePanel.appendChild(header);
+
+  // this layer's code editor
+  var code_editor_element = CodeMirrors[2*layerIndex+1];
+  code_editor_element.style.display = "block";
+  var code_editor_object = CodeEditors[layerIndex];
+  code_editor_object.refresh();
+
 
   var tabNameExtension = "Tab97";  
 

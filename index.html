@@ -104,6 +104,8 @@
               <!-- Main -->
               <div id="Tab99" class="tabcontent">
 
+                <h2>Main</h2>
+
                 <h4>Project Import</h4>
                 <div class="subsection">
                   <div class="grid-container-Nx2">
@@ -171,16 +173,23 @@
                   <!-- <button type="button" class="reseed" id="openControlsPanel_Button">Controls</button> 
                   <button type="button" class="reseed" id="openCodePanel_Button">Code</button>   -->
 
-                  Controls <input type="range" class="on-off" min="0" max="1" step:="1" value="0" id="ControlsCodeToggle"></input>  Code
+                  <div id="Tab97" class="grid-container-Nx2" style="grid-template-columns: 2fr 5fr;">
+                    <h3 id="layer_header"></h3>
+                    <input class="layer_geom_input" name="LayerGeomInput">
+                  </div>
 
-                  <!-- <button type="button" class="reseed" id="eval_code_button">Eval</button>   -->
-                  <button type="button" class="reseed" id="save_code_button">Save & Eval</button>  
-                  <button type="button" class="reseed" id="load_code_button">Load</button>  
-                  <!-- <input type="text" id="load_code_name_input"></input>  -->
+                  <div class="editor_tools_bar">
+                    <input type="range" class="controls_code_toggle" min="0" max="1" step:="1" value="0" id="ControlsCodeToggle"></input>
+
+                    <!-- <button type="button" class="reseed" id="eval_code_button">Eval</button>   -->
+                    <button type="button" class="editor_buttons" id="save_code_button">Save & Eval</button>  
+                    <button type="button" class="editor_buttons" id="load_code_button">Load</button>  
+                    <!-- <input type="text" id="load_code_name_input"></input>  -->
+                  </div>
+
+
 
                 </div>
-
-                <input class="TabModule_Input_InTab" name="LayerGeomInput">
 
                 <div id="Tab97ControlsPanel"></div>
                 <div id="Tab97CodePanel"></div>

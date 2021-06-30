@@ -185,7 +185,8 @@ h5 {
   margin: 0;
   font-weight: 500;
   color: var(--clr_h5);
-  /* margin-left: 10px; */
+  /* text-align:end; */
+  /* margin-left: auto; */
   /* margin-bottom: 1px; */
   /* margin-top:2rem; */
 }
@@ -231,7 +232,7 @@ input:focus {
   padding: 2rem;
 }
 
-.TabModule_Input_InTab {
+.layer_geom_input {
   width:100%;
   /* width:auto; */
   /* justify-self:center; */
@@ -277,6 +278,9 @@ button:active {
   /* background-color: color( var(--clr-button) lightness(+10%)); */
 }
 
+
+
+
 button.reseed {
   /* justify-self: end; */
   /* width: 100%; */
@@ -296,6 +300,73 @@ button.reseed:focus {
   /* background: linear-gradient(hsl(200, 10%, calc( var(--redrawL) * var(--activeMult) ) ), hsl(200, 50%, calc( var(--redrawL) * var(--activeMult) ) ) ); */
   /* background-color: hsl(200, 50%, calc( var(--redrawL) * var(--activeMult)) ); */
 }
+
+
+.editor_tools_bar {
+  display:flex;
+  flex-direction: row;
+  height: 2rem;
+  justify-content:flex-end;
+  /* padding:0.5rem 0rem; */
+  margin:0.5rem 0rem;
+}
+
+.controls_code_toggle {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 6rem;
+  height: 2rem;
+  /* padding:0.2rem; */
+  background-color: hsl(0, 0%, 5%);
+  outline: none;
+  border-radius: 0rem;
+  margin-right: auto;
+  border: none;
+  box-shadow:none;
+  /* opacity: 0.7; */
+  /* -webkit-transition: 0.2s; */
+  /* transition: opacity 0.2s; */
+}
+.controls_code_toggle::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 3rem;
+  height: 2rem;
+  
+  border: 0.2rem solid hsl(0, 0%, 5%);
+  /* border: none; */
+  border-radius: 0rem;
+  background-color: hsl(0, 00%, 20%);
+  cursor: grab;
+}
+
+
+
+button.editor_buttons {
+  /* justify-self: right; */
+  /* width: 100%; */
+  height: 2rem;
+  margin: 0 0.2rem;
+  border-radius: 0rem;
+  background-color: hsl(0, 0%, 5%);
+  color:var(--clr_text);
+  font-family:'Courier New', Courier, monospace;
+  /* border: 1px solid gray; */
+  /* font-weight: bold; */
+  /* background-color: hsl(10, 50%, 50% ); */
+  /* background: linear-gradient(hsl(200, 10%, var(--redrawL)), hsl(200, 50%, var(--redrawL)) ); */
+  /* background-image: linear-gradient(red, yellow); */
+}
+button.editor_buttons:focus {
+  /* border:none; */
+  outline: none;
+  /* background-color: hsl(0, 0%, 10%); */
+  /* border-color: #2196F3; */
+  /* background: linear-gradient(hsl(200, 10%, calc( var(--redrawL) * var(--activeMult) ) ), hsl(200, 50%, calc( var(--redrawL) * var(--activeMult) ) ) ); */
+  /* background-color: hsl(200, 50%, calc( var(--redrawL) * var(--activeMult)) ); */
+}
+
+
 
 #save-json-button {
   background: linear-gradient(hsl(10, 50%, 70%), hsl(10, 50%, 50%));
@@ -416,6 +487,13 @@ button.redraw:active {
   outline: none;
   color: red;
 }
+
+
+
+
+
+
+
 
 .on-off {
   -webkit-appearance: none;
@@ -562,6 +640,9 @@ button.redraw:active {
   justify-self: end;
 }
 
+
+
+
 .input-form-container {
   display: grid;
 
@@ -603,7 +684,7 @@ button.redraw:active {
   /* overflow-y: scroll; */
   /* height:100%; */
   width:100%;
-  padding: 2rem 1rem;
+  padding: 0.5rem 1rem;
   
 
   box-sizing: border-box;
@@ -658,6 +739,7 @@ button.redraw:active {
 
 .grid-container-Nx2 {
   grid-template-columns: 8rem 8rem;
+  grid-template-columns: 1fr 1fr;
 }
 
 .grid-container-Nx3 {

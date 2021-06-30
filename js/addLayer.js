@@ -37,8 +37,8 @@ function addCodeEditor(layer) {
   Tab97CodePanel.appendChild(text_area_params);
 
   // add a break so you can see the line between the two
-  var breaky = document.createElement("BR");
-  Tab97CodePanel.appendChild(breaky);
+  // var breaky = document.createElement("BR");
+  // Tab97CodePanel.appendChild(breaky);
 
   // first: add a text_area to the Tab97CodePanel
   var text_area_code = document.createElement("TEXTAREA");

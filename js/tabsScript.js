@@ -8,6 +8,8 @@ function openTab() {
 
     var i, tabcontent, tablinks;
 
+
+
     // get all the tabcontents
     tabcontent = document.getElementsByClassName("tabcontent");
 
@@ -41,6 +43,10 @@ function openTab() {
     currentLayerIndex =  getNamedIndexOfElement("Layer",this); // global variable
     // console.log("currentTabIndex:",currentTabIndex);
     // console.log("currentLayerIndex:",currentLayerIndex);
+
+    // Update the Layer Header
+    var layer_header = document.getElementById("layer_header");
+    layer_header.innerText = "Layer " + currentLayerIndex + ":";
 
 
     var currentTabId = "Tab" + currentTabIndex;
