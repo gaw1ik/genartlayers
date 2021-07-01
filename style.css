@@ -226,22 +226,33 @@ input:focus {
 }
 
 #Tab97ControlsPanel{
-  background-color: #0F192A;
-  height:65vh;
+  /* background-color: #0F192A; */
+  background-color: hsl(218, 47%, 11%);
+  height:68vh;
   overflow-y: scroll;
-  padding: 2rem;
+  padding: 1rem 2rem;
+}
+
+#Tab97CodePanel{
+  /* background-color: #0F192A; */
+  /* background-color: hsl(218, 47%, 11%); */
+  height:68vh;
+  overflow-y: hidden;
+  /* overflow-y: scroll; */
+  /* padding: 2rem; */
 }
 
 .layer_geom_input {
   width:100%;
   /* width:auto; */
   /* justify-self:center; */
-  height:3rem;
+  height:2rem;
   box-shadow:none;
   background-color: var(--clr_app_bg);
   color:var(--clr_text);
-  font-size: 2rem;
+  font-size: 1rem;
   /* margin: 0 1rem 1rem 0; */
+  padding: 0 1rem;
   text-align:center;
   font-family: Courier;
 }
@@ -307,7 +318,8 @@ button.reseed:focus {
   flex-direction: row;
   height: 2rem;
   justify-content:flex-end;
-  /* padding:0.5rem 0rem; */
+  align-content:center;
+  align-items:center;
   margin:0.5rem 0rem;
 }
 
@@ -342,25 +354,85 @@ button.reseed:focus {
 
 
 
-button.editor_buttons {
-  /* justify-self: right; */
-  /* width: 100%; */
+button.save_code_button {
+  height: 1rem;
+  margin: 0 0.2rem;
+  border-radius: 0rem;
+  background-color: hsl(218, 47%, 11%);
+  color:var(--clr_text);
+  font-family:'Courier New', Courier, monospace;
+  border-radius: 0.5rem;
+}
+button.save_code_button:hover {
+  cursor: pointer;
+}
+button.button.save_code_button:focus {
+  outline: none;
+}
+
+button.load_code_button {
   height: 2rem;
   margin: 0 0.2rem;
   border-radius: 0rem;
-  background-color: hsl(0, 0%, 5%);
-  color:var(--clr_text);
+  background-color: hsl(0, 0%, 8%);
+  color: var(--clr_text);
   font-family:'Courier New', Courier, monospace;
+  border-radius: 0rem;
+}
+button.load_code_button:hover {
+  cursor: pointer;
+}
+button.button.load_code_button:focus {
+  outline: none;
+}
+
+button.panel_buttons {
+  /* justify-self: right; */
+  /* width: 100%; */
+  /* margin-right: auto; */
+  justify-self: flex-start;
+  height: 2rem;
+  margin: 0 0.2rem;
+  border-radius: 0rem;
+  /* background-color: hsl(0, 0%, 10%); */
+  border-bottom: 1px solid var(--clr_input_form_bg);
+  /* background-color: hsl(218, 47%, 11%); */
+  color:hsl(0,0%,40%);
+  font-family:'Courier New', Courier, monospace;
+  box-shadow: none;
+  background-color: var(--clr_input_form_bg);
+  /* box-shadow: 0 2px 3px black; */
+  /* box-shadow: inset 1px 1px 2px black; */
+
   /* border: 1px solid gray; */
   /* font-weight: bold; */
   /* background-color: hsl(10, 50%, 50% ); */
   /* background: linear-gradient(hsl(200, 10%, var(--redrawL)), hsl(200, 50%, var(--redrawL)) ); */
   /* background-image: linear-gradient(red, yellow); */
 }
-button.editor_buttons:focus {
+
+button.panel_buttons:focus {
+  outline: none;
+  box-shadow:none;
+}
+
+button.panel_buttons:hover {
+  cursor: pointer;
+}
+
+button.panel_buttons.active {
   /* border:none; */
   outline: none;
-  /* background-color: hsl(0, 0%, 10%); */
+  /* background-color: hsl(0, 0%, 5%); */
+  /* border-bottom: 1px solid hsl(0,0%,40%); */
+  border-bottom:1px solid var(--clr_text);
+  box-shadow:none;
+  color:var(--clr_text);
+  /* box-shadow: inset 1px 1px 2px black; */
+  /* box-shadow: 0 1px 3px black; */
+  /* background-color: hsl(0, 0%, 8%); */
+  /* background-color: hsl(218, 47%, 11%); */
+  background-color: var(--clr_input_form_bg);
   /* border-color: #2196F3; */
   /* background: linear-gradient(hsl(200, 10%, calc( var(--redrawL) * var(--activeMult) ) ), hsl(200, 50%, calc( var(--redrawL) * var(--activeMult) ) ) ); */
   /* background-color: hsl(200, 50%, calc( var(--redrawL) * var(--activeMult)) ); */

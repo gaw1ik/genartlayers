@@ -2,11 +2,11 @@
 
 
 // Controls Button Event Handler
-document.addEventListener("DOMContentLoaded", function () {
-    ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
+// document.addEventListener("DOMContentLoaded", function () {
+//     ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
   
-    ControlsCodeToggle.addEventListener("change", switchBetweenLayerPanels);
-  });
+//     ControlsCodeToggle.addEventListener("change", switchBetweenLayerPanels);
+//   });
   
   // // Code Button Event Handler
   // document.addEventListener("DOMContentLoaded", function () {
@@ -14,23 +14,30 @@ document.addEventListener("DOMContentLoaded", function () {
   
   //   openCodePanel_Button.addEventListener("click", switchBetweenLayerPanels);
   // });
+
+
+
   
-  function switchBetweenLayerPanels() {
-    console.log("switchBetweenLayerPanels");
-    // console.log("this.innerText",this.innerText)
-    var currentLayer = Tabs[currentLayerIndex];
+  // function switchBetweenLayerPanels() {
+  //   console.log("switchBetweenLayerPanels");
+  //   // console.log("this.innerText",this.innerText)
+  //   var currentLayer = Tabs[currentLayerIndex];
   
-    var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
-    var ControlsCodeToggle_value = ControlsCodeToggle.value;
+  //   var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
+  //   var ControlsCodeToggle_value = ControlsCodeToggle.value;
   
-    if(ControlsCodeToggle_value == 1) {
-      makeGUICodePanel(currentLayer);
-    } else {
-      makeGUIControlsPanel(currentLayer);
-    }
+  //   if(ControlsCodeToggle_value == 1) {
+  //     makeGUICodePanel(currentLayer);
+  //   } else {
+  //     makeGUIControlsPanel(currentLayer);
+  //   }
     
-    // nothing
-  }
+  //   // nothing
+  // }
+
+
+
+
   
   // function switchToCodePanel() {
   //   console.log("switchToCodePanel")
@@ -216,7 +223,7 @@ function loadAlgorithm(layer) {
   var algorithmJSON = localStorage.getItem(geometry);
   var algorithm = JSON.parse(algorithmJSON);
 
-  console.log("algorithm.params",algorithm.params);
+  // console.log("algorithm.params",algorithm.params);
 
   params_editor.setValue( algorithm.params );
   code_editor.setValue( algorithm.drawFunction );
@@ -274,8 +281,8 @@ function loadAlgorithm(layer) {
   // finish by recalculating/redrawing everything
   drawTab(layer);
 
-  var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
-  if(ControlsCodeToggle.value==1) {
+  // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
+  if(currentPanelValue.value==1) {
     makeGUICodePanel(layer);
   } else {
     makeGUIControlsPanel(layer);

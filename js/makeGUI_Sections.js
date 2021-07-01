@@ -37,6 +37,64 @@ function onLayerGeomInput() {
 
 
 
+//
+var controls_panel_button = document.getElementById("controls_panel_button");
+var code_panel_button = document.getElementById("code_panel_button");
+
+controls_panel_button.addEventListener("click",onCodePanelButtonClick);
+code_panel_button.addEventListener("click",onCodePanelButtonClick);
+
+
+//
+function onControlsPanelButtonClick() {
+  currentPanelValue = 0;
+  var className = this.className;
+  this.className = this.className + ".active";
+}
+
+
+//
+function onCodePanelButtonClick() {
+
+  var controls_panel_button = document.getElementById("controls_panel_button");
+  controls_panel_button.className = controls_panel_button.className.replace(" active", ""); 
+
+  var code_panel_button = document.getElementById("code_panel_button");
+  code_panel_button.className = code_panel_button.className.replace(" active", ""); 
+
+  if( this.id == "controls_panel_button" ) {
+    currentPanelValue = 0;
+  } else if (this.id == "code_panel_button") {
+    currentPanelValue = 1;
+  }
+
+  this.className = this.className + " active";
+
+
+  var currentLayer = Tabs[currentLayerIndex];
+
+
+  if(currentPanelValue == 1) {
+    makeGUICodePanel(currentLayer);
+  } else {
+    makeGUIControlsPanel(currentLayer);
+  }
+
+
+  // // hide/show save_code_button (not sure if I like this yet)
+  // var save_code_button = document.getElementById("save_code_button");
+
+  // if(currentPanelValue == 0) {
+  //   save_code_button.style.display = "none";
+  // } else {
+  //   save_code_button.style.display = "block";
+  // }
+
+
+}
+
+
+
 
 
 //////////////////////////////////////////////////////////////////// I'm pretty sure I don't use this anywhere and can delete...

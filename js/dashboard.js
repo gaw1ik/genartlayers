@@ -31,6 +31,8 @@ window.onload = function () {
   }
   recent_projects_list.innerText = text;
 
+  currentPanelValue = 0;
+
 
 
 

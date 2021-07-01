@@ -62,12 +62,12 @@ function openTab() {
 
     if(currentTabIndex==97){
 
-        var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
-        var ControlsCodeToggle_value = ControlsCodeToggle.value;
+        // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
+        // var ControlsCodeToggle_value = ControlsCodeToggle.value;
 
         var currentLayer = Tabs[currentLayerIndex];
 
-        if(ControlsCodeToggle_value == 1) {
+        if(currentPanelValue == 1) {
             makeGUICodePanel(currentLayer);
         } else {
             makeGUIControlsPanel(currentLayer);

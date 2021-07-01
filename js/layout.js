@@ -41,13 +41,16 @@ function handleResize() {
 
   var wallAspectRatio = doc1.wallHeight.value/doc1.wallWidth.value; // 9/16, for instance
 
-  if(drawCont_aspectRatio > wallAspectRatio){
-    var canvas4Wall_width  = drawCont_width;
-    var canvas4Wall_height = canvas4Wall_width*wallAspectRatio;
-  } else {
-    var canvas4Wall_height  = drawCont_height;
-    var canvas4Wall_width   = canvas4Wall_height/wallAspectRatio;
-  }
+  // if(drawCont_aspectRatio > wallAspectRatio){
+  //   var canvas4Wall_width  = drawCont_width;
+  //   var canvas4Wall_height = canvas4Wall_width*wallAspectRatio;
+  // } else {
+  //   var canvas4Wall_height  = drawCont_height;
+  //   var canvas4Wall_width   = canvas4Wall_height/wallAspectRatio;
+  // }
+
+  var canvas4Wall_height  = drawCont_height;
+  var canvas4Wall_width   = drawCont_width;
 
 
   var artBoardAspectRatio = picH / picW;
