@@ -11,7 +11,7 @@ function handleResize() {
   var picW = doc1.pageWidth.value;
   var picH = doc1.pageHeight.value;
 
-  var dpi = doc1.pageDPI.value;
+  // var dpi = doc1.pageDPI.value;
 
   // console.log("dpi",dpi)
 
@@ -39,7 +39,9 @@ function handleResize() {
 
   var drawCont_aspectRatio = drawCont_height/drawCont_width; // 12/16, for instance
 
-  var wallAspectRatio = doc1.wallHeight.value/doc1.wallWidth.value; // 9/16, for instance
+  var wallAspectRatio = drawCont_aspectRatio;
+
+  // var wallAspectRatio = doc1.wallHeight.value/doc1.wallWidth.value; // 9/16, for instance
 
   // if(drawCont_aspectRatio > wallAspectRatio){
   //   var canvas4Wall_width  = drawCont_width;
@@ -216,8 +218,8 @@ function handleResize() {
   // var yOffset = 0.1;
   drawWallShadow(ctx4WallShadow)
 
-  var lineWidth = doc1.frameThickness.value;; // inches
-  drawFrame(artboardHeightRatio, lineWidth, yOffset, ctx4Frame);
+  // var lineWidth = doc1.frameThickness.value;; // inches
+  // drawFrame(artboardHeightRatio, lineWidth, yOffset, ctx4Frame);
 }
 
 
@@ -244,11 +246,13 @@ function draw_wall(wallHueCenter,wallSatCenter,wallLitCenter,ctx)
 
   ctx.clearRect(0,0,wall_width,wall_height);
 
-  ctx.filter = 'blur(' + blur + 'px)';
+  // ctx.filter = 'blur(' + blur + 'px)';
 
   // make a new random number generator
   var seed = 1; myrng = new Math.seedrandom(seed);
 
+
+  // this part draws a rectangle that covers the entire wall.
   ctx.beginPath()
   ctx.rect(-1*wall_width,-1*wall_height,3*wall_width,3*wall_height)
   ctx.fillStyle = 'hsl(' + wallHueCenter + ', ' +  wallSatCenter + '%, ' + wallLitCenter + '%'  +')'
@@ -256,22 +260,24 @@ function draw_wall(wallHueCenter,wallSatCenter,wallLitCenter,ctx)
 
   var variation = 30
 
-  for(i=0; i<3; i++){
 
-    ctx.beginPath()
-    x0 = myrng()*wall_width
-    y0 = myrng()*wall_height
-    rad = getRandomFloat(0.2*wall_height,0.5*wall_height)
+  // This part draws the blurry circles. (currently just keeping draw_wall simple and leaving this out).
+  // for(i=0; i<3; i++){
 
-    var wallHue = vary(wallHueCenter,variation);
-    var wallSat = vary(wallSatCenter,variation);
-    var wallLit = vary(wallLitCenter,variation);
+  //   ctx.beginPath()
+  //   x0 = myrng()*wall_width
+  //   y0 = myrng()*wall_height
+  //   rad = getRandomFloat(0.2*wall_height,0.5*wall_height)
+
+  //   var wallHue = vary(wallHueCenter,variation);
+  //   var wallSat = vary(wallSatCenter,variation);
+  //   var wallLit = vary(wallLitCenter,variation);
   
   
-    ctx.ellipse( x0, y0, rad, rad, 0, 0, Math.PI*2)
-    ctx.fillStyle = 'hsl(' + wallHue + ', ' +  wallSat + '%, ' + wallLit + '%'  +')'
-    ctx.fill()
-  }
+  //   ctx.ellipse( x0, y0, rad, rad, 0, 0, Math.PI*2)
+  //   ctx.fillStyle = 'hsl(' + wallHue + ', ' +  wallSat + '%, ' + wallLit + '%'  +')'
+  //   ctx.fill()
+  // }
 
   // ctx.drawImage(canvas4Wall,0,0,wall_width,wall_height);
 
@@ -302,7 +308,7 @@ function drawWallShadow(ctx)  {
   ctx.clearRect(0,0,wall_width,wall_height);
 
 
-  var wallAspectRatio = doc1.wallHeight.value / doc1.wallWidth.value;
+  var wallAspectRatio = wall_height / wall_width;
 
   var artBoardAspectRatio = doc1.pageHeight.value / doc1.pageWidth.value;
 

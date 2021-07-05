@@ -16,7 +16,10 @@ function fromParams2Code(layer) {
     var params_editor = ParamsEditors[layerIndex];
 
     // then comes the code from the code_editor
-    code_snippet = code_snippet + params_editor.getValue() + "\n } \n";
+    var params_editor_text = params_editor.getValue();
+    // use replace to make sure that the close curly brackets are followed by a comma (necessary for the dictionary structure)
+    params_editor_text_w_commas = params_editor_text.replaceAll(   "}"   ,   "}," );
+    code_snippet = code_snippet + params_editor_text_w_commas + "\n } \n";
 
     code_snippet = code_snippet + "return " + geometry +";\n}";
 

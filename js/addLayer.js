@@ -24,29 +24,40 @@ function addCodeEditor(layer) {
 
   var newLayerIndex = layer.ctxIndex;
 
+  console.log("newLayerIndex", newLayerIndex);
 
-  // Add a code editor to Tab97InnerPanel
 
-  // first: add a text_area to the Tab97CodePanel for the PARAMS
+  // Add a code editor and append it to Tab97CodePanel
   var text_area_params = document.createElement("TEXTAREA");
+  text_area_params.name = "textAreaParams";
   text_area_params.id = "text_area_params" + "_Layer" + newLayerIndex;
-  // console.log("text_area",text_area);
-  text_area_params.style.display = "none";
-  // Append it to Tab97InnerPanel
+  // text_area_params.style.display = "none";
   var Tab97CodePanel = document.getElementById("Tab97CodePanel");
-  Tab97CodePanel.appendChild(text_area_params);
+  if(newLayerIndex<Tabs.length-1) {
+    Tab97CodePanel.appendChild(text_area_params);
+  } else {
+    var referenceNode = document.getElementById("text_area_params_Layer" + (newLayerIndex+1) );
+    Tab97CodePanel.insertBefore(text_area_params,referenceNode);
+  }
+  // 
 
-  // add a break so you can see the line between the two
-  // var breaky = document.createElement("BR");
-  // Tab97CodePanel.appendChild(breaky);
 
-  // first: add a text_area to the Tab97CodePanel
+
+  // Add a params editor and append it to Tab97CodePanel
   var text_area_code = document.createElement("TEXTAREA");
+  text_area_code.name = "textAreaCode";
   text_area_code.id = "text_area_code" + "_Layer" + newLayerIndex;
-  // console.log("text_area",text_area);
-  text_area_code.style.display = "none";
-  // Append it to Tab97InnerPanel
-  Tab97CodePanel.appendChild(text_area_code);
+  // text_area_code.style.display = "none";
+  if(newLayerIndex<Tabs.length-1) {
+    Tab97CodePanel.appendChild(text_area_code);
+  } else {
+    var referenceNode = document.getElementById("text_area_code_Layer" + (newLayerIndex+1) );
+    Tab97CodePanel.insertBefore(text_area_code,referenceNode);
+  }
+
+
+
+  // updateLayers();
 
 
   // Do the CodeMirror Stuff to convert the text_area to a CodeMirror editor
@@ -59,6 +70,8 @@ function addCodeEditor(layer) {
   });
   params_editor.setSize(null,"15vh");
   params_editor.refresh();
+  
+  // params_editor.name = "paramsEditor";
   // for code editor
   var code_editor = CodeMirror.fromTextArea(text_area_code, {
     lineNumbers: true,
@@ -68,11 +81,28 @@ function addCodeEditor(layer) {
   });
   code_editor.setSize(null,"50vh");
   code_editor.refresh();
+  // code_editor.name = "codeEditor";
 
 
   // add the new code editor to the BIG OL' array of code_editors, CodeEditor.
   CodeEditors.splice(newLayerIndex, 0, code_editor);
   ParamsEditors.splice(newLayerIndex, 0, params_editor);
+
+  // if you're adding a new layer in-between existing layers.
+  if(newLayerIndex<Tabs.length-1) {
+    console.log("new layer inserted in between");
+    // update the editor text such that the editors on the existing layer that got bumped up have the values of the old layer and the editors on the newly created layer are blank.
+    // var code_editor_oldValue = CodeEditors[newLayerIndex].getValue();
+    // var params_editor_oldValue = ParamsEditors[newLayerIndex].getValue();
+
+    // CodeEditors[newLayerIndex+1].setValue(code_editor_oldValue);
+    // ParamsEditors[newLayerIndex+1].setValue(params_editor_oldValue);
+    // console.log("set layer ", newLayerIndex+1 , "old value");
+
+    CodeEditors[newLayerIndex].setValue("");
+    ParamsEditors[newLayerIndex].setValue("");
+    console.log("set layer ", newLayerIndex, "blanks");
+  }
 
   // console.log("new params editor placed at layerIndex =",newLayerIndex);
   // console.log("new code editor placed at layerIndex =",newLayerIndex);
@@ -80,27 +110,7 @@ function addCodeEditor(layer) {
 }
 
 
-// Add Tab Button to the Tabs Bar for a particular layer
-function addTabButton(layer) {
 
-  var layerIndex = layer.ctxIndex;
-  
-  
-  // console.log("layerIndex",layerIndex);
-  // console.log("layer.geometry",layer.geometry);
-
-
-  var tabs_button = document.createElement("BUTTON");
-  tabs_button.className = "tablinks";
-  tabs_button.id = "Tab97" + "_Layer" + layerIndex + "_Button";
-  // tabs_button.tabindex = layerIndex;
-  tabs_button.innerText = layerIndex + ". " + layer.geometry;
-  document.getElementById("tab-bar-layers-container").appendChild(tabs_button);
-  
-  // Attach an event listener to the tab button.
-  tabs_button.addEventListener("click", openTab);
-
-}
 
 
 
@@ -122,13 +132,14 @@ function onAddLayerButtonClick(){
   // create a blank layer dict
   var layer = { ctxIndex:newLayerIndex, geometry:"", object: {} };
 
-  Tabs.splice(newLayerIndex, 0, layer); // insert layer into Layers Array at newLayerIndex (gobal variable)
+  // insert layer into Layers Array at newLayerIndex
+  Tabs.splice(newLayerIndex, 0, layer);
+
 
   addCodeEditor(layer);
 
+  // updateLayers();
   
-  updateLayers();
-
 
   // then open the tab you just created
   document.getElementById("Tab97" + "_Layer" + newLayerIndex + "_Button").click();
@@ -217,31 +228,69 @@ function onMoveDownLayerButtonClick() {
 
 function onDeleteLayerButtonClick(){
 
+  // remove the current layer from Tabs.
   Tabs.splice(currentLayerIndex, 1);
 
-  // add the new code editor to the BIG OL' array of code_editors, CodeEditor.
+
+  var CodeMirrors = document.getElementsByClassName("CodeMirror cm-s-midnight");
+
+  // remove the code mirror elements corresponding to this layer
+  var this_params_editor = CodeMirrors[2*currentLayerIndex];
+  var this_code_editor = CodeMirrors[2*currentLayerIndex+1];
+  this_params_editor.remove();
+  this_code_editor.remove();
+
+  // remove the references n CodeEditors and ParamsEditors.
   CodeEditors.splice(currentLayerIndex, 1);
   ParamsEditors.splice(currentLayerIndex, 1);
-  var id = "text_area_params_Layer" + currentLayerIndex;
-  var text_area_params = document.getElementById(id);
-  id = "text_area_code_Layer" + currentLayerIndex;
-  var text_area_code = document.getElementById(id);
-  text_area_code.remove();
+
+
+  // remove the text areas corresponding to the params and code editors for the current layer
+  var text_area_params = document.getElementById("text_area_params_Layer" + currentLayerIndex);
   text_area_params.remove();
+  var text_area_code = document.getElementById("text_area_code_Layer" + currentLayerIndex);
+  text_area_code.remove();
+  
   
   // clear the canvas on the layer that was just deleted
   ctx[currentLayerIndex].clearRect(0,0,w,h);
 
+  // update layers function
   updateLayers();
 
-  console.log("Tab97" + "_Layer" + (currentLayerIndex-1) + "_Button");
-  // Unless the layer you are deleting is the 0th layer, open the tab below the one you just deleted.
+
+  // Open the tab below the one you just deleted (unless the layer you are deleting is the 0th layer, in which case - do nothing).
   if(currentLayerIndex>0){
     document.getElementById("Tab97" + "_Layer" + (currentLayerIndex-1) + "_Button").click();
   }
 
 }
 
+
+
+
+
+// This function adds a Tab Button to the Tabs Bar for a particular layer
+function addTabButton(layer) {
+
+  var layerIndex = layer.ctxIndex;
+  
+  
+  // console.log("layerIndex",layerIndex);
+  // console.log("layer.geometry",layer.geometry);
+
+
+  var tabs_button = document.createElement("BUTTON");
+  tabs_button.className = "tablinks";
+  tabs_button.id = "Tab97" + "_Layer" + layerIndex + "_Button";
+  // tabs_button.tabindex = layerIndex;
+  tabs_button.innerText = layerIndex + ". " + layer.geometry;
+  document.getElementById("tab-bar-layers-container").appendChild(tabs_button);
+  
+  // Attach an event listener to the tab button.
+  tabs_button.addEventListener("click", openTab);
+
+}
 
 
 
@@ -254,7 +303,7 @@ function updateLayers() {
 
   var nLayers = Tabs.length;
 
-  // for each layer, update all the layer info and GUI components like: the layerIndex, the name, etc.
+  // for each layer, update all the layer info, text areas, and tab buttons.
   for(let i=0; i<nLayers; i++) {
 
     // Grab this layer
@@ -263,6 +312,17 @@ function updateLayers() {
 
     // Update some info about the layer
     layer.ctxIndex = layerIndex;
+
+
+    // // update all the text areas to have the correct id
+    // var textAreasParams = document.getElementsByName("textAreaParams");
+    // var text_area_params = textAreasParams[layerIndex];
+    // text_area_params.id = "text_area_params_Layer" + layerIndex;
+
+    // var textAreasCode = document.getElementsByName("textAreaCode");
+    // var text_area_code = textAreasCode[layerIndex];
+    // text_area_code.id = "text_area_code_Layer" + layerIndex;
+
 
     addTabButton(layer);
 

@@ -140,10 +140,11 @@ function onSaveAndEvalAlgorithmButtonClick(){
   // get the code name
   var load_code_name_input = document.getElementById("Tab97_Layer" + currentLayerIndex + "_LayerGeomInput");
   var load_code_name = load_code_name_input.value;
+  var ALG_name = "ALG_" + load_code_name;
 
 
   // confirmation message stuff.
-  var confirmation = confirm("Are you sure you want to overwrite '" + load_code_name +"' ?");
+  var confirmation = confirm("Are you sure you want to overwrite '" + ALG_name +"' ?");
   if(confirmation==false) return;
 
 
@@ -156,7 +157,7 @@ function onSaveAndEvalAlgorithmButtonClick(){
   params_editor = ParamsEditors[currentLayerIndex];
 
 
-  console.log("params_editor.getValue()", params_editor.getValue());
+  // console.log("params_editor.getValue()", params_editor.getValue());
   // Get the algorithm from the code editors.
   var algorithm = {};
   algorithm.params = params_editor.getValue();
@@ -167,8 +168,9 @@ function onSaveAndEvalAlgorithmButtonClick(){
 
   // Convert the algorithm to a JSON object and save to local storage.
   var algorithmJSON = JSON.stringify(algorithm);
-  localStorage.setItem(load_code_name, algorithmJSON);
-  console.log("saved", load_code_name ," to local storage");
+  
+  localStorage.setItem(ALG_name, algorithmJSON);
+  console.log("saved '", ALG_name ,"' to local storage");
 
 
   // Evaluate this layer's new algorithm.
@@ -220,7 +222,8 @@ function loadAlgorithm(layer) {
 
 
   // get the algorithm out of local storage and into the editors
-  var algorithmJSON = localStorage.getItem(geometry);
+  var ALG_name = "ALG_" + geometry;
+  var algorithmJSON = localStorage.getItem(ALG_name);
   var algorithm = JSON.parse(algorithmJSON);
 
   // console.log("algorithm.params",algorithm.params);
@@ -282,7 +285,7 @@ function loadAlgorithm(layer) {
   drawTab(layer);
 
   // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
-  if(currentPanelValue.value==1) {
+  if(currentPanelValue==1) {
     makeGUICodePanel(layer);
   } else {
     makeGUIControlsPanel(layer);

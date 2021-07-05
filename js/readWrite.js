@@ -72,7 +72,7 @@ saveJsonButton.addEventListener("click", saveProject);
 function saveProject () {
 
   var fPathEntry = document.getElementById("fpath");
-  var projName = fPathEntry.value;
+  var projName = "PROJ_" + fPathEntry.value;
   
 
   // confirmation message stuff.
@@ -85,10 +85,9 @@ function saveProject () {
   let data = JSON.stringify({ doc1: doc1, Tabs: Tabs });
 
   // fs.writeFileSync("C:/Users/Brian/OneDrive/Documents/Gen-Art-Studio/Projects/" + fpath + ".json", data );
-  console.log("saved to JSON");
+  console.log("saved project to local storage");
   // 
   localStorage.setItem(projName, data);
-  // console.log("saved to local storage");
 
   // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array...
   // and then update recentSavedProjects to have the most reent 8.
@@ -176,7 +175,7 @@ function loadProject() {
 
   /////////////////////////////////////////////// Bring in file info, and the then file data
   var fPathEntry = document.getElementById("fpath");
-  var fpath = fPathEntry.value;
+  var fpath = "PROJ_" + fPathEntry.value;
 
   var rawData = localStorage.getItem(fpath);
 
@@ -196,7 +195,7 @@ function loadProject() {
     var parameter = keys[i]
 
     if(newDoc[parameter]==null){
-      console.warn("the parameter ",parameter, "was not found in the prototype object for newDoc");
+      // console.warn("the parameter ",parameter, "was not found in the prototype object for newDoc");
     } else {
       parameter = keys[i];
       newDoc[parameter].value = doc1[parameter].value;
@@ -236,6 +235,7 @@ function loadProject() {
     var layer = Tabs[i];
 
     addCodeEditor(layer);
+
 
     addTabButton(layer);
 

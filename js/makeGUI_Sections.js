@@ -155,7 +155,6 @@ function makeGUICodePanel(layer) {
 
 
   
-
   // Set display to every CodeMirror Element to "none" and then set the one corresponding to the current layer to "block"
   var CodeMirrors = document.getElementsByClassName("CodeMirror cm-s-midnight");
   for(let i=0; i<CodeMirrors.length; i++){
@@ -179,7 +178,7 @@ function makeGUICodePanel(layer) {
   // this layer's code editor
   var code_editor_element = CodeMirrors[2*layerIndex+1];
   code_editor_element.style.display = "block";
-  var code_editor_object = CodeEditors[layerIndex];
+  var code_editor_object = CodeEditors[layerIndex]; 
   code_editor_object.refresh();
 
 
@@ -187,7 +186,7 @@ function makeGUICodePanel(layer) {
 
   var object = layer.object;
 
-  tabElement = document.getElementById("Tab97");
+  var tabElement = document.getElementById("Tab97");
   
   var layerGeomInputs = document.getElementsByName("LayerGeomInput");
   var layerGeomInput = layerGeomInputs[0];

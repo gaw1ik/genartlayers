@@ -18,15 +18,15 @@ function updateDocObject() {
     handleResize();
   }
 
-  else if ( propertyName == "wallHue" || propertyName == "wallSat" || propertyName == "wallLit" || propertyName == "wallShadowHeight" || propertyName == "wallShadowWidth" || propertyName=="wallShadowEllipseWidth" || propertyName == "wallShadoBlur" || propertyName == "wallShadowOpacity" || propertyName == "yOffset"  ) {
+  else if ( propertyName == "wallHue" || propertyName == "wallSat" || propertyName == "wallLit" || propertyName == "wallShadowHeight" || propertyName == "wallShadowWidth" || propertyName=="wallShadowEllipseWidth" || propertyName == "wallShadowBlur" || propertyName == "wallShadowOpacity" || propertyName == "yOffset"  ) {
     // console.log("3");
     var wallHue = doc1.wallHue.value;
     var wallSat = doc1.wallSat.value;
     var wallLit = doc1.wallLit.value;
     
   
-    var wallShadowHeight  = doc1.wallShadowHeight .value;
-    var wallShadowWidth  = doc1.wallShadowWidth  .value;
+    // var wallShadowHeight  = doc1.wallShadowHeight .value;
+    // var wallShadowWidth  = doc1.wallShadowWidth  .value;
     var wallShadowEllipseWidth  = doc1.wallShadowEllipseWidth  .value;
     var wallShadowBlur    = doc1.wallShadowBlur   .value;
     var wallShadowOpacity = doc1.wallShadowOpacity.value;
@@ -41,8 +41,8 @@ function updateDocObject() {
 
   else if ( propertyName == "wallWidth" || propertyName == "wallHeight" || propertyName == "wallPadding" || propertyName=="yOffset") {
     // console.log("4");
-    var wallWidth = doc1.wallWidth.value;
-    var wallHeight = doc1.wallHeight.value;
+    // var wallWidth = doc1.wallWidth.value;
+    // var wallHeight = doc1.wallHeight.value;
     var wallPadding = doc1.wallPadding.value;
     handleResize();
   }

@@ -103,7 +103,7 @@
   --BGHue: 150;
 
   /* --input_form_container_width: 20rem; */
-  --input_form_container_width: 100%;
+  --input_form_container_width: 42rem;
 }
 
 /* =============
@@ -151,7 +151,7 @@ h2 {
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 1rem;
-  margin-top: 0;
+  margin-top: 1rem;
   color: var(--clr_h2);
   /* font-weight: 500; */
   /* font-weight: 500; */
@@ -225,6 +225,14 @@ input:focus {
   width: 100%;
 }
 
+#Tab98ControlsPanel{
+  /* background-color: #0F192A; */
+  background-color: hsl(218, 47%, 11%);
+  height:68vh;
+  overflow-y: scroll;
+  padding: 1rem 2rem;
+}
+
 #Tab97ControlsPanel{
   /* background-color: #0F192A; */
   background-color: hsl(218, 47%, 11%);
@@ -238,7 +246,7 @@ input:focus {
   /* background-color: hsl(218, 47%, 11%); */
   height:68vh;
   overflow-y: hidden;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
   /* padding: 2rem; */
 }
 
@@ -672,7 +680,7 @@ button.redraw:active {
 
   /* grid-template-rows: 60vh 40vh; */
   /* grid-template-columns: calc(60vw - var(--app_padding)) calc(40vw - var(--app_padding)); */
-  grid-template-columns: var(--drawing_container_width) auto;
+  grid-template-columns: 1fr auto;
 
 }
 
@@ -719,7 +727,9 @@ button.redraw:active {
   display: grid;
 
   height: 100vh;
-  grid-template-columns: var(--tab_bar_width)    calc(100vw - var(--tab_bar_width) - var(--drawing_container_width) - var(--app_padding) - var(--app_padding) );
+  width: var(--input_form_container_width);
+  grid-template-columns: var(--tab_bar_width) 1fr;
+  /* grid-template-columns: var(--tab_bar_width)    calc(100vw - var(--tab_bar_width) - var(--drawing_container_width) - var(--app_padding) - var(--app_padding) ); */
 
   height: calc(var(--app_height) - var(--app_padding)*2);
 
@@ -733,8 +743,9 @@ button.redraw:active {
 
   width:100%;
   border-radius: 3px;
-  overflow-y: hidden;
-  justify-self:end;
+  /* overflow-y: hidden; */
+  overflow-y: scroll;
+  justify-self:start;
 
   
 
@@ -917,7 +928,8 @@ button.redraw:active {
   position: relative;
 
   height: 100%;
-  width: var(--drawing_container_width);
+  width:100%;
+  /* width: var(--drawing_container_width); */
 
   overflow:hidden;
 

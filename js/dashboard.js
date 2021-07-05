@@ -20,14 +20,15 @@ window.onload = function () {
   ControlsDict = [];
 
 
-  // Retrieve the ApplicationData object out of local storagea.
+  // Retrieve the ApplicationData object out of local storagea and put the most recent projects into the Main Tab.
   var ApplicationDataJSON = localStorage.getItem("ApplicationData");
   ApplicationData = JSON.parse(ApplicationDataJSON);
   var recentSavedProjects = ApplicationData.recentSavedProjects;
   var recent_projects_list = document.getElementById("recent-projects-list");
   var text = "";
   for(let i=0; i<recentSavedProjects.length; i++) {
-    text = text + recentSavedProjects[i] + ", ";
+    var thisPROJ_Name = recentSavedProjects[i].replace("PROJ_","");
+    text = text + thisPROJ_Name + ", ";
   }
   recent_projects_list.innerText = text;
 
@@ -37,7 +38,7 @@ window.onload = function () {
 
 
   // Assign default document properties to page controls
-  var tabElement = document.getElementById("Tab98");
+  var tabElement = document.getElementById("Tab98ControlsPanel");
   doc1 = docDict(); // make default doc object
   var keys = Object.keys(doc1);
 
@@ -95,7 +96,7 @@ window.onload = function () {
 
     updateObjectPropertyIndicator(input);
 
-    input.addEventListener("change", updateDocObject);
+    input.addEventListener("input", updateDocObject);
   }
 
   // Canvases
@@ -141,7 +142,7 @@ window.onload = function () {
   handleResize();
 
   // FOR AUTOMATIALLY OPENING A PROJECT
-  fpath.value = "default_project";
+  fpath.value = "default";
   readJsonButton.click(); // automatically opening the project defined in the line above
 
   // setTheme_input.click(); // automatically select light theme
