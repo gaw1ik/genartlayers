@@ -1,6 +1,9 @@
 // this is more-or-less my main function, but it's currently a little dirty (probably)
 // handles the window.onload tasks and also sets up event handlers
 
+
+
+
 window.onload = function () {
 
   console.log("**Window Loaded**");
@@ -20,17 +23,30 @@ window.onload = function () {
   ControlsDict = [];
 
 
-  // Retrieve the ApplicationData object out of local storagea and put the most recent projects into the Main Tab.
-  var ApplicationDataJSON = localStorage.getItem("ApplicationData");
-  ApplicationData = JSON.parse(ApplicationDataJSON);
-  var recentSavedProjects = ApplicationData.recentSavedProjects;
-  var recent_projects_list = document.getElementById("recent-projects-list");
-  var text = "";
-  for(let i=0; i<recentSavedProjects.length; i++) {
-    var thisPROJ_Name = recentSavedProjects[i].replace("PROJ_","");
-    text = text + thisPROJ_Name + ", ";
+  // Retrieve the ApplicationData object out of local storage and put the most recent projects into the Main Tab.
+  if (localStorage.getItem("ApplicationData") === null) {
+
+    // if the ApplicationData object doesn't already exist in local storage, create a new one (new user).
+    localStorage.setItem("ApplicationData",{});
+
+    
+
+  } else {
+  
+    var ApplicationDataJSON = localStorage.getItem("ApplicationData");
+    ApplicationData = JSON.parse(ApplicationDataJSON);
+    var recentSavedProjects = ApplicationData.recentSavedProjects;
+    var recent_projects_list = document.getElementById("recent-projects-list");
+    var text = "";
+
+    for(let i=0; i<recentSavedProjects.length; i++) {
+      var thisPROJ_Name = recentSavedProjects[i].replace("PROJ_","");
+      text = text + thisPROJ_Name + ", ";
+    }
+
+    recent_projects_list.innerText = text;
+
   }
-  recent_projects_list.innerText = text;
 
   currentPanelValue = 0;
 
@@ -141,9 +157,10 @@ window.onload = function () {
   // do a resize
   handleResize();
 
-  // FOR AUTOMATIALLY OPENING A PROJECT
-  fpath.value = "default";
-  readJsonButton.click(); // automatically opening the project defined in the line above
+  // FOR AUTOMATCIALLY OPENING A PROJECT
+  loadDefaultProject();
+  // fpath.value = "default";
+  // readJsonButton.click(); // automatically opening the project defined in the line above
 
   // setTheme_input.click(); // automatically select light theme
 };

@@ -168,25 +168,17 @@ var readJsonButton = document.getElementById("read-json-button");
 readJsonButton.addEventListener("click", loadProject );
 
 
-function loadProject() {
-
-  console.log("**Load Project**");
 
 
-  /////////////////////////////////////////////// Bring in file info, and the then file data
-  var fPathEntry = document.getElementById("fpath");
-  var fpath = "PROJ_" + fPathEntry.value;
+function setUpProjectFromProjectFile(JSONdata) {
 
-  var rawData = localStorage.getItem(fpath);
-
-  var parsedData = JSON.parse(rawData);
-
-
+  Tabs = JSONdata.Tabs;
+  doc1 = JSONdata.doc1;
 
   //////////////////////////////////////////////// Bring in the Doc object
   var newDoc = docDict();
 
-  doc1 = parsedData.doc1;
+  // doc1 = parsedData.doc1;
   var keys = Object.keys(doc1);
 
   // document object
@@ -219,7 +211,7 @@ function loadProject() {
 
 
   /////////////////////////////////////////////// Bring in the Tabs object.
-  Tabs = Object.values( parsedData.Tabs );  
+  // Tabs = Object.values( parsedData.Tabs );  
   // console.log("Tabs", Tabs);
 
   // Clear out the CodeEditors and ParamsEditors objects AND remove all the HTML CodeMirror Elements in this layer (otherwise they stick around and eff' stuff up).
@@ -251,6 +243,46 @@ function loadProject() {
 }
 
 
+
+
+
+function loadProject() {
+
+  console.log("**Load Project**");
+
+
+  /////////////////////////////////////////////// Bring in file info, and the then file data
+  var fPathEntry = document.getElementById("fpath");
+  var fpath = "PROJ_" + fPathEntry.value;
+
+  var rawData = localStorage.getItem(fpath);
+
+  var JSONdata = JSON.parse(rawData);
+
+  setUpProjectFromProjectFile(JSONdata) ;
+
+}
+
+
+
+
+
+function loadDefaultProject() {
+
+  console.log("**Load Default Project**");
+
+
+  // get the default project JSON file from the server
+  fetch("./PROJ_default.json")
+  .then(response => {
+     return response.json();
+  })
+  .then( function(data) {
+    var JSONdata = data;
+    setUpProjectFromProjectFile(JSONdata);
+  });
+
+}
 
 
 
