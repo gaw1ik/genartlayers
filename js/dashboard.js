@@ -26,30 +26,38 @@ window.onload = function () {
   // Retrieve the ApplicationData object out of local storage and put the most recent projects into the Main Tab.
   if (localStorage.getItem("ApplicationData") === null) {
 
+    console.log("creating Application Data for New User");
     // if the ApplicationData object doesn't already exist in local storage, create a new one (new user).
-    localStorage.setItem("ApplicationData",{});
+    ApplicationData = { "recentOpenedProjects":[] };
+    var ApplicationDataJSON = JSON.stringify(ApplicationData);
+    localStorage.setItem("ApplicationData", ApplicationDataJSON);
 
-    
+    console.log("ApplicationData",ApplicationData);
 
   } else {
-  
+
+    console.log("getting Application Data for Existing User");
+
     var ApplicationDataJSON = localStorage.getItem("ApplicationData");
     ApplicationData = JSON.parse(ApplicationDataJSON);
-    var recentSavedProjects = ApplicationData.recentSavedProjects;
+    var recentOpenedProjects = ApplicationData.recentOpenedProjects;
     var recent_projects_list = document.getElementById("recent-projects-list");
     var text = "";
 
-    for(let i=0; i<recentSavedProjects.length; i++) {
-      var thisPROJ_Name = recentSavedProjects[i].replace("PROJ_","");
+    for(let i=0; i<recentOpenedProjects.length; i++) {
+      var thisPROJ_Name = recentOpenedProjects[i].replace("PROJ_","");
       text = text + thisPROJ_Name + ", ";
     }
 
     recent_projects_list.innerText = text;
 
+    console.log("ApplicationData",ApplicationData);
+
   }
 
-  currentPanelValue = 0;
 
+
+  currentPanelValue = 0;
 
 
 

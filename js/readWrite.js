@@ -89,24 +89,7 @@ function saveProject () {
   // 
   localStorage.setItem(projName, data);
 
-  // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array...
-  // and then update recentSavedProjects to have the most reent 8.
-  var recentSavedProjects = ApplicationData.recentSavedProjects;
-  var yep = 1;
-  for(let i=0; i<recentSavedProjects.length; i++){
-    if( projName == recentSavedProjects[i] ) {
-      yep = 0;
-    }
-  }
-  if( yep == 1 ) {
-    recentSavedProjects.splice(0,0,projName);
-  }
-  // most recent 8.
-  recentSavedProjects = ApplicationData.recentSavedProjects.slice(0,8); 
-  ApplicationData.recentSavedProjects = recentSavedProjects;
-  // save ApplicationData to local storage
-  let ApplicationDataJSON = JSON.stringify(ApplicationData);
-  localStorage.setItem("ApplicationData", ApplicationDataJSON);
+
 
 }
 
@@ -260,6 +243,25 @@ function loadProject() {
   var JSONdata = JSON.parse(rawData);
 
   setUpProjectFromProjectFile(JSONdata) ;
+
+
+  // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array and then update recentSavedProjects to have the most reent 8.
+  var recentOpenedProjects = ApplicationData.recentOpenedProjects;
+  var yep = 1;
+  for(let i=0; i<recentOpenedProjects.length; i++){
+    if( fpath == recentOpenedProjects[i] ) {
+      yep = 0;
+    }
+  }
+  if( yep == 1 ) {
+    recentOpenedProjects.splice(0,0,fpath);
+  }
+  // most recent 8.
+  recentOpenedProjects = ApplicationData.recentOpenedProjects.slice(0,8); 
+  ApplicationData.recentOpenedProjects = recentOpenedProjects;
+  // save ApplicationData to local storage
+  let ApplicationDataJSON = JSON.stringify(ApplicationData);
+  localStorage.setItem("ApplicationData", ApplicationDataJSON);
 
 }
 
