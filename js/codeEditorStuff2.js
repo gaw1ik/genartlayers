@@ -223,76 +223,107 @@ function loadAlgorithm(layer) {
 
   // get the algorithm out of local storage and into the editors
   var ALG_name = "ALG_" + geometry;
+  var algorithm;
 
-  fetch
-  var algorithmJSON = localStorage.getItem(ALG_name);
-  var algorithm = JSON.parse(algorithmJSON);
+//   try {
 
-  // console.log("algorithm.params",algorithm.params);
+    fetch("./" + geometry + ".txt")
+    .then(response => {
 
-  params_editor.setValue( algorithm.params );
-  code_editor.setValue( algorithm.drawFunction );
+        if (!response.ok) {
 
+            console.log("that algorithm wasn't on the server -> looking in local storage now");
 
+            var algorithmJSON = localStorage.getItem(ALG_name);
+            algorithm = JSON.parse(algorithmJSON);
+            params_editor.setValue( algorithm.params );
+            code_editor.setValue( algorithm.drawFunction );
+      
+            throw "that algorithm wasn't on the server";
 
-  // then once you have them in the editors, use evalAlgorithm to evaluate the algorithm from the editors.
-  // this is what formats the code and then brings the Dict and Draw functions into the global space.
-  evalAlgorithm(layer);
+            // console.log("hi");
+        } else {
+            return response.text();
+        }
+    })
+    .then( function(data) {
 
-  ControlsDict = window[geometry + "Dict"]();
+        var str = data;
+        algorithm = JSON.parse( str );
+        console.log( "agorithm", algorithm );
+        params_editor.setValue( algorithm.params );
+        code_editor.setValue( algorithm.drawFunction );
 
+        return("algorithm",algorithm);
 
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 
+    // } finally {
 
-  // update the layer object to be whatever the code name has been defined as.
-  // layer.object = window[geometry + "Dict"]();
-
-
-  // Update the object parameter values to be the default values
-  var object = layer.object;
-  // console.log("object",object);
-  var keys = Object.keys(ControlsDict);
-
-  // console.log("keys",keys);
-
-
-  for(let i=0; i<keys.length; i++){
-
-    var key = keys[i];
-
-    // console.log("key",key);
-    // console.log("object[key].value",object[key].value);
-
-    if(object[key].value === undefined) {
-
-      object[key].value = ControlsDict[key].default;
-
-      // console.log("object[key].value",object[key].value);
-
-    }
-
-  }
+    
+        // console.log("algorithm.params",algorithm.params);
 
 
 
+        // then once you have them in the editors, use evalAlgorithm to evaluate the algorithm from the editors.
+        // this is what formats the code and then brings the Dict and Draw functions into the global space.
+        evalAlgorithm(layer);
+
+        ControlsDict = window[geometry + "Dict"]();
 
 
 
-  // update the tab button for this layer.
-  var tab_button = document.getElementById("Tab97" + "_Layer" + layerIndex + "_Button");
-  tab_button.innerText = currentLayerIndex + ". " + layer.geometry;
+
+        // update the layer object to be whatever the code name has been defined as.
+        // layer.object = window[geometry + "Dict"]();
 
 
-  // finish by recalculating/redrawing everything
-  drawTab(layer);
+        // Update the object parameter values to be the default values
+        var object = layer.object;
+        // console.log("object",object);
+        var keys = Object.keys(ControlsDict);
 
-  // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
-  if(currentPanelValue==1) {
-    makeGUICodePanel(layer);
-  } else {
-    makeGUIControlsPanel(layer);
-  }
+        // console.log("keys",keys);
 
+
+        for(let i=0; i<keys.length; i++){
+
+            var key = keys[i];
+
+            // console.log("key",key);
+            // console.log("object[key].value",object[key].value);
+
+            if(object[key].value === undefined) {
+
+            object[key].value = ControlsDict[key].default;
+
+            // console.log("object[key].value",object[key].value);
+
+            }
+
+        }
+
+
+
+        // update the tab button for this layer.
+        var tab_button = document.getElementById("Tab97" + "_Layer" + layerIndex + "_Button");
+        tab_button.innerText = currentLayerIndex + ". " + layer.geometry;
+
+
+        // finish by recalculating/redrawing everything
+        drawTab(layer);
+
+        // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
+        if(currentPanelValue==1) {
+            makeGUICodePanel(layer);
+        } else {
+            makeGUIControlsPanel(layer);
+        }
+
+    // }
 
 }
 
