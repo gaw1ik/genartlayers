@@ -1,6 +1,6 @@
 function fromParams2Code(layer) {
 
-    var object = layer.object;
+    // var object = layer.object;
     var geometry = layer.geometry;
     var layerIndex = layer.ctxIndex;
 
@@ -17,6 +17,8 @@ function fromParams2Code(layer) {
 
     // then comes the code from the code_editor
     var params_editor_text = params_editor.getValue();
+
+    // console.log("params_editor_text",params_editor_text);
     // use replace to make sure that the close curly brackets are followed by a comma (necessary for the dictionary structure)
     params_editor_text_w_commas = params_editor_text.replaceAll(   "}"   ,   "}," );
     code_snippet = code_snippet + params_editor_text_w_commas + "\n } \n";

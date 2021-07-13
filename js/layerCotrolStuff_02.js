@@ -24,7 +24,7 @@ function addCodeEditor(layer) {
 
   var newLayerIndex = layer.ctxIndex;
 
-  console.log("newLayerIndex", newLayerIndex);
+  // console.log("newLayerIndex", newLayerIndex);
 
 
   // Do the CodeMirror Stuff to convert the text_area to a CodeMirror editor

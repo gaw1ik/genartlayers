@@ -2,11 +2,13 @@
 
 function fromDrawFunction2Code(layer) {
 
-    var object = layer.object;
+    // var object = layer.object;
     // console.log("object",object);
     var geometry = layer.geometry;
     var layerIndex = layer.ctxIndex;
 
+
+    // CODE HEADER
     // code snippet starts with the function declaration
     var code_snippet = "function draw_" + geometry + "( ctx, layer ) {\n";
 
@@ -24,6 +26,8 @@ function fromDrawFunction2Code(layer) {
 
     var code_editor = CodeEditors[layerIndex];
 
+
+    // CODE BODY
     // then comes the code from the code_editor
     code_snippet = code_snippet + code_editor.getValue();
 

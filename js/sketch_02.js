@@ -88,6 +88,7 @@ function drawTab(layer) {
 
   // console.log("paramValues going into draw function via drawTab()",paramValues);
   // draw on canvas
+  // console.log("layer.geometry",layer.geometry);
   window["draw_" + layer.geometry]( paramValues, layer, ctx[layerIndex] );
   
 }

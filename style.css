@@ -245,8 +245,8 @@ input:focus {
   /* background-color: #0F192A; */
   /* background-color: hsl(218, 47%, 11%); */
   height:68vh;
-  overflow-y: hidden;
-  overflow-y: scroll;
+  /* overflow-y: hidden; */
+  /* overflow-y: scroll; */
   /* padding: 2rem; */
 }
 

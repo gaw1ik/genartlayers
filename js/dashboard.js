@@ -8,7 +8,7 @@ window.onload = function () {
 
   console.log("**Window Loaded**");
 
-  // useful constant
+  // useful constants
   deg2rad = Math.PI/180;
   twoPI = Math.PI * 2;
 
@@ -23,6 +23,15 @@ window.onload = function () {
   ControlsDict = [];
 
 
+
+  // pull in all the user's saved algorithms from local storage.
+  bringInAlgsFromLocalStorage();
+
+  // pull in all the included algorithms.
+  includedAlgNames = ["bg"];
+  bringInIncludedAlgs(includedAlgNames);
+
+
   // Retrieve the ApplicationData object out of local storage and put the most recent projects into the Main Tab.
   if (localStorage.getItem("ApplicationData") === null) {
 
@@ -32,11 +41,11 @@ window.onload = function () {
     var ApplicationDataJSON = JSON.stringify(ApplicationData);
     localStorage.setItem("ApplicationData", ApplicationDataJSON);
 
-    console.log("ApplicationData",ApplicationData);
+    // console.log("ApplicationData",ApplicationData);
 
   } else {
 
-    console.log("getting Application Data for Existing User");
+    // console.log("getting Application Data for Existing User");
 
     var ApplicationDataJSON = localStorage.getItem("ApplicationData");
     ApplicationData = JSON.parse(ApplicationDataJSON);
@@ -51,7 +60,7 @@ window.onload = function () {
 
     recent_projects_list.innerText = text;
 
-    console.log("ApplicationData",ApplicationData);
+    // console.log("ApplicationData",ApplicationData);
 
   }
 
@@ -172,6 +181,17 @@ window.onload = function () {
 
   // setTheme_input.click(); // automatically select light theme
 };
+
+
+
+
+
+
+
+
+
+
+
 
 // Tab Buttons EVENT LISTENERS
 function attachTabButtonEventListeners() {

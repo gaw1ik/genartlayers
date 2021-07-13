@@ -17,21 +17,33 @@ function randomSign() {
   return Math.round(myrng()) * 2 - 1;
 }
 
-function plusOrMinus(amount) {
-  return (Math.round(myrng()) * 2 - 1) * amount;
-}
 
-function plusOrMinusRange(centerValue, maxAmount) {
-  // var max = amount*value;
+
+
+// function plusOrMinus(amount) {
+//   return (Math.round(myrng()) * 2 - 1) * amount;
+// }
+
+// function plusOrMinusRange(centerValue, maxAmount) {
+//   // var max = amount*value;
+//   var newValue = centerValue + randomSign()*getRandomFloat(0,maxAmount);
+//   // var sign = (Math.round(myrng()) * 2 - 1) * amount;
+//   return newValue;
+// }
+
+// function plusOrMinusMax(max) {
+//   var randInt = getRandomInt(0,max);
+//   return (Math.round(myrng()) * 2 - 1) * randInt;
+// }
+
+function plusOrMinus(centerValue, maxAmount) {
+
   var newValue = centerValue + randomSign()*getRandomFloat(0,maxAmount);
-  // var sign = (Math.round(myrng()) * 2 - 1) * amount;
+
   return newValue;
 }
 
-function plusOrMinusMax(max) {
-  var randInt = getRandomInt(0,max);
-  return (Math.round(myrng()) * 2 - 1) * randInt;
-}
+
 
 function vary(parameter,perc, rng02 = myrng) {
   var min = 1-perc/100;

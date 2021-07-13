@@ -152,7 +152,7 @@ readJsonButton.addEventListener("click", loadProject );
 
 
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function setUpProjectFromProjectFile(JSONdata) {
 
   Tabs = JSONdata.Tabs;
@@ -203,6 +203,8 @@ function setUpProjectFromProjectFile(JSONdata) {
   var Tab97CodePanel = document.getElementById("Tab97CodePanel");
   removeAllChildNodes(Tab97CodePanel);
 
+  // console.log("Tabs",Tabs);
+
 
   // for each layer add a code editor, add a tab button, and load the algorithm.
   for (let i = 0; i < Tabs.length; i++) {
@@ -221,6 +223,8 @@ function setUpProjectFromProjectFile(JSONdata) {
 
   updateLayers();
 
+  // console.log("Tabs[0].geometry",Tabs[0].geometry);
+
   handleResize();
 
 }
@@ -228,7 +232,7 @@ function setUpProjectFromProjectFile(JSONdata) {
 
 
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function loadProject() {
 
   console.log("**Load Project**");
