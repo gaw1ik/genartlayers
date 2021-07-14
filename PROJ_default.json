@@ -37,7 +37,7 @@
             "class": "slider-hue"
         },
         "wallSat": {
-            "value": "23",
+            "value": "0",
             "min": 0,
             "max": 100,
             "step": 1,
@@ -45,7 +45,7 @@
             "class": "slider-sat"
         },
         "wallLit": {
-            "value": "72",
+            "value": "10",
             "min": 0,
             "max": 100,
             "step": 1,

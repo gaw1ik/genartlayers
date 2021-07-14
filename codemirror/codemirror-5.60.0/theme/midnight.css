@@ -1,11 +1,15 @@
 /* Based on the theme at http://bonsaiden.github.com/JavaScript-Garden */
 
 /*<!--activeline-->*/
-.cm-s-midnight .CodeMirror-activeline-background { background: #253540; }
+.cm-s-midnight .CodeMirror-activeline-background { 
+  background: #253540; }
 
 .cm-s-midnight.CodeMirror {
-    background: #0F192A;
+    /* background: #0F192A; */
+    background-color: hsl(200, 10%, 12%);
+    
     color: #D1EDFF;
+    box-shadow: 0 0 3px black;
 }
 
 .cm-s-midnight div.CodeMirror-selected { background: #314D67; }

@@ -277,6 +277,7 @@ function loadDefaultProject() {
 
   console.log("**Load Default Project**");
 
+  document.getElementById("fpath").value = "default";
 
   // get the default project JSON file from the server
   fetch("./PROJ_default.json")

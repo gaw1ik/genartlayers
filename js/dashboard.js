@@ -180,9 +180,10 @@ window.onload = function () {
   // readJsonButton.click(); // automatically opening the project defined in the line above
 
   // setTheme_input.click(); // automatically select light theme
+
+
+
 };
-
-
 
 
 
@@ -219,6 +220,14 @@ function attachTabButtonEventListeners() {
 
 //   SaveImgButton.addEventListener("click", saveImg);
 // });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  // click on it
+  document.getElementById("Tab97_Layer0_Button").click();
+  console.log("hi")
+
+});
 
 
 
