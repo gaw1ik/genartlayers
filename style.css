@@ -44,7 +44,7 @@
   --clr_tab_button: none;
   --clr_tab_button_text: hsl(200, 40%, 50%);
   --clr_tab_button_font_weight: bold;
-  --clr_text: hsl(0, 0%, 80%);
+  --clr_text: hsl(0, 0%, 95%);
 
   --clr_button: hsl(200, 30%, 70%);
   --button_font_weight: 600;
@@ -108,7 +108,7 @@
   --input_form_container_width: 42rem;
   --height_window_frame: 2rem;
   --input_form_width: 40rem;
-  --tab_bar_width: 5rem;
+  --tab_bar_width: 3rem;
   --height_panel: 70vh;
 
 }
@@ -152,6 +152,7 @@ control-name {
 
 h1 {
   text-align: center;
+  color: var(--clr_text);
 }
 
 h2 {
@@ -160,10 +161,7 @@ h2 {
   margin-bottom: 1rem;
   margin-top: 1rem;
   color: var(--clr_h2);
-  /* font-weight: 500; */
-  /* font-weight: 500; */
-  /* border-bottom:1px; */
-  /* text-decoration: underline; */
+  color: var(--clr_text);
 }
 
 h3 {
@@ -173,7 +171,7 @@ h3 {
   margin-top: 5px; */
   font-weight: 700;
   color: var(--clr_h3);
-  /* text-align: center; */
+  color: var(--clr_text);
 }
 
 h4 {
@@ -181,10 +179,7 @@ h4 {
   margin: 0;
   color: var(--clr_h4);
   font-weight: 700;
-  /* font-weight: 300; */
-  /* margin-left: 10px; */
-  /* margin-bottom: 1px; */
-  /* margin-top:2rem; */
+  color: var(--clr_text);
 }
 
 h5 {
@@ -192,10 +187,7 @@ h5 {
   margin: 0;
   font-weight: 500;
   color: var(--clr_h5);
-  /* text-align:end; */
-  /* margin-left: auto; */
-  /* margin-bottom: 1px; */
-  /* margin-top:2rem; */
+  color: var(--clr_text);
 }
 
 p {
@@ -288,14 +280,18 @@ input:focus {
   width:10rem;
   /* width:auto; */
   /* justify-self:center; */
-  height:2rem;
+  /* height:2rem; */
   box-shadow:none;
   border:none;
+  /* border-bottom: 1px solid var(--clr_text); */
   outline:none;
+  
   background-color: hsl(0, 0%, 8%);
+  /* background-color: none; */
+  /* background: none; */
   color:var(--clr_text);
   font-size: 1rem;
-  /* margin: 0 1rem 1rem 0; */
+  margin: 0 1rem;
   padding: 0 1rem;
   text-align:center;
   font-family: Courier;
@@ -422,13 +418,14 @@ button.button.save_code_button:focus {
 }
 
 button.load_code_button {
-  height: 2rem;
+  /* height: 2rem; */
   margin: 0 0.2rem;
-  border-radius: 0rem;
+  /* border-radius: 0rem; */
   background-color: hsl(0, 0%, 8%);
   color: var(--clr_text);
   font-family:'Courier New', Courier, monospace;
-  border-radius: 0rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--clr_text);
 }
 /* button.load_code_button:hover {
   cursor: pointer;
@@ -732,7 +729,7 @@ button.redraw:active {
   /* background-color: var(--clr_input_form_bg); */
   justify-content:flex-start;
   /* text-align: right; */
-  margin:var(--app_padding_top_bottom) var(--app_padding_left_right) 0 var(--app_padding_left_right);
+  margin:var(--app_padding_top_bottom) var(--tab_bar_width) 0 var(--app_padding_left_right);
   /* height: var(--height_window_frame); */
   height: var(--height_window_frame);
   color: white;
@@ -1267,13 +1264,15 @@ button.redraw:active {
   align-items: center;
 
   outline: none;
-  background: hsl(0,0%,0%);
+  /* background: hsl(0,0%,0%); */
+  background: none;
 
   /* background-color: var(--clr-tab-button); */
   color: var(--clr_tab_button_text);
+  
   overflow: hidden;
   background-color: none;
-  box-shadow: var(--drop_shadow_outset);
+  /* box-shadow: var(--drop_shadow_outset); */
   box-shadow: none;
   box-sizing: border-box;
   /* opacity: 0; */
@@ -1283,7 +1282,7 @@ button.redraw:active {
   /* float: left; */
   border-radius: 3px;
   border: 1px solid black;
-  margin: 0px 0px 10px 0;
+  margin: 0px 0px 0.2rem 0;
   /* box-sizing: border-box; */
   /* outline: none; */
   /* border-bottom: 1px solid var(--clr_btn_border); */
@@ -1325,7 +1324,10 @@ button.redraw:active {
 .tablinks.active {
   /* border-bottom: solid 1px var(--clr_tab_button_active); */
   /* border-bottom:solid 1.5px var(--clr-tab-button-hover); */
-  background-color: hsl(0,0%,10%);
+  /* background-color: hsl(0,0%,10%); */
+  color: var(--clr_text);
+  height: 1.5rem;
+  width: 1.6rem;
   /* box-shadow: var(--drop-shadow-inset); */
   /* border:solid 1px hsl(0,0%,80%); */
   /* border: 0.5px solid gray; */
@@ -1346,9 +1348,10 @@ button.redraw:active {
 
   outline: none;
   background: none;
-  background-color: hsl(0,0%,5%);
+  /* background-color: hsl(0,0%,5%); */
 
-  color: var(--clr_tab_button_text);
+  /* color: var(--clr_tab_button_text); */
+  color: var(--clr_text);
   overflow: hidden;
  
   box-shadow: var(--drop_shadow_outset);
@@ -1360,7 +1363,7 @@ button.redraw:active {
 
   /* float: left; */
   border-radius: 3px;
-  border: 1px solid black;
+  border-bottom: 1px solid var(--clr_text);
   margin: 0px 0px 10px 0;
 
   cursor: pointer;

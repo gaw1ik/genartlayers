@@ -6,7 +6,8 @@
 
 .cm-s-midnight.CodeMirror {
     /* background: #0F192A; */
-    background-color: hsl(200, 10%, 12%);
+    /* background-color: hsl(200, 10%, 12%); */
+    background-color: hsl(200, 0%, 2%);
     
     color: #D1EDFF;
     box-shadow: 0 0 3px black;

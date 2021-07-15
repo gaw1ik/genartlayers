@@ -69,7 +69,7 @@ function evalAlgorithm(layer) {
 
   // get the dict code and evaluate it
   // var object_dict_code = fromParams2Code(layer);
-  var algText = ParamsEditors[layerIndex];
+  var algText = ParamsEditors[layerIndex].getValue();
   var object_dict_code = fromParamsText2Code(geometry, algText) 
   window.eval(object_dict_code);
 
@@ -102,7 +102,7 @@ function evalAlgorithm(layer) {
 
   // get the draw function code and evaluate it
   // var draw_function_code = fromDrawFunction2Code(layer);
-  algText = CodeEditors[layerIndex];
+  algText = CodeEditors[layerIndex].getValue();
   var draw_function_code = fromDrawFunctionText2Code(geometry, algText)
   window.eval(draw_function_code);
 

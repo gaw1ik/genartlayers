@@ -232,6 +232,9 @@ function setUpProjectFromProjectFile(JSONdata) {
 
   handleResize();
 
+  // open layer 0 tab
+  document.getElementById("Tab97_Layer0_Button").click();
+
 }
 
 
@@ -292,7 +295,7 @@ function loadDefaultProject() {
   .then( function(data) {
     var JSONdata = data;
     setUpProjectFromProjectFile(JSONdata);    
-    document.getElementById("Tab97_Layer0_Button").click();
+    // document.getElementById("Tab97_Layer0_Button").click();
   });
 
 }
