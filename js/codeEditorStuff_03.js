@@ -193,6 +193,25 @@ function onLoadAlgorithmButtonClick() {
 
 
 
+function isAlgIncluded(geometry) {
+
+  var algIsIncluded = 0;
+
+  for(let i=0; i<includedAlgNames.length; i++ ) {
+      var thisAlgName = includedAlgNames[i];
+
+      if( thisAlgName==geometry ) {
+          algIsIncluded = 1;
+      }
+  }
+
+  return algIsIncluded;
+}
+
+
+
+
+
 function loadAlgorithm(layer) {
 
   // get the layer attibutes.
@@ -202,8 +221,8 @@ function loadAlgorithm(layer) {
   
 
   // get the code editors on the current layer.
-  code_editor = CodeEditors[layerIndex];
-  params_editor = ParamsEditors[layerIndex];
+  var code_editor = CodeEditors[layerIndex];
+  var params_editor = ParamsEditors[layerIndex];
 
 
   // get the algorithm out of local storage and into the editors
@@ -211,129 +230,119 @@ function loadAlgorithm(layer) {
   var algorithm;
 
 //   try {
-    var algIsIncluded = 0;
-    for(let i=0; i<includedAlgNames.length; i++ ) {
-        var thisAlgName = includedAlgNames[i];
 
-        if( thisAlgName==geometry ) {
-            algIsIncluded = 1;
-        }
-    }
-
-    // if the algorithm is determined to be an included algorithm, fetch it from the server, otherwise get it out of local storage instead.
-    if(algIsIncluded==1) {
-
-        fetch("./" + geometry + ".txt")
-        .then(response => {
-    
-            return response.text();
-            
-        })
-        .then( data => {
-    
-            console.log("the algorithm was found on the server.");
-            algorithm = JSON.parse( data );  
-            
-            params_editor.setValue( algorithm.params );
-            code_editor.setValue( algorithm.drawFunction );
-    
-            // return(algorithm);
-    
-        });
-
-    } else {
-
-        console.log("the algorithm was found in local storage.");
-
-        // get the algorithm out of local storage.
-        var algorithmJSON = localStorage.getItem("ALG_" + geometry);
-        algorithm = JSON.parse(algorithmJSON);
-
-        params_editor.setValue( algorithm.params );
-        code_editor.setValue( algorithm.drawFunction );
-
-    }
+  algIsIncluded = isAlgIncluded(geometry);
 
 
+  // if the algorithm is determined to be an included algorithm, fetch it from the server, otherwise get it out of local storage instead.
+  if(algIsIncluded==1) {
 
-    
+      fetch("./" + geometry + ".txt")
+      .then(response => {
+  
+          return response.text();
+          
+      })
+      .then( data => {
+  
+          console.log("the algorithm was found on the server.");
+          algorithm = JSON.parse( data );  
+          
+          params_editor.setValue( algorithm.params );
+          code_editor.setValue( algorithm.drawFunction );
+  
+          // return(algorithm);
+  
+      });
 
-    // console.log("algorithm.params",algorithm.params);
+  } else if (algIsIncluded==0) {
+
+      console.log("the algorithm was found in local storage.");
+
+      // get the algorithm out of local storage.
+      var algorithmJSON = localStorage.getItem("ALG_" + geometry);
+      algorithm = JSON.parse(algorithmJSON);
+
+      console.log("layerIndex",layerIndex);
+      console.log("algorithm.params",algorithm.params);
+
+      params_editor.setValue( algorithm.params );
+      code_editor.setValue( algorithm.drawFunction );
+
+  } else {
+
+    console.log("algorithm included was neither 1 or 0. (something went very wrong.)")
+
+  }
+
 
     
-    // then once you have them in the editors, use evalAlgorithm to evaluate the algorithm from the editors.
-    // this is what formats the code and then brings the Dict and Draw functions into the global space.
+  // then once you have them in the editors, use evalAlgorithm to evaluate the algorithm from the editors.
+  // this is what formats the code and then brings the Dict and Draw functions into the global space.
 
 
-    ControlsDict = window[geometry + "Dict"]();
-
-    
-
-
-    // update the layer object to be whatever the code name has been defined as.
-    // layer.object = window[geometry + "Dict"]();
-
-
-    // Update the object parameter values to be the default values
-    var object = layer.object;
-
-    var keys = Object.keys(ControlsDict);
-
-    if( Object.keys(object).length === 0 ) {
-
-        console.log("object=={}")
-        for(let i=0; i<keys.length; i++){
-
-            var key = keys[i];
-
-            object[key] = {value:undefined};
-            object[key].value = ControlsDict[key].default;
-
-        }
-
-    }
-    // console.log("object",object);
-    
-
-    // console.log("keys",keys);
-
-
-    // // set the layer object's parameter values to be the default if they aren't defined yet.
-    // for(let i=0; i<keys.length; i++){
-
-    //     var key = keys[i];
-
-    //     // console.log("key",key);
-    //     // console.log("object[key].value",object[key].value);
-
-    //     if(object[key].value === undefined) {
-
-    //         // make a blank object[key], and the set its value to the default value for this algorithm.
-    //         object[key] = {};
-    //         object[key].value = ControlsDict[key].default;
-
-    //         // console.log("object[key].value",object[key].value);
-
-    //     }
-
-    // }
+  ControlsDict = window[geometry + "Dict"]();
 
 
 
-    // update the tab button for this layer.
-    var tab_button = document.getElementById("Tab97" + "_Layer" + layerIndex + "_Button");
-    tab_button.innerText = currentLayerIndex + ". " + layer.geometry;
+  // Update the object parameter values to be the default values
+  var object = layer.object;
+
+  var keys = Object.keys(ControlsDict);
+
+  if( Object.keys(object).length === 0 ) {
+
+      console.log("object=={}")
+      for(let i=0; i<keys.length; i++){
+
+          var key = keys[i];
+
+          object[key] = {value:undefined};
+          object[key].value = ControlsDict[key].default;
+
+      }
+
+  }
+  // console.log("object",object);
+  
+
+  // console.log("keys",keys);
 
 
-    // finish by recalculating/redrawing everything
-    drawTab(layer);
+  // // set the layer object's parameter values to be the default if they aren't defined yet.
+  // for(let i=0; i<keys.length; i++){
 
-    // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
-    if(currentPanelValue==1) {
-        makeGUICodePanel(layer);
-    } else {
-        makeGUIControlsPanel(layer);
-    }
+  //     var key = keys[i];
+
+  //     // console.log("key",key);
+  //     // console.log("object[key].value",object[key].value);
+
+  //     if(object[key].value === undefined) {
+
+  //         // make a blank object[key], and the set its value to the default value for this algorithm.
+  //         object[key] = {};
+  //         object[key].value = ControlsDict[key].default;
+
+  //         // console.log("object[key].value",object[key].value);
+
+  //     }
+
+  // }
+
+
+
+  // updateTabButtons();
+
+
+  // finish by recalculating/redrawing everything
+  drawTab(layer);
+
+  // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
+  if(currentPanelValue==1) {
+      makeGUICodePanel(layer);
+  } else {
+      makeGUIControlsPanel(layer);
+  }
 
 }
 

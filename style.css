@@ -27,7 +27,7 @@
 
   --drawing_container_width: 250px;
 
-  --tab_bar_width: 2rem;
+  
 
   --padded_app_height: calc( var(--container_height) - var(--app_padding) * 2);
 
@@ -108,6 +108,7 @@
   --input_form_container_width: 42rem;
   --height_window_frame: 2rem;
   --input_form_width: 40rem;
+  --tab_bar_width: 5rem;
   --height_panel: 70vh;
 
 }
@@ -291,7 +292,7 @@ input:focus {
   box-shadow:none;
   border:none;
   outline:none;
-  background-color: var(--clr_app_bg);
+  background-color: hsl(0, 0%, 8%);
   color:var(--clr_text);
   font-size: 1rem;
   /* margin: 0 1rem 1rem 0; */
@@ -486,7 +487,8 @@ button.panel_buttons {
   color:hsl(0,0%,40%);
   font-family:'Courier New', Courier, monospace;
   box-shadow: none;
-  background-color: var(--clr_input_form_bg);
+  background-color: none;
+  background: none;
   /* box-shadow: 0 2px 3px black; */
   /* box-shadow: inset 1px 1px 2px black; */
 
@@ -518,7 +520,8 @@ button.panel_buttons.active {
   /* box-shadow: 0 1px 3px black; */
   /* background-color: hsl(0, 0%, 8%); */
   /* background-color: hsl(218, 47%, 11%); */
-  background-color: var(--clr_input_form_bg);
+  background-color: none;
+  background: none;
   /* border-color: #2196F3; */
   /* background: linear-gradient(hsl(200, 10%, calc( var(--redrawL) * var(--activeMult) ) ), hsl(200, 50%, calc( var(--redrawL) * var(--activeMult) ) ) ); */
   /* background-color: hsl(200, 50%, calc( var(--redrawL) * var(--activeMult)) ); */
@@ -995,16 +998,7 @@ button.redraw:active {
 
 
 
-.layer_list_add_delete_buttons {
-  /* width:1rem; */
-  /* height:1rem; */
-  padding: 0.2rem 0.4rem;
-  /* text-align:center; */
-  /* align-self:end; */
-  background-color:var(--clr_input_form_bg);
-  color:var(--clr_text);
-  border-radius:1rem;
-}
+
 
 .layer-list {
   display: grid;
@@ -1163,13 +1157,13 @@ button.redraw:active {
   /* grid-template-rows: 3rem 3rem auto auto; */
   flex-direction: column;
   align-items: end;
-  justify-content:center;
+  /* justify-content:center; */
   border: solid var(--borderThickness);
   /* height: var(--padded_app_height); */
   overflow-y: hidden;
   /* padding: 4rem 0.5rem 0 0.5rem; */
   /* padding: 0 0.5rem; */
-  padding:0.2rem;
+  padding: 0.2rem;
 
   width:var(--tab_bar_width);
   /* height:100%; */
@@ -1184,11 +1178,11 @@ button.redraw:active {
   flex-direction: column;
   overflow-y: scroll;
   /* padding: 1px 5px; */
-  margin:1rem 0;
+  margin:6rem 0;
   align-items: center;
   width:100%;
   height:100%;
-  margin-top:auto;
+  /* margin-top:auto; */
   /* justify-self: flex-start; */
   
   /* height: calc(var(--app_height) - var(--app_padding) * 2); */
@@ -1196,17 +1190,29 @@ button.redraw:active {
 
 .layer_add_delete_container {
   display:flex;
+  height: 15rem;
+  width:100%;
   flex-direction: column;
-  
-  /* grid-template-columns: 1fr 1fr; */
-  grid-gap:0.3rem;
   align-self:end;
-  /* padding: 1rem; */
+  align-items: center;
+  justify-content: center;
   overflow-y:hidden;
 }
 
+.layer_list_add_delete_buttons {
+  width:2rem;
+  height:2rem;
+  padding: 0;
+  margin:0.3rem;
+  /* text-align:center; */
+  /* align-self:end; */
+  background-color:var(--clr_input_form_bg);
+  color:var(--clr_text);
+  border-radius:3px;
+}
+
 /* Style the buttons inside the tab */
-.tablinks {
+/* .tablinks {
   display: flex;
   overflow: hidden;
   white-space: nowrap;
@@ -1216,34 +1222,27 @@ button.redraw:active {
   outline: none;
   background: var(--clr_tab_button);
 
-  /* background-color: var(--clr-tab-button); */
   color: var(--clr_tab_button_text);
   overflow: hidden;
   background-color: none;
   box-shadow: var(--drop_shadow_outset);
   box-shadow: none;
   box-sizing: border-box;
-  /* opacity: 0; */
+
   height: 1.5rem;
   width: 80%;
 
-  /* float: left; */
   border-radius: 3px;
   margin: 0px 0px 10px 0;
-  /* box-sizing: border-box; */
-  /* outline: none; */
+
   border-bottom: 1px solid var(--clr_btn_border);
   cursor: pointer;
   padding: 14px 3px;
-  /* transition: 0.3s; */
+
   font-family: "Courier New", Courier, monospace;
   font-weight: var(--clr_tab_button_font_weight);
-  /* font-size: 100%; */
-  /* text-align: left; */
-  /* border-right:solid 1px var(--clr-btn-border); */
-  /* border:none; */
-  /* border-right:solid 1px var(--clr-tab-button-hover); */
-}
+
+} */
 
 .tablinks[name="MainTab"],
 .tablinks[name="DocPropsTab"],
@@ -1259,10 +1258,52 @@ button.redraw:active {
   align-items: center;
 }
 
+.tablinks {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+
+  outline: none;
+  background: hsl(0,0%,0%);
+
+  /* background-color: var(--clr-tab-button); */
+  color: var(--clr_tab_button_text);
+  overflow: hidden;
+  background-color: none;
+  box-shadow: var(--drop_shadow_outset);
+  box-shadow: none;
+  box-sizing: border-box;
+  /* opacity: 0; */
+  height: 1.5rem;
+  width: 1.5rem;
+
+  /* float: left; */
+  border-radius: 3px;
+  border: 1px solid black;
+  margin: 0px 0px 10px 0;
+  /* box-sizing: border-box; */
+  /* outline: none; */
+  /* border-bottom: 1px solid var(--clr_btn_border); */
+  cursor: pointer;
+  text-align:center;
+  /* padding: 14px 3px; */
+  padding: 0;
+  /* transition: 0.3s; */
+  font-family: "Courier New", Courier, monospace;
+  font-weight: var(--clr_tab_button_font_weight);
+  /* font-size: 100%; */
+  /* text-align: left; */
+  /* border-right:solid 1px var(--clr-btn-border); */
+  /* border:none; */
+  /* border-right:solid 1px var(--clr-tab-button-hover); */
+}
+
 /* Change background color of buttons on hover */
 .tablinks:hover {
   outline: none;
-  border-bottom: solid 1px var(--clr_tab_button_hover);
+  /* border-bottom: solid 1px var(--clr_tab_button_hover); */
   /* border:none; */
   /* border-right:solid 1.1px var(--clr-tab-button-hover); */
   /* border: none; */
@@ -1281,15 +1322,55 @@ button.redraw:active {
 
 /* Create an active/current tablink class */
 .tablinks.active {
-  border-bottom: solid 1px var(--clr_tab_button_active);
+  /* border-bottom: solid 1px var(--clr_tab_button_active); */
   /* border-bottom:solid 1.5px var(--clr-tab-button-hover); */
-  /* background-color: var(--clr-tab-button-active); */
+  background-color: hsl(0,0%,10%);
   /* box-shadow: var(--drop-shadow-inset); */
   /* border:solid 1px hsl(0,0%,80%); */
-  outline: none;
+  /* border: 0.5px solid gray; */
   /* border-bottom: solid 1px black; */
 }
 
+
+
+
+
+.navbuttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  outline: none;
+  background: none;
+  background-color: hsl(0,0%,5%);
+
+  color: var(--clr_tab_button_text);
+  overflow: hidden;
+ 
+  box-shadow: var(--drop_shadow_outset);
+  box-shadow: none;
+  box-sizing: border-box;
+  /* opacity: 0; */
+  height: 100%;
+  width: auto;
+
+  /* float: left; */
+  border-radius: 3px;
+  border: 1px solid black;
+  margin: 0px 0px 10px 0;
+
+  cursor: pointer;
+  text-align:center;
+  /* padding: 14px 3px; */
+  padding: 0 1rem;
+  /* transition: 0.3s; */
+  font-family: "Courier New", Courier, monospace;
+  font-weight: var(--clr_tab_button_font_weight);
+
+}
 
 
 

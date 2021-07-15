@@ -183,6 +183,7 @@ window.onload = function () {
 
 
 
+
 };
 
 
@@ -221,13 +222,6 @@ function attachTabButtonEventListeners() {
 //   SaveImgButton.addEventListener("click", saveImg);
 // });
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  // click on it
-  document.getElementById("Tab97_Layer0_Button").click();
-  console.log("hi")
-
-});
 
 
 

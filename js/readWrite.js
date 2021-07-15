@@ -200,11 +200,15 @@ function setUpProjectFromProjectFile(JSONdata) {
   // Clear out the CodeEditors and ParamsEditors objects AND remove all the HTML CodeMirror Elements in this layer (otherwise they stick around and eff' stuff up).
   CodeEditors = [];
   ParamsEditors = [];
+
   var Tab97CodePanel = document.getElementById("Tab97CodePanel");
   removeAllChildNodes(Tab97CodePanel);
 
-  // console.log("Tabs",Tabs);
+  var tab_bar_layers_container = document.getElementById("tab-bar-layers-container");
+  removeAllChildNodes(tab_bar_layers_container);
 
+
+  console.log("Tabs",Tabs);
 
   // for each layer add a code editor, add a tab button, and load the algorithm.
   for (let i = 0; i < Tabs.length; i++) {
@@ -221,9 +225,10 @@ function setUpProjectFromProjectFile(JSONdata) {
   
   }
 
-  updateLayers();
+  updateTabButtons();
 
-  // console.log("Tabs[0].geometry",Tabs[0].geometry);
+
+  currentLayerIndex = 0;  
 
   handleResize();
 
@@ -286,7 +291,8 @@ function loadDefaultProject() {
   })
   .then( function(data) {
     var JSONdata = data;
-    setUpProjectFromProjectFile(JSONdata);
+    setUpProjectFromProjectFile(JSONdata);    
+    document.getElementById("Tab97_Layer0_Button").click();
   });
 
 }

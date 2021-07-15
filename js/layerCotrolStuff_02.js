@@ -22,10 +22,7 @@ LayerList_MoveDown_Button.addEventListener("click", onMoveDownLayerButtonClick);
 
 function addCodeEditor(layer) {
 
-  var newLayerIndex = layer.ctxIndex;
-
-  // console.log("newLayerIndex", newLayerIndex);
-
+  // var newLayerIndex = layer.ctxIndex;
 
   // Do the CodeMirror Stuff to convert the text_area to a CodeMirror editor
   // for params edior
@@ -51,31 +48,8 @@ function addCodeEditor(layer) {
   // code_editor.name = "codeEditor";
 
 
-  // add the new code editor to the BIG OL' array of code_editors, CodeEditor.
-  // CodeEditors.splice(newLayerIndex, 0, code_editor);
-  // ParamsEditors.splice(newLayerIndex, 0, params_editor);
-
   CodeEditors.push(code_editor);
   ParamsEditors.push(params_editor);
-
-  // if you're adding a new layer in-between existing layers.
-  // if(newLayerIndex<Tabs.length-1) {
-    // console.log("new layer inserted in between");
-    // update the editor text such that the editors on the existing layer that got bumped up have the values of the old layer and the editors on the newly created layer are blank.
-    // var code_editor_oldValue = CodeEditors[newLayerIndex].getValue();
-    // var params_editor_oldValue = ParamsEditors[newLayerIndex].getValue();
-
-    // CodeEditors[newLayerIndex+1].setValue(code_editor_oldValue);
-    // ParamsEditors[newLayerIndex+1].setValue(params_editor_oldValue);
-    // console.log("set layer ", newLayerIndex+1 , "old value");
-
-    // CodeEditors[newLayerIndex].setValue("");
-    // ParamsEditors[newLayerIndex].setValue("");
-    // console.log("set layer ", newLayerIndex, "blanks");
-  // }
-
-  // console.log("new params editor placed at layerIndex =",newLayerIndex);
-  // console.log("new code editor placed at layerIndex =",newLayerIndex);
 
 }
 
@@ -86,9 +60,9 @@ function addCodeEditor(layer) {
 
 
 // This function adds a Tab Button to the Tabs Bar for a particular layer
-function addTabButton(layer) {
+function addTabButton() {
 
-    var newLayerIndex = layer.ctxIndex;
+    // var newLayerIndex = layer.ctxIndex;
     // var newLayerIndex = currentLayerIndex + 1;
 
     // var layer = Tabs[newLayerIndex];    
@@ -97,14 +71,15 @@ function addTabButton(layer) {
   
     var tab_button = document.createElement("BUTTON");
     tab_button.className = "tablinks";
-    tab_button.id = "Tab97" + "_Layer" + newLayerIndex + "_Button";
+    // tab_button.id = "Tab97" + "_Layer" + newLayerIndex + "_Button";
     // tab_button.tabindex = layerIndex;
-    tab_button.innerText = newLayerIndex + ". " + layer.geometry;
+    // tab_button.innerText = newLayerIndex + ". " + layer.geometry;
     var tab_bar_layers_container = document.getElementById("tab-bar-layers-container");
 
+    // console.log("tab_button",tab_button);
     
-    tab_bar_layers_container.insertBefore(tab_button, tab_bar_layers_container.children[Tabs.length-newLayerIndex-1] );
-  //   document.getElementById("tab-bar-layers-container").appendChild(tab_button);
+    // tab_bar_layers_container.insertBefore(tab_button, tab_bar_layers_container.children[Tabs.length-newLayerIndex-1] );
+    tab_bar_layers_container.appendChild(tab_button);
     
     // Attach an event listener to the tab button.
     tab_button.addEventListener("click", openTab);
@@ -120,9 +95,14 @@ function addTabButton(layer) {
 function updateTabButtons() {
 
   var tab_bar_layers_container = document.getElementById("tab-bar-layers-container");
+  // removeAllChildNodes(tab_bar_layers_container);
   
   // for each layer above the newly created layer, update all the layer info, and tab buttons.
   for(let i=0; i<Tabs.length; i++) {
+
+    // var layer = Tabs[i];
+
+    // addTabButton();
 
     // Grab this layer
     var layerIndex = i;
@@ -133,11 +113,26 @@ function updateTabButtons() {
 
     // update the tab buttons
     var tabIndex = Tabs.length-1-i;
+    console.log("tabIndex",tabIndex);
     var tab_button = tab_bar_layers_container.children[tabIndex];
     tab_button.id = "Tab97" + "_Layer" + (i) + "_Button";
-    tab_button.innerText = i + ". " + layer.geometry;
+    // tab_button.innerText = i + ". " + layer.geometry;
+    tab_button.innerText = "[" + i + "]";
+    
 
   }
+
+}
+
+
+
+
+function updateCodeEditors() {
+
+  var CodeMirrors = document.getElementsByClassName("CodeMirror cm-s-midnight");
+
+
+
 
 }
 
@@ -166,13 +161,15 @@ function onAddLayerButtonClick(){
   // add a new pair of text editors (params and code) to the code panel
   addCodeEditor(layer);
 
+  addTabButton();
+
 
 
   ////////////////////////////////////////////////////////////////////////////////
 //   var tabBarLayersContainer = document.getElementById("tab-bar-layers-container");
 
     // add a tab button for the new layer
-    addTabButton(layer);
+    // addTabButton(layer);
 
 //   removeAllChildNodes(tabBarLayersContainer);
 
