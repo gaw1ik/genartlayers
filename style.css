@@ -1179,7 +1179,7 @@ button.redraw:active {
   overflow-y: scroll;
   /* padding: 1px 5px; */
   margin:6rem 0;
-  align-items: center;
+  align-items: flex-end;
   width:100%;
   height:100%;
   /* margin-top:auto; */
@@ -1194,7 +1194,7 @@ button.redraw:active {
   width:100%;
   flex-direction: column;
   align-self:end;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   overflow-y:hidden;
 }
@@ -1204,6 +1204,7 @@ button.redraw:active {
   height:2rem;
   padding: 0;
   margin:0.3rem;
+  
   /* text-align:center; */
   /* align-self:end; */
   background-color:var(--clr_input_form_bg);

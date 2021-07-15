@@ -65,9 +65,12 @@ function evalAlgorithm(layer) {
 
   // get the geometry
   var geometry = layer.geometry;
+  var layerIndex = layer.ctxIndex;
 
   // get the dict code and evaluate it
-  var object_dict_code = fromParams2Code(layer);
+  // var object_dict_code = fromParams2Code(layer);
+  var algText = ParamsEditors[layerIndex];
+  var object_dict_code = fromParamsText2Code(geometry, algText) 
   window.eval(object_dict_code);
 
   // console.log("object_dict_code",object_dict_code);
@@ -98,7 +101,9 @@ function evalAlgorithm(layer) {
 
 
   // get the draw function code and evaluate it
-  var draw_function_code = fromDrawFunction2Code(layer);
+  // var draw_function_code = fromDrawFunction2Code(layer);
+  algText = CodeEditors[layerIndex];
+  var draw_function_code = fromDrawFunctionText2Code(geometry, algText)
   window.eval(draw_function_code);
 
   // finish by recalculating/redrawing everything
