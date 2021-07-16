@@ -3,7 +3,7 @@ function getLayerElementIsOn(element) {
 
     layerIndex = getNamedIndexOfElement("Layer",element);
 
-    var layer = Tabs[layerIndex];
+    var layer = Layers[layerIndex];
 
     return layer;
 }
@@ -37,8 +37,8 @@ function removeAllChildNodesExcept(parent) {
     while(true) { 
 
       var lastChildsClassName = parent.lastChild.className;
-      console.log("lastChildsClassName",lastChildsClassName);
-      console.log("lastChildsClassName type",typeof(lastChildsClassName));
+      //console.log("lastChildsClassName",lastChildsClassName);
+      //console.log("lastChildsClassName type",typeof(lastChildsClassName));
 
       // if the element has a className, check to see if the first 10 characters are "CodeMirror"
       if(lastChildsClassName === undefined){
@@ -47,7 +47,7 @@ function removeAllChildNodesExcept(parent) {
 
       } else if (lastChildsClassName.substring(0,10) == "CodeMirror") {
 
-        console.log("it was CodeMirror");
+        //console.log("it was CodeMirror");
 
         return;
 
@@ -71,22 +71,22 @@ function removeAllChildNodesExceptCode(parent) {
 
     var nChildren = parent.childNodes.length;
 
-    console.log("nChildren",nChildren);
+    //console.log("nChildren",nChildren);
 
     for(let i=0; i<nChildren; i++) { 
 
       // var lastChildsClassName = parent.lastChild.className;
-      // console.log("lastChildsClassName",lastChildsClassName);
+      // //console.log("lastChildsClassName",lastChildsClassName);
 
       let thisChild = parent.childNodes[i];
 
-      console.log("thisChild",thisChild);
+      //console.log("thisChild",thisChild);
 
     
 
       if(thisChild === undefined) {
 
-        console.log("")
+        //console.log("")
         
         parent.removeChild(thisChild);
 
@@ -98,10 +98,10 @@ function removeAllChildNodesExceptCode(parent) {
 
           if (thisChildsClassName.substring(0,10) == "CodeMirror") {
             // do nothing
-            console.log("it was a CodeMirror");        
+            //console.log("it was a CodeMirror");        
           } else {
             parent.removeChild(thisChild);
-            console.log("it was NOT a CodeMirror");
+            //console.log("it was NOT a CodeMirror");
           }
 
         }
@@ -140,7 +140,7 @@ function getPropertyNameFromInput(name,element) {
 function print(variable) {
   // var hello = variable
   var variableAsString = Object.keys({variable})[0];
-  console.log(variableAsString + ":", variable);
+  //console.log(variableAsString + ":", variable);
 }
 
 
@@ -174,12 +174,12 @@ function print(variable) {
 // // this function figures out which tab an element belongs to, and returns that Tab's index.
 // function getTabIndexOfElement(element) {
 //     var id = element.id;
-//     // console.log("id:",id)
+//     // //console.log("id:",id)
 //     var start = id.lastIndexOf('Tab') + 3; // add 2 to get from "T" to "b" and then 1 more to get to the index
 //     var end = start + 2;
-//     // console.log("[start,end]:",[start,end])
+//     // //console.log("[start,end]:",[start,end])
 //     var tabIndex = id.substring(start, end);
-//     // console.log("tabIndex:",tabIndex);
+//     // //console.log("tabIndex:",tabIndex);
 //     var nDigits = tabIndex.length;
 //     if(tabIndex[0]==0){
 //         tabIndex = tabIndex.substring(1);

@@ -288,7 +288,7 @@ function draw_fractalCirc( fractalCirc, ctx ) {
         var litCenter1 = lit;
         var alpha1 = 255;
 
-        // console.log("x,y,radMax,radMin",xCenter,yCenter,radMax,radMin);
+        // //console.log("x,y,radMax,radMin",xCenter,yCenter,radMax,radMin);
 
         // make a new random number generator for the stroking
         var seed = 1;

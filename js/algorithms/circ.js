@@ -41,9 +41,9 @@ function circDict() {
     
     fillMode = "fill";
     
-    //console.log("x",x);
-    //console.log("y",y);
-    //console.log("rad",rad);
+    ////console.log("x",x);
+    ////console.log("y",y);
+    ////console.log("rad",rad);
   
   
     var alpha = 255;

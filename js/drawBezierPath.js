@@ -1,7 +1,7 @@
 
 function drawBezierPath(bezierPath,xOffset,yOffset,lineWidth,hue,sat,lit,fillMode,referencePointsOn,ctx) {
 
-    // console.log("bezierPath", bezierPath);
+    // //console.log("bezierPath", bezierPath);
 
     var rMarker = lineWidth;
     var markerLineW = lineWidth;
@@ -33,7 +33,7 @@ function drawBezierPath(bezierPath,xOffset,yOffset,lineWidth,hue,sat,lit,fillMod
 
         ctx.bezierCurveTo( xc1,yc1, xc2,yc2, x2,y2 );
 
-        // console.log(bezierPath);
+        // //console.log(bezierPath);
 
     }
 

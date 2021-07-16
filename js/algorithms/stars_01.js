@@ -51,8 +51,8 @@ function starsDict() {
       y = myrng();
       r = vary(radCenter,radVariation);
 
-    //   console.log("radCenter",radCenter)
-    //   console.log("variation",variation)
+    //   //console.log("radCenter",radCenter)
+    //   //console.log("variation",variation)
 
       circle = {loc:[x,y], rad:r};
 

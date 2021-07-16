@@ -1,7 +1,7 @@
 
 function drawPath(path,xOffset,yOffset,lineWidth,hue,sat,lit,fillMode,close,ctx) {
 
-    // console.log("ctx",ctx);
+    // //console.log("ctx",ctx);
 
     ctx.beginPath()
 
@@ -14,7 +14,7 @@ function drawPath(path,xOffset,yOffset,lineWidth,hue,sat,lit,fillMode,close,ctx)
         x = path[i][0]*h + xOffset*w
         y = path[i][1]*h + yOffset*h
         ctx.lineTo(x,y)
-        // console.log("[x,y]",[x,y])
+        // //console.log("[x,y]",[x,y])
     }
 
     if(close==1){

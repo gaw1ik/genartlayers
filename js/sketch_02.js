@@ -35,12 +35,12 @@ function onObjectPropertyInput() {
 
 //   // DRAW SECOND
 //   // clear canvas
-//   // console.log("layer.ctxIndex",layer.ctxIndex);
+//   // //console.log("layer.ctxIndex",layer.ctxIndex);
 //   ctx[layer.ctxIndex].clearRect(0, 0, w, h); 
 
 
-//   // console.log("in calcTab, seed = ", layer.object.seed);
-//   // console.log("in calcTab, myrng(1) = ",myrng(1));
+//   // //console.log("in calcTab, seed = ", layer.object.seed);
+//   // //console.log("in calcTab, myrng(1) = ",myrng(1));
 
 //   // draw on canvas
 //     // make a new random number generator
@@ -72,7 +72,7 @@ function drawTab(layer) {
     
   }
   myrng = new Math.seedrandom(seed);
-  // console.log("in drawTab, myrng(1) = ",myrng(1));
+  // //console.log("in drawTab, myrng(1) = ",myrng(1));
 
 
   // Build the array of param values to pass into the draw function.
@@ -86,9 +86,9 @@ function drawTab(layer) {
       paramValues.push(paramValue);
   }
 
-  // console.log("paramValues going into draw function via drawTab()",paramValues);
+  // //console.log("paramValues going into draw function via drawTab()",paramValues);
   // draw on canvas
-  // console.log("layer.geometry",layer.geometry);
+  // //console.log("layer.geometry",layer.geometry);
   window["draw_" + layer.geometry]( paramValues, layer, ctx[layerIndex] );
   
 }
@@ -103,11 +103,11 @@ function updateObjectProperty(input) {
   // Update the property that was changed in the layer 
   // var id = input.id;
 
-  // console.log("input.id:",input.id);
+  // //console.log("input.id:",input.id);
 
   var propertyName = getPropertyNameFromInput("Property",input);
 
-  // console.log("propertyName:",propertyName);
+  // //console.log("propertyName:",propertyName);
 
   object[propertyName].value = parseFloat(input.value,10);
 }
@@ -128,11 +128,11 @@ function updateObjectPropertyIndicator(input) {
   
 function calcAll() {
 
-  for(let i=0; i<Tabs.length; i++){
+  for(let i=0; i<Layers.length; i++){
     // key = Tabs_Keys[i];
 
-    // var layer =  Tabs[Tabs.length-1-i];
-    var layer =  Tabs[i];
+    // var layer =  Layers[Layers.length-1-i];
+    var layer =  Layers[i];
 
     if(layer.geometry=="") {
 
@@ -154,11 +154,11 @@ function calcAll() {
 }
 
 function drawAll() {
-  for(let i=0; i<Tabs.length; i++){
+  for(let i=0; i<Layers.length; i++){
     // key = Tabs_Keys[i];
 
-    // var layer =  Tabs[Tabs.length-1-i];
-    var layer =  Tabs[i];
+    // var layer =  Layers[Layers.length-1-i];
+    var layer =  Layers[i];
 
     ctx[i].clearRect(0, 0, w, h); // clear canvas
 

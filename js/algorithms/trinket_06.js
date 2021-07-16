@@ -205,7 +205,7 @@ function trinketDict() {
     // fill mode
     if(fillMode==0){fillMode = "fill";}else{}
 
-    //   console.log("circle",circle)
+    //   //console.log("circle",circle)
 
     var xOffset = xOffset + 0.5;
     var yOffset = yOffset + 0.5;

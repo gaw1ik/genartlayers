@@ -3,7 +3,7 @@
 
 // deprecating
 function assignFromControls(object) {
-  // console.log("assign from controls for:",object);
+  // //console.log("assign from controls for:",object);
 
   // var object = tab.object;
 
@@ -15,19 +15,19 @@ function assignFromControls(object) {
   for (let i = 0; i < keys.length; i++) {
     var propertyName = keys[i];
 
-    // console.log("propertyName:",propertyName);
+    // //console.log("propertyName:",propertyName);
 
     // var id = propertyName + "_Tab" + tabIndex;
 
     var id = makeInputName(propertyName, tabIndex);
 
-    // console.log("id:", id);
+    // //console.log("id:", id);
 
     // if it's a control then do the thing (otherwise it's a non-control property without attributes like min, max, etc.)
     if (object[propertyName].type != null) {
       var input = document.getElementById(id);
 
-      // console.log("input:", input)
+      // //console.log("input:", input)
 
       // Stuff for handling the value indicator on the inputs
       var inputLabel_Node = input.previousElementSibling;
@@ -80,14 +80,14 @@ function saveProject () {
   if(confirmation==false) return;
 
 
-  // var newTabs = getParamsOnly(Tabs);
+  // var newTabs = getParamsOnly(Layers);
 
-  let data = JSON.stringify({ doc1: doc1, Tabs: Tabs });
+  let dataStr = JSON.stringify({ doc1: doc1, Layers: Layers });
 
   // fs.writeFileSync("C:/Users/Brian/OneDrive/Documents/Gen-Art-Studio/Projects/" + fpath + ".json", data );
-  console.log("saved project to local storage");
+  //console.log("saved project to local storage");
   // 
-  localStorage.setItem(projName, data);
+  localStorage.setItem(projName, dataStr);
 
 
 
@@ -97,19 +97,19 @@ function saveProject () {
 
 
 // this function gets only the parameters (i.e. not coordinate arrays) and values (i.e. not min, max, etc.) from the layer objects
-function getParamsOnly(Tabs) {
+function getParamsOnly(Layers) {
 
-  const newTabs = JSON.parse(JSON.stringify(Tabs));
+  const newTabs = JSON.parse(JSON.stringify(Layers));
 
   // let newTabs = [];
 
   // get the values just so you can get its length for the subsequent for-loop
-  var Tabs_values = Object.values(Tabs);
+  var Tabs_values = Object.values(Layers);
 
   // for each layer ("tab")
   for (let i = 0; i < Tabs_values.length; i++) {
 
-    layer = Tabs[i];
+    layer = Layers[i];
 
     var object = layer.object;
 
@@ -127,7 +127,7 @@ function getParamsOnly(Tabs) {
       param = params[j];
 
       if (object[param].type != undefined) {
-        // console.log(object[param].type)
+        // //console.log(object[param].type)
         tempObject[param].value = object[param].value;
       }
 
@@ -155,7 +155,7 @@ readJsonButton.addEventListener("click", loadProject );
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function setUpProjectFromProjectFile(JSONdata) {
 
-  Tabs = JSONdata.Tabs;
+  Layers = JSONdata.Layers;
   doc1 = JSONdata.doc1;
 
   //////////////////////////////////////////////// Bring in the Doc object
@@ -184,7 +184,7 @@ function setUpProjectFromProjectFile(JSONdata) {
   for (let i = 0; i < keys.length; i++) {
     var key = keys[i];
     var inputID = "doc_" + "Property" + key + "_Input";
-    // console.log("key",key)
+    // //console.log("key",key)
     var element = document.getElementById(inputID);
     element.value = doc1[key].value;
     updateObjectPropertyIndicator(element);
@@ -193,9 +193,9 @@ function setUpProjectFromProjectFile(JSONdata) {
 
 
 
-  /////////////////////////////////////////////// Bring in the Tabs object.
-  // Tabs = Object.values( parsedData.Tabs );  
-  // console.log("Tabs", Tabs);
+  /////////////////////////////////////////////// Bring in the Layers object.
+  // Layers = Object.values( parsedData.Layers );  
+  // //console.log("Layers", Layers);
 
   // Clear out the CodeEditors and ParamsEditors objects AND remove all the HTML CodeMirror Elements in this layer (otherwise they stick around and eff' stuff up).
   CodeEditors = [];
@@ -208,12 +208,12 @@ function setUpProjectFromProjectFile(JSONdata) {
   removeAllChildNodes(tab_bar_layers_container);
 
 
-  console.log("Tabs",Tabs);
+  //console.log("Layers",Layers);
 
   // for each layer add a code editor, add a tab button, and load the algorithm.
-  for (let i = 0; i < Tabs.length; i++) {
+  for (let i = 0; i < Layers.length; i++) {
 
-    var layer = Tabs[i];
+    var layer = Layers[i];
 
     addCodeEditor(layer);
 
@@ -243,7 +243,7 @@ function setUpProjectFromProjectFile(JSONdata) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function loadProject() {
 
-  console.log("**Load Project**");
+  //console.log("**Load Project**");
 
 
   /////////////////////////////////////////////// Bring in file info, and the then file data
@@ -283,7 +283,7 @@ function loadProject() {
 
 function loadDefaultProject() {
 
-  console.log("**Load Default Project**");
+  //console.log("**Load Default Project**");
 
   document.getElementById("fpath").value = "default";
 
@@ -309,7 +309,7 @@ function loadDefaultProject() {
 // // the old readJASON function...
 // readJsonButton.addEventListener("click", function () {
   
-//   console.log("**Read from JSON**");
+//   //console.log("**Read from JSON**");
 
 
 //   // let rawdata = fs.readFileSync('tree1.json');
@@ -320,11 +320,11 @@ function loadDefaultProject() {
 
 //   var rawData = localStorage.getItem(fpath);
 
-//   console.log("rawData",rawData);
+//   //console.log("rawData",rawData);
 
 //   parsedData = JSON.parse(rawData);
 
-//   console.log("parsedData",parsedData);
+//   //console.log("parsedData",parsedData);
 
 
 //   // Bring in the Doc object
@@ -353,7 +353,7 @@ function loadDefaultProject() {
 //   for (let i = 0; i < keys.length; i++) {
 //     var key = keys[i];
 //     var inputID = "doc_" + "Property" + key + "_Input";
-//     // console.log("key",key)
+//     // //console.log("key",key)
 //     var element = document.getElementById(inputID);
 //     element.value = doc1[key].value;
 //     updateObjectPropertyIndicator(element);
@@ -363,15 +363,15 @@ function loadDefaultProject() {
 
 
 
-//   // bring in the Tabs object.
-//   let newTabs = Object.values( parsedData.Tabs );  
+//   // bring in the Layers object.
+//   let newTabs = Object.values( parsedData.Layers );  
 
-//   // console.log("newTabs",newTabs);
+//   // //console.log("newTabs",newTabs);
 
 //   // return;
 
-//   // Bring in info from the Tabs object to make tab guis, make geometry objects, assign to controls...
-//   Tabs = newTabs; // initially, let's just set Tabs = newTabs
+//   // Bring in info from the Layers object to make tab guis, make geometry objects, assign to controls...
+//   Layers = newTabs; // initially, let's just set Layers = newTabs
 //   for (let i = 0; i < newTabs.length; i++) {
 
 //     var layer = newTabs[i];
@@ -429,7 +429,7 @@ function bringInLayer(layer) {
   // Base it on the prototype object, and update the values only (so you can update GUI properties like min, max, and step)
   var protoObject = window[layer.geometry + "Dict"]();
 
-  console.log("protoObject",protoObject);
+  //console.log("protoObject",protoObject);
 
 
   // for each key in tabObject assign the value from the saved object to the prototype object.
@@ -440,11 +440,11 @@ function bringInLayer(layer) {
     var param = keys[j]; // get one key
 
     // if( tabObject[param].value!=null ) { // if it has a value (i.e. if it's an input parameter)
-    // console.log("param:",param);
+    // //console.log("param:",param);
     if(protoObject[param]==null){
       console.warn("the parameter ",param, "was not found in the prototype object for", layer.geometry, "." );
     } else {
-      console.log("layer.object[param].value:",layer.object[param].value);
+      //console.log("layer.object[param].value:",layer.object[param].value);
       protoObject[param].value = layer.object[param].value; // assign the *value* from the saved object to the prototype object
     }
     // }
@@ -453,7 +453,7 @@ function bringInLayer(layer) {
   
 
   // replace the object from newTabs (with key:value pairs like hue:20, sat:30, etc. with the new object with e.g. hue:{value:20,min:0,max:255,etc...})
-  Tabs[layerIndex].object = protoObject; 
+  Layers[layerIndex].object = protoObject; 
 
 
   // calcTab(layer);

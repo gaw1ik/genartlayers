@@ -6,17 +6,17 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode, ctx) {
 
     var alpha = alpha/255;
 
-    // console.log("x",x);
-    // console.log("y",y);
-    // console.log("rad",rad);
+    // //console.log("x",x);
+    // //console.log("y",y);
+    // //console.log("rad",rad);
 
     ctx.beginPath();
 
-    // console.log("ctx",ctx)
+    // //console.log("ctx",ctx)
 
     ctx.ellipse(x,y,rad,rad,0,0,twoPI);
 
-    // console.log("hsla",hue,sat,lit,alpha/255);
+    // //console.log("hsla",hue,sat,lit,alpha/255);
 
     if(fillMode=="fill") {
         ctx.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 

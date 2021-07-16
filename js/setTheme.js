@@ -127,7 +127,7 @@ function setTheme() {
         // editor.setOption("theme","default")
     }
 
-    // console.log(lightTheme);
+    // //console.log(lightTheme);
 
     keys = Object.keys(theme);
 
@@ -139,8 +139,8 @@ function setTheme() {
 
         var value = theme[key];
 
-        // console.log(typeof property);
-        // console.log("property:",property,"value",value);
+        // //console.log(typeof property);
+        // //console.log("property:",property,"value",value);
 
         root.style.setProperty(property, value);
     }

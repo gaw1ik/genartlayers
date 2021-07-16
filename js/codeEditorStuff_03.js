@@ -19,9 +19,9 @@
 
   
   // function switchBetweenLayerPanels() {
-  //   console.log("switchBetweenLayerPanels");
-  //   // console.log("this.innerText",this.innerText)
-  //   var currentLayer = Tabs[currentLayerIndex];
+  //   //console.log("switchBetweenLayerPanels");
+  //   // //console.log("this.innerText",this.innerText)
+  //   var currentLayer = Layers[currentLayerIndex];
   
   //   var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
   //   var ControlsCodeToggle_value = ControlsCodeToggle.value;
@@ -40,7 +40,7 @@
 
   
   // function switchToCodePanel() {
-  //   console.log("switchToCodePanel")
+  //   //console.log("switchToCodePanel")
   // }
 
 
@@ -70,10 +70,10 @@ function evalAlgorithm(layer) {
   // get the dict code and evaluate it
   // var object_dict_code = fromParams2Code(layer);
   var algText = ParamsEditors[layerIndex].getValue();
-  var object_dict_code = fromParamsText2Code(geometry, algText) 
+  var object_dict_code = fromParamsText2Code(geometry, algText);
   window.eval(object_dict_code);
 
-  // console.log("object_dict_code",object_dict_code);
+  // //console.log("object_dict_code",object_dict_code);
 
 
   // layer.object = window[geometry + "Dict"]();
@@ -103,7 +103,7 @@ function evalAlgorithm(layer) {
   // get the draw function code and evaluate it
   // var draw_function_code = fromDrawFunction2Code(layer);
   algText = CodeEditors[layerIndex].getValue();
-  var draw_function_code = fromDrawFunctionText2Code(geometry, algText)
+  var draw_function_code = fromDrawFunctionText2Code(geometry, algText);
   window.eval(draw_function_code);
 
   // finish by recalculating/redrawing everything
@@ -117,7 +117,7 @@ function evalAlgorithm(layer) {
 function onEvalAlgorithmButtonClick() {
 
   // get the current layer
-  let layer = Tabs[currentLayerIndex];
+  let layer = Layers[currentLayerIndex];
 
   evalAlgorithm(layer)
 
@@ -139,11 +139,11 @@ function onSaveAndEvalAlgorithmButtonClick(){
   if(confirmation==false) return;
 
   // update the Layers object
-  Tabs[currentLayerIndex].geometry = load_code_name;
+  Layers[currentLayerIndex].geometry = load_code_name;
 
 
   // get the current layer
-  let layer = Tabs[currentLayerIndex];
+  let layer = Layers[currentLayerIndex];
 
 
   // get the code editor on the current layer.
@@ -151,7 +151,7 @@ function onSaveAndEvalAlgorithmButtonClick(){
   params_editor = ParamsEditors[currentLayerIndex];
 
 
-  // console.log("params_editor.getValue()", params_editor.getValue());
+  // //console.log("params_editor.getValue()", params_editor.getValue());
   // Get the algorithm from the code editors.
   var algorithm = {};
   algorithm.params = params_editor.getValue();
@@ -164,7 +164,7 @@ function onSaveAndEvalAlgorithmButtonClick(){
   var algorithmJSON = JSON.stringify(algorithm);
   
   localStorage.setItem(ALG_name, algorithmJSON);
-  console.log("saved '", ALG_name ,"' to local storage");
+  //console.log("saved '", ALG_name ,"' to local storage");
 
 
   // Evaluate this layer's new algorithm.
@@ -179,7 +179,7 @@ function onSaveAndEvalAlgorithmButtonClick(){
 function onLoadAlgorithmButtonClick() {
 
   // get the current layer.
-  var layer = Tabs[currentLayerIndex];
+  var layer = Layers[currentLayerIndex];
 
 
   // get the name of the code to be loaded from layerGeomInput and set the layer.geometry equal to it.
@@ -189,7 +189,7 @@ function onLoadAlgorithmButtonClick() {
 
   layer.geometry = load_code_name;
 
-//   console.log("layer.geometry",layer.geometry);
+//   //console.log("layer.geometry",layer.geometry);
 
   loadAlgorithm(layer);
 
@@ -250,7 +250,7 @@ function loadAlgorithm(layer) {
       })
       .then( data => {
   
-          console.log("the algorithm was found on the server.");
+          //console.log("the algorithm was found on the server.");
           algorithm = JSON.parse( data );  
           
           params_editor.setValue( algorithm.params );
@@ -262,21 +262,21 @@ function loadAlgorithm(layer) {
 
   } else if (algIsIncluded==0) {
 
-      console.log("the algorithm was found in local storage.");
+      //console.log("the algorithm was found in local storage.");
 
       // get the algorithm out of local storage.
       var algorithmJSON = localStorage.getItem("ALG_" + geometry);
       algorithm = JSON.parse(algorithmJSON);
 
-      console.log("layerIndex",layerIndex);
-      console.log("algorithm.params",algorithm.params);
+      //console.log("layerIndex",layerIndex);
+      //console.log("algorithm.params",algorithm.params);
 
       params_editor.setValue( algorithm.params );
       code_editor.setValue( algorithm.drawFunction );
 
   } else {
 
-    console.log("algorithm included was neither 1 or 0. (something went very wrong.)")
+    //console.log("algorithm included was neither 1 or 0. (something went very wrong.)")
 
   }
 
@@ -297,7 +297,7 @@ function loadAlgorithm(layer) {
 
   if( Object.keys(object).length === 0 ) {
 
-      console.log("object=={}")
+      //console.log("object=={}")
       for(let i=0; i<keys.length; i++){
 
           var key = keys[i];
@@ -308,10 +308,10 @@ function loadAlgorithm(layer) {
       }
 
   }
-  // console.log("object",object);
+  // //console.log("object",object);
   
 
-  // console.log("keys",keys);
+  // //console.log("keys",keys);
 
 
   // // set the layer object's parameter values to be the default if they aren't defined yet.
@@ -319,8 +319,8 @@ function loadAlgorithm(layer) {
 
   //     var key = keys[i];
 
-  //     // console.log("key",key);
-  //     // console.log("object[key].value",object[key].value);
+  //     // //console.log("key",key);
+  //     // //console.log("object[key].value",object[key].value);
 
   //     if(object[key].value === undefined) {
 
@@ -328,7 +328,7 @@ function loadAlgorithm(layer) {
   //         object[key] = {};
   //         object[key].value = ControlsDict[key].default;
 
-  //         // console.log("object[key].value",object[key].value);
+  //         // //console.log("object[key].value",object[key].value);
 
   //     }
 

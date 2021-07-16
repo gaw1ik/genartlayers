@@ -4,7 +4,7 @@ let version = process.argv[2]
 let auth = process.argv[3]
 
 if (!auth) {
-  console.log("Usage: upload-release.js [TAG] [github-user:password]")
+  //console.log("Usage: upload-release.js [TAG] [github-user:password]")
   process.exit(1)
 }
 
@@ -22,7 +22,7 @@ require('child_process').exec("git --no-pager show -s --format='%s' " + version,
   }, res => {
     if (res.statusCode >= 300) {
       console.error(res.statusMessage)
-      res.on("data", d => console.log(d.toString()))
+      res.on("data", d => //console.log(d.toString()))
       res.on("end", process.exit(1))
     }
   })

@@ -19,9 +19,9 @@ var server = require('http').createServer(function (req, res) {
   const puppeteer = require('puppeteer');
   const browser = await puppeteer.launch({args: ["--no-sandbox", "--disable-setuid-sandbox"]})
   const page = await browser.newPage()
-  page.on('console', msg => console.log("console:", msg.text()))
+  page.on('console', msg => //console.log("console:", msg.text()))
   page.on('dialog', async dialog => {
-    console.log(dialog.message())
+    //console.log(dialog.message())
     await dialog.dismiss()
   })
   page.evaluateOnNewDocument(() => window.automatedTests = true)
@@ -31,8 +31,8 @@ var server = require('http').createServer(function (req, res) {
     await sleep(200)
   }
   let [failed, errors] = await page.evaluate(() => [window.failed, window.errored])
-  for (let error of errors) console.log(error)
-  console.log(await page.evaluate(() => document.getElementById('output').innerText + "\n" +
+  for (let error of errors) //console.log(error)
+  //console.log(await page.evaluate(() => document.getElementById('output').innerText + "\n" +
                                           document.getElementById('status').innerText))
   process.exit(failed > 0 || errors.length || !lint.ok ? 1 : 0)
   await browser.close()

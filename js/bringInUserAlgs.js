@@ -33,7 +33,7 @@ function bringInAlgsFromLocalStorage() {
 
             var paramsText = thisItemJSON.params;
             var paramsCode = fromParamsText2Code(algName, paramsText);
-            // console.log("paramsCode",paramsCode);
+            // //console.log("paramsCode",paramsCode);
             window.eval(paramsCode);
 
             // this line right here is super important. it makes sure that the params are in, so that the drawFunctionCode can include them.

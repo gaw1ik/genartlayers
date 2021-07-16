@@ -4,7 +4,7 @@
 function openTab() {
 
 
-    console.log("**Switch tab**");
+    //console.log("**Switch tab**");
 
     var i, tabcontent, tablinks;
 
@@ -41,8 +41,8 @@ function openTab() {
     // get current tab and change its class to the "active" class
     var currentTabIndex =  getNamedIndexOfElement("Tab",this);
     currentLayerIndex =  getNamedIndexOfElement("Layer",this); // global variable
-    // console.log("currentTabIndex:",currentTabIndex);
-    // console.log("currentLayerIndex:",currentLayerIndex);
+    // //console.log("currentTabIndex:",currentTabIndex);
+    // //console.log("currentLayerIndex:",currentLayerIndex);
 
     // Update the Layer Header
     var layer_header = document.getElementById("layer_header");
@@ -51,9 +51,9 @@ function openTab() {
 
     var currentTabId = "Tab" + currentTabIndex;
 
-    // console.log("currentTabId:",currentTabId);
+    // //console.log("currentTabId:",currentTabId);
 
-    // console.log("currentTabId:",currentTabId);
+    // //console.log("currentTabId:",currentTabId);
     var currentTab = document.getElementById(currentTabId)
     currentTab.style.display = "block";
     currentTab.className += " active";
@@ -65,7 +65,7 @@ function openTab() {
         // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
         // var ControlsCodeToggle_value = ControlsCodeToggle.value;
 
-        var currentLayer = Tabs[currentLayerIndex];
+        var currentLayer = Layers[currentLayerIndex];
 
         if(currentPanelValue == 1) {
             makeGUICodePanel(currentLayer);

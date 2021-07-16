@@ -99,14 +99,14 @@ function draw_signature( signature, ctx ) {
 
       ctx.fillText(char,x,y0);
       x = x + charWidth;
-      // console.log(char,x,font);
+      // //console.log(char,x,font);
 
-      // console.log("charHeight",charHeight)
+      // //console.log("charHeight",charHeight)
 
   }
 
 
-  // console.log("charHeightMax",charHeightMax)
+  // //console.log("charHeightMax",charHeightMax)
 
 
 
@@ -124,7 +124,7 @@ function draw_signature( signature, ctx ) {
   ////////////////////////////////////////////////////////////////////////////// piece title
   str = fpath.value;
 
-  // console.log("str",str)
+  // //console.log("str",str)
 
   x = x0; // first character is placed at x0
 
@@ -142,17 +142,17 @@ function draw_signature( signature, ctx ) {
 
       character = {value:value, fontSize:fontSize};
 
-      // console.log("character",character);
+      // //console.log("character",character);
 
       chars.push(character);
 
-      // console.log("chars",chars)
+      // //console.log("chars",chars)
 
       // wordWidth = x + charWidth;
       
   }
   
-  // console.log("chars",chars)
+  // //console.log("chars",chars)
 
   // draw chars for piece title
 
@@ -167,8 +167,8 @@ function draw_signature( signature, ctx ) {
     
     ctx.font = fontSize + "px " + font;
 
-    // console.log("value",value)
-    // console.log("fontSize",fontSize)
+    // //console.log("value",value)
+    // //console.log("fontSize",fontSize)
 
     var hue = hueCenter;
     var sat = vary(satCenter,variation/colorToSizeVarRatio);

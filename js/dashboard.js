@@ -6,7 +6,7 @@
 
 window.onload = function () {
 
-  console.log("**Window Loaded**");
+  //console.log("**Window Loaded**");
 
   // useful constants
   deg2rad = Math.PI/180;
@@ -35,17 +35,17 @@ window.onload = function () {
   // Retrieve the ApplicationData object out of local storage and put the most recent projects into the Main Tab.
   if (localStorage.getItem("ApplicationData") === null) {
 
-    console.log("creating Application Data for New User");
+    //console.log("creating Application Data for New User");
     // if the ApplicationData object doesn't already exist in local storage, create a new one (new user).
     ApplicationData = { "recentOpenedProjects":[] };
     var ApplicationDataJSON = JSON.stringify(ApplicationData);
     localStorage.setItem("ApplicationData", ApplicationDataJSON);
 
-    // console.log("ApplicationData",ApplicationData);
+    // //console.log("ApplicationData",ApplicationData);
 
   } else {
 
-    // console.log("getting Application Data for Existing User");
+    // //console.log("getting Application Data for Existing User");
 
     var ApplicationDataJSON = localStorage.getItem("ApplicationData");
     ApplicationData = JSON.parse(ApplicationDataJSON);
@@ -60,7 +60,7 @@ window.onload = function () {
 
     recent_projects_list.innerText = text;
 
-    // console.log("ApplicationData",ApplicationData);
+    // //console.log("ApplicationData",ApplicationData);
 
   }
 
@@ -163,7 +163,7 @@ window.onload = function () {
   ctx4Frame = canvas4Frame.getContext("2d")
 
   // LAYERS ARRAY
-  Tabs = [];
+  Layers = [];
 
   // Set up Page Properties
   // setUpDocumentEventListeners();
@@ -261,7 +261,7 @@ function attachTabButtonEventListeners() {
 
 //   for (i=0;i<sliderSat.length;i++) {
 
-//     console.log("hey");
+//     //console.log("hey");
 
 //     var sliderSatHue = sliderHue[i].value;
 //     var color1 = 'hsl(' + sliderSatHue + ', ' +  0 + '%, ' + 50 + '%)';

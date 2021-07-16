@@ -141,7 +141,7 @@
             "class": "number"
         }
     },
-    "Tabs": [
+    "Layers": [
         {
             "ctxIndex": 0,
             "geometry": "bg",

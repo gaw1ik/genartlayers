@@ -88,15 +88,15 @@ namespace = "comment_";
 
   test("dontMessWithStrings", "javascript", function(cm) {
     cm.execCommand("toggleComment");
-  }, "console.log(\"/*string*/\");", "// console.log(\"/*string*/\");");
+  }, "//console.log(\"/*string*/\");", "// //console.log(\"/*string*/\");");
 
   test("dontMessWithStrings2", "javascript", function(cm) {
     cm.execCommand("toggleComment");
-  }, "console.log(\"// string\");", "// console.log(\"// string\");");
+  }, "//console.log(\"// string\");", "// //console.log(\"// string\");");
 
   test("dontMessWithStrings3", "javascript", function(cm) {
     cm.execCommand("toggleComment");
-  }, "// console.log(\"// string\");", "console.log(\"// string\");");
+  }, "// //console.log(\"// string\");", "//console.log(\"// string\");");
 
   test("includeLastLine", "javascript", function(cm) {
     cm.execCommand("selectAll")

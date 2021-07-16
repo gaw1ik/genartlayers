@@ -6,31 +6,64 @@
 // const { TouchBarScrubber } = require("electron"); // what the hell is this?
 
 
-function saveImg() {
 
-  var dpi_export = doc1.exportDPI.value;
+// this function combines all the canvas drawings into one layer so that it can be exported as an image
+function combine() {
+
+  ctx4Shadow.clearRect(0, 0, w, h); 
+
+ 
+  // for each layer, draw the image onto canvas4Shadow. (canvas4Shadow is a canvas that used to be used to create the dropshadow effect. Now, I just use it for combining the images for export.)
+  for(let i=0; i<Layers.length; i++) {
+
+    
+      layerIndex = i;
+
+      var layer = Layers[layerIndex];
+
+      // make a new random number generator
+      if(layer.object.seed===undefined) { var seed = 1; } else { seed = layer.object.seed.value; }
+      myrng = new Math.seedrandom(seed);
+
+
+      // Build the array of param values to pass into the draw function.
+      var paramValues = [];
+      var object = layer.object;
+      var keys = Object.keys(object);
+
+      for(let i=0; i<keys.length; i++) {
+          var key = keys[i];
+          paramValue = object[key].value;
+          paramValues.push(paramValue);
+      }
+
+      // //console.log("just drew...");
+      // //console.log("layerIndex",layerIndex);
+      // //console.log("layer.geometry",layer.geometry);
+
+      // draw on canvas4Shadow
+      window["draw_" + layer.geometry]( paramValues, layer, ctx4Shadow );
+
+  }
+  
+}
+
+
+
+
+function exportImg(pixWidth) {
 
   var picW = doc1.pageWidth .value;
   var picH = doc1.pageHeight.value;
 
-  var dpr = window.devicePixelRatio;
+  var artboardAspectRatio = picH/picW;
 
-  // var canvas4Shadow_style_width = +getComputedStyle(canvas4Shadow).getPropertyValue("width").slice(0, -2);
-  // var canvas4Shadow_style_height = +getComputedStyle(canvas4Shadow).getPropertyValue("height").slice(0, -2);
 
-  // set HTML Width/Height of canvas4Shadow
-  // var scale = (dpi_export * picW)/(canvas4Shadow_style_width);
-
-  canvas4Shadow.width  = dpi_export * picW * dpr;
-  canvas4Shadow.height = dpi_export * picH * dpr;
+  canvas4Shadow.width  = pixWidth;
+  canvas4Shadow.height = pixWidth * artboardAspectRatio;
 
   w = canvas4Shadow.width;
   h = canvas4Shadow.height;
-
-  console.log("dpr:",dpr);
-  console.log("dpi_export:",dpi_export);
-  console.log("w:",w);
-  console.log("h:",h);
 
   combine();
 
@@ -44,53 +77,6 @@ function saveImg() {
 }
 
 
-// this function combines all the canvas drawings into one layer so that it can be exported as an image
-function combine() {
-
-  ctx4Shadow.clearRect(0, 0, w, h); 
-
- 
-
-  for(let i=0; i<Tabs.length; i++) {
-
-    
-
-      layerIndex = (Tabs.length-1) - i;
-      // layerIndex = i;
-
-      var layer = Tabs[layerIndex];
-
-      // console.log("layerIndex",layerIndex,"calc_" + layer.geometry);
-
-      //////////////////////////////////////////////
-
-      if(layer.geometry=="image" || layer.geometry=="dropshadow"){
-
-        ctx4Shadow.drawImage(canvases[layerIndex],0,0,w,h);
-
-      } else {
-
-        // make a new random number generator
-        if(layer.object.seed===undefined) { var seed = 1; } else { seed = layer.object.seed.value; }
-        myrng = new seedrandom(seed);
-
-        // draw on to canvas4Shadow
-        // ctx4Shadow.drawImage(canvases[layerIndex],0,0);
-        layer.object = window["calc_" + layer.geometry]( layer.object );
-
-        // make a new random number generator
-        if(layer.object.seed===undefined) { var seed = 1; } else { seed = layer.object.seed.value; }
-        myrng = new seedrandom(seed);
-
-        console.log("w,h",w,h);
-
-        // window["calc_" + layer.geometry]( layer.object, ctx4Shadow );
-        window["draw_" + layer.geometry]( layer.object, ctx4Shadow );
-      }
-
-  }
-  
-}
 
 
 
@@ -124,8 +110,8 @@ function saveDirect(customExtension) {
   canvas4Shadow.width  = resWidth;
   canvas4Shadow.height = resHeight;
 
-  console.log(resWidth,"resWidth");
-  console.log(resHeight,"resHeight");
+  //console.log(resWidth,"resWidth");
+  //console.log(resHeight,"resHeight");
 
   w = resWidth;
   h = resHeight;
@@ -178,7 +164,7 @@ function saveDirectPix(pixLongDimension, customExtension) {
     resWidth = pixLongDimension / artboardAspectRatio;
   }
 
-  console.log("artboard dimensions:",resWidth, " x ", resHeight);
+  //console.log("artboard dimensions:",resWidth, " x ", resHeight);
 
   resWidth = Math.ceil(resWidth);
   resHeight = Math.ceil(resHeight);
@@ -215,43 +201,12 @@ function saveDirectPix(pixLongDimension, customExtension) {
 
 
 
-function exportToSlideshow(customExtension) {
-
-  var exportDPI = doc1.exportDPI.value;
-
-  var pageWidth = doc1.pageWidth.value;
-  var pageHeight = doc1.pageHeight.value;
-
-  var resHeight = 800;
-  var resWidth  = resHeight * pageWidth/pageHeight;
-
-  canvas4Shadow.width  = resWidth;
-  canvas4Shadow.height = resHeight;
-
-  console.log(resWidth,"resWidth");
-  console.log(resHeight,"resHeight");
-
-  w = resWidth;
-  h = resHeight;
-
-  combine();
-
-  imageURL = canvas4Shadow.toDataURL("image/png");
-
-  var data = imageURL.replace(/^data:image\/\w+;base64,/, "");
-
-  var buf = Buffer.from(data, 'base64');
-
-  var projectName = document.getElementById("fpath").value;
-
-  fs.writeFileSync('C:/Users/Brian/Desktop/slideshow/' + projectName + ' - render - ' +  ' - ' + customExtension + '.png', buf)
-
-}
 
 
 
 
 
+// for just exporting a single layer
 function exportOneLayer(layerIndex,extensionName) {
 
   
@@ -280,7 +235,7 @@ function exportOneLayer(layerIndex,extensionName) {
   // reset to original values
   doc1.pageDPI.value = original_pageDPI;
 
-  console.log("export done");
+  //console.log("export done");
 
   handleResize();
 
@@ -396,14 +351,14 @@ function combineOntoWall(wallWidth,wallHeight,wallHue,wallSat,wallLit,artboardSi
   ctx4WallShot.drawImage(canvas4Shadow    , x0, y0, artboardWidth, artboardHeight  );
   ctx4WallShot.drawImage(canvas4Frame     ,  0,  0, resWidth, resHeight);
 
-  // console.log("WALL")
-  console.log("canvas4WallWidth",canvas4WallWidth)
-  console.log("canvas4WallHeight",canvas4WallHeight)
-  // console.log("ARTBOARD")
-  // console.log("x0",x0)
-  // console.log("y0",y0)
-  console.log("artboardWidth",artboardWidth)
-  console.log("artboardHeight",artboardHeight)
+  // //console.log("WALL")
+  //console.log("canvas4WallWidth",canvas4WallWidth)
+  //console.log("canvas4WallHeight",canvas4WallHeight)
+  // //console.log("ARTBOARD")
+  // //console.log("x0",x0)
+  // //console.log("y0",y0)
+  //console.log("artboardWidth",artboardWidth)
+  //console.log("artboardHeight",artboardHeight)
 
 }
 
@@ -455,7 +410,7 @@ function saveAsPNG(canvas, fileDirectory, customExtension) {
 
 
 
-
+//////////////////////////////////////////// WALL SHOT EXPORT FUNCTIONS
 
 function exportDesktopWallShot() {
   wallWidth = 16
@@ -467,7 +422,7 @@ function exportDesktopWallShot() {
   yOffset = 0.03
   resWidth = 1920
   resHeight = 1080
-  console.log("HI")
+  //console.log("HI")
   exportWallShot(wallWidth,wallHeight,wallHue,wallSat,wallLit,artboardHeightRatio,resWidth,resHeight,yOffset)
 }
 
@@ -482,7 +437,7 @@ function exportPhoneWallShot() {
   yOffset = -0.1
   resWidth = 1080
   resHeight = 1920
-  console.log("HI")
+  //console.log("HI")
   exportWallShot(wallWidth,wallHeight,wallHue,wallSat,wallLit,artboardHeightRatio,resWidth,resHeight,yOffset)
 }
 

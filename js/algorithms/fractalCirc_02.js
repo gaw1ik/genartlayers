@@ -283,7 +283,7 @@ function draw_fractalCirc( fractalCirc, ctx ) {
         var litCenter1 = lit;
         var alpha1 = 255;
 
-        // console.log("x,y,radMax,radMin",xCenter,yCenter,radMax,radMin);
+        // //console.log("x,y,radMax,radMin",xCenter,yCenter,radMax,radMin);
 
           drawCircleBrushed( radMin, radMax, xCenter, yCenter, nStrokes, lineWidthCenter, lineWidthVar, hueCenter1,satCenter1,litCenter1,alpha1, colorVar, ctx)
 

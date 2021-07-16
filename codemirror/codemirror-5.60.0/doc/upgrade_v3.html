@@ -119,7 +119,7 @@ their old form.)</p>
 
 <pre data-lang="javascript">
 cm.on("change", function(cm, change) {
-  console.log("something changed! (" + change.origin + ")");
+  //console.log("something changed! (" + change.origin + ")");
 });
 </pre>
 </section>
@@ -160,7 +160,7 @@ var range = cm.markText({line: 4, ch: 2}, {line: 8, ch: 1}, {
 });
 // Get notified when auto-unfolding
 CodeMirror.on(range, "clear", function() {
-  console.log("boom");
+  //console.log("boom");
 });
 </pre>
 </section>

@@ -2,7 +2,7 @@
 // this function is also triggered at other times, like when a project is opened
 
 function handleResize() {
-  console.log("**Resize**");
+  //console.log("**Resize**");
 
   dpr = window.devicePixelRatio; // global
 
@@ -13,13 +13,13 @@ function handleResize() {
 
   // var dpi = doc1.pageDPI.value;
 
-  // console.log("dpi",dpi)
+  // //console.log("dpi",dpi)
 
   var yOffset = doc1.yOffset.value;
 
   // var canvasZoom = doc1.canvasZoom.value;
 
-  // console.log(canvasZoom);
+  // //console.log(canvasZoom);
 
   var aspectRatio = picH / picW;
 
@@ -85,7 +85,7 @@ function handleResize() {
   // var scale = (dpi * picW) / canvas_style_width;
   // var scale = 6;
 
-  // console.log("scale",scale)
+  // //console.log("scale",scale)
 
 
     // Wall Canvas Sizing
@@ -94,7 +94,7 @@ function handleResize() {
     // canvas4Wall.style.height = drawCont_height.toString() + "px";
     var canvas4Wall_Left = (drawCont_width  - canvas4Wall_width ) / 2;
     var canvas4Wall_Top  = (drawCont_height - canvas4Wall_height) / 2;
-    // console.log("canvas4Wall_Left",canvas4Wall_Left)
+    // //console.log("canvas4Wall_Left",canvas4Wall_Left)
     canvas4Wall.style.left = canvas4Wall_Left.toString() + "px";
     canvas4Wall.style.top  =  canvas4Wall_Top.toString() + "px";
   
@@ -109,7 +109,7 @@ function handleResize() {
     // canvas4Wall.style.height = drawCont_height.toString() + "px";
     var canvas4WallShadow_Left = (drawCont_width  - canvas4Wall_width) / 2;
     var canvas4Wall_Top        = (drawCont_height - canvas4Wall_height) / 2;
-    // console.log("canvas4Wall_Left",canvas4Wall_Left)
+    // //console.log("canvas4Wall_Left",canvas4Wall_Left)
     canvas4WallShadow.style.left = canvas4WallShadow_Left.toString() + "px";
     canvas4WallShadow.style.top  = canvas4Wall_Top.toString() + "px";
   
@@ -125,7 +125,7 @@ function handleResize() {
     // canvas4Wall.style.height = drawCont_height.toString() + "px";
     var canvas4WallShot_Left = (drawCont_width  - canvas4Wall_width ) / 2;
     var canvas4WallShot_Top  = (drawCont_height - canvas4Wall_height) / 2;
-    // console.log("canvas4Wall_Left",canvas4Wall_Left)
+    // //console.log("canvas4Wall_Left",canvas4Wall_Left)
     canvas4WallShot.style.left = canvas4WallShot_Left.toString() + "px";
     canvas4WallShot.style.top  =  canvas4WallShot_Top.toString() + "px";
   
@@ -140,7 +140,7 @@ function handleResize() {
     // canvas4Wall.style.height = drawCont_height.toString() + "px";
     var canvas4Frame_Left = (drawCont_width  - canvas4Wall_width ) / 2;
     var canvas4Frame_Top  = (drawCont_height - canvas4Wall_height) / 2;
-    // console.log("canvas4Wall_Left",canvas4Wall_Left)
+    // //console.log("canvas4Wall_Left",canvas4Wall_Left)
     canvas4Frame.style.left = canvas4Frame_Left.toString() + "px";
     canvas4Frame.style.top  =  canvas4Frame_Top.toString() + "px";
   
@@ -182,7 +182,7 @@ function handleResize() {
   // canvas4Shadow.width = Math.ceil(canvas_style_width * dpr); // HTML
   // canvas4Shadow.height = Math.ceil(canvas_style_height * dpr); // HTML
 
-  // console.log("canvas4Shadow.width",canvas4Shadow.width)
+  // //console.log("canvas4Shadow.width",canvas4Shadow.width)
 
 
 
@@ -238,8 +238,8 @@ function draw_wall(wallHueCenter,wallSatCenter,wallLitCenter,ctx)
   var wall_width  = canvas4Wall.width
   var wall_height = canvas4Wall.height;
 
-  // console.log("wall_width in draw_wall " , wall_width )
-  // console.log("wall_height in draw_wall" , wall_height)
+  // //console.log("wall_width in draw_wall " , wall_width )
+  // //console.log("wall_height in draw_wall" , wall_height)
 
   var blur = 0.6 * wall_height;
   
@@ -316,7 +316,7 @@ function drawWallShadow(ctx)  {
     var artboardHeight = wallPadding * wall_height;
     var artboardWidth  = artboardHeight / artBoardAspectRatio;
   } else {
-    // console.log("<")
+    // //console.log("<")
     var artboardWidth  = wallPadding * wall_width;
     var artboardHeight = artboardWidth * artBoardAspectRatio;
   }
@@ -379,7 +379,7 @@ function drawFrame(artboardHeightRatio, lineWidth, yOffset, ctx)  {
     var artboardHeight = artboardHeightRatio * wall_height;
     var artboardWidth  = artboardHeight / artBoardAspectRatio;
   } else {
-    // console.log("<")
+    // //console.log("<")
     var artboardWidth  = artboardHeightRatio * wall_width;
     var artboardHeight = artboardWidth * artBoardAspectRatio;
   }
@@ -390,9 +390,9 @@ function drawFrame(artboardHeightRatio, lineWidth, yOffset, ctx)  {
 
   var dpi = artboardWidth / doc1.pageWidth.value;
 
-  // console.log("wall_width",wall_width)
-  // console.log("artboardWidth",artboardWidth)
-  // console.log("dpi",dpi)
+  // //console.log("wall_width",wall_width)
+  // //console.log("artboardWidth",artboardWidth)
+  // //console.log("dpi",dpi)
 
   // mat
   matThickness = 0;

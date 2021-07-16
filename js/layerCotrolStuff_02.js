@@ -59,15 +59,15 @@ function addCodeEditor(layer) {
 
 
 
-// This function adds a Tab Button to the Tabs Bar for a particular layer
+// This function adds a Tab Button to the Layers Bar for a particular layer
 function addTabButton() {
 
     // var newLayerIndex = layer.ctxIndex;
     // var newLayerIndex = currentLayerIndex + 1;
 
-    // var layer = Tabs[newLayerIndex];    
+    // var layer = Layers[newLayerIndex];    
 
-    // console.log("newLayerIndex",newLayerIndex);
+    // //console.log("newLayerIndex",newLayerIndex);
   
     var tab_button = document.createElement("BUTTON");
     tab_button.className = "tablinks";
@@ -76,9 +76,9 @@ function addTabButton() {
     // tab_button.innerText = newLayerIndex + ". " + layer.geometry;
     var tab_bar_layers_container = document.getElementById("tab-bar-layers-container");
 
-    // console.log("tab_button",tab_button);
+    // //console.log("tab_button",tab_button);
     
-    // tab_bar_layers_container.insertBefore(tab_button, tab_bar_layers_container.children[Tabs.length-newLayerIndex-1] );
+    // tab_bar_layers_container.insertBefore(tab_button, tab_bar_layers_container.children[Layers.length-newLayerIndex-1] );
     tab_bar_layers_container.appendChild(tab_button);
     
     // Attach an event listener to the tab button.
@@ -98,22 +98,22 @@ function updateTabButtons() {
   // removeAllChildNodes(tab_bar_layers_container);
   
   // for each layer above the newly created layer, update all the layer info, and tab buttons.
-  for(let i=0; i<Tabs.length; i++) {
+  for(let i=0; i<Layers.length; i++) {
 
-    // var layer = Tabs[i];
+    // var layer = Layers[i];
 
     // addTabButton();
 
     // Grab this layer
     var layerIndex = i;
-    var layer = Tabs[layerIndex];
+    var layer = Layers[layerIndex];
 
     // Update some info about the layer
     layer.ctxIndex = layerIndex;
 
     // update the tab buttons
-    var tabIndex = Tabs.length-1-i;
-    console.log("tabIndex",tabIndex);
+    var tabIndex = Layers.length-1-i;
+    //console.log("tabIndex",tabIndex);
     var tab_button = tab_bar_layers_container.children[tabIndex];
     tab_button.id = "Tab97" + "_Layer" + (i) + "_Button";
     // tab_button.innerText = i + ". " + layer.geometry;
@@ -145,7 +145,7 @@ function onAddLayerButtonClick(){
   var newLayerIndex;
 
   // if Layers is empty, newLayerIndex should be 0. Otherwise, it's always currentLayerIndex + 1.
-  if(Tabs.length==0){
+  if(Layers.length==0){
     newLayerIndex = 0;
   } else {
     newLayerIndex = currentLayerIndex + 1;
@@ -155,7 +155,7 @@ function onAddLayerButtonClick(){
   var layer = { ctxIndex:newLayerIndex, geometry:"", object: {} };
 
   // insert layer into Layers Array at newLayerIndex
-  Tabs.splice(newLayerIndex, 0, layer);
+  Layers.splice(newLayerIndex, 0, layer);
 
 
   // add a new pair of text editors (params and code) to the code panel
@@ -180,9 +180,9 @@ function onAddLayerButtonClick(){
 
 
   // starting at the index of the newly created layer, move the text from each editor up one layer
-  console.log("newLayerIndex",newLayerIndex)
+  //console.log("newLayerIndex",newLayerIndex)
 
-  for(let i=Tabs.length-1; i>newLayerIndex; i--) {
+  for(let i=Layers.length-1; i>newLayerIndex; i--) {
 
     var codeEditorText = CodeEditors[i-1].getValue();
     CodeEditors[i].setValue(codeEditorText);
@@ -190,7 +190,7 @@ function onAddLayerButtonClick(){
     var paramsEditorText = ParamsEditors[i-1].getValue();
     ParamsEditors[i].setValue(paramsEditorText);
 
-    console.log("text from", i-1, "being put on ", i);
+    //console.log("text from", i-1, "being put on ", i);
 
   }
 
@@ -223,14 +223,14 @@ function onDeleteLayerButtonClick(){
 
 
     // clear the canvases on the layer that was just deleted and all above it.
-    for(let i=currentLayerIndex; i<Tabs.length; i++){
+    for(let i=currentLayerIndex; i<Layers.length; i++){
       ctx[i].clearRect(0,0,w,h);
     }
 
 
 
-    // remove the current layer from Tabs.
-    Tabs.splice(currentLayerIndex, 1);
+    // remove the current layer from Layers.
+    Layers.splice(currentLayerIndex, 1);
   
   
     // remove the code mirror elements corresponding to this layer
@@ -267,7 +267,7 @@ function onDeleteLayerButtonClick(){
 
     updateTabButtons();
 
-    // for(let i=currentLayerIndex+1; i<Tabs.length; i++) {
+    // for(let i=currentLayerIndex+1; i<Layers.length; i++) {
 
     //   var codeEditorText = CodeEditors[i+1].getValue();
     //   CodeEditors[i].setValue(codeEditorText);
@@ -275,7 +275,7 @@ function onDeleteLayerButtonClick(){
     //   var paramsEditorText = ParamsEditors[i+1].getValue();
     //   ParamsEditors[i].setValue(paramsEditorText);
   
-    //   console.log("text from", i-1, "being put on ", i);
+    //   //console.log("text from", i-1, "being put on ", i);
   
     // }
   ////////////////////////////////////////////////////////////////////////////////
@@ -319,9 +319,9 @@ function onAddToEndLayerButtonClick() {
 
   var layer = { name:"", canvas:"", algorithm:"", geometry:"", inputs:[], ctxIndex:0, object: {} };
 
-  Tabs.splice(Tabs.length, 0, layer); // insert layer into Layers Array at currentLayerIndex (gobal variable)
+  Layers.splice(Layers.length, 0, layer); // insert layer into Layers Array at currentLayerIndex (gobal variable)
 
-  // layer = Tabs[layerIndex];
+  // layer = Layers[layerIndex];
 
   // document.getElementById("Tab97"+"_Layer"+currentLayerIndex+"_Button").click();
   
@@ -346,19 +346,19 @@ function onAddToEndLayerButtonClick() {
 function onMoveUpLayerButtonClick() {
 
   // get the current layers as they are before the swap occurs.
-  var layerBelow = Tabs[currentLayerIndex  ];
-  var layerAbove = Tabs[currentLayerIndex+1];
+  var layerBelow = Layers[currentLayerIndex  ];
+  var layerAbove = Layers[currentLayerIndex+1];
 
 
   // if there are currently zero or one layers, just don't do anything when this button is pressed. Otherwise, swap the current layer with the layer above it.
-  if( Tabs.length==1 || Tabs.length==0 ) {
+  if( Layers.length==1 || Layers.length==0 ) {
     // do nothing
   } else {
 
 
     // update the Layers object to reflect the change.
-    Tabs[currentLayerIndex+1] = layerBelow;
-    Tabs[currentLayerIndex  ] = layerAbove;
+    Layers[currentLayerIndex+1] = layerBelow;
+    Layers[currentLayerIndex  ] = layerAbove;
 
 
     // handle the swapping for the editors.
@@ -407,20 +407,20 @@ function onMoveUpLayerButtonClick() {
 function onMoveDownLayerButtonClick() {
 
   // get the current layers as they are before the swap occurs.
-  var layerBelow = Tabs[currentLayerIndex  ];
-  var layerAbove = Tabs[currentLayerIndex-1];
+  var layerBelow = Layers[currentLayerIndex  ];
+  var layerAbove = Layers[currentLayerIndex-1];
 
 
   // if there are currently zero or one layers, just don't do anything when this button is pressed. Otherwise, swap the current layer with the layer above it.
-  if( Tabs.length==1 || Tabs.length==0 ) {
+  if( Layers.length==1 || Layers.length==0 ) {
 
     // do nothing
 
   } else {
 
     // update the Layers object to reflect the change.
-    Tabs[currentLayerIndex-1] = layerBelow;
-    Tabs[currentLayerIndex  ] = layerAbove;
+    Layers[currentLayerIndex-1] = layerBelow;
+    Layers[currentLayerIndex  ] = layerAbove;
 
 
     // handle the swapping for the editors.
@@ -486,14 +486,14 @@ function updateLayers() {
   var tabBarLayersContainer = document.getElementById("tab-bar-layers-container");
   removeAllChildNodes(tabBarLayersContainer);
 
-  var nLayers = Tabs.length;
+  var nLayers = Layers.length;
 
   // for each layer, update all the layer info, text areas, and tab buttons.
   for(let i=0; i<nLayers; i++) {
 
     // Grab this layer
     var layerIndex = nLayers - i - 1;
-    var layer = Tabs[layerIndex];
+    var layer = Layers[layerIndex];
 
     // Update some info about the layer
     layer.ctxIndex = layerIndex;

@@ -25,7 +25,7 @@ function fromParamsText2Code(algName, algText) {
 
     code_snippet = code_snippet + "return " + algName +";\n}";
 
-    // console.log(code_snippet);
+    // //console.log(code_snippet);
 
     return code_snippet;
 
@@ -39,7 +39,7 @@ function fromParamsText2Code(algName, algText) {
 function fromDrawFunctionText2Code(algName, algText) {
 
 
-    // console.log("object",object);
+    // //console.log("object",object);
     var geometry = algName;
 
 
@@ -54,7 +54,7 @@ function fromDrawFunctionText2Code(algName, algText) {
 
         var key = keys[i];
 
-        // console.log("key",key);
+        // //console.log("key",key);
 
         // code_snippet = code_snippet + "var " + key + " = parseFloat(" + geometry + "." + key + ".value, 10 ); \n";
 
@@ -70,7 +70,7 @@ function fromDrawFunctionText2Code(algName, algText) {
     // place the last curly brace to end the draw function.
     code_snippet = code_snippet + "\n}";
 
-    // console.log(code_snippet);
+    // //console.log(code_snippet);
 
     return code_snippet;
 

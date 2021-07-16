@@ -2,23 +2,23 @@
 function onLayerGeomInput() {
 
   var layerIndex = getNamedIndexOfElement("Layer",this);
-  var layer = Tabs[layerIndex];
+  var layer = Layers[layerIndex];
 
   layer.geometry = this.value;
 
   // update the layer button's inner text
   var layerButton = document.getElementById("Tab97" + "_Layer" + layerIndex + "_Button");
-  console.log("Tab97" + "_Layer" + layerIndex + "_Button");
+  //console.log("Tab97" + "_Layer" + layerIndex + "_Button");
   layerButton.innerText = layerIndex + ". " + layer.geometry;
 
-  // console.log("layer",layer);
+  // //console.log("layer",layer);
 
   // update the layer geometry to match the change
   layer.geometry = this.value;
   // layer.geometry = 
   TabModule_Name = this.value;
 
-  //   console.log("TabModule_Name:", TabModule_Name);
+  //   //console.log("TabModule_Name:", TabModule_Name);
 
   // make new module object
   if(TabModule_Name=="") {
@@ -71,7 +71,7 @@ function onCodePanelButtonClick() {
   this.className = this.className + " active";
 
 
-  var currentLayer = Tabs[currentLayerIndex];
+  var currentLayer = Layers[currentLayerIndex];
 
 
   if(currentPanelValue == 1) {
@@ -99,7 +99,7 @@ function onCodePanelButtonClick() {
 
 //////////////////////////////////////////////////////////////////// I'm pretty sure I don't use this anywhere and can delete...
 // function assignToControls(layer) {
-//   // console.log("object:",object);
+//   // //console.log("object:",object);
 
 //   var tabID = layer.name;
 //   var geometry = layer.geometry;
@@ -107,7 +107,7 @@ function onCodePanelButtonClick() {
 //   // var object = window[geometry + tabID];
 //   var object = layer.object;
 
-//   // console.log("geometry + tabID:",geometry + tabID);
+//   // //console.log("geometry + tabID:",geometry + tabID);
 
 //   var keys = Object.keys(object);
 
@@ -117,7 +117,7 @@ function onCodePanelButtonClick() {
 
 //     var id = ControlsDict[key].inputID;
 
-//     // console.log("id",id)
+//     // //console.log("id",id)
 
 //     var input = document.getElementById(id);
 
@@ -140,7 +140,7 @@ function onCodePanelButtonClick() {
 ////////////////////////////////////////////////////////////////////
 function makeGUICodePanel(layer) {
 
-  console.log("makeGUICodePanel")
+  //console.log("makeGUICodePanel")
 
   var layerIndex = layer.ctxIndex;
 
@@ -212,7 +212,7 @@ function makeGUICodePanel(layer) {
 ////////////////////////////////////////////////////////////////////
 function makeGUIControlsPanel(layer) {
 
-  console.log("makeGUIControlsPanel");
+  //console.log("makeGUIControlsPanel");
 
   var layerIndex = layer.ctxIndex;
   var geometry = layer.geometry;
@@ -244,7 +244,7 @@ function makeGUIControlsPanel(layer) {
   tabElement = document.getElementById("Tab97ControlsPanel");
 
   var layerGeomInputs = document.getElementsByName("LayerGeomInput");
-  // console.log("layerGeomInputs",layerGeomInputs);
+  // //console.log("layerGeomInputs",layerGeomInputs);
   var layerGeomInput = layerGeomInputs[0];
   var layerGeomInputID = tabNameExtension + "_Layer" + layerIndex + "_LayerGeomInput";
   layerGeomInput.id = layerGeomInputID;
@@ -252,11 +252,11 @@ function makeGUIControlsPanel(layer) {
   layerGeomInput.value = layer.geometry;
 
 
-  // console.log("geometry",geometry);
+  // //console.log("geometry",geometry);
 
   // if the geometry hasnt been defined yet, skip everything else
   if(geometry=="") {return;}
-  // console.log("geometry", geometry);
+  // //console.log("geometry", geometry);
   ControlsDict = window[geometry + "Dict"]();
 
 
@@ -264,14 +264,14 @@ function makeGUIControlsPanel(layer) {
   // get the parameter keys
   var keys = Object.keys(ControlsDict);
 
-  // console.log("keys",keys);
+  // //console.log("keys",keys);
 
   // for each parameter add and set up an input in the controls panel.
   for (let i = 0; i < keys.length; i++) {
 
     var key = keys[i];
 
-    // console.log("key",key);
+    // //console.log("key",key);
 
     // // if it's the first iteration and it's neither a section header or a header only (sorry, kind of a shitty if statement...)
     // if(i==0 && (object[key].type == "range" || object[key].type == "number")) {

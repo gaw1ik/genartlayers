@@ -1336,7 +1336,7 @@ function testEdit(name, before, pos, edit, after, configureCm) {
 }
 
 // These Delete tests effectively cover word-wise Change, Visual & Yank.
-// Tabs are used as differentiated whitespace to catch edge cases.
+// Layers are used as differentiated whitespace to catch edge cases.
 // Normal word:
 testEdit('diw_mid_spc', 'foo \tbAr\t baz', /A/, 'diw', 'foo \t\t baz');
 testEdit('daw_mid_spc', 'foo \tbAr\t baz', /A/, 'daw', 'foo \tbaz');

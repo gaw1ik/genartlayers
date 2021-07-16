@@ -4,7 +4,7 @@ function save2svg(layerIndex,customExtension) {
     var ctx4svg = new C2S(w,h);
 
 
-    var layer = Tabs[layerIndex];
+    var layer = Layers[layerIndex];
 
     // draw on SVG "canvas"
 
