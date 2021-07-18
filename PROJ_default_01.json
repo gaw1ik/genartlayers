@@ -14,6 +14,20 @@
             "type": "number",
             "class": "number"
         },
+        "pageDPI": {
+            "value": "150",
+            "min": 1,
+            "max": 1000,
+            "type": "number",
+            "class": "number"
+        },
+        "exportDPI": {
+            "value": "150",
+            "min": 1,
+            "max": 1000,
+            "type": "number",
+            "class": "number"
+        },
         "wallHue": {
             "value": "190",
             "min": 0,
@@ -37,6 +51,14 @@
             "step": 1,
             "type": "range",
             "class": "slider-lit"
+        },
+        "setTheme": {
+            "value": "1",
+            "min": 0,
+            "max": 1,
+            "step": 1,
+            "type": "range",
+            "class": "on-off"
         },
         "wallShadowHeight": {
             "value": 1,
@@ -78,6 +100,22 @@
             "type": "range",
             "class": "slider"
         },
+        "wallWidth": {
+            "value": 8,
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "type": "number",
+            "class": "number"
+        },
+        "wallHeight": {
+            "value": 8,
+            "min": 1,
+            "max": 100,
+            "step": 1,
+            "type": "number",
+            "class": "number"
+        },
         "wallPadding": {
             "value": "0.85",
             "min": 0.01,
@@ -90,6 +128,14 @@
             "value": "0.01",
             "min": -0.5,
             "max": 0.5,
+            "step": 0.01,
+            "type": "number",
+            "class": "number"
+        },
+        "frameThickness": {
+            "value": 0,
+            "min": 0,
+            "max": 6,
             "step": 0.01,
             "type": "number",
             "class": "number"
@@ -108,39 +154,6 @@
                 },
                 "lit": {
                     "value": 80
-                }
-            }
-        },
-        {
-            "ctxIndex": 1,
-            "geometry": "example01",
-            "object": {
-                "seed": {
-                    "value": 1
-                },
-                "nRows": {
-                    "value": 5
-                },
-                "padding": {
-                    "value": 0.75
-                },
-                "hueCenter": {
-                    "value": 0
-                },
-                "satCenter": {
-                    "value": 50
-                },
-                "litCenter": {
-                    "value": 50
-                },
-                "colorVar": {
-                    "value": 10
-                },
-                "fillMode": {
-                    "value": 0
-                },
-                "lineWidthFraction": {
-                    "value": 0.1
                 }
             }
         }

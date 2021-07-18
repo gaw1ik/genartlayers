@@ -5,9 +5,8 @@ function bringInIncludedAlgs(includedAlgNames) {
 
         var thisAlgName = includedAlgNames[i];
 
-
-
-        fetch("./" + thisAlgName + ".txt")
+    
+        fetch("./" + "ALG_" + thisAlgName + ".txt")
         .then(response => {    
     
             return response.text();
@@ -16,6 +15,9 @@ function bringInIncludedAlgs(includedAlgNames) {
         .then( function(data) {
  
             var algorithm = JSON.parse( data );
+
+            console.log("thisAlgName",thisAlgName);
+            console.log(algorithm);
 
             var paramsText = algorithm.params;
             var paramsCode = fromParamsText2Code(thisAlgName, paramsText);

@@ -242,7 +242,7 @@ function loadAlgorithm(layer) {
   // if the algorithm is determined to be an included algorithm, fetch it from the server, otherwise get it out of local storage instead.
   if(algIsIncluded==1) {
 
-      fetch("./" + geometry + ".txt")
+      fetch("./" + "ALG_" + geometry + ".txt")
       .then(response => {
   
           return response.text();
@@ -250,7 +250,7 @@ function loadAlgorithm(layer) {
       })
       .then( data => {
   
-          //console.log("the algorithm was found on the server.");
+          
           algorithm = JSON.parse( data );  
           
           params_editor.setValue( algorithm.params );

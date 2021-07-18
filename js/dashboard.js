@@ -24,12 +24,7 @@ window.onload = function () {
 
 
 
-  // pull in all the user's saved algorithms from local storage.
-  bringInAlgsFromLocalStorage();
 
-  // pull in all the included algorithms.
-  includedAlgNames = ["bg"];
-  bringInIncludedAlgs(includedAlgNames);
 
 
   // Retrieve the ApplicationData object out of local storage and put the most recent projects into the Main Tab.
@@ -132,6 +127,7 @@ window.onload = function () {
     input.addEventListener("input", updateDocObject);
   }
 
+
   // Canvases
   canvas_0 = document.getElementById("canvas0");
   canvas_1 = document.getElementById("canvas1");
@@ -162,6 +158,7 @@ window.onload = function () {
   ctx4WallShot = canvas4WallShot.getContext("2d");
   ctx4Frame = canvas4Frame.getContext("2d")
 
+
   // LAYERS ARRAY
   Layers = [];
 
@@ -171,20 +168,40 @@ window.onload = function () {
 
   attachTabButtonEventListeners();
 
-  // do a resize
-  handleResize();
 
-  // FOR AUTOMATCIALLY OPENING A PROJECT
-  loadDefaultProject();
+
+  loadIncludedStuff();
+
+
+
   // fpath.value = "default";
   // readJsonButton.click(); // automatically opening the project defined in the line above
 
   // setTheme_input.click(); // automatically select light theme
 
+  // do a resize
+  handleResize();
+
 
 
 
 };
+
+
+
+async function loadIncludedStuff() {
+
+    // pull in all the user's saved algorithms from local storage.
+    bringInAlgsFromLocalStorage();
+
+    // pull in all the included algorithms.
+    includedAlgNames = ["bg","example01"];
+    let response = await bringInIncludedAlgs(includedAlgNames);
+  
+    // FOR AUTOMATCIALLY OPENING A PROJECT
+    loadDefaultProject();
+
+}
 
 
 

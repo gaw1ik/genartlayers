@@ -290,12 +290,15 @@ function loadDefaultProject() {
   // get the default project JSON file from the server
   fetch("./PROJ_default.json")
   .then(response => {
-     return response.json();
+    return response.json();
   })
   .then( function(data) {
     var JSONdata = data;
-    setUpProjectFromProjectFile(JSONdata);    
-    // document.getElementById("Tab97_Layer0_Button").click();
+    setUpProjectFromProjectFile(JSONdata);  
+  })
+  .then( () => {
+    // then click layer 1 so it opens up and the user sees the controls for the example algorithm
+    document.getElementById("Tab97_Layer1_Button").click();
   });
 
 }

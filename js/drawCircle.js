@@ -18,7 +18,7 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode, ctx) {
 
     // //console.log("hsla",hue,sat,lit,alpha/255);
 
-    if(fillMode=="fill") {
+    if(fillMode==0) {
         ctx.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
         ctx.fill();
     } else {

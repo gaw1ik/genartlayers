@@ -60,8 +60,8 @@
   --clr_tab_button_hover: hsl(200, 40%, 40%);
   --clr_tab_button_active: hsl(200, 40%, 80%);
 
-  --clr_input_bg: hsl(250, 20%, 70%);
-  --clr_input_bg_focus: rgba(255, 236, 127, 0.721);
+  --clr_input_bg: hsl(0,0%,5%);
+  /* --clr_input_bg_focus: hsl(0,0%,5%); */
   --input_font_weight: 600;
 
   --clr_on_off_bg: hsl(250, 20%, 80%);
@@ -198,13 +198,24 @@ p {
    components
    ============= */
 
-/* input, */
+input {
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 1rem;
+  color: var(--clr_text);
+  margin: 0.1rem 0.2em;
+  background-color: var(--clr_input_bg);
+  box-shadow: none;
+}
 
 input:focus {
   /* border: 2px solid black; */
   outline: none;
   /* box-shadow:var(--drop-shadow-outset); */
-  background-color: hsl(0, 0%, 8%);
+  /* background:none; */
+  /* background-color: hsl(0, 0%, 8%); */
 }
 
 .filename-input {
