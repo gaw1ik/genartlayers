@@ -45,12 +45,32 @@ function plusOrMinus(centerValue, maxAmount) {
 
 
 
+/////////////////////// vary functions
 function vary(parameter,perc, rng02 = myrng) {
   var min = 1-perc/100;
   var max = 1+perc/100;
   var newValue = parameter*getRandomFloat(min, max, rng=rng02);
   return newValue;
 }
+
+function varyAbove(parameter,perc, rng02 = myrng) {
+  var min = 1;
+  var max = 1+perc/100;
+  var newValue = parameter*getRandomFloat(min, max, rng=rng02);
+  return newValue;
+}
+
+function varyUnder(parameter,perc, rng02 = myrng) {
+  var min = 1-perc/100;
+  var max = 1;
+  var newValue = parameter*getRandomFloat(min, max, rng=rng02);
+  return newValue;
+}
+
+
+
+
+
 
 function overunder(perc) {
   return myrng() * (2 * perc / 100) + (1 - perc / 100);
