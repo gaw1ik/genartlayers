@@ -295,15 +295,37 @@ function loadAlgorithm(layer) {
 
   var keys = Object.keys(ControlsDict);
 
+  // if the object doesn't exist yet go through and make a default version of the object based on the ControlsDict. (this is for when you load in a new algorithm mid-project).
   if( Object.keys(object).length === 0 ) {
 
-      //console.log("object=={}")
-      for(let i=0; i<keys.length; i++){
+      
+      for(let i=0; i<keys.length; i++) {
 
           var key = keys[i];
 
           object[key] = {value:undefined};
           object[key].value = ControlsDict[key].default;
+
+          // console.log("key",key)
+
+      }
+
+  }
+
+    // if the object does exist go through and assign existing parameter values and set up any non-existing parameters to the default. (this is for when you load in a project that references algorithms that were updated within projects that weren't subsequently saved after said algorithm update).
+    if( Object.keys(object).length !== 0 ) {
+
+      for(let i=0; i<keys.length; i++) {
+
+          var key = keys[i];
+
+          if(object[key]===undefined) {
+            object[key] = {};
+            object[key].value = ControlsDict[key].default;
+          }
+          
+
+          // console.log("key",key);
 
       }
 

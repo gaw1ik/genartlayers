@@ -221,6 +221,7 @@ function setUpProjectFromProjectFile(JSONdata) {
     addTabButton(layer);
 
     // Load the algorithm for this layer. Also evaluates the code so it's usable.
+    // console.log("loading algorithm for layer ",i);
     loadAlgorithm(layer);
   
   }

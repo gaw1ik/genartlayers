@@ -11,7 +11,7 @@ function onObjectPropertyInput() {
   updateObjectProperty(this);
   updateObjectPropertyIndicator(this);
 
-  var propertyName = getPropertyNameFromInput("Property",this)
+  // var propertyName = getPropertyNameFromInput("Property",this)
   // var calc = layer.object[propertyName].calc
 
   drawTab(layer);
@@ -107,9 +107,11 @@ function updateObjectProperty(input) {
 
   var propertyName = getPropertyNameFromInput("Property",input);
 
-  // //console.log("propertyName:",propertyName);
+  // console.log("propertyName",propertyName);
 
-  object[propertyName].value = parseFloat(input.value,10);
+
+
+  object[propertyName].value = parseFloat(input.value, 10);
 }
 
 function updateObjectPropertyIndicator(input) {

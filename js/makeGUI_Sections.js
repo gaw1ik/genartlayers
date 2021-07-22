@@ -350,10 +350,11 @@ function makeGUIControlsPanel(layer) {
       input.min = ControlsDict[key].min;
       input.max = ControlsDict[key].max;
       input.step = ControlsDict[key].step;
-      // and assigning the value is a lil' more complicated... If it's undefined, set it to the default value, otherwise set it to the value.
+
+      // And then assign the value. However, assigning the value is a lil' more complicated... If the parameter is undefined, set it to the default value, otherwise set it to the value.
       var object = layer.object;
-      if(object[key].value===undefined) {
-        input.value = object[key].default;
+      if(object[key]===undefined) {
+        input.value = ControlsDict[key].default;
       } else {
         input.value = object[key].value;
       }
