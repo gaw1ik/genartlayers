@@ -256,7 +256,8 @@ function makeGUIControlsPanel(layer) {
 
   // if the geometry hasnt been defined yet, skip everything else
   if(geometry=="") {return;}
-  // //console.log("geometry", geometry);
+
+
   ControlsDict = window[geometry + "Dict"]();
 
 
@@ -264,12 +265,24 @@ function makeGUIControlsPanel(layer) {
   // get the parameter keys
   var keys = Object.keys(ControlsDict);
 
-  // //console.log("keys",keys);
+  // console.log("keys",keys);
 
   // for each parameter add and set up an input in the controls panel.
   for (let i = 0; i < keys.length; i++) {
 
     var key = keys[i];
+
+    if(key.substr(0,6)=="header"){
+
+      var break_element = document.createElement("BR");
+      tabElement.appendChild(break_element); 
+
+      var header_element = document.createElement("H3");
+      header_element.innerText = ControlsDict[key].text;  
+      // header_element.style.textAlign
+      tabElement.appendChild(header_element);    
+
+    } else {
 
     // //console.log("key",key);
 
@@ -373,6 +386,8 @@ function makeGUIControlsPanel(layer) {
       input_section.appendChild(input);
 
       updateObjectPropertyIndicator(input);
+
+    }
 
     
   }

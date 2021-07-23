@@ -42,6 +42,8 @@ function fromDrawFunctionText2Code(algName, algText) {
     // //console.log("object",object);
     var geometry = algName;
 
+    var nHeadings = 0;
+
 
 
     ////////////////////////// CODE HEADER //////////////////////////
@@ -54,11 +56,11 @@ function fromDrawFunctionText2Code(algName, algText) {
 
         var key = keys[i];
 
-        // //console.log("key",key);
-
-        // code_snippet = code_snippet + "var " + key + " = parseFloat(" + geometry + "." + key + ".value, 10 ); \n";
-
-        code_snippet = code_snippet + "var " + key + " = " + "paramValues[" + i + "]; \n";
+        if(key.substr(0,6)==="header") {
+            nHeadings += 1;
+        } else {
+            code_snippet = code_snippet + "var " + key + " = " + "paramValues[" + (i-nHeadings) + "]; \n";
+        }
 
     }
 
