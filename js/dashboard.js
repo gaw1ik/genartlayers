@@ -1,7 +1,9 @@
 // this is more-or-less my main function, but it's currently a little dirty (probably)
 // handles the window.onload tasks and also sets up event handlers
 
-
+// GLOBAL VARIABLES
+includedProjNames = ["default"];
+includedAlgNames = ["bg","example01"];
 
 
 window.onload = function () {
@@ -195,7 +197,7 @@ async function loadIncludedStuff() {
     bringInAlgsFromLocalStorage();
 
     // pull in all the included algorithms.
-    includedAlgNames = ["bg","example01"];
+    
     let response = await bringInIncludedAlgs(includedAlgNames);
   
     // FOR AUTOMATCIALLY OPENING A PROJECT

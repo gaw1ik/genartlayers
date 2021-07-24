@@ -116,13 +116,19 @@
             "geometry": "example01",
             "object": {
                 "seed": {
-                    "value": 1
+                    "value": 50
                 },
                 "nRows": {
-                    "value": 5
+                    "value": 6
                 },
                 "padding": {
                     "value": 0.75
+                },
+                "rectProb": {
+                    "value": 50
+                },
+                "defectivity": {
+                    "value": 0.1
                 },
                 "hueCenter": {
                     "value": 0

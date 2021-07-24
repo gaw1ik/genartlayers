@@ -1,48 +1,48 @@
 // functions involved in reading and writing files
 // also includes functions for assigning values read from files to controls, from controls, and the initial setup of the controls.
 
-// deprecating
-function assignFromControls(object) {
-  // //console.log("assign from controls for:",object);
+// // deprecating
+// function assignFromControls(object) {
+//   // //console.log("assign from controls for:",object);
 
-  // var object = tab.object;
+//   // var object = tab.object;
 
-  var keys = Object.keys(object);
+//   var keys = Object.keys(object);
 
-  tabIndex = object.tabIndex;
-  // values = Object.values(object);
+//   tabIndex = object.tabIndex;
+//   // values = Object.values(object);
 
-  for (let i = 0; i < keys.length; i++) {
-    var propertyName = keys[i];
+//   for (let i = 0; i < keys.length; i++) {
+//     var propertyName = keys[i];
 
-    // //console.log("propertyName:",propertyName);
+//     // //console.log("propertyName:",propertyName);
 
-    // var id = propertyName + "_Tab" + tabIndex;
+//     // var id = propertyName + "_Tab" + tabIndex;
 
-    var id = makeInputName(propertyName, tabIndex);
+//     var id = makeInputName(propertyName, tabIndex);
 
-    // //console.log("id:", id);
+//     // //console.log("id:", id);
 
-    // if it's a control then do the thing (otherwise it's a non-control property without attributes like min, max, etc.)
-    if (object[propertyName].type != null) {
-      var input = document.getElementById(id);
+//     // if it's a control then do the thing (otherwise it's a non-control property without attributes like min, max, etc.)
+//     if (object[propertyName].type != null) {
+//       var input = document.getElementById(id);
 
-      // //console.log("input:", input)
+//       // //console.log("input:", input)
 
-      // Stuff for handling the value indicator on the inputs
-      var inputLabel_Node = input.previousElementSibling;
-      var inputLabel = inputLabel_Node.innerText;
-      var lastIndex = inputLabel.lastIndexOf("(");
-      if (lastIndex != -1) {
-        var inputLabelBase = inputLabel.substring(0, lastIndex);
-        inputLabel = inputLabelBase + "(" + input.value + ")";
-        inputLabel_Node.innerText = inputLabel;
-      }
+//       // Stuff for handling the value indicator on the inputs
+//       var inputLabel_Node = input.previousElementSibling;
+//       var inputLabel = inputLabel_Node.innerText;
+//       var lastIndex = inputLabel.lastIndexOf("(");
+//       if (lastIndex != -1) {
+//         var inputLabelBase = inputLabel.substring(0, lastIndex);
+//         inputLabel = inputLabelBase + "(" + input.value + ")";
+//         inputLabel_Node.innerText = inputLabel;
+//       }
 
-      object[propertyName].value = parseFloat(input.value, 10);
-    }
-  }
-}
+//       object[propertyName].value = parseFloat(input.value, 10);
+//     }
+//   }
+// }
 
 
 
@@ -71,11 +71,20 @@ saveJsonButton.addEventListener("click", saveProject);
 
 function saveProject () {
 
-  var fPathEntry = document.getElementById("fpath");
-  var projName = "PROJ_" + fPathEntry.value;
+  var fPathElement = document.getElementById("fpath");
+  var projNameUser = fPathElement.value;
+  var projName = "PROJ_" + projNameUser;
+
+
+  // Catch when users try to save over included project names. If so, alert the user and return immediately.
+  if( includedProjNames.some((name) => name === projNameUser) ) {
+    console.warn("'" + projNameUser + "' is the name of an included project. Please choose a different name and try saving again.");
+    alert("'" + projNameUser + "' is the name of an included project. Please choose a different name and try saving again.");
+    return;
+  }
   
 
-  // confirmation message stuff.
+  // Send a confirmation message to the user to double check that they want to save over the existing project.
   var confirmation = confirm("Are you sure you want to overwrite '" + projName +"' ?");
   if(confirmation==false) return;
 
@@ -84,60 +93,58 @@ function saveProject () {
 
   let dataStr = JSON.stringify({ doc1: doc1, Layers: Layers });
 
-  // fs.writeFileSync("C:/Users/Brian/OneDrive/Documents/Gen-Art-Studio/Projects/" + fpath + ".json", data );
-  //console.log("saved project to local storage");
   // 
   localStorage.setItem(projName, dataStr);
 
-
-
 }
 
 
 
 
-// this function gets only the parameters (i.e. not coordinate arrays) and values (i.e. not min, max, etc.) from the layer objects
-function getParamsOnly(Layers) {
+// // this function gets only the parameters (i.e. not coordinate arrays) and values (i.e. not min, max, etc.) from the layer objects
 
-  const newTabs = JSON.parse(JSON.stringify(Layers));
+// // depricating
+// function getParamsOnly(Layers) {
 
-  // let newTabs = [];
+//   const newTabs = JSON.parse(JSON.stringify(Layers));
 
-  // get the values just so you can get its length for the subsequent for-loop
-  var Tabs_values = Object.values(Layers);
+//   // let newTabs = [];
 
-  // for each layer ("tab")
-  for (let i = 0; i < Tabs_values.length; i++) {
+//   // get the values just so you can get its length for the subsequent for-loop
+//   var Tabs_values = Object.values(Layers);
 
-    layer = Layers[i];
+//   // for each layer ("tab")
+//   for (let i = 0; i < Tabs_values.length; i++) {
 
-    var object = layer.object;
+//     layer = Layers[i];
 
-    var params = Object.keys(object);
+//     var object = layer.object;
 
-    tempObject = {};
+//     var params = Object.keys(object);
 
-    for (let j = 0; j < params.length; j++) {
-      param = params[j];
-      tempObject[param] = { value: 0 };
-    }
+//     tempObject = {};
 
-    for (let j = 0; j < params.length; j++) {
+//     for (let j = 0; j < params.length; j++) {
+//       param = params[j];
+//       tempObject[param] = { value: 0 };
+//     }
 
-      param = params[j];
+//     for (let j = 0; j < params.length; j++) {
 
-      if (object[param].type != undefined) {
-        // //console.log(object[param].type)
-        tempObject[param].value = object[param].value;
-      }
+//       param = params[j];
 
-    }
+//       if (object[param].type != undefined) {
+//         // //console.log(object[param].type)
+//         tempObject[param].value = object[param].value;
+//       }
 
-    newTabs[i].object = tempObject;
-  }
+//     }
 
-  return newTabs;
-}
+//     newTabs[i].object = tempObject;
+//   }
+
+//   return newTabs;
+// }
 
 
 
@@ -190,6 +197,7 @@ function setUpProjectFromProjectFile(JSONdata) {
     updateObjectPropertyIndicator(element);
 
   }
+  /////////////////////////////////////////////////////////////////////////
 
 
 
@@ -392,73 +400,73 @@ function loadDefaultProject() {
 
 
 
+// // depricating
+// function bringInLayer(layer) {
 
-function bringInLayer(layer) {
+//   addCodeEditor(layer);
 
-  addCodeEditor(layer);
+//   // addTabButton(layer);
 
-  // addTabButton(layer);
-
-  // if the layer geometry is empty return imediately (still could be more robust in order to handle non-existant algorithms e.g. "fractal24792")
-  if(layer.geometry=="") {return;}
-
-
-  // get the layer attributes
-  var layerIndex = layer.ctxIndex;
-  var geometry = layer.geometry;
+//   // if the layer geometry is empty return imediately (still could be more robust in order to handle non-existant algorithms e.g. "fractal24792")
+//   if(layer.geometry=="") {return;}
 
 
-  // Get the algorithm out of local storage, and put it in the code editors.
-  var algorithmJSON = localStorage.getItem(geometry);
-  var algorithm = JSON.parse(algorithmJSON);
-  // // populate the params and code eidtors based on the algorithm.
-  var params_editor = ParamsEditors[layerIndex];
-  var code_editor = CodeEditors[layerIndex];
-  params_editor.setValue( algorithm.params );
-  code_editor.setValue( algorithm.drawFunction );
-
-  
-  // evaluate the algorithm so that it's actually usable (excerpt from the function evalAlgorithm(), but without the assignment to the object, ...
-  // so that the object doesn't end up with the default values or undefined shit.)
-
-  var object_dict_code = fromParams2Code(layer);
-  window.eval(object_dict_code);
-
-  var draw_function_code = fromDrawFunction2Code(layer);
-  window.eval(draw_function_code);
+//   // get the layer attributes
+//   var layerIndex = layer.ctxIndex;
+//   var geometry = layer.geometry;
 
 
-
-
-  // Base it on the prototype object, and update the values only (so you can update GUI properties like min, max, and step)
-  var protoObject = window[layer.geometry + "Dict"]();
-
-  //console.log("protoObject",protoObject);
-
-
-  // for each key in tabObject assign the value from the saved object to the prototype object.
-  var keys = Object.keys(layer.object);
-  
-  for (let j = 0; j < keys.length; j++) {
-
-    var param = keys[j]; // get one key
-
-    // if( tabObject[param].value!=null ) { // if it has a value (i.e. if it's an input parameter)
-    // //console.log("param:",param);
-    if(protoObject[param]==null){
-      console.warn("the parameter ",param, "was not found in the prototype object for", layer.geometry, "." );
-    } else {
-      //console.log("layer.object[param].value:",layer.object[param].value);
-      protoObject[param].value = layer.object[param].value; // assign the *value* from the saved object to the prototype object
-    }
-    // }
-  }
+//   // Get the algorithm out of local storage, and put it in the code editors.
+//   var algorithmJSON = localStorage.getItem(geometry);
+//   var algorithm = JSON.parse(algorithmJSON);
+//   // // populate the params and code eidtors based on the algorithm.
+//   var params_editor = ParamsEditors[layerIndex];
+//   var code_editor = CodeEditors[layerIndex];
+//   params_editor.setValue( algorithm.params );
+//   code_editor.setValue( algorithm.drawFunction );
 
   
+//   // evaluate the algorithm so that it's actually usable (excerpt from the function evalAlgorithm(), but without the assignment to the object, ...
+//   // so that the object doesn't end up with the default values or undefined shit.)
 
-  // replace the object from newTabs (with key:value pairs like hue:20, sat:30, etc. with the new object with e.g. hue:{value:20,min:0,max:255,etc...})
-  Layers[layerIndex].object = protoObject; 
+//   var object_dict_code = fromParams2Code(layer);
+//   window.eval(object_dict_code);
+
+//   var draw_function_code = fromDrawFunction2Code(layer);
+//   window.eval(draw_function_code);
 
 
-  // calcTab(layer);
-}
+
+
+//   // Base it on the prototype object, and update the values only (so you can update GUI properties like min, max, and step)
+//   var protoObject = window[layer.geometry + "Dict"]();
+
+//   //console.log("protoObject",protoObject);
+
+
+//   // for each key in tabObject assign the value from the saved object to the prototype object.
+//   var keys = Object.keys(layer.object);
+  
+//   for (let j = 0; j < keys.length; j++) {
+
+//     var param = keys[j]; // get one key
+
+//     // if( tabObject[param].value!=null ) { // if it has a value (i.e. if it's an input parameter)
+//     // //console.log("param:",param);
+//     if(protoObject[param]==null){
+//       console.warn("the parameter ",param, "was not found in the prototype object for", layer.geometry, "." );
+//     } else {
+//       //console.log("layer.object[param].value:",layer.object[param].value);
+//       protoObject[param].value = layer.object[param].value; // assign the *value* from the saved object to the prototype object
+//     }
+//     // }
+//   }
+
+  
+
+//   // replace the object from newTabs (with key:value pairs like hue:20, sat:30, etc. with the new object with e.g. hue:{value:20,min:0,max:255,etc...})
+//   Layers[layerIndex].object = protoObject; 
+
+
+//   // calcTab(layer);
+// }

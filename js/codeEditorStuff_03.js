@@ -84,7 +84,7 @@ function evalAlgorithm(layer) {
    For params that are newly added: Make a new dict for the param (object[key]) and set its value to the default.
    BG: BUT we also need to get rid of params that no longer exist. Like, let's say I change param "alpha" to be called "alpha2". I want to bring in "alpha2", but also get rid of the original "alpha".
   */
-   var oldObject = layer.object;
+  var oldObject = layer.object;
   var newObject = {};
   var keys = Object.keys(ControlsDict);
 
@@ -149,6 +149,13 @@ function onSaveAndEvalAlgorithmButtonClick(){
   var load_code_name = load_code_name_input.value;
   var ALG_name = "ALG_" + load_code_name;
 
+
+  // Catch when users try to save over included algorithm names. If so, alert the user and return immediately.
+  if( includedAlgNames.some((name) => name === load_code_name) ) {
+    console.warn("'" + load_code_name + "' is the name of an included algorithm. Please choose a different name and try saving again.");
+    alert("'" + load_code_name + "' is the name of an included algorithm. Please choose a different name and try saving again.");
+    return;
+  }
 
   // confirmation message stuff.
   var confirmation = confirm("Are you sure you want to overwrite '" + ALG_name +"' ?");
@@ -331,13 +338,15 @@ function loadAlgorithm(layer) {
 
   }
 
-    /*
-     If the object is already populated, that means the user is either loading a project or swapping algorithms on a layer. 
-     Actually, this should only apply to loading a project, because the "swapAlgorithm()" function handles swapping. 
-     Go through and assign existing parameter values and set up any non-existing parameters to the default*
-     *this is for when you load in a project that references algorithms that were updated within projects that weren't subsequently saved after said algorithm update.
-    */
-    if( Object.keys(object).length !== 0 ) {
+  /*
+    If the object is already populated, that means the user is either loading a project or swapping algorithms on a layer. 
+    Actually, this should only apply to loading a project, because the "swapAlgorithm()" function handles swapping. 
+    Go through and assign existing parameter values and set up any non-existing parameters to the default*
+    ALSO check for vestigial parameters and delete any that exist.
+    *this is for when you load in a project that references algorithms that were updated within projects that weren't subsequently saved after said algorithm update.
+  */
+  if( Object.keys(object).length !== 0 ) {
+
 
       for(let i=0; i<keys.length; i++) {
 
@@ -358,13 +367,39 @@ function loadAlgorithm(layer) {
 
       }
 
+
+      /* 
+      One additional check to make sure there aren't any vestigial* parameters that came through with the saved project.
+
+      *Vestigial parameters are parameters that are no longer part of an algorithm, but might remain in a project's saved file if, for instance, the user
+      removes a parameter from an algorithm, but then doesn't update all the projects which use that algorithm. In that case, the vestigial parameter remains
+      in those projects, and without this step to remove them, can cause problems further down the line.
+      */
+
+      var objectKeys = Object.keys(object);
+
+      for(let i=0; i<objectKeys.length; i++) {
+
+        let objectKey = objectKeys[i];
+
+        // if the objectKey doesn't exist in the ControlsDict then remove that key from the object...
+        if( ControlsDict[objectKey]===undefined ) {
+
+          delete object[objectKey];
+          console.warn("deleted the key '" + objectKey + "' from the object on layer " + layerIndex + " because that parameter was determined to be vestigial.")
+
+        }
+
+      }
+
+
   }
 
 
   // finish by recalculating/redrawing everything
   drawTab(layer);
 
-  // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
+  // Then make the GUI for this layer.
   if(currentPanelValue==1) {
       makeGUICodePanel(layer);
   } else {

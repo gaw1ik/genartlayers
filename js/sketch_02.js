@@ -71,6 +71,7 @@ function drawTab(layer) {
     seed = layer.object.seed.value;
     
   }
+
   myrng = new Math.seedrandom(seed);
   // //console.log("in drawTab, myrng(1) = ",myrng(1));
 
@@ -78,6 +79,7 @@ function drawTab(layer) {
   // Build the array of param values to pass into the draw function.
   var paramValues = [];
   var object = layer.object;
+  // var keys = Object.keys(object);
   var keys = Object.keys(object);
 
   for(let i=0; i<keys.length; i++) {
@@ -90,7 +92,6 @@ function drawTab(layer) {
       paramValue = object[key].value;
       paramValues.push(paramValue);
       
-
     }
   }
 
