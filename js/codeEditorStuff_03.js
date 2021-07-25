@@ -208,13 +208,13 @@ function onLoadAlgorithmButtonClick() {
   // get the name of the code to be loaded from layerGeomInput and set the layer.geometry equal to it.
   var load_code_name_input = document.getElementById("Tab97_Layer" + currentLayerIndex + "_LayerGeomInput");
 
-  var load_code_name = load_code_name_input.value;  
+  var newAlgName = load_code_name_input.value;  
 
-  layer.geometry = load_code_name;
+  // layer.geometry = load_code_name;
 
-//   //console.log("layer.geometry",layer.geometry);
+  // console.log("layer.geometry",layer.geometry);
 
-  swapAlgorithm(layer);
+  swapAlgorithmOnLayer(newAlgName, layer);
 
 }
 
@@ -240,11 +240,12 @@ function isAlgIncluded(geometry) {
 
 
 
-function loadAlgorithm(layer) {
+function assignAlgorithmToLayer(algName, layer) {
+
 
   // get the layer attibutes.
   var layerIndex = layer.ctxIndex;
-  var geometry = layer.geometry;
+  // var geometry = layer.geometry;
 
   
 
@@ -254,18 +255,18 @@ function loadAlgorithm(layer) {
 
 
   // get the algorithm out of local storage and into the editors
-//   var ALG_name = "ALG_" + geometry;
+  // var ALG_name = "ALG_" + geometry;
   var algorithm;
 
-//   try {
-
-  algIsIncluded = isAlgIncluded(geometry);
 
 
-  // if the algorithm is determined to be an included algorithm, fetch it from the server, otherwise get it out of local storage instead.
+// if the algorithm is determined to be an included algorithm, fetch it from the server, otherwise get it out of local storage instead.
+  algIsIncluded = isAlgIncluded(algName);
+
+  
   if(algIsIncluded==1) {
 
-      fetch("./" + "ALG_" + geometry + ".txt")
+      fetch("./" + "ALG_" + algName + ".txt")
       .then(response => {
   
           return response.text();
@@ -285,10 +286,18 @@ function loadAlgorithm(layer) {
 
   } else if (algIsIncluded==0) {
 
-      //console.log("the algorithm was found in local storage.");
-
       // get the algorithm out of local storage.
-      var algorithmJSON = localStorage.getItem("ALG_" + geometry);
+      var algorithmJSON = localStorage.getItem("ALG_" + algName);
+
+      // if the algorithm doesn't exist in local storage, alert the user and return immediately.
+      if(algorithmJSON===null) {
+
+        console.warn("The algorithm '" + algName + "' does not exist.");
+        alert(       "The algorithm '" + algName + "' does not exist.");
+        return;
+
+      }
+
       algorithm = JSON.parse(algorithmJSON);
 
       //console.log("layerIndex",layerIndex);
@@ -299,9 +308,11 @@ function loadAlgorithm(layer) {
 
   } else {
 
-    //console.log("algorithm included was neither 1 or 0. (something went very wrong.)")
+    console.error("algorithm included was neither 1 or 0. (something went very wrong.)")
 
   }
+
+  layer.geometry = algName;
 
 
     
@@ -309,7 +320,7 @@ function loadAlgorithm(layer) {
   // this is what formats the code and then brings the Dict and Draw functions into the global space.
 
 
-  ControlsDict = window[geometry + "Dict"]();
+  ControlsDict = window[algName + "Dict"]();
 
 
 
@@ -411,11 +422,11 @@ function loadAlgorithm(layer) {
 
 
 
-function swapAlgorithm(layer) {
+function swapAlgorithmOnLayer(algName, layer) {
 
   // get the layer attibutes.
   var layerIndex = layer.ctxIndex;
-  var geometry = layer.geometry;
+  //var geometry = layer.geometry;
 
   
   // get the code editors on the current layer.
@@ -428,13 +439,13 @@ function swapAlgorithm(layer) {
   var algorithm;
 
 
-  algIsIncluded = isAlgIncluded(geometry);
+  algIsIncluded = isAlgIncluded(algName);
 
 
   // if the algorithm is determined to be an included algorithm, fetch it from the server, otherwise get it out of local storage instead.
   if(algIsIncluded==1) {
 
-      fetch("./" + "ALG_" + geometry + ".txt")
+      fetch("./" + "ALG_" + algName + ".txt")
       .then(response => {
   
           return response.text();
@@ -457,7 +468,18 @@ function swapAlgorithm(layer) {
       //console.log("the algorithm was found in local storage.");
 
       // get the algorithm out of local storage.
-      var algorithmJSON = localStorage.getItem("ALG_" + geometry);
+      var algorithmJSON = localStorage.getItem("ALG_" + algName);
+
+      // if the algorithm doesn't exist in local storage, alert the user and return immediately.
+      if(algorithmJSON===null) {
+
+        console.warn("The algorithm '" + algName + "' does not exist.");
+        alert(       "The algorithm '" + algName + "' does not exist.");
+        return;
+
+      }
+
+
       algorithm = JSON.parse(algorithmJSON);
 
       //console.log("layerIndex",layerIndex);
@@ -468,17 +490,18 @@ function swapAlgorithm(layer) {
 
   } else {
 
-    //console.log("algorithm included was neither 1 or 0. (something went very wrong.)")
+    console.log("algorithm included was neither 1 or 0. (something went very wrong.)")
 
   }
 
+  layer.geometry = algName;
 
     
   // then once you have them in the editors, use evalAlgorithm to evaluate the algorithm from the editors.
   // this is what formats the code and then brings the Dict and Draw functions into the global space.
 
 
-  ControlsDict = window[geometry + "Dict"]();
+  ControlsDict = window[algName + "Dict"]();
 
 
 

@@ -83,6 +83,7 @@ function saveProject () {
     return;
   }
   
+  
 
   // Send a confirmation message to the user to double check that they want to save over the existing project.
   var confirmation = confirm("Are you sure you want to overwrite '" + projName +"' ?");
@@ -230,7 +231,8 @@ function setUpProjectFromProjectFile(JSONdata) {
 
     // Load the algorithm for this layer. Also evaluates the code so it's usable.
     // console.log("loading algorithm for layer ",i);
-    loadAlgorithm(layer);
+    let algName = layer.geometry;
+    assignAlgorithmToLayer(algName, layer);
   
   }
 
@@ -257,32 +259,44 @@ function loadProject() {
 
   /////////////////////////////////////////////// Bring in file info, and the then file data
   var fPathEntry = document.getElementById("fpath");
-  var fpath = "PROJ_" + fPathEntry.value;
+  var projName = fPathEntry.value;
+  var fpath = "PROJ_" + projName;
 
   var rawData = localStorage.getItem(fpath);
 
-  var JSONdata = JSON.parse(rawData);
+  // if the project doesn't exist in local storage, alert the user and return immediately
+  if(rawData===null) {
 
-  setUpProjectFromProjectFile(JSONdata) ;
+    console.warn("The project '" + projName + "' does not exist.");
+    alert(       "The project '" + projName + "' does not exist.");
+    return;
+
+  }
+
+    var JSONdata = JSON.parse(rawData);
+
+    setUpProjectFromProjectFile(JSONdata) ;
 
 
-  // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array and then update recentSavedProjects to have the most reent 8.
-  var recentOpenedProjects = ApplicationData.recentOpenedProjects;
-  var yep = 1;
-  for(let i=0; i<recentOpenedProjects.length; i++){
-    if( fpath == recentOpenedProjects[i] ) {
-      yep = 0;
+    // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array and then update recentSavedProjects to have the most reent 8.
+    var recentOpenedProjects = ApplicationData.recentOpenedProjects;
+    var yep = 1;
+    for(let i=0; i<recentOpenedProjects.length; i++){
+      if( fpath == recentOpenedProjects[i] ) {
+        yep = 0;
+      }
     }
-  }
-  if( yep == 1 ) {
-    recentOpenedProjects.splice(0,0,fpath);
-  }
-  // most recent 8.
-  recentOpenedProjects = ApplicationData.recentOpenedProjects.slice(0,8); 
-  ApplicationData.recentOpenedProjects = recentOpenedProjects;
-  // save ApplicationData to local storage
-  let ApplicationDataJSON = JSON.stringify(ApplicationData);
-  localStorage.setItem("ApplicationData", ApplicationDataJSON);
+    if( yep == 1 ) {
+      recentOpenedProjects.splice(0,0,fpath);
+    }
+    // most recent 8.
+    recentOpenedProjects = ApplicationData.recentOpenedProjects.slice(0,8); 
+    ApplicationData.recentOpenedProjects = recentOpenedProjects;
+    // save ApplicationData to local storage
+    let ApplicationDataJSON = JSON.stringify(ApplicationData);
+    localStorage.setItem("ApplicationData", ApplicationDataJSON);
+
+  
 
 }
 
