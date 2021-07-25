@@ -42,7 +42,7 @@ function combine() {
       // //console.log("layer.geometry",layer.geometry);
 
       // draw on canvas4Shadow
-      window["draw_" + layer.geometry]( paramValues, layer, ctx4Shadow );
+      window["draw_" + layer.geometry]( object, layer, ctx4Shadow );
 
   }
   

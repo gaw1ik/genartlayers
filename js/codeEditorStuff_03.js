@@ -475,6 +475,11 @@ function swapAlgorithmOnLayer(algName, layer) {
 
         console.warn("The algorithm '" + algName + "' does not exist.");
         alert(       "The algorithm '" + algName + "' does not exist.");
+
+        // reset the alg name to be whatever it was before
+        var load_code_name_input = document.getElementById("Tab97_Layer" + currentLayerIndex + "_LayerGeomInput");
+        load_code_name_input.value = layer.geometry;
+        
         return;
 
       }

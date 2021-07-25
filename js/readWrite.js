@@ -269,32 +269,36 @@ function loadProject() {
 
     console.warn("The project '" + projName + "' does not exist.");
     alert(       "The project '" + projName + "' does not exist.");
+    // reset the projName input to the current one
+    fPathEntry.value = currentProjName;
     return;
 
   }
 
-    var JSONdata = JSON.parse(rawData);
+  currentProjName = projName;
 
-    setUpProjectFromProjectFile(JSONdata) ;
+  var JSONdata = JSON.parse(rawData);
+
+  setUpProjectFromProjectFile(JSONdata) ;
 
 
-    // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array and then update recentSavedProjects to have the most reent 8.
-    var recentOpenedProjects = ApplicationData.recentOpenedProjects;
-    var yep = 1;
-    for(let i=0; i<recentOpenedProjects.length; i++){
-      if( fpath == recentOpenedProjects[i] ) {
-        yep = 0;
-      }
+  // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array and then update recentSavedProjects to have the most reent 8.
+  var recentOpenedProjects = ApplicationData.recentOpenedProjects;
+  var yep = 1;
+  for(let i=0; i<recentOpenedProjects.length; i++){
+    if( fpath == recentOpenedProjects[i] ) {
+      yep = 0;
     }
-    if( yep == 1 ) {
-      recentOpenedProjects.splice(0,0,fpath);
-    }
-    // most recent 8.
-    recentOpenedProjects = ApplicationData.recentOpenedProjects.slice(0,8); 
-    ApplicationData.recentOpenedProjects = recentOpenedProjects;
-    // save ApplicationData to local storage
-    let ApplicationDataJSON = JSON.stringify(ApplicationData);
-    localStorage.setItem("ApplicationData", ApplicationDataJSON);
+  }
+  if( yep == 1 ) {
+    recentOpenedProjects.splice(0,0,fpath);
+  }
+  // most recent 8.
+  recentOpenedProjects = ApplicationData.recentOpenedProjects.slice(0,8); 
+  ApplicationData.recentOpenedProjects = recentOpenedProjects;
+  // save ApplicationData to local storage
+  let ApplicationDataJSON = JSON.stringify(ApplicationData);
+  localStorage.setItem("ApplicationData", ApplicationDataJSON);
 
   
 

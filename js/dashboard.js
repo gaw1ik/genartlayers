@@ -4,6 +4,7 @@
 // GLOBAL VARIABLES
 includedProjNames = ["default"];
 includedAlgNames = ["bg","example01"];
+currentProjName = "default";
 
 
 window.onload = function () {
