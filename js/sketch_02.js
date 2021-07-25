@@ -77,28 +77,29 @@ function drawTab(layer) {
 
 
   // Build the array of param values to pass into the draw function.
-  var paramValues = [];
+  // var paramValues = [];
   var object = layer.object;
   // var keys = Object.keys(object);
-  var keys = Object.keys(object);
+  // var keys = Object.keys(object);
 
-  for(let i=0; i<keys.length; i++) {
-    var key = keys[i];
-    // if it's a header then just skip it. Should eventually just get header out of the layer object entirely.
-    if(key.substr(0,6)==="header"){
-      // do nothing
-    } else {
+  // for(let i=0; i<keys.length; i++) {
+  //   var key = keys[i];
+  //   // if it's a header then just skip it. Should eventually just get header out of the layer object entirely.
+  //   if(key.substr(0,6)==="header"){
+  //     // do nothing
+  //   } else {
       
-      paramValue = object[key].value;
-      paramValues.push(paramValue);
+  //     paramValue = object[key].value;
+  //     paramValues.push(paramValue);
       
-    }
-  }
+  //   }
+  // }
 
   // console.log("paramValues going into draw function via drawTab()",paramValues);
   // draw on canvas
   // //console.log("layer.geometry",layer.geometry);
-  window["draw_" + layer.geometry]( paramValues, layer, ctx[layerIndex] );
+  // window["draw_" + layer.geometry]( paramValues, layer, ctx[layerIndex] );
+  window["draw_" + layer.geometry]( object, layer, ctx[layerIndex] );
   
 }
 
