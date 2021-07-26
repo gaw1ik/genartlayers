@@ -108,7 +108,7 @@
   --input_form_container_width: 42rem;
   --height_window_frame: 2rem;
   --input_form_width: 40rem;
-  --tab_bar_width: 3rem;
+  --tab_bar_width: 4rem;
   --height_panel: 70vh;
 
 }
@@ -741,7 +741,7 @@ button.redraw:active {
   /* background-color: var(--clr_input_form_bg); */
   justify-content:flex-start;
   /* text-align: right; */
-  margin:var(--app_padding_top_bottom) var(--tab_bar_width) 0 var(--app_padding_left_right);
+  margin:var(--app_padding_top_bottom) calc( var(--tab_bar_width) + var(--app_padding_left_right)) 0 var(--app_padding_left_right);
   /* height: var(--height_window_frame); */
   height: var(--height_window_frame);
   color: white;
@@ -814,7 +814,8 @@ button.redraw:active {
   /* height: 100vh; */
   width: 100vw;
   /* margin:auto;   */
-  padding: var(--app_padding_top_bottom) var(--app_padding_left_right);
+  padding: var(--app_padding_top_bottom) 0 var(--app_padding_top_bottom) var(--app_padding_left_right);
+  padding: var(--app_padding_top_bottom) var(--app_padding_top_bottom);
   overflow-y: hidden;
 
   justify-items: center;
@@ -1160,11 +1161,28 @@ button.redraw:active {
   padding: 5px;
 }
 
+.layer_controls_bar {
+  display: flex;
+  /* grid-template-rows: 3rem 3rem auto auto; */
+  flex-direction: column;
+  align-items: center;
+  /* justify-content:center; */
+  border: solid var(--borderThickness);
+  /* height: var(--padded_app_height); */
+  overflow-y: hidden;
+  /* padding: 4rem 0.5rem 0 0.5rem; */
+  /* padding: 0 0.5rem; */
+  padding: 0.2rem;
+
+  width:var(--tab_bar_width);
+}
+
+
 /* Style the tab */
 .tab-bar {
   display: flex;
   /* grid-template-rows: 3rem 3rem auto auto; */
-  flex-direction: column;
+  flex-direction: row;
   align-items: end;
   /* justify-content:center; */
   border: solid var(--borderThickness);
@@ -1185,10 +1203,10 @@ button.redraw:active {
 .tab-bar-layers-container {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   /* padding: 1px 5px; */
   /* margin:6rem 0; */
-  align-items: flex-end;
+  align-items: flex-start;
   width:100%;
   height:100%;
   /* margin-top:auto; */
@@ -1204,21 +1222,21 @@ button.redraw:active {
   flex-direction: column;
   align-self:end;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-y:hidden;
 }
 
 .layer_list_add_delete_buttons {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   width:1.2rem;
   height:1.2rem;
   padding: 0;
   margin:0.3rem;
-  
-  /* text-align:center; */
-  /* align-self:end; */
   background-color:var(--clr_input_form_bg);
   color:var(--clr_text);
-  border-radius:3px;
+  border-radius:1rem;
 }
 
 /* Style the buttons inside the tab */
