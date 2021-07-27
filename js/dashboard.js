@@ -5,6 +5,7 @@
 includedProjNames = ["default"];
 includedAlgNames = ["bg","example01"];
 currentProjName = "default";
+noDrawMode = 0;
 
 
 window.onload = function () {

@@ -58,6 +58,9 @@ function onObjectPropertyInput() {
 
 function drawTab(layer) {
 
+  // if noDrawMode, don't draw anything and return immediately...
+  if(noDrawMode == 1) {return;}
+
   // get layerIndex
   var layerIndex = layer.ctxIndex; 
 
