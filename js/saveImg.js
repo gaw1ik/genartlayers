@@ -17,7 +17,7 @@ function combine() {
   for(let i=0; i<Layers.length; i++) {
 
     
-      layerIndex = i;
+      var layerIndex = i;
 
       var layer = Layers[layerIndex];
 
@@ -41,8 +41,9 @@ function combine() {
       // //console.log("layerIndex",layerIndex);
       // //console.log("layer.geometry",layer.geometry);
 
+      ctxToDrawToNow = ctx4Shadow;
       // draw on canvas4Shadow
-      window["draw_" + layer.geometry]( object, layer, ctx4Shadow );
+      window["draw_" + layer.geometry]( object );
 
   }
   

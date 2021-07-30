@@ -1,7 +1,7 @@
 function randomizeParams(layers) {
     // var values = Object.values(layers)
 
-    layerIndex = 0;
+    var layerIndex = 0;
 
     var layer = layers[layerIndex]
 

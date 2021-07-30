@@ -48,7 +48,19 @@ function fromDrawFunctionText2Code(algName, algText) {
 
     ////////////////////////// CODE HEADER //////////////////////////
     // code snippet starts with the function declaration
-    var code_snippet = "function draw_" + geometry + "( object, layer, ctx ) {\n";
+    var code_snippet = "function draw_" + geometry + "( object ) {\n;";
+
+    // var code_snippet = "console.log('layerIndex'" + layerIndex + ")\n;"
+
+    // if(algName.layerIndex===undefined) {
+    //     // do nothing (that should mean it's a nested algorithm)
+    // } else {
+    //     code_snippet = code_snippet + "var layerIndex = object.layerIndex;\n";
+    //     code_snippet = code_snippet + "var layer = Layers[layerIndex];\n";
+    // }
+
+    //code_snippet = code_snippet + "layerIndex = layer.ctxIndex;\n";
+    //code_snippet = code_snippet + "layerIndex = layer.ctxIndex;\n";
 
     var keys = Object.keys(ControlsDict);
 

@@ -6,7 +6,8 @@ includedProjNames = ["default"];
 includedAlgNames = ["bg","example01"];
 currentProjName = "default";
 noDrawMode = 0;
-
+ctxIndex = 0;
+ctxToDrawToNow = 0;
 
 window.onload = function () {
 
@@ -195,6 +196,7 @@ window.onload = function () {
 
 async function loadIncludedStuff() {
 
+    
     // pull in all the user's saved algorithms from local storage.
     bringInAlgsFromLocalStorage();
 

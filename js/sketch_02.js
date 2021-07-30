@@ -62,7 +62,10 @@ function drawTab(layer) {
   if(noDrawMode == 1) {return;}
 
   // get layerIndex
-  var layerIndex = layer.ctxIndex; 
+  ctxIndex = layer.ctxIndex; 
+  ctxToDrawToNow = ctx[ctxIndex]; 
+
+  
 
   // clear canvas
   ctx[layer.ctxIndex].clearRect(0, 0, w, h); 
@@ -82,6 +85,8 @@ function drawTab(layer) {
   // Build the array of param values to pass into the draw function.
   // var paramValues = [];
   var object = layer.object;
+
+
   // var keys = Object.keys(object);
   // var keys = Object.keys(object);
 
@@ -102,7 +107,11 @@ function drawTab(layer) {
   // draw on canvas
   // //console.log("layer.geometry",layer.geometry);
   // window["draw_" + layer.geometry]( paramValues, layer, ctx[layerIndex] );
-  window["draw_" + layer.geometry]( object, layer, ctx[layerIndex] );
+  //window["draw_" + layer.geometry]( object, layer, ctx[layerIndex] );
+
+  // console.log("ctxIndex",ctxIndex);
+
+  window["draw_" + layer.geometry]( object );
   
 }
 

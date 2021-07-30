@@ -45,9 +45,14 @@ async function bringInIncludedAlgs(includedAlgNames) {
         // this line right here is super important. it makes sure that the params are in, so that the drawFunctionCode can include them.
         ControlsDict = window[thisAlgName + "Dict"]();
 
+        
+
         var drawFunctionText = algorithm.drawFunction;
         var drawFunctionCode = fromDrawFunctionText2Code(thisAlgName, drawFunctionText);
+
+
         window.eval(drawFunctionCode);
+
 
     }
 
