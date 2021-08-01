@@ -1,34 +1,34 @@
 
-function drawPath(path,xOffset,yOffset,lineWidth,hue,sat,lit,fillMode,close,ctx) {
+function drawPath(path, lineWidth, hue, sat, lit, fillMode, close) {
 
-    // //console.log("ctx",ctx);
+    // console.log("path",path);
 
-    ctx.beginPath()
+    ctxToDrawToNow.beginPath()
 
-    x = path[0][0]*h + xOffset*w
-    y = path[0][1]*h + yOffset*h
-    ctx.moveTo(x,y)   
+    x = path[0][0]*h
+    y = path[0][1]*h
+    ctxToDrawToNow.moveTo(x,y)   
 
     for(let i=1; i<path.length; i++) {
         
-        x = path[i][0]*h + xOffset*w
-        y = path[i][1]*h + yOffset*h
-        ctx.lineTo(x,y)
+        x = path[i][0]*h
+        y = path[i][1]*h
+        ctxToDrawToNow.lineTo(x,y)
         // //console.log("[x,y]",[x,y])
     }
 
     if(close==1){
-        ctx.closePath();
+        ctxToDrawToNow.closePath();
     }
     
 
-    if(fillMode=="fill") {
-        ctx.fillStyle   = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')'; 
-        ctx.fill();
+    if(fillMode==0) {
+        ctxToDrawToNow.fillStyle   = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')'; 
+        ctxToDrawToNow.fill();
     } else {
-        ctx.strokeStyle = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')';
-        ctx.lineWidth = lineWidth*h;
-        ctx.stroke()
+        ctxToDrawToNow.strokeStyle = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')';
+        ctxToDrawToNow.lineWidth = lineWidth*h;
+        ctxToDrawToNow.stroke()
     }
     
 }

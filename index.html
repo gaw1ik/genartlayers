@@ -57,7 +57,7 @@
           
         </div>
 
-        <button class="navbuttons" id="Tab99_Button" name="MainTab" style="margin-left:auto;">Main</button>
+        <button class="navbuttons" id="Tab99_Button" name="MainTab" style="margin-left:auto;">Info</button>
         <button class="navbuttons" id="Tab98_Button" name="DocPropsTab" style="margin-left:auto;">Doc Props</button>
 
       </div>
@@ -110,12 +110,110 @@
               <!-- Main -->
               <div id="Tab99" class="tabcontent">
 
-                <h2>Main</h2>
+                <h2>Welcome!</h2>
 
-                <h4>Recent Saved Projects:</h4>
-                <div class="subsection">
+               
+                <div id="Tab99Panel">
+                  <h3></h3>
+                
 
-                <div id="recent-projects-list"></div>
+                  <p>Genartlayers is an app for coding, manipulating, and exporting generative art.</p>
+                  
+
+                  <h4>If you're brand new here:</h4>
+                  <p>Click the little [1] over there to the right. This will open up Layer 1 of the default project.
+                    This project is just an example, but it's pretty fun to mess around with! Move the controls around
+                    and see what happens.
+                  </p>
+                  <br>
+
+                  <h4>To make your own algorithms:</h4>
+                  <p>Select a layer from the right panel (e.g. [1] or [0]), and then click the <b>Code</b> tab. This will open up the code editors.</p>
+                  <p>
+                    The editor on the top is for Parameters which are variables you can control (like hue, width, etc), and the editor on the bottom is the Draw Function,
+                    which is the code that tells genartlayers how to draw your art.
+                  </p>
+                    <p>
+                     Take note of the example codes in the default project. Observe how parameters are defined and how the code is written.
+                    Code in genartlayers is written in javascript, but there are many simplifications and included functions provided to you in genartlayers. 
+                  </p>
+                  <p>
+                    Poke around in the examples a bit to see how things get drawn. There's a lot of code in there, but everything comes down to drawing simple shapes
+                    including rectangles, circles, and paths.
+                  </p>
+
+                  <h4>Basic shape functions:</h4>
+                  <p>Genartlayers provides functions for drawing these basic shapes which are as follows:</p>
+                  
+                  <UL>
+                    <li>drawRect(x, y, width, height, lineWidth, hue, saturation, lightness, alpha, fillMode)</li>
+
+                    <li>drawCircle(x, y, radius, lineWidth, hue, saturation, lightness, alpha, fillMode)</li>
+
+                    <li>drawPath(path, lineWidth, hue, saturation, lightness, fillMode, close)</li>
+                  </UL>
+
+                  <h4>Saving Algorithms and Projects</h4>
+                  <p>
+                    After you make changes to your code, hit the SaveCode button to implement them. Make sure you give your code a unique name in the text field above the editors.
+                    The layer that the code is on should redraw immediately unless there's an error in your code. Pro-tip: open your browser's console (ctrl+shift+i) to debug while you code.
+                  </p>
+                  <p>
+                    You should also save your projects. A project is a collection of all the layers, algorithms, and parameter values that you have defined for a particular generative art piece.
+                  </p>
+                  <p>
+                    To save a project, give it a name in the text field located top-left next to "Project:" and hit Save. When you return to genartlayers, type in your project's name and hit Open.
+                  </p>
+                  <p>Genartlayers uses your browser's local storage, so as long as you're accessing genartlayers from the same computer and internet browser, you can return to 
+                    your files and pick up where you left off.
+                  </p>
+
+                  <h4>Exporting images</h4>
+                  <p>
+                    I will add some buttons for this later, but for now, if you want to export an image of your piece type exportImg(width) into your browser's console
+                    and hit enter. "width" is the width of the image in pixels you desire.
+                  </p>
+                  <p>Example: exportImg(2048)</p>
+                  <p>Your browser should prompt you to download your image.</p>
+                  
+                  
+
+                  <h4>A couple more things to know...</h4>
+
+                  <UL>
+                    <li>Units (e.g. x, y, radius, width, lineWidth, etc.) are fractional, meaning between 0 and 1. A height of 0.1 means 10% of the height of the canvas.
+                      This ensures that no matter what size you want to export, your design will always look the same.
+                    </li>
+                    <li>The fillMode parameter in the basic shape functions is valued either 0 (for fill) or 1 (for stroke)</li>
+                  </UL>
+
+                  <p>Genartlayers uses the HSL color system and the value ranges are as follows:</p>
+                  <UL>
+                    <li>Hue: 0-359</li>
+                    <li>Saturation: 0-100</li>
+                    <li>Lightness: 0-100</li>
+                    <li>Alpha: 0-255</li>
+                  </UL>
+
+                  <p>
+                    I will provide more documentation soon, but hopefully if you're here, this can get you started. Please feel free to DM me on @genartlayers on instagram
+                    at any time if you have any questions about how to do something in this application. I am here to answer your questions!                    
+                  </p>
+                  <p>-Brian </p>
+
+                  
+                  
+                  <br>
+
+
+
+                </div>
+                
+
+                <!-- <h4>Recent Saved Projects:</h4> -->
+                <div class="subsection" style="display:none">
+
+                  <div id="recent-projects-list" ></div>
 
                 </div>
               
@@ -273,6 +371,7 @@
     <script src="js/drawPath.js"></script>
     <script src="js/drawEllipse.js"></script>
     <script src="js/drawBezierPath.js"></script>
+    <script src="js/drawText.js"></script>
     <!-- <script src="js/drawBlob.js"></script> -->
     <!-- <script src="js/drawCircleBrushed_02.js"></script> -->
 

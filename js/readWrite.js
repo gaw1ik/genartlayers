@@ -244,7 +244,7 @@ function setUpProjectFromProjectFile(JSONdata) {
   handleResize();
 
   // open layer 0 tab
-  document.getElementById("Tab97_Layer0_Button").click();
+  // document.getElementById("Tab97_Layer0_Button").click();
 
 }
 
@@ -325,7 +325,7 @@ function loadDefaultProject() {
   })
   .then( () => {
     // then click layer 1 so it opens up and the user sees the controls for the example algorithm
-    document.getElementById("Tab97_Layer1_Button").click();
+    // document.getElementById("Tab97_Layer1_Button").click();
   });
 
 }

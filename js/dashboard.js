@@ -187,6 +187,8 @@ window.onload = function () {
   // do a resize
   handleResize();
 
+  document.getElementById("Tab99_Button").click();
+
 
 
 
