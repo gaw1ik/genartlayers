@@ -1,22 +1,37 @@
-function drawEllipse(ellipse,xOffset,yOffset,lineWidth,hue,sat,lit,fillMode,ctx) {
 
-    var x = ellipse.loc[0] * h + xOffset*w;
-    var y = ellipse.loc[1] * h + yOffset*h;
-    var r1 = ellipse.rad1 * h;
-    var r2 = ellipse.rad2 * h;
-    var thetaR_rotation = ellipse.thetaR_rotation;
+function drawEllipse(x, y, radX, radY, rotation, lineWidth, hue, sat, lit, alpha, fillMode) {
 
-    ctx.beginPath();
+    // console.log("ctxIndex",ctxIndex);
 
-    ctx.ellipse(x, y, r1, r2, thetaR_rotation, 0, Math.PI*2);
+    //var thisCtx = ctx[ctxIndex];
 
-    if(fillMode=="fill") {
-        ctx.fillStyle   = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')'; 
-        ctx.fill();
+    var x = x*w;
+    var y = y*h;
+    var radX = radX * h;
+    var radY = radY * h;
+
+    var alpha = alpha/255;
+
+    // //console.log("x",x);
+    // //console.log("y",y);
+    // //console.log("rad",rad);
+
+    ctxToDrawToNow.beginPath();
+
+    // //console.log("ctx",ctx)
+
+    ctxToDrawToNow.ellipse(x,y,radX,radY,rotation,0,twoPI);
+
+    // //console.log("hsla",hue,sat,lit,alpha/255);
+
+    if(fillMode==0) {
+        ctxToDrawToNow.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
+        ctxToDrawToNow.fill();
     } else {
-        ctx.strokeStyle = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')';
-        ctx.lineWidth = lineWidth*h;
-        ctx.stroke()
+        ctxToDrawToNow.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
+        ctxToDrawToNow.lineWidth = lineWidth*h;
+        ctxToDrawToNow.stroke()
     }
     
 }
+

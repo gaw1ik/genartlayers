@@ -42,6 +42,7 @@ function combine() {
       // //console.log("layer.geometry",layer.geometry);
 
       ctxToDrawToNow = ctx4Shadow;
+      // var ctxIndex = layerIndex;
       // draw on canvas4Shadow
       window["draw_" + layer.geometry]( object );
 
