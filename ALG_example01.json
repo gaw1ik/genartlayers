@@ -1,0 +1,85 @@
+{
+	"params": 
+
+	header0:{text:"Welcome to genartlayers!\n\n This is an example algorithm. Mess with the controls below and 	see what happens. Then, go to the 'Code' tab to edit the algorithm or code your own alg!"}
+
+	header1:{text:"Geometric Properties"}
+	seed:{default:1, min:1, max:100, step:1, class:"number"}
+	nRows:{default:5, min:1, max:100, step:1, class:"slider"}
+	padding:{default:0.75, min:0, max:0.99, step:0.01, class:"slider"}
+
+	header4:{text:"Probability"}
+	rectProb: {default:50, min:0, max:100, step:1, class:"slider"}
+	defectivity:{default:0, min:0, max:1, step:0.01, class:"slider"}
+
+	header2:{text:"Color Properties"}
+	hueCenter:{default:0, min:0, max:255, step:1, class:"slider-hue"}
+	satCenter:{default:50, min:0, max:100, step:1, class:"slider-sat"}
+	litCenter:{default:50, min:0, max:100, step:1, class:"slider-lit"}
+	colorVar:{default:10, min:0, max:100, step:1, class:"slider"}
+
+	header3:{text:"Line/Fill Properties"}
+	fillMode:{default:0, min:0, max:1, step:1, class:"on-off"}
+	lineWidthFraction:{default:0.1, min:0.01, max:1, step:0.01, class:"slider"}
+
+
+
+
+	"drawFunction": 
+	// constant parameters
+	var alpha1 = 255;
+
+	// code variables
+	var y;
+	var x;
+	var lineWidth;
+
+	// the height and width of the cells
+	var width = 1/nRows;
+	var height = 1/nRows;
+
+
+	// for each cell (row and column location), draw either a rectangle or a circle in the middle of the cell.
+	for(let i=0; i<nRows; i++) {
+  
+  	y = height * i;
+  
+  	for(let j=0; j<nRows; j++) {
+    
+    	hue = hueCenter;
+    	sat = vary(satCenter,colorVar);
+    	lit = vary(litCenter,colorVar);
+    
+    	if(getRandomFloat(0,1) < defectivity) {alpha=0} else { alpha=alpha1 }
+    
+    	lineWidth = lineWidthFraction * width;
+    
+    	x = width * j;
+    
+    	// with 50% probability draw a rectangle, otherwise draw a circle instead.
+    	if( getRandomFloat(0,1) < rectProb/100 ) {    
+      
+      	// some calculations for the rectangle
+      	var rectWidth = width*padding;
+      	var rectHeight = height*padding;
+      	var xTL = x + (width-rectWidth)/2;
+      	var yTL = y + (height-rectHeight)/2;
+
+      	// draw a rectangle
+      	drawRect(xTL, yTL, rectWidth, rectHeight, lineWidth, hue, sat, lit, alpha, fillMode);
+
+    	} else {
+      
+      	// some calculations for the circle
+      	radCirc = width/2 * padding;
+      	var xCenter = x + width/2;
+      	var yCenter = y + height/2;
+
+      	// draw a circle
+      	drawCircle(xCenter, yCenter, radCirc, lineWidth, hue, sat, lit, alpha, fillMode);
+      
+    	}
+    
+  	}
+  
+}

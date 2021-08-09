@@ -74,8 +74,7 @@ function drawTab(layer) {
   if(layer.object.seed === undefined) {
     var seed = 1;
   } else {
-    seed = layer.object.seed.value;
-    
+    seed = layer.object.seed.value; 
   }
 
   myrng = new Math.seedrandom(seed);

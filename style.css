@@ -544,6 +544,15 @@ button.panel_buttons.active {
   /* background-color: hsl(200, 50%, calc( var(--redrawL) * var(--activeMult)) ); */
 }
 
+#code_panel_button.panel_buttons{
+  color:turquoise;
+}
+
+#controls_panel_button.panel_buttons{
+  
+  color:rgb(124, 177, 124);
+}
+
 
 
 /* #save-json-button {

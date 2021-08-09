@@ -187,7 +187,7 @@ window.onload = function () {
   // do a resize
   handleResize();
 
-  document.getElementById("Tab99_Button").click();
+  // document.getElementById("Tab99_Button").click();
 
 
 
@@ -230,7 +230,7 @@ function attachTabButtonEventListeners() {
   DocPropsTabButton.addEventListener("click", openTab);
 
   // click on it
-  MainTabButton.click();
+  //MainTabButton.click();
 }
 
 // // setTheme Event Listener

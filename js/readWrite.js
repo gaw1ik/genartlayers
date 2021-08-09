@@ -239,12 +239,6 @@ function setUpProjectFromProjectFile(JSONdata) {
   updateTabButtons();
 
 
-  currentLayerIndex = 0;  
-
-  handleResize();
-
-  // open layer 0 tab
-  // document.getElementById("Tab97_Layer0_Button").click();
 
 }
 
@@ -300,6 +294,17 @@ function loadProject() {
   let ApplicationDataJSON = JSON.stringify(ApplicationData);
   localStorage.setItem("ApplicationData", ApplicationDataJSON);
 
+
+  
+  currentLayerIndex = Layers.length - 1;  // what was this even doing?
+
+  handleResize();
+
+  // open layer 0 tab
+  document.getElementById("Tab97_Layer" + currentLayerIndex + "_Button").click();
+
+
+
   
 
 }
@@ -311,6 +316,7 @@ function loadProject() {
 function loadDefaultProject() {
 
   //console.log("**Load Default Project**");
+  
 
   document.getElementById("fpath").value = "default";
 
@@ -325,7 +331,8 @@ function loadDefaultProject() {
   })
   .then( () => {
     // then click layer 1 so it opens up and the user sees the controls for the example algorithm
-    // document.getElementById("Tab97_Layer1_Button").click();
+    handleResize();
+    document.getElementById("Tab97_Layer1_Button").click();
   });
 
 }
