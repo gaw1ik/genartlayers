@@ -26,6 +26,7 @@ function addCodeEditor(layer) {
 
   // Do the CodeMirror Stuff to convert the text_area to a CodeMirror editor
   // for params edior
+
   var params_editor = CodeMirror(Tab97CodePanel, {
     // lineNumbers: true,
     mode: "javascript",
@@ -34,6 +35,12 @@ function addCodeEditor(layer) {
   params_editor.setSize(null,"15vh");
   // params_editor.setValue("// Layer " + newLayerIndex + ": Params");
   params_editor.refresh();
+
+  var CodeMirrors = document.getElementsByClassName("CodeMirror cm-s-midnight");
+
+
+
+
   
   // params_editor.name = "paramsEditor";
   // for code editor
@@ -46,6 +53,10 @@ function addCodeEditor(layer) {
   // code_editor.setValue("// Layer " + newLayerIndex + ": Draw Function");
   code_editor.refresh();
   // code_editor.name = "codeEditor";
+
+
+
+
 
 
   CodeEditors.push(code_editor);

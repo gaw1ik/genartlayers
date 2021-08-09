@@ -37,7 +37,7 @@ function onLayerGeomInput() {
 
 
 
-//
+// Event listeners for the panel buttons
 var controls_panel_button = document.getElementById("controls_panel_button");
 var code_panel_button = document.getElementById("code_panel_button");
 
@@ -97,41 +97,7 @@ function onCodePanelButtonClick() {
 
 
 
-//////////////////////////////////////////////////////////////////// I'm pretty sure I don't use this anywhere and can delete...
-// function assignToControls(layer) {
-//   // //console.log("object:",object);
 
-//   var tabID = layer.name;
-//   var geometry = layer.geometry;
-
-//   // var object = window[geometry + tabID];
-//   var object = layer.object;
-
-//   // //console.log("geometry + tabID:",geometry + tabID);
-
-//   var keys = Object.keys(object);
-
-//   for (let i = 0; i < keys.length; i++) {
-
-//     var key = keys[i];
-
-//     var id = ControlsDict[key].inputID;
-
-//     // //console.log("id",id)
-
-//     var input = document.getElementById(id);
-
-    
-
-//     if(object[key].value === undefined) {
-//       object[key].value = ControlsDict.default;
-//     } else {      
-//       input.value = object[key].value;
-//     }
-    
-//   }
-  
-// }
 
 
 
@@ -140,7 +106,13 @@ function onCodePanelButtonClick() {
 ////////////////////////////////////////////////////////////////////
 function makeGUICodePanel(layer) {
 
-  //console.log("makeGUICodePanel")
+  // First, remove all the headers on the code editors (we'll add them back in where they are needed)
+  var editor_headers = document.getElementsByClassName("editor_header");
+  for(let i=editor_headers.length-1; i>=0; i--) {
+    var element = editor_headers[i];
+    element.remove();
+  }
+
 
   var layerIndex = layer.ctxIndex;
 
@@ -166,7 +138,7 @@ function makeGUICodePanel(layer) {
   // Tab97CodePanel.appendChild(header);
 
   // this layer's params editor
-  var params_editor_element = CodeMirrors[2*layerIndex  ];
+  var params_editor_element = CodeMirrors[2*layerIndex];
   params_editor_element.style.display = "block";
   var params_editor_object = ParamsEditors[layerIndex];
   params_editor_object.refresh();
@@ -176,10 +148,23 @@ function makeGUICodePanel(layer) {
   // Tab97CodePanel.appendChild(header);
 
   // this layer's code editor
-  var code_editor_element = CodeMirrors[2*layerIndex+1];
-  code_editor_element.style.display = "block";
-  var code_editor_object = CodeEditors[layerIndex]; 
-  code_editor_object.refresh();
+  var drawFunction_editor_element = CodeMirrors[2*layerIndex+1];
+  drawFunction_editor_element.style.display = "block";
+  var drawFunction_editor_object = CodeEditors[layerIndex]; 
+  drawFunction_editor_object.refresh();
+
+
+  /////////////////// ADD HEADERS TO THE CODE EDITORS
+  // add header to the params editor
+  let params_header = document.createElement("H5");
+  params_header.innerText = "Params Editor";
+  params_header.className = "editor_header";
+  params_header = Tab97CodePanel.insertBefore( params_header, params_editor_element );
+  // add header to the drawFunction editor
+  let drawFunction_header = document.createElement("H5");
+  drawFunction_header.innerText = "drawFunction() Editor";
+  drawFunction_header.className = "editor_header";
+  drawFunction_header = Tab97CodePanel.insertBefore( drawFunction_header, drawFunction_editor_element );
 
 
   var tabNameExtension = "Tab97";  

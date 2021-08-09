@@ -279,7 +279,7 @@ input:focus {
   /* background-color: #0F192A; */
   /* background-color: hsl(218, 47%, 11%); */
   /* height: calc( (var(--app_height) - var(--app_padding)*2 - var(--height_window_frame)) *0.7); */
-  border-top:2px solid black;
+  /* border-top:2px solid black; */
   height:70vh;
   overflow-y: scroll;
   padding: 1rem 2rem;
@@ -380,6 +380,8 @@ button.reseed:focus {
   align-content:center;
   align-items:center;
   margin:1rem 0rem;
+  /* border-top: 1px solid gray; */
+  border-bottom: 1px solid gray;
 }
 
 .controls_code_toggle {
@@ -497,15 +499,17 @@ button.panel_buttons {
   justify-self: flex-start;
   height: 2rem;
   margin: 0 0.2rem;
-  border-radius: 0rem;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
   /* background-color: hsl(0, 0%, 10%); */
-  border-bottom: 1px solid var(--clr_input_form_bg);
+  border:1px solid hsla(0, 0%, 100%, 0);
+  /* border-bottom: 1px solid var(--clr_input_form_bg); */
   /* background-color: hsl(218, 47%, 11%); */
-  color:hsl(0,0%,40%);
+  /* color:hsl(0,0%,40%); */
   font-family:'Courier New', Courier, monospace;
   box-shadow: none;
-  background-color: none;
-  background: none;
+  background-color: hsl(0,0%,20%);
+  /* background: none; */
   /* box-shadow: 0 2px 3px black; */
   /* box-shadow: inset 1px 1px 2px black; */
 
@@ -528,17 +532,21 @@ button.panel_buttons:hover {
 button.panel_buttons.active {
   /* border:none; */
   outline: none;
+  /* outline: 1px solid white; */
   /* background-color: hsl(0, 0%, 5%); */
   /* border-bottom: 1px solid hsl(0,0%,40%); */
-  border-bottom:1px solid var(--clr_text);
+  border:0.5px solid gray;
+  border-bottom:none;
   box-shadow:none;
   color:var(--clr_text);
+  height: calc(2rem + 1px);
   /* box-shadow: inset 1px 1px 2px black; */
   /* box-shadow: 0 1px 3px black; */
   /* background-color: hsl(0, 0%, 8%); */
   /* background-color: hsl(218, 47%, 11%); */
-  background-color: none;
-  background: none;
+  /* background-color: hsl(0,0%,20%); */
+  /* background-color: hsl(0,0%,50%); */
+  /* background: none; */
   /* border-color: #2196F3; */
   /* background: linear-gradient(hsl(200, 10%, calc( var(--redrawL) * var(--activeMult) ) ), hsl(200, 50%, calc( var(--redrawL) * var(--activeMult) ) ) ); */
   /* background-color: hsl(200, 50%, calc( var(--redrawL) * var(--activeMult)) ); */
