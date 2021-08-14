@@ -41,41 +41,54 @@ Below are the current set of basic shape functions in genartlayers.
 *__Alpha__: 0-255*
 
 ### Rectangle
+```javascript
 drawRect(x, y, width, height, lineWidth, hue, saturation, lightness, alpha, fillMode)
+```
 ### Circle
+```javascript
 drawCircle(x, y, radius, lineWidth, hue, saturation, lightness, alpha, fillMode)
+```
 ### Ellipse
+```javascript
 drawEllipse(x, y, radX, radY, rotation, lineWidth, hue, sat, lit, alpha, fillMode)
+```
 ### Path
+```javascript
 drawPath(path, lineWidth, hue, saturation, lightness, fillMode, close)
+```
 ### Arc
+```javascript
 drawArc(x, y, radX, radY, rotation, startAngle, endAngle, lineWidth, hue, sat, lit, alpha, fillMode) 
+```
 ### Text
+```javascript
 drawText(text, x, y, fontSize, hue, sat, lit)
+```
 
 ## Saving Algorithms and Projects
-After you make changes to your code, hit the SaveCode button to implement them. Make sure you give your code a unique name in the text field above the editors. The layer that the code is on should redraw immediately unless there's an error in your code. Pro-tip: open your browser's console (ctrl+shift+i) to debug while you code.
+After you make changes to your code, hit the SaveCode button to implement them. Make sure you give your code a unique name in the text field above the editors. The layer that the code is on should redraw immediately unless there's an error in your code. Pro-tip: open your browser's console (ctrl+shift+i) to debug while you code. The browser console is awesome, and it's where everyone debugs Javascript.
 
-You should also save your projects. A project is a collection of all the layers, algorithms, and parameter values that you have defined for a particular generative art piece.
+*You should also save your projects.* A project is a collection of all the layers, algorithms, and parameter values that you have defined for a particular generative art piece. To save a project, give it a name in the text field located top-left next to "Project:" and hit Save. When you return to genartlayers, type in your project's name and hit Open.
 
-To save a project, give it a name in the text field located top-left next to "Project:" and hit Save. When you return to genartlayers, type in your project's name and hit Open.
-
-Genartlayers uses your browser's local storage, so as long as you're accessing genartlayers from the same computer and internet browser, you can return to your files and pick up where you left off.
+Genartlayers uses your browser's local storage, so as long as you're accessing genartlayers from the same computer and same internet browser, you can return to your files and pick up where you left off.
 
 ## Exporting images
 I will add some buttons for this later, but for now, if you want to export an image of your piece type exportImg(width) into your browser's console and hit enter. "width" is the width of the image in pixels you desire.
 
-Example: exportImg(2048)
-
+Example: 
+```javascript 
+exportImg(2048)
+```
+It might be helpful to do some math inside the function, like... If I want to export a 12 x 12 inch piece at 300 DPI I could do....
+```javascript 
+exportImg(12*300)
+```
 Your browser should prompt you to download your image.
 
-## A couple more things to know...
-Units (e.g. x, y, radius, width, lineWidth, etc.) are fractional, meaning between 0 and 1. A height of 0.1 means 10% of the height of the canvas. This ensures that no matter what size you want to export, your design will always look the same.
-The fillMode parameter in the basic shape functions is valued either 0 (for fill) or 1 (for stroke)
-Genartlayers uses the HSL color system and the value ranges are as follows:
+## Advanced features
+Coming soon.
 
-
-
+# Future Work
 I will provide more documentation soon, but hopefully if you're here, this can get you started. Please feel free to DM me on @genartlayers on instagram at any time if you have any questions about how to do something in this application. I am here to answer your questions!
 
 -Brian
