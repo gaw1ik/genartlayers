@@ -66,18 +66,22 @@ drawCircle(x, y, radius, lineWidth, hue, saturation, lightness, alpha, fillMode)
 ```javascript
 drawEllipse(x, y, radX, radY, rotation, lineWidth, hue, sat, lit, alpha, fillMode)
 ```
+rotation is in radians.
 ### Path
 ```javascript
 drawPath(path, lineWidth, hue, saturation, lightness, fillMode, close)
 ```
+close is a 0 or 1 value, 1 being close and 0 being do not close.
 ### Arc
 ```javascript
 drawArc(x, y, radX, radY, rotation, startAngle, endAngle, lineWidth, hue, sat, lit, alpha, fillMode) 
 ```
+startAngle and endAngle are in radians.
 ### Text
 ```javascript
 drawText(text, x, y, fontSize, hue, sat, lit)
 ```
+fontSize is in pixels (px). Might change to fractional units at some point.
 
 ## Saving Algorithms and Projects
 After you make changes to your code, hit the SaveCode button to implement them. Make sure you give your code a unique name in the text field above the editors. The layer that the code is on should redraw immediately unless there's an error in your code. Pro-tip: open your browser's console (ctrl+shift+i) to debug while you code. The browser console is awesome, and it's where everyone debugs Javascript.
