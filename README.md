@@ -23,6 +23,20 @@ The drawFunction is the code that tells genartlayers how to draw your art. Code 
 
 Poke around in the examples a bit to see how things get drawn. There's a lot of code in there, but everything comes down to drawing simple shapes including rectangles, circles, and paths. 
 
+Generally speaking, you should declare variables using var as follows. This will keep these variables exclusive to the layer they are on.
+
+```javascript
+var hue = 50;
+var height = 0.3;
+var dog = 1;
+```
+You can declare global variables as well and use those across layers, but things can get potentially confusing if you declare global variables unintentionally.
+```javascript
+hue = 50;
+height = 0.3;
+dog = 1;
+```
+
 ## Basic shape functions:
 Below are the current set of basic shape functions in genartlayers. 
 
