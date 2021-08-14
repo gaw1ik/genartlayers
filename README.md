@@ -15,16 +15,43 @@ Select a layer from the right panel (e.g. [1] or [0]), and then click the Code t
 
 The editor on the top is for Parameters which are variables you can control (like hue, width, etc), and the editor on the bottom is the Draw Function, which is the code that tells genartlayers how to draw your art.
 
-Take note of the example codes in the default project. Observe how parameters are defined and how the code is written. Code in genartlayers is written in javascript, but there are many simplifications and included functions provided to you in genartlayers.
+### Parameters
+Parameter controls (like sliders and numeric inputs) are created automatically in the Controls panel when they are defined in the Parameters editor. Parameters can then be used as variables anywhere in the drawFunction and they take on the value of the control allowing you to easily manipulate your algorithms! Take note of the syntax used for the parameters in the example. Be careful and _exact_ with the syntax. Also notice that you can create headers to help organize your control panel.
 
-Poke around in the examples a bit to see how things get drawn. There's a lot of code in there, but everything comes down to drawing simple shapes including rectangles, circles, and paths.
+### drawFunction
+The drawFunction is the code that tells genartlayers how to draw your art. Code in genartlayers is written in javascript, but there are many simplifications and included functions provided to you in genartlayers which are discussed below.
+
+Poke around in the examples a bit to see how things get drawn. There's a lot of code in there, but everything comes down to drawing simple shapes including rectangles, circles, and paths. 
 
 ## Basic shape functions:
-Genartlayers provides functions for drawing these basic shapes which are as follows:
+Below are the current set of basic shape functions in genartlayers. 
 
+~*Note that the units for location  (x,y) and dimensions  (width, height, radius) are normalized to the artBoard dimensions. For example, x=0.5, y=0.5 will place a shape in the middle of the artBoard.*
+
+~*fillMode is a value 0 (for fill) or 1 (for stroke)*
+
+~*Ranges for color values are as follows...*
+
+*__Hue__: 0-359*
+
+*__Saturation__: 0-100*
+
+*__Lightness__: 0-100*
+
+*__Alpha__: 0-255*
+
+### Rectangle
 drawRect(x, y, width, height, lineWidth, hue, saturation, lightness, alpha, fillMode)
+### Circle
 drawCircle(x, y, radius, lineWidth, hue, saturation, lightness, alpha, fillMode)
+### Ellipse
+drawEllipse(x, y, radX, radY, rotation, lineWidth, hue, sat, lit, alpha, fillMode)
+### Path
 drawPath(path, lineWidth, hue, saturation, lightness, fillMode, close)
+### Arc
+drawArc(x, y, radX, radY, rotation, startAngle, endAngle, lineWidth, hue, sat, lit, alpha, fillMode) 
+### Text
+drawText(text, x, y, fontSize, hue, sat, lit)
 
 ## Saving Algorithms and Projects
 After you make changes to your code, hit the SaveCode button to implement them. Make sure you give your code a unique name in the text field above the editors. The layer that the code is on should redraw immediately unless there's an error in your code. Pro-tip: open your browser's console (ctrl+shift+i) to debug while you code.
@@ -47,10 +74,7 @@ Units (e.g. x, y, radius, width, lineWidth, etc.) are fractional, meaning betwee
 The fillMode parameter in the basic shape functions is valued either 0 (for fill) or 1 (for stroke)
 Genartlayers uses the HSL color system and the value ranges are as follows:
 
-Hue: 0-359
-Saturation: 0-100
-Lightness: 0-100
-Alpha: 0-255
+
 
 I will provide more documentation soon, but hopefully if you're here, this can get you started. Please feel free to DM me on @genartlayers on instagram at any time if you have any questions about how to do something in this application. I am here to answer your questions!
 
