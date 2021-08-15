@@ -125,15 +125,13 @@ After you make changes to your code, hit the SaveCode button to implement them. 
 Genartlayers uses your browser's local storage, so as long as you're accessing genartlayers from the same computer and same internet browser, you can return to your files and pick up where you left off.
 
 ## Exporting images
-I will add some buttons for this later, but for now, if you want to export an image of your piece type exportImg(width) into your browser's console and hit enter. "width" is the width of the image in pixels you desire.
+I will add some buttons for this later, but for now, if you want to export an image of your piece type exportImg(width, dpi) into your browser's console and hit enter. "width" is the desired width of the image in inches and dpi is the desired resolution of the image in dots per inch. Genartlayers will infer the height of the image based on the ratio of the artboard defined in the document properties.
 
-Example: 
+If you want a metric equivalent, hit me up! What do y'all use? Dots per cm?
+
+Example (12 inch wide image at 300 DPI): 
 ```javascript 
-exportImg(2048)
-```
-It might be helpful to do some math inside the function, like... If I want to export a 12 x 12 inch piece at 300 DPI I could do....
-```javascript 
-exportImg(12*300)
+exportImg(12,300)
 ```
 Your browser should prompt you to download your image.
 
