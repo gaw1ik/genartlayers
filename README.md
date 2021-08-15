@@ -16,7 +16,41 @@ Select a layer from the right panel (e.g. [1] or [0]), and then click the Code t
 The editor on the top is for Parameters which are variables you can control (like hue, width, etc), and the editor on the bottom is the Draw Function, which is the code that tells genartlayers how to draw your art.
 
 ### Parameters
-Parameter controls (like sliders and numeric inputs) are created automatically in the Controls panel when they are defined in the Parameters editor. Parameters can then be used as variables anywhere in the drawFunction and they take on the value of the control allowing you to easily manipulate your algorithms! Take note of the syntax used for the parameters in the example. Be careful and _exact_ with the syntax. Also notice that you can create headers to help organize your control panel.
+Parameter controls (like sliders and numeric inputs) are created automatically in the Controls panel when they are defined in the Parameters editor. Parameters can then be used as variables anywhere in the drawFunction (using the same exact name you defined in the Parameters editor) and they take on the value of the control allowing you to easily manipulate your algorithms! Take note of the syntax used for the parameters in the example. Be careful and _exact_ with the syntax. Also notice that you can create headers to help organize your control panel.
+
+#### Parameter Classes
+##### text
+```javascript
+section1:  {class:"text", type:"H2", value:"Geometry"}
+section1a: {class:"text", type:"H3", value:"Size & Shape"}
+```
+type can be "H1", "H2", "H3", "H4", "H5", or "P" (paragraph).
+
+##### number
+```javascript
+seed:{class:"number", default:1, min:1, max:1000, step:1}
+```
+
+##### slider
+```javascript
+width: {class:"slider", default:0.5, min:0.1, max:1.0, step:0.01}
+```
+##### slider-hue
+```javascript
+hueCenter1: {class:"slider-hue", default:0, min:0, max:255, step:1}
+```
+##### slider-sat
+```javascript
+satCenter1: {class:"slider-sat", default:50, min:0, max:100, step:1}
+```
+##### slider-lit
+```javascript
+litCenter1: {class:"slider-lit", default:50, min:0, max:100, step:1}
+```
+##### on-off
+```javascript
+fillMode:{class:"on-off"}
+```
 
 ### drawFunction
 The drawFunction is the code that tells genartlayers how to draw your art. Code in genartlayers is written in javascript, but there are many simplifications and included functions provided to you in genartlayers which are discussed below.
