@@ -31,17 +31,34 @@ function bringInAlgsFromLocalStorage() {
             var algName = thisKey.replace("ALG_","");
 
 
-            var paramsText = thisItemJSON.params;
-            var paramsCode = fromParamsText2Code(algName, paramsText);
-            // //console.log("paramsCode",paramsCode);
-            window.eval(paramsCode);
 
-            // this line right here is super important. it makes sure that the params are in, so that the drawFunctionCode can include them.
-            ControlsDict = window[algName + "Dict"]();
 
-            var drawFunctionText = thisItemJSON.drawFunction;
-            var drawFunctionCode = fromDrawFunctionText2Code(algName, drawFunctionText);
-            window.eval(drawFunctionCode);
+
+
+
+            try {
+
+                var paramsText = thisItemJSON.params;
+                var paramsCode = fromParamsText2Code(algName, paramsText);
+                window.eval(paramsCode);
+
+                //console.log("algName", algName)
+
+                // this line right here is super important. it makes sure that the params are in, so that the drawFunctionCode can include them.
+                ControlsDict = window[algName + "Dict"]();
+
+                //console.log("ControlsDict", ControlsDict);
+
+                var drawFunctionText = thisItemJSON.drawFunction;
+                var drawFunctionCode = fromDrawFunctionText2Code(algName, drawFunctionText);    
+                window.eval(drawFunctionCode);
+
+            } catch(error) {
+
+                console.warn("the user algorithm " + algName + " has an error in it.");
+
+            }
+
         
         }
 

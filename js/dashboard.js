@@ -142,7 +142,7 @@ window.onload = function () {
   canvas_5 = document.getElementById("canvas5");
   canvas_6 = document.getElementById("canvas6");
   canvas_7 = document.getElementById("canvas7");
-  canvas4Shadow = document.getElementById("canvas4Shadow");
+  canvas4Export = document.getElementById("canvas4Export");
   canvas4Wall = document.getElementById("canvas4Wall");
   canvas4WallShadow = document.getElementById("canvas4WallShadow");
   canvas4WallShot = document.getElementById("canvas4WallShot");
@@ -152,12 +152,12 @@ window.onload = function () {
   canvases = [canvas_0, canvas_1, canvas_2, canvas_3, canvas_4, canvas_5, canvas_6, canvas_7];
 
   // get ctx variables from each canvas
-  ctx = [];
+  CTX = [];
   for (i = 0; i < canvases.length; i++) {
-    ctx[i] = canvases[i].getContext("2d");
+    CTX[i] = canvases[i].getContext("2d");
   }
 
-  ctx4Shadow = canvas4Shadow.getContext("2d");
+  ctx4Export = canvas4Export.getContext("2d");
   ctx4WallShadow = canvas4WallShadow.getContext("2d");
   ctx4Wall   =   canvas4Wall.getContext("2d");
   ctx4WallShot = canvas4WallShot.getContext("2d");
@@ -223,8 +223,8 @@ async function loadIncludedStuff() {
 // Tab Buttons EVENT LISTENERS
 function attachTabButtonEventListeners() {
   // Main Tab Button
-  MainTabButton = document.getElementById("Tab99_Button");
-  MainTabButton.addEventListener("click", openTab);
+  // MainTabButton = document.getElementById("Tab99_Button");
+  // MainTabButton.addEventListener("click", openTab);
 
   DocPropsTabButton = document.getElementById("Tab98_Button");
   DocPropsTabButton.addEventListener("click", openTab);

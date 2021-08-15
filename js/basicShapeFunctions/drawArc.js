@@ -3,12 +3,12 @@ function drawArc(x, y, radX, radY, rotation, startAngle, endAngle, lineWidth, hu
 
     // console.log("ctxIndex",ctxIndex);
 
-    //var thisCtx = ctx[ctxIndex];
+    //var thisCtx = CTX[ctxIndex];
 
-    var x = x*w;
-    var y = y*h;
-    var radX = radX * h;
-    var radY = radY * h;
+    var x = x * artboardW;
+    var y = y * artboardH;
+    var radX = radX * artboardH;
+    var radY = radY * artboardH;
 
     var alpha = alpha/255;
 
@@ -29,7 +29,7 @@ function drawArc(x, y, radX, radY, rotation, startAngle, endAngle, lineWidth, hu
         ctxToDrawToNow.fill();
     } else {
         ctxToDrawToNow.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-        ctxToDrawToNow.lineWidth = lineWidth*h;
+        ctxToDrawToNow.lineWidth = lineWidth * artboardH;
         ctxToDrawToNow.stroke()
     }
     

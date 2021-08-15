@@ -57,7 +57,8 @@
           
         </div>
 
-        <button class="navbuttons" id="Tab99_Button" name="MainTab" style="margin-left:auto;">Info</button>
+        <!-- <button class="navbuttons" id="Tab99_Button" name="MainTab" style="margin-left:auto;">Info</button> -->
+        <a id="help_link" href="https://github.com/gaw1ik/genartlayers/tree/main#readme" target="_blank" rel="noopener noreferrer" style="margin-left:auto;">Documentation</a>
         <button class="navbuttons" id="Tab98_Button" name="DocPropsTab" style="margin-left:auto;">Doc Props</button>
 
       </div>
@@ -74,7 +75,7 @@
             
             <canvas class="myCanvas" id="canvas4Wall"></canvas>  
             <canvas class="myCanvas" id="canvas4WallShadow"></canvas> 
-            <canvas class="myCanvas" id="canvas4Shadow"></canvas>
+            <canvas class="myCanvas" id="canvas4Export"></canvas>
           
             <canvas class="myCanvas" id="canvas0"></canvas>  
             <canvas class="myCanvas" id="canvas1"></canvas>
@@ -110,7 +111,7 @@
               <!-- Main -->
               <div id="Tab99" class="tabcontent" style="display:none">
 
-                <h2>Welcome!</h2>
+                <h2 style="text-align:center; font-weight:normal;"">Welcome!</h2>
 
                
                 <div id="Tab99Panel">
@@ -237,7 +238,7 @@
               <!-- Doc Properties -->
               <div id="Tab98" class="tabcontent" style="display:none">
                 <!-- <br> -->
-                <h2>Document Properties</h2>
+                <h2 style="text-align:center; font-weight:normal;">Document Properties</h2>
                 <div id="Tab98ControlsPanel"></div>
 
               </div>
@@ -366,13 +367,13 @@
     <script src="js/docDict.js"></script>
 
     <!-- Basic Shape Drawing Functions -->
-    <script src="js/drawCircle.js"></script>
-    <script src="js/drawRect.js"></script>
-    <script src="js/drawPath.js"></script>
-    <script src="js/drawEllipse.js"></script>
-    <script src="js/drawArc.js"></script>
-    <script src="js/drawBezierPath.js"></script>
-    <script src="js/drawText.js"></script>
+    <script src="js/basicShapeFunctions/drawCircle.js"></script>
+    <script src="js/basicShapeFunctions/drawRect.js"></script>
+    <script src="js/basicShapeFunctions/drawPath.js"></script>
+    <script src="js/basicShapeFunctions/drawEllipse.js"></script>
+    <script src="js/basicShapeFunctions/drawArc.js"></script>
+    <script src="js/basicShapeFunctions/drawBezierPath.js"></script>
+    <script src="js/basicShapeFunctions/drawText.js"></script>
     <!-- <script src="js/drawBlob.js"></script> -->
     <!-- <script src="js/drawCircleBrushed_02.js"></script> -->
 
@@ -395,6 +396,8 @@
     <script src="js/tabsScript.js"></script>  
     <script src="js/dashboard.js"></script>
     <script src="js/saveImg.js"></script>
+
+    <script src="js/other/usefulConsoleUtilities.js"></script>
 
     <!-- OTHER (Brian's Special Secret Functions Don't Use Unless Authorized) -->
     <!-- <script src="js/other/updatePROJ_Tabs2Layers.js"></script> -->

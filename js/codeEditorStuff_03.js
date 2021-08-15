@@ -59,6 +59,9 @@ load_code_button = document.getElementById("load_code_button");
 load_code_button.addEventListener("click",onLoadAlgorithmButtonClick);
 
 
+function evaluate(text) {
+  window.eval(text)
+}
 
 
 function evalAlgorithm(layer) {
@@ -71,10 +74,23 @@ function evalAlgorithm(layer) {
   // var object_dict_code = fromParams2Code(layer);
   var algText = ParamsEditors[layerIndex].getValue();
   var object_dict_code = fromParamsText2Code(geometry, algText);
-  window.eval(object_dict_code);
+
+
+  // try {
+  //   var layer_button = document.getElementById("Tab97_Layer" + currentLayerIndex + "_Button");
+  //   layer_button.style.color = "var(--clr_text)";
+  //   layer.hasCodeError = 0;
+    window.eval(object_dict_code);      
+  // } catch(err) {
+  //   console.log("there was an error evaluating the algorithm");
+  //   console.error(err);
+  //   layer.hasCodeError = 1;
+  //   layer_button.style.color = "red";
+  // }
+
+  
 
   // //console.log("object_dict_code",object_dict_code);
-
 
   // layer.object = window[geometry + "Dict"]();
   ControlsDict = window[geometry + "Dict"]();
@@ -92,7 +108,9 @@ function evalAlgorithm(layer) {
     var key = keys[i];
     
     //if it's a header then just skip it.
-    if(key.substr(0,6)==="header"){
+    var className = ControlsDict[key].class;
+
+    if(className==="text") {
 
       // do nothing
       // console.log("header detected")
@@ -120,7 +138,21 @@ function evalAlgorithm(layer) {
   // var draw_function_code = fromDrawFunction2Code(layer);
   algText = CodeEditors[layerIndex].getValue();
   var draw_function_code = fromDrawFunctionText2Code(geometry, algText);
-  window.eval(draw_function_code);
+  
+
+  // try {
+  //   var layer_button = document.getElementById("Tab97_Layer" + currentLayerIndex + "_Button");
+  //   layer_button.style.color = "var(--clr_text)";
+  //   layer.hasCodeError = 0;
+    window.eval(draw_function_code);  
+    
+  // } catch(err) {
+  //   console.log("there was an error evaluating the algorithm");
+  //   console.error(err);
+  //   layer.hasCodeError = 1;
+  //   layer_button.style.color = "red";
+  // }
+  
 
   // finish by recalculating/redrawing everything
   drawTab(layer);
@@ -158,8 +190,8 @@ function onSaveAndEvalAlgorithmButtonClick(){
   }
 
   // confirmation message stuff.
-  var confirmation = confirm("Are you sure you want to overwrite '" + ALG_name +"' ?");
-  if(confirmation==false) return;
+  //var confirmation = confirm("Are you sure you want to overwrite '" + ALG_name +"' ?");
+  //if(confirmation==false) return;
 
   // update the Layers object
   Layers[currentLayerIndex].geometry = load_code_name;
@@ -191,7 +223,20 @@ function onSaveAndEvalAlgorithmButtonClick(){
 
 
   // Evaluate this layer's new algorithm.
-  evalAlgorithm(layer);
+  try {
+    var layer_button = document.getElementById("Tab97_Layer" + currentLayerIndex + "_Button");
+    //layer_button.style.color = "var(--clr_text)";
+    layer_button.style.textDecoration = "none";
+    layer.hasCodeError = 0;
+    evalAlgorithm(layer);     
+  } catch(err) {
+    console.log("there was an error evaluating the algorithm");
+    console.error(err);
+    layer.hasCodeError = 1;
+    //layer_button.style.color = "red";
+    layer_button.style.textDecoration = "line-through";
+  }
+  
 
 }
 
@@ -213,8 +258,17 @@ function onLoadAlgorithmButtonClick() {
   // layer.geometry = load_code_name;
 
   // console.log("layer.geometry",layer.geometry);
-
-  swapAlgorithmOnLayer(newAlgName, layer);
+  try{
+    var layer_button = document.getElementById("Tab97_Layer" + currentLayerIndex + "_Button");
+    swapAlgorithmOnLayer(newAlgName, layer);
+  } catch(error) {
+    console.log("the algorithm " + "'" + newAlgName + "'" + " that you just tried to bring in has an error in it.")
+    console.error(error);
+    layer.hasCodeError = 1;
+    //layer_button.style.color = "red";
+    layer_button.style.textDecoration = "line-through";
+  }
+  
 
 }
 
@@ -261,7 +315,7 @@ function assignAlgorithmToLayer(algName, layer) {
 
 
 // if the algorithm is determined to be an included algorithm, fetch it from the server, otherwise get it out of local storage instead.
-  algIsIncluded = isAlgIncluded(algName);
+  var algIsIncluded = isAlgIncluded(algName);
 
   
   if(algIsIncluded==1) {
@@ -340,7 +394,9 @@ function assignAlgorithmToLayer(algName, layer) {
         var key = keys[i];
 
         // if it's a header, skip it... otherwise add the parameter and give it the default value.
-        if(key.substr(0,6)==="header") {
+        var className = ControlsDict[key].class;
+
+        if(className==="text") {
           // do nothing
         } else {
           object[key] = {value:undefined};
@@ -365,7 +421,9 @@ function assignAlgorithmToLayer(algName, layer) {
 
           var key = keys[i];
 
-          if(key.substr(0,6)==="header") {
+          var className = ControlsDict[key].class;
+
+          if(className==="header") {
             // do nothing
           } else{
 
@@ -410,7 +468,7 @@ function assignAlgorithmToLayer(algName, layer) {
 
 
   // finish by recalculating/redrawing everything
-  drawTab(layer);
+  // drawTab(layer);
 
   // Then make the GUI for this layer.
   if(currentPanelValue==1) {
@@ -504,8 +562,7 @@ function swapAlgorithmOnLayer(algName, layer) {
   layer.geometry = algName;
 
     
-  // then once you have them in the editors, use evalAlgorithm to evaluate the algorithm from the editors.
-  // this is what formats the code and then brings the Dict and Draw functions into the global space.
+
 
 
   ControlsDict = window[algName + "Dict"]();
@@ -528,7 +585,9 @@ function swapAlgorithmOnLayer(algName, layer) {
 
       var key = keys[i];
 
-      if(key.substr(0,6)==="header") {
+      var className = ControlsDict[key].class;
+
+      if(className==="text") {
         // do nothing
       } else {
         object[key] = {value:undefined};

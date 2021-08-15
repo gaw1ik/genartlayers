@@ -48,7 +48,7 @@ function fromDrawFunctionText2Code(algName, algText) {
 
     ////////////////////////// CODE HEADER //////////////////////////
     // code snippet starts with the function declaration
-    var code_snippet = "function draw_" + geometry + "( object ) {\n;";
+    var code_snippet = "function draw_" + geometry + "( object ) {\n";
 
     // var code_snippet = "console.log('layerIndex'" + layerIndex + ")\n;"
 
@@ -68,7 +68,9 @@ function fromDrawFunctionText2Code(algName, algText) {
 
         var key = keys[i];
 
-        if(key.substr(0,6)==="header") {
+        var className = ControlsDict[key].class;
+
+        if(className==="text") {
             // do nothing
         } else {
             code_snippet = code_snippet + "var " + key + " = " + "object." + key + ".value; \n";

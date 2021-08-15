@@ -29,12 +29,32 @@ function openTab() {
     // change class of all tablinks to "non-active" class
     for (let i = 0; i < tablinks.length; i++) {
 
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+        let iInverted = tablinks.length-1-i;
+
+        //tablinks[i].className = tablinks[i].className.replace(" active", "");
+        //if(Layers[i].hasCodeError===1){
+            // do nothing (should keep it red)
+            //tablinks[iInverted].style.color = "red";
+            
+        //} else {
+            // reset to the default inactive color
+            tablinks[iInverted].style.color = "var(--clr_tab_button_text)";
+        //}
+        
 
     }
 
-    // change current button to active class
-    this.className += " active";
+    // // change current button to active class
+    // //this.className += " active";
+    var layerIndexJustClicked = getLayerIndexFromElement(this)
+    // console.log("layerIndexJustClicked",layerIndexJustClicked);
+    // if(Layers[layerIndexJustClicked].hasCodeError===1) {
+    //     tablinks[ tablinks.length-1-layerIndexJustClicked ].style.color = "red";
+    // } else {
+    if(layerIndexJustClicked!==-1){
+        tablinks[ tablinks.length-1-layerIndexJustClicked ].style.color = "var(--clr_text)";
+    }
+    // }
 
 
 

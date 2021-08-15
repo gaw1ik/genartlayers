@@ -160,6 +160,12 @@ readJsonButton.addEventListener("click", loadProject );
 
 
 
+
+
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function setUpProjectFromProjectFile(JSONdata) {
 
@@ -237,6 +243,8 @@ function setUpProjectFromProjectFile(JSONdata) {
   }
 
   updateTabButtons();
+
+  drawAll();
 
 
 

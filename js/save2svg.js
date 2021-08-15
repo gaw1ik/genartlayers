@@ -1,7 +1,7 @@
 function save2svg(layerIndex,customExtension) {
 
     //Create a new mock canvas context. Pass in your desired width and height for your svg document.
-    var ctx4svg = new C2S(w,h);
+    var ctx4svg = new C2S(artboardW,artboardH);
 
 
     var layer = Layers[layerIndex];

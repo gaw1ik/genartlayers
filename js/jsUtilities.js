@@ -1,4 +1,4 @@
-// this function figures out which tab an element belongs to, and returns that Tab's index.
+// this function figures out which layer an element belongs to, and returns that layer object.
 function getLayerElementIsOn(element) {
 
     layerIndex = getNamedIndexOfElement("Layer",element);
@@ -6,6 +6,15 @@ function getLayerElementIsOn(element) {
     var layer = Layers[layerIndex];
 
     return layer;
+}
+
+
+// this function figures out which tab an element belongs to, and returns that Tab's index.
+function getLayerIndexFromElement(element) {
+
+  layerIndex = getNamedIndexOfElement("Layer",element);
+  
+  return layerIndex;
 }
 
 
@@ -120,9 +129,16 @@ function removeAllChildNodesExceptCode(parent) {
 
 
 function getNamedIndexOfElement(name,element) {
+
     var id = element.id;
-    var newid = id.substring(id.indexOf(name));
-    var namedIndex = newid.substring(newid.indexOf(name)+name.length,newid.indexOf("_"));
+
+    var firstIndexOfName = id.indexOf(name);
+
+    if(firstIndexOfName===-1) {return -1;}
+
+    var newid = id.substring(firstIndexOfName);
+    
+    var namedIndex = newid.substring( newid.indexOf(name)+name.length, newid.indexOf("_") );
     namedIndex = parseInt(namedIndex,10);
     return namedIndex;
 }

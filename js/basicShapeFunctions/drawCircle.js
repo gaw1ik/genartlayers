@@ -3,11 +3,11 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode) {
 
     // console.log("ctxIndex",ctxIndex);
 
-    //var thisCtx = ctx[ctxIndex];
+    //var thisCtx = CTX[ctxIndex];
 
-    var x = x*w;
-    var y = y*h;
-    var rad = rad * h;
+    var x = x*artboardW;
+    var y = y*artboardH;
+    var rad = rad * artboardH;
 
     var alpha = alpha/255;
 
@@ -28,7 +28,7 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode) {
         ctxToDrawToNow.fill();
     } else {
         ctxToDrawToNow.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-        ctxToDrawToNow.lineWidth = lineWidth*h;
+        ctxToDrawToNow.lineWidth = lineWidth * artboardH;
         ctxToDrawToNow.stroke()
     }
     
@@ -39,11 +39,11 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode) {
 
 //     console.log("ctxIndex",ctxIndex);
 
-//     var thisCtx = ctx[ctxIndex];
+//     var thisCtx = CTX[ctxIndex];
 
-//     var x = x*w;
-//     var y = y*h;
-//     var rad = rad * h;
+//     var x = x*artboardW;
+//     var y = y*;
+//     var rad = rad * artboardH;
 
 //     var alpha = alpha/255;
 
@@ -64,7 +64,7 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode) {
 //         thisCtx.fill();
 //     } else {
 //         thisCtx.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-//         thisCtx.lineWidth = lineWidth*h;
+//         thisCtx.lineWidth = lineWidth*;
 //         thisCtx.stroke()
 //     }
     

@@ -8,7 +8,7 @@
     lit = litCenter1;
     alpha = alpha1;       
 
-    var x = xCenter * w;
+    var x = xCenter * artBoardW;
     var y = yCenter * h;
 
     var startAngle = 0;
@@ -38,7 +38,7 @@
         lineWidth2 = vary(lineWidthCenter,lineWidthVar);
         
 
-        var x = xCenter * w;
+        var x = xCenter * artBoardW;
         var y = yCenter * h;
 
         var startAngle = getRandomFloat(0,twoPI);

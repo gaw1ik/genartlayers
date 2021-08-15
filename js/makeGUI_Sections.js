@@ -133,9 +133,6 @@ function makeGUICodePanel(layer) {
     CodeMirrors[i].style.display = "none";
   }  
 
-  // var header = document.createElement("h3");
-  // header.innerText = "Params";
-  // Tab97CodePanel.appendChild(header);
 
   // this layer's params editor
   var params_editor_element = CodeMirrors[2*layerIndex];
@@ -143,9 +140,7 @@ function makeGUICodePanel(layer) {
   var params_editor_object = ParamsEditors[layerIndex];
   params_editor_object.refresh();
 
-  // header = document.createElement("h3");
-  // header.innerText = "DrawFunction";
-  // Tab97CodePanel.appendChild(header);
+
 
   // this layer's code editor
   var drawFunction_editor_element = CodeMirrors[2*layerIndex+1];
@@ -157,7 +152,7 @@ function makeGUICodePanel(layer) {
   /////////////////// ADD HEADERS TO THE CODE EDITORS
   // add header to the params editor
   let params_header = document.createElement("H5");
-  params_header.innerText = "Params Editor";
+  params_header.innerText = "Parameters Editor";
   params_header.className = "editor_header";
   params_header = Tab97CodePanel.insertBefore( params_header, params_editor_element );
   // add header to the drawFunction editor
@@ -257,13 +252,21 @@ function makeGUIControlsPanel(layer) {
 
     var key = keys[i];
 
-    if(key.substr(0,6)=="header"){
+    var className = ControlsDict[key].class;
+    var type = ControlsDict[key].type;
+
+    if(className==="text") {
 
       var break_element = document.createElement("BR");
       tabElement.appendChild(break_element); 
 
-      var header_element = document.createElement("H3");
-      header_element.innerText = ControlsDict[key].text;  
+      if(type){
+        var header_element = document.createElement(type);
+      } else {
+        var header_element = document.createElement("H3");
+      }
+      
+      header_element.innerText = ControlsDict[key].value;  
       // header_element.style.textAlign
       tabElement.appendChild(header_element);    
 
@@ -338,6 +341,10 @@ function makeGUIControlsPanel(layer) {
       } else if (ControlsDict[key].class == "on-off") {
         input.type = "range";
         input.className = "on-off";
+        ControlsDict[key].default = 0;
+        ControlsDict[key].min = 0;
+        ControlsDict[key].max = 1;
+        ControlsDict[key].step= 1;
       }
 
       var propertyName = key;

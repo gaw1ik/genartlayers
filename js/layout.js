@@ -169,20 +169,20 @@ function handleResize() {
 
   }
 
-  // set HTML Width/Height of canvas4Shadow
-  canvas4Shadow.style.width = canvas_style_width.toString() + "px";
-  canvas4Shadow.style.height = canvas_style_height.toString() + "px";
+  // set HTML Width/Height of canvas4Export
+  canvas4Export.style.width = canvas_style_width.toString() + "px";
+  canvas4Export.style.height = canvas_style_height.toString() + "px";
 
-  canvas4Shadow.style.left = canvasLeft.toString() + "px";
-  canvas4Shadow.style.top = canvasTop.toString() + "px";
+  canvas4Export.style.left = canvasLeft.toString() + "px";
+  canvas4Export.style.top = canvasTop.toString() + "px";
 
-  canvas4Shadow.width = Math.ceil(canvas_style_width * dpr * scale); // HTML
-  canvas4Shadow.height = Math.ceil(canvas_style_height * dpr * scale); // HTML
+  canvas4Export.width = Math.ceil(canvas_style_width * dpr * scale); // HTML
+  canvas4Export.height = Math.ceil(canvas_style_height * dpr * scale); // HTML
 
-  // canvas4Shadow.width = Math.ceil(canvas_style_width * dpr); // HTML
-  // canvas4Shadow.height = Math.ceil(canvas_style_height * dpr); // HTML
+  // canvas4Export.width = Math.ceil(canvas_style_width * dpr); // HTML
+  // canvas4Export.height = Math.ceil(canvas_style_height * dpr); // HTML
 
-  // //console.log("canvas4Shadow.width",canvas4Shadow.width)
+  // //console.log("canvas4Export.width",canvas4Export.width)
 
 
 
@@ -192,12 +192,12 @@ function handleResize() {
   // // CSS height
   // inputContainer.style.height =  drawCont_height.toString() + 'px';
 
-  // w = canvas4Shadow.width;
-  // h = canvas4Shadow.height;
+  // artboardW = canvas4Export.width;
+  // artboardH = canvas4Export.height;
 
-  // Update the global w and h variables (width and height for calc and draw functions)
-  w = canvas0.width;
-  h = canvas0.height;
+  // Update the global artboardW and artboardH variables (width and height for calc and draw functions)
+  artboardW = canvas0.width;
+  artboardH = canvas0.height;
 
   // draw_wall();
 
@@ -324,7 +324,7 @@ function drawWallShadow(ctx)  {
 
   var shadow_height = wallShadowHeight * artboardHeight;
   var shadow_width  = wallShadowWidth  * artboardWidth;
-  var blur          = wallShadowBlur   * h;
+  var blur          = wallShadowBlur   * artboardH;
   var opacity       = wallShadowOpacity   ;
 
 

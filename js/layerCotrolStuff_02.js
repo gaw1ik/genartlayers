@@ -28,7 +28,8 @@ function addCodeEditor(layer) {
   // for params edior
 
   var params_editor = CodeMirror(Tab97CodePanel, {
-    // lineNumbers: true,
+    lineNumbers: true,
+    firstLineNumber: 3,
     mode: "javascript",
     theme: "midnight",
   });
@@ -45,7 +46,8 @@ function addCodeEditor(layer) {
   // params_editor.name = "paramsEditor";
   // for code editor
   var code_editor = CodeMirror(Tab97CodePanel, {
-    // lineNumbers: true,
+    lineNumbers: true,
+    firstLineNumber: 2 + Object.keys(layer.object).length,
     mode: "javascript",
     theme: "midnight",
   });
@@ -129,6 +131,14 @@ function updateTabButtons() {
     tab_button.id = "Tab97" + "_Layer" + (i) + "_Button";
     // tab_button.innerText = i + ". " + layer.geometry;
     tab_button.innerText = "[" + i + "]";
+
+    if(layer.hasCodeError===1) {
+      tab_button.style.color = "red";
+      tab_button.style.textDecoration = "line-through";
+    } else {
+      tab_button.style.color = "var(--clr_tab_button_text)";
+      tab_button.style.textDecoration = "none";
+    }
     
 
   }
@@ -142,15 +152,24 @@ function updateCodeEditors() {
 
   var CodeMirrors = document.getElementsByClassName("CodeMirror cm-s-midnight");
 
+}
 
 
-
+function resetAllCanvasBlursToZero() {
+  for(let i=0; i<Layers.length; i++) {
+    let this_ctx = CTX[i]; 
+    this_ctx.filter = 'none';
+  }
 }
 
 
 
-
 function onAddLayerButtonClick(){
+
+  if(Layers.length>7) {
+    alert("this version of genartlayers does not allow more than 8 layers! \nSorry :(");
+    return;
+  }
 
   // variables
   var newLayerIndex;
@@ -163,7 +182,7 @@ function onAddLayerButtonClick(){
   }
 
   // create a blank layer dict
-  var layer = { ctxIndex:newLayerIndex, geometry:"", object: {} };
+  var layer = { ctxIndex:newLayerIndex, geometry:"", object: {}, hasCodeError:0 };
 
   // insert layer into Layers Array at newLayerIndex
   Layers.splice(newLayerIndex, 0, layer);
@@ -187,6 +206,7 @@ function onAddLayerButtonClick(){
   
 
   updateTabButtons();
+  resetAllCanvasBlursToZero();
 
 
 
@@ -235,7 +255,7 @@ function onDeleteLayerButtonClick(){
 
     // clear the canvases on the layer that was just deleted and all above it.
     for(let i=currentLayerIndex; i<Layers.length; i++){
-      ctx[i].clearRect(0,0,w,h);
+      CTX[i].clearRect(0,0,artboardW,artboardH);
     }
 
 
@@ -277,6 +297,7 @@ function onDeleteLayerButtonClick(){
     tab_bar_layers_container.children[currentLayerIndex].remove();
 
     updateTabButtons();
+    resetAllCanvasBlursToZero();
 
     // for(let i=currentLayerIndex+1; i<Layers.length; i++) {
 
@@ -394,6 +415,7 @@ function onMoveUpLayerButtonClick() {
 
   // update the tab buttons to reflect the change
   updateTabButtons();
+  resetAllCanvasBlursToZero();
 
 
   // redraw everything
@@ -459,6 +481,7 @@ function onMoveDownLayerButtonClick() {
 
 
   // redraw everything
+  resetAllCanvasBlursToZero();
   drawAll();
 
 

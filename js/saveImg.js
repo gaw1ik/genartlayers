@@ -8,12 +8,11 @@
 
 
 // this function combines all the canvas drawings into one layer so that it can be exported as an image
-function combine() {
+function combine(pageWidth,exportDPI) {
 
-  ctx4Shadow.clearRect(0, 0, w, h); 
-
+  ctx4Export.clearRect(0, 0, artboardW, artboardH); 
  
-  // for each layer, draw the image onto canvas4Shadow. (canvas4Shadow is a canvas that used to be used to create the dropshadow effect. Now, I just use it for combining the images for export.)
+  // for each layer, draw the image onto canvas4Export. (canvas4Export is a canvas that used to be used to create the dropshadow effect. Now, I just use it for combining the images for export.)
   for(let i=0; i<Layers.length; i++) {
 
     
@@ -21,30 +20,21 @@ function combine() {
 
       var layer = Layers[layerIndex];
 
-      // make a new random number generator
-      if(layer.object.seed===undefined) { var seed = 1; } else { seed = layer.object.seed.value; }
-      myrng = new Math.seedrandom(seed);
+      ctxToDrawToNow = ctx4Export;
 
+      var pageHeight = pageWidth * (doc1.pageHeight.value/doc1.pageWidth.value);
 
-      // Build the array of param values to pass into the draw function.
-      var paramValues = [];
-      var object = layer.object;
-      var keys = Object.keys(object);
+      artboardW = exportDPI * pageWidth ;
+      artboardH = exportDPI * pageHeight;
 
-      for(let i=0; i<keys.length; i++) {
-          var key = keys[i];
-          paramValue = object[key].value;
-          paramValues.push(paramValue);
-      }
+      canvases[i].width  = Math.ceil(artboardW); // HTML width
+      canvases[i].height = Math.ceil(artboardH); // HTML height
 
-      // //console.log("just drew...");
-      // //console.log("layerIndex",layerIndex);
-      // //console.log("layer.geometry",layer.geometry);
+      drawTab(layer);
 
-      ctxToDrawToNow = ctx4Shadow;
-      // var ctxIndex = layerIndex;
-      // draw on canvas4Shadow
-      window["draw_" + layer.geometry]( object );
+      var imageFromOneLayer = canvases[layerIndex];
+
+      ctx4Export.drawImage(imageFromOneLayer, 0, 0, artboardW, artboardH);
 
   }
   
@@ -53,25 +43,86 @@ function combine() {
 
 
 
-function exportImg(pixWidth) {
+
+
+
+
+
+// // this function combines all the canvas drawings into one layer so that it can be exported as an image
+// function combine() {
+
+//   ctx4Export.clearRect(0, 0, artboardW, artboardH); 
+
+ 
+//   // for each layer, draw the image onto canvas4Export. (canvas4Export is a canvas that used to be used to create the dropshadow effect. Now, I just use it for combining the images for export.)
+//   for(let i=0; i<Layers.length; i++) {
+
+    
+//       var layerIndex = i;
+
+//       var layer = Layers[layerIndex];
+
+//       // make a new random number generator
+//       if(layer.object.seed===undefined) { var seed = 1; } else { seed = layer.object.seed.value; }
+//       myrng = new Math.seedrandom(seed);
+
+
+//       // Build the array of param values to pass into the draw function.
+//       var paramValues = [];
+//       var object = layer.object;
+//       var keys = Object.keys(object);
+
+//       for(let i=0; i<keys.length; i++) {
+//           var key = keys[i];
+//           paramValue = object[key].value;
+//           paramValues.push(paramValue);
+//       }
+
+//       // //console.log("just drew...");
+//       // //console.log("layerIndex",layerIndex);
+//       // //console.log("layer.geometry",layer.geometry);
+
+//       ctxToDrawToNow = ctx4Export;
+//       // var ctxIndex = layerIndex;
+//       // draw on canvas4Export
+//       window["draw_" + layer.geometry]( object );
+
+//   }
+  
+// }
+
+
+
+
+
+
+
+
+
+
+
+function exportImg(pageWidth,exportDPI) {
 
   var picW = doc1.pageWidth .value;
   var picH = doc1.pageHeight.value;
 
   var artboardAspectRatio = picH/picW;
 
+  var pixWidth = pageWidth*exportDPI;
+  var pixHeight = pixWidth * artboardAspectRatio;
 
-  canvas4Shadow.width  = pixWidth;
-  canvas4Shadow.height = pixWidth * artboardAspectRatio;
 
-  w = canvas4Shadow.width;
-  h = canvas4Shadow.height;
+  canvas4Export.width  = pixWidth;
+  canvas4Export.height = pixHeight;
 
-  combine();
+  artboardW = canvas4Export.width;
+  artboardH = canvas4Export.height;
+
+  combine(pageWidth,exportDPI);
 
   var link = document.getElementById('save_img_link');
   link.setAttribute('download', 'render.png');
-  link.setAttribute('href', canvas4Shadow.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  link.setAttribute('href', canvas4Export.toDataURL("image/png").replace("image/png", "image/octet-stream"));
   link.click();
 
   handleResize();
@@ -98,8 +149,8 @@ function saveDirect(customExtension) {
   // doc1.pageDPI.value = exportDPI;
 
 
-  // canvas4Shadow.style.width  = canvas4Wall.style.width;
-  // canvas4Shadow.style.height = canvas4Wall.style.height;
+  // canvas4Export.style.width  = canvas4Wall.style.width;
+  // canvas4Export.style.height = canvas4Wall.style.height;
 
 
 
@@ -109,27 +160,27 @@ function saveDirect(customExtension) {
   var resWidth  = exportDPI * pageWidth;
   var resHeight = exportDPI * pageHeight;
 
-  canvas4Shadow.width  = resWidth;
-  canvas4Shadow.height = resHeight;
+  canvas4Export.width  = resWidth;
+  canvas4Export.height = resHeight;
 
   //console.log(resWidth,"resWidth");
   //console.log(resHeight,"resHeight");
 
-  w = resWidth;
-  h = resHeight;
+  artboardW = resWidth;
+  artboardH = resHeight;
 
-  // canvas4Shadow.width  = w; // HTML
-  // canvas4Shadow.height = h; // HTML  
+  // canvas4Export.width  = artboardW; // HTML
+  // canvas4Export.height = artboardH; // HTML  
 
-  // canvas4Shadow.style.width  = canvas4Shadow.width  / dpr + 'px'; // CSS
-  // canvas4Shadow.style.height = canvas4Shadow.height / dpr + 'px'; // CSS
+  // canvas4Export.style.width  = canvas4Export.width  / dpr + 'px'; // CSS
+  // canvas4Export.style.height = canvas4Export.height / dpr + 'px'; // CSS
 
 
 
   combine();
 
-  // imageURL = canvas4Shadow.toDataURL("image/png").replace("image/png", "image/octet-stream");
-  imageURL = canvas4Shadow.toDataURL("image/png");
+  // imageURL = canvas4Export.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  imageURL = canvas4Export.toDataURL("image/png");
   // data = imageURL.substring(imageURL.indexOf(',') + 1)
 
   var data = imageURL.replace(/^data:image\/\w+;base64,/, "");
@@ -171,11 +222,11 @@ function saveDirectPix(pixLongDimension, customExtension) {
   resWidth = Math.ceil(resWidth);
   resHeight = Math.ceil(resHeight);
 
-  canvas4Shadow.width = resWidth;
-  canvas4Shadow.height =resHeight;  
+  canvas4Export.width = resWidth;
+  canvas4Export.height =resHeight;  
 
-  w = resWidth;
-  h = resHeight;
+  artboardW = resWidth;
+  artboardH = resHeight;
 
 
   /////////////////
@@ -185,8 +236,8 @@ function saveDirectPix(pixLongDimension, customExtension) {
   ////////////////
 
 
-  // imageURL = canvas4Shadow.toDataURL("image/png").replace("image/png", "image/octet-stream");
-  imageURL = canvas4Shadow.toDataURL("image/png");
+  // imageURL = canvas4Export.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  imageURL = canvas4Export.toDataURL("image/png");
   // data = imageURL.substring(imageURL.indexOf(',') + 1)
 
   var data = imageURL.replace(/^data:image\/\w+;base64,/, "");
@@ -315,16 +366,16 @@ function combineOntoWall(wallWidth,wallHeight,wallHue,wallSat,wallLit,artboardSi
   // artboardAspectRatio = doc1.pageHeight.value / doc1.pageWidth.value;
   if(pageHeight<pageWidth){
     var artboardWidthFrac  = artboardSizeRatio;
-    var artboardHeightFrac = artboardSizeRatio * canvas4Shadow.height / canvas4Shadow.width;
+    var artboardHeightFrac = artboardSizeRatio * canvas4Export.height / canvas4Export.width;
   } else {
     var artboardHeightFrac  = artboardSizeRatio;
-    var artboardWidthFrac = artboardSizeRatio * canvas4Shadow.width / canvas4Shadow.height;
+    var artboardWidthFrac = artboardSizeRatio * canvas4Export.width / canvas4Export.height;
   }
 
 
-  // // Combine Canvas stuff (canvas4Shadow)
-  // canvas4Shadow.style.width  = canvas4Wall.style.width  * artboardWidthFrac ;
-  // canvas4Shadow.style.height = canvas4Wall.style.height * artboardHeightFrac;
+  // // Combine Canvas stuff (canvas4Export)
+  // canvas4Export.style.width  = canvas4Wall.style.width  * artboardWidthFrac ;
+  // canvas4Export.style.height = canvas4Wall.style.height * artboardHeightFrac;
 
   var x0 = (0.5-artboardWidthFrac /2)           * resWidth;
   var y0 = (0.5-artboardHeightFrac/2 - yOffset) * resHeight;
@@ -332,11 +383,11 @@ function combineOntoWall(wallWidth,wallHeight,wallHue,wallSat,wallLit,artboardSi
   artboardWidth  = artboardWidthFrac  * resWidth;
   artboardHeight = artboardHeightFrac * resHeight;
 
-  canvas4Shadow.width  = artboardWidth;
-  canvas4Shadow.height = artboardHeight;
+  canvas4Export.width  = artboardWidth;
+  canvas4Export.height = artboardHeight;
 
-  w = artboardWidth;
-  h = artboardHeight;
+  artboardW = artboardWidth;
+  artboardH = artboardHeight;
 
   combine();
 
@@ -350,7 +401,7 @@ function combineOntoWall(wallWidth,wallHeight,wallHue,wallSat,wallLit,artboardSi
   ctx4WallShot.drawImage(canvas4Wall      ,  0,  0, resWidth, resHeight);
   ctx4WallShot.drawImage(canvas4WallShadow,  0,  0, resWidth, resHeight);
   
-  ctx4WallShot.drawImage(canvas4Shadow    , x0, y0, artboardWidth, artboardHeight  );
+  ctx4WallShot.drawImage(canvas4Export    , x0, y0, artboardWidth, artboardHeight  );
   ctx4WallShot.drawImage(canvas4Frame     ,  0,  0, resWidth, resHeight);
 
   // //console.log("WALL")
@@ -569,15 +620,15 @@ function exportDesktopWallShot2() {
 //   var artboardStyleWidth  = artboardWidth  / dpr;
 
   
-//   canvas4Shadow.style.width   = artboardStyleWidth .toString() + 'px';
-//   canvas4Shadow.style.height  = artboardStyleHeight.toString() + 'px';
+//   canvas4Export.style.width   = artboardStyleWidth .toString() + 'px';
+//   canvas4Export.style.height  = artboardStyleHeight.toString() + 'px';
 
-//   canvas4Shadow.width  = artboardWidth ;
-//   canvas4Shadow.height = artboardHeight;
+//   canvas4Export.width  = artboardWidth ;
+//   canvas4Export.height = artboardHeight;
 
-//   // reset w and h to the current HTML dimensions of the artboard canvases
-//   w = canvas4Shadow.width;
-//   h = canvas4Shadow.height;
+//   // reset artboardW and artboardH to the current HTML dimensions of the artboard canvases
+//   artboardW = canvas4Export.width;
+//   artboardH = canvas4Export.height;
 
 //   //
 //   var wallShadowHeight  = doc1.wallShadowHeight .value;
@@ -598,7 +649,7 @@ function exportDesktopWallShot2() {
 //   x0 = (wallWidth  - artboardWidth )/2;
 //   y0 = (wallHeight - artboardHeight)/2;
 
-//   ctx4Wall.drawImage(canvas4Shadow,x0,y0,artboardWidth,artboardHeight);
+//   ctx4Wall.drawImage(canvas4Export,x0,y0,artboardWidth,artboardHeight);
 
 //   var link = document.getElementById('save_img_link');
 //   link.setAttribute('download', 'render.png');

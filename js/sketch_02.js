@@ -36,7 +36,7 @@ function onObjectPropertyInput() {
 //   // DRAW SECOND
 //   // clear canvas
 //   // //console.log("layer.ctxIndex",layer.ctxIndex);
-//   ctx[layer.ctxIndex].clearRect(0, 0, w, h); 
+//   CTX[layer.ctxIndex].clearRect(0, 0, artboardW, artboardH); 
 
 
 //   // //console.log("in calcTab, seed = ", layer.object.seed);
@@ -50,11 +50,15 @@ function onObjectPropertyInput() {
 //       seed = layer.object.seed.value;
 //     }
 //     myrng = new Math.seedrandom(seed);
-//   window["draw_" + layer.geometry]( layer.object, ctx[layer.ctxIndex] );
+//   window["draw_" + layer.geometry]( layer.object, CTX[layer.ctxIndex] );
 
   
 
 // }
+
+
+
+
 
 function drawTab(layer) {
 
@@ -63,12 +67,12 @@ function drawTab(layer) {
 
   // get layerIndex
   ctxIndex = layer.ctxIndex; 
-  ctxToDrawToNow = ctx[ctxIndex]; 
+  ctxToDrawToNow = CTX[ctxIndex]; 
 
   
 
   // clear canvas
-  ctx[layer.ctxIndex].clearRect(0, 0, w, h); 
+  CTX[layer.ctxIndex].clearRect(0, 0, artboardW, artboardH); 
 
   // make a new random number generator
   if(layer.object.seed === undefined) {
@@ -82,37 +86,32 @@ function drawTab(layer) {
 
 
   // Build the array of param values to pass into the draw function.
-  // var paramValues = [];
   var object = layer.object;
 
 
-  // var keys = Object.keys(object);
-  // var keys = Object.keys(object);
 
-  // for(let i=0; i<keys.length; i++) {
-  //   var key = keys[i];
-  //   // if it's a header then just skip it. Should eventually just get header out of the layer object entirely.
-  //   if(key.substr(0,6)==="header"){
-  //     // do nothing
-  //   } else {
-      
-  //     paramValue = object[key].value;
-  //     paramValues.push(paramValue);
-      
-  //   }
-  // }
+  // console.log("ctxIndex",ctxIndex)
+  // console.log("Layers.length-1-ctxIndex",Layers.length-1-ctxIndex)
 
-  // console.log("paramValues going into draw function via drawTab()",paramValues);
-  // draw on canvas
-  // //console.log("layer.geometry",layer.geometry);
-  // window["draw_" + layer.geometry]( paramValues, layer, ctx[layerIndex] );
-  //window["draw_" + layer.geometry]( object, layer, ctx[layerIndex] );
+  var tab_buttons = document.getElementsByClassName("tablinks");
+  var tab_button = tab_buttons[Layers.length-1-ctxIndex];
 
-  // console.log("ctxIndex",ctxIndex);
-
-  window["draw_" + layer.geometry]( object );
+  try{
+    window["draw_" + layer.geometry]( object );
+    tab_button.style.textDecoration = "none";
+  } catch(error) {
+    console.error(error)
+    tab_button.style.textDecoration = "line-through";
+  }
+  
   
 }
+
+
+
+
+
+
 
 
 function updateObjectProperty(input) {
@@ -183,7 +182,7 @@ function drawAll() {
     // var layer =  Layers[Layers.length-1-i];
     var layer =  Layers[i];
 
-    ctx[i].clearRect(0, 0, w, h); // clear canvas
+    CTX[i].clearRect(0, 0, artboardW, artboardH); // clear canvas
 
     if(layer.geometry=="") {
       // do nothing
@@ -191,10 +190,6 @@ function drawAll() {
 
       drawTab(layer)
 
-      // // make a new random number generator
-      // myrng = new Math.seedrandom(layer.object.seed);
-
-      // window["draw_" + layer.geometry]( layer.object, ctx[i] );
     }
 
     

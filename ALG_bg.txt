@@ -1,4 +1,4 @@
 {
     "params": "hue:{default:90, min:0, max:359, step:1, class:\"slider-hue\"}\nsat:{default:30, min:0, max:100, step:1, class:\"slider-sat\"}\nlit:{default:80, min:0, max:100, step:1, class:\"slider-lit\"}\n",
-    "drawFunction": "drawRect(0, 0, w, h, 0, hue, sat, lit, 255, 0);"
+    "drawFunction": "drawRect(0, 0, artboardW, artboardH, 0, hue, sat, lit, 255, 0);"
 }

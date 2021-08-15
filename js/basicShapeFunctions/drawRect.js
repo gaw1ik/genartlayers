@@ -1,9 +1,9 @@
 // function drawRect(ctx, x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alpha=255, fillMode=0) {
 
-//     var x = x*w;
-//     var y = y*h;
-//     var width = width * w;
-//     var height = height * h;
+//     var x = x*artboardW;
+//     var y = y*artboardH;
+//     var width = width * artboardW;
+//     var height = height * artboardH;
 
 //     var alpha = alpha/255;
 
@@ -16,7 +16,7 @@
 //         ctx.fill();
 //     } else {
 //         ctx.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-//         ctx.lineWidth = lineWidth*h;
+//         ctx.lineWidth = lineWidth*artboardH;
 //         ctx.stroke()
 //     }
     
@@ -29,13 +29,13 @@ function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alp
 
     // console.log("ctxIndex",ctxIndex);
 
-    //var thisCtx = ctx[ctxIndex];
+    //var thisCtx = CTX[ctxIndex];
     
 
-    var x = x*w;
-    var y = y*h;
-    var width = width * w;
-    var height = height * h;
+    var x = x*artboardW;
+    var y = y*artboardH;
+    var width = width * artboardW;
+    var height = height * artboardH;
 
     var alpha = alpha/255;
 
@@ -49,7 +49,7 @@ function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alp
         ctxToDrawToNow.fill();
     } else {
         ctxToDrawToNow.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-        ctxToDrawToNow.lineWidth = lineWidth*h;
+        ctxToDrawToNow.lineWidth = lineWidth*artboardH;
         ctxToDrawToNow.stroke()
     }
 
@@ -62,13 +62,13 @@ function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alp
 
 //     // console.log("ctxIndex",ctxIndex);
 
-//     var thisCtx = ctx[ctxIndex];
+//     var thisCtx = CTX[ctxIndex];
     
 
-//     var x = x*w;
-//     var y = y*h;
-//     var width = width * w;
-//     var height = height * h;
+//     var x = x*artboardW;
+//     var y = y*artboardH;
+//     var width = width * artboardW;
+//     var height = height * artboardH;
 
 //     var alpha = alpha/255;
 
@@ -82,7 +82,7 @@ function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alp
 //         thisCtx.fill();
 //     } else {
 //         thisCtx.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-//         thisCtx.lineWidth = lineWidth*h;
+//         thisCtx.lineWidth = lineWidth*artboardH;
 //         thisCtx.stroke()
 //     }
 
