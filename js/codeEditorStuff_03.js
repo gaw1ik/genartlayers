@@ -155,7 +155,7 @@ function evalAlgorithm(layer) {
   
 
   // finish by recalculating/redrawing everything
-  drawTab(layer);
+  drawLayer(layer);
 
 }
 
@@ -468,7 +468,7 @@ function assignAlgorithmToLayer(algName, layer) {
 
 
   // finish by recalculating/redrawing everything
-  // drawTab(layer);
+  // drawLayer(layer);
 
   // Then make the GUI for this layer.
   if(currentPanelValue==1) {
@@ -602,7 +602,7 @@ function swapAlgorithmOnLayer(algName, layer) {
  
 
   // finish by recalculating/redrawing everything
-  drawTab(layer);
+  drawLayer(layer);
 
   // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
   if(currentPanelValue==1) {

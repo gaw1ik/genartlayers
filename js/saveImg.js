@@ -30,7 +30,7 @@ function combine(pageWidth,exportDPI) {
       canvases[i].width  = Math.ceil(artboardW); // HTML width
       canvases[i].height = Math.ceil(artboardH); // HTML height
 
-      drawTab(layer);
+      drawLayer(layer);
 
       var imageFromOneLayer = canvases[layerIndex];
 

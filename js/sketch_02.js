@@ -14,53 +14,13 @@ function onObjectPropertyInput() {
   // var propertyName = getPropertyNameFromInput("Property",this)
   // var calc = layer.object[propertyName].calc
 
-  drawTab(layer);
+  drawLayer(layer);
 
 }
 
 
-// function calcTab(layer) {
 
-//   // CALC FIRST
-//   // make a new random number generator
-//   if(layer.object.seed===undefined) {
-//     var seed = 1;
-//   } else {
-//     seed = layer.object.seed.value;
-//   }
-//   myrng = new Math.seedrandom(seed);
-//   // calculate
-//   layer.object = window["calc_" + layer.geometry]( layer.object );
-
-
-//   // DRAW SECOND
-//   // clear canvas
-//   // //console.log("layer.ctxIndex",layer.ctxIndex);
-//   CTX[layer.ctxIndex].clearRect(0, 0, artboardW, artboardH); 
-
-
-//   // //console.log("in calcTab, seed = ", layer.object.seed);
-//   // //console.log("in calcTab, myrng(1) = ",myrng(1));
-
-//   // draw on canvas
-//     // make a new random number generator
-//     if(layer.object.seed===undefined) {
-//       var seed = 1;
-//     } else {
-//       seed = layer.object.seed.value;
-//     }
-//     myrng = new Math.seedrandom(seed);
-//   window["draw_" + layer.geometry]( layer.object, CTX[layer.ctxIndex] );
-
-  
-
-// }
-
-
-
-
-
-function drawTab(layer) {
+function drawLayer(layer) {
 
   // if noDrawMode, don't draw anything and return immediately...
   if(noDrawMode == 1) {return;}
@@ -82,7 +42,7 @@ function drawTab(layer) {
   }
 
   myrng = new Math.seedrandom(seed);
-  // //console.log("in drawTab, myrng(1) = ",myrng(1));
+  // //console.log("in drawLayer, myrng(1) = ",myrng(1));
 
 
   // Build the array of param values to pass into the draw function.
@@ -97,9 +57,11 @@ function drawTab(layer) {
   var tab_button = tab_buttons[Layers.length-1-ctxIndex];
 
   try{
+    //console.warn("No error caught after executing drawFunction")
     window["draw_" + layer.geometry]( object );
     tab_button.style.textDecoration = "none";
   } catch(error) {
+    //console.warn("Caught Error after executing drawFunction")
     console.error(error)
     tab_button.style.textDecoration = "line-through";
   }
@@ -148,34 +110,35 @@ function updateObjectPropertyIndicator(input) {
 }
 
   
-function calcAll() {
+// function calcAll() {
 
-  for(let i=0; i<Layers.length; i++){
-    // key = Tabs_Keys[i];
+//   for(let i=0; i<Layers.length; i++){
+//     // key = Tabs_Keys[i];
 
-    // var layer =  Layers[Layers.length-1-i];
-    var layer =  Layers[i];
+//     // var layer =  Layers[Layers.length-1-i];
+//     var layer =  Layers[i];
 
-    if(layer.geometry=="") {
+//     if(layer.geometry=="") {
 
-      // do nothing
+//       // do nothing
 
-    } else {
+//     } else {
 
-      calcTab(layer)
+//       calcTab(layer)
 
-      // // make a new random number generator
-      // myrng = new Math.seedrandom(layer.object.seed);
+//       // // make a new random number generator
+//       // myrng = new Math.seedrandom(layer.object.seed);
 
-      // layer.object = window["calc_" + layer.geometry]( layer.object );
-    }
+//       // layer.object = window["calc_" + layer.geometry]( layer.object );
+//     }
 
     
-  }
+//   }
 
-}
+// }
 
 function drawAll() {
+
   for(let i=0; i<Layers.length; i++){
     // key = Tabs_Keys[i];
 
@@ -188,11 +151,9 @@ function drawAll() {
       // do nothing
     } else {
 
-      drawTab(layer)
+      drawLayer(layer);
 
     }
-
-    
 
   }
 
