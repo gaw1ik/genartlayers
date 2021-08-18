@@ -2,8 +2,8 @@
 // handles the window.onload tasks and also sets up event handlers
 
 // GLOBAL VARIABLES
-includedProjNames = ["default"];
-includedAlgNames = ["bg","example01"];
+includedProjNames = ["default","example4Martin"];
+includedAlgNames = ["bg","example01","arcs4Martin"];
 currentProjName = "default";
 noDrawMode = 0;
 ctxIndex = 0;
