@@ -142,17 +142,19 @@ Example: vary(100,15) will give a random value in the range 85-115; (returns a f
   ```javascript
 varyAbove(parameter, percent)
 ```
-Returns centerValue plus a randomly selected number in the range 0-maxAmount .
+Randomly varies a parameter by a range defined as the parameter's center value plus a percentage of that center value.
+
 
 ```javascript
 varyUnder(parameter, percent)
 ```
-Randomly varies a parameter by a range defined as the parameter's center value plus a percentage of that center value.
+Randomly varies a parameter by a range defined as the parameter's center value minus a percentage of that center value.
 
 ```javascript
 plusOrMinus(centerValue, maxAmount)
 ```
-Randomly varies a parameter by a range defined as the parameter's center value minus a percentage of that center value.
+Returns centerValue plus or minus a randomly selected number in the range 0-maxAmount.
+Example: plusOrMins(50,7) would return a value in the range 43-57;
 
   
 ```javascript
