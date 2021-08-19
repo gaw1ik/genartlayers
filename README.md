@@ -133,31 +133,32 @@ getRandomFloat(min, max)
 ```
 Gives a random float in the range defined by min and max. The range includes min and max.
 
-  ```javascript
- vary(centerValue, percentage)
- ```
- Randomly varies a parameter by a range defined as the parameter's center value plus or minus a percentage of that center value.
- Example: vary(100,15) will give a random value in the range 85-115; (returns a float).
- 
- ```javascript
- plusOrMinus(centerValue, maxAmount)
- ```
- Returns centerValue plus or minus a randomly selected number in the range 0-maxAmount .
- 
-   ```javascript
- varyAbove(parameter, percent)
+```javascript
+vary(centerValue, percentage)
 ```
- Returns centerValue plus a randomly selected number in the range 0-maxAmount .
+Randomly varies a parameter by a range defined as the parameter's center value plus or minus a percentage of that center value.
+Example: vary(100,15) will give a random value in the range 85-115; (returns a float).
+
+  ```javascript
+varyAbove(parameter, percent)
+```
+Returns centerValue plus a randomly selected number in the range 0-maxAmount .
 
 ```javascript
- varyUnder(parameter, percent)
+varyUnder(parameter, percent)
 ```
-  Returns centerValue minus a randomly selected number in the range 0-maxAmount .
+Randomly varies a parameter by a range defined as the parameter's center value plus a percentage of that center value.
+
+```javascript
+plusOrMinus(centerValue, maxAmount)
+```
+Randomly varies a parameter by a range defined as the parameter's center value minus a percentage of that center value.
+
   
- ```javascript
- randomSign() 
- ```
- Returns either 1 or -1 at random.
+```javascript
+randomSign() 
+```
+Returns either 1 or -1 at random.
  
 ```javascript
 chooseFromArray(array) 
