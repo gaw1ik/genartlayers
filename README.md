@@ -117,6 +117,65 @@ drawText(text, x, y, fontSize, hue, sat, lit)
 ```
 fontSize is in pixels (px). Might change to fractional units at some point.
 
+## Utility  functions:
+Below are the current set of utility functions in genartlayers. This includes many random number utilities as well as some useful conversion functions.
+## Random number utilitiy:
+
+```javascript
+getRandomInt(min, max)
+```
+Gives a random integer in the range defined by min and max. The range includes min and max.
+
+```javascript
+getRandomFloat(min, max) 
+```
+Gives a random float in the range defined by min and max. The range includes min and max.
+
+  ```javascript
+ vary(centerValue, percentage)
+ ```
+ Randomly varies a parameter by a range defined as the parameter's center value plus or minus a percentage of that center value.
+ Example: vary(100,15) will give a random value in the range 85-115; (returns a float).
+ 
+ ```javascript
+ plusOrMinus(centerValue, maxAmount)
+ ```
+ Returns centerValue plus or minus a randomly selected number in the range 0-maxAmount .
+ 
+   ```javascript
+ varyAbove(parameter, percent)
+```
+ Returns centerValue plus a randomly selected number in the range 0-maxAmount .
+
+```javascript
+ varyUnder(parameter, percent)
+```
+  Returns centerValue minus a randomly selected number in the range 0-maxAmount .
+  
+ ```javascript
+ randomSign() 
+ ```
+ Returns either 1 or -1 at random.
+ 
+```javascript
+chooseFromArray(array) 
+```
+Returns a randomly chosen value from an array.
+
+
+### Conversions:
+```javascript
+ deg2rad(thetaD)
+```
+Converts the value thetaD (which is assumed to be in degrees) to the equivalent value in radians.
+  
+  ```javascript
+ rad2deg(thetaR)
+ ```
+Converts the value thetaR (which is assumed to be in radians) to the equivalent value in degrees.
+ 
+ 
+ 
 ## Saving Algorithms and Projects
 After you make changes to your code, hit the SaveCode button to implement them. Make sure you give your code a unique name in the text field above the editors. The layer that the code is on should redraw immediately unless there's an error in your code. Pro-tip: open your browser's console (ctrl+shift+i) to debug while you code. The browser console is awesome, and it's where everyone debugs Javascript.
 
