@@ -119,7 +119,8 @@ fontSize is in pixels (px). Might change to fractional units at some point.
 
 ## Utility  functions:
 Below are the current set of utility functions in genartlayers. This includes many random number utilities as well as some useful conversion functions.
-## Random number utilitiy:
+## Random number utilities:
+*Note about random number utilities:* All random number utility functions use a global random number generator, which is seeded with the integer 1 unless the user specifies a seed parameter in the layer's parameters. Simply defining a parameter with the name "seed" will allow the user to reseed the random number generator, which (in my experience, at least) is an essential aspect of generative art. The same seed will always be able to reproduce the same sequence of random numbers, so artists will be able to recreate their work, even when it is based in randomization. It's important to understand that shifting the order of random utility functions in your algorithms or changing the number of random utility functions used will alter the sequence of random numbers.
 
 ```javascript
 getRandomInt(min, max)
@@ -163,7 +164,7 @@ chooseFromArray(array)
 Returns a randomly chosen value from an array.
 
 
-### Conversions:
+### Conversion utilities:
 ```javascript
  deg2rad(thetaD)
 ```
