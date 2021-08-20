@@ -116,7 +116,11 @@ startAngle and endAngle are in radians.
 ```javascript
 drawText(text, x, y, fontSize, hue, sat, lit)
 ```
-fontSize is in pixels (px). Might change to fractional units at some point.
+fontSize is in normalized units.
+```javascript
+drawTextPix(text, x, y, fontSizePix, hue, sat, lit)
+```
+fontSize is in pixels (px).
 
 ## Utility  functions:
 Below are the current set of utility functions in genartlayers. This includes many random number utilities as well as some useful conversion functions.
@@ -179,7 +183,18 @@ Converts the value thetaD (which is assumed to be in degrees) to the equivalent 
  ```
 Converts the value thetaR (which is assumed to be in radians) to the equivalent value in degrees.
  
- 
+ ```javascript
+normal2range(nValue,min,max)
+```
+Takes a normalized value and places it appropriately in a range bounded by min and max.
+
+Example: normal2range(0.6, 0, 100) will return the value 60.
+```javascript
+range2normal(rValue,min,max)
+ ```
+ Takes a range value and a range (bounded by min and max) and returns a normalized value.
+
+Example: range2normal(60, 0, 100) will return the value 0.6.
  
 ## Saving Algorithms and Projects
 After you make changes to your code, hit the SaveCode button to implement them. Make sure you give your code a unique name in the text field above the editors. The layer that the code is on should redraw immediately unless there's an error in your code. Pro-tip: open your browser's console (ctrl+shift+i) to debug while you code. The browser console is awesome, and it's where everyone debugs Javascript.
