@@ -7,8 +7,8 @@
 function getRandomInt(min, max) {
     return Math.floor(myrng() * (max - min + 1) + min);
 }
-function getRandomFloat(min, max, rng = myrng) {
-  return (rng() * (max - min) + min);
+function getRandomFloat(min, max) {
+  return (myrng() * (max - min) + min);
 }
 function chooseFromArray(array) {
   return array[Math.floor(myrng() * array.length)];
@@ -46,24 +46,24 @@ function plusOrMinus(centerValue, maxAmount) {
 
 
 /////////////////////// vary functions
-function vary(parameter,perc, rng02 = myrng) {
+function vary(parameter, perc) {
   var min = 1-perc/100;
   var max = 1+perc/100;
-  var newValue = parameter*getRandomFloat(min, max, rng=rng02);
+  var newValue = parameter*getRandomFloat(min, max);
   return newValue;
 }
 
-function varyAbove(parameter,perc, rng02 = myrng) {
+function varyAbove(parameter, perc) {
   var min = 1;
   var max = 1+perc/100;
-  var newValue = parameter*getRandomFloat(min, max, rng=rng02);
+  var newValue = parameter*getRandomFloat(min, max);
   return newValue;
 }
 
-function varyUnder(parameter,perc, rng02 = myrng) {
+function varyUnder(parameter, perc) {
   var min = 1-perc/100;
   var max = 1;
-  var newValue = parameter*getRandomFloat(min, max, rng=rng02);
+  var newValue = parameter*getRandomFloat(min, max);
   return newValue;
 }
 

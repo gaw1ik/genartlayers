@@ -254,7 +254,7 @@ function setUpProjectFromProjectFile(JSONdata) {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function loadProject() {
+function loadProject() { // HEY THIS ONLY LOOKS IN LOCAL STORAGE
 
   //console.log("**Load Project**");
 
