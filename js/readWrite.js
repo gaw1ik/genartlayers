@@ -253,6 +253,32 @@ function setUpProjectFromProjectFile(JSONdata) {
 
 
 
+
+
+
+
+function isProjIncluded(projName) {
+
+  var projIsIncluded = 0;
+
+  for(let i=0; i<includedProjNames.length; i++ ) {
+      var thisProjName = includedProjNames[i];
+
+      if( thisProjName==projName ) {
+          projIsIncluded = 1;
+      }
+  }
+
+  return projIsIncluded;
+}
+
+
+
+
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function loadProject() { // HEY THIS ONLY LOOKS IN LOCAL STORAGE
 
@@ -262,58 +288,80 @@ function loadProject() { // HEY THIS ONLY LOOKS IN LOCAL STORAGE
   /////////////////////////////////////////////// Bring in file info, and the then file data
   var fPathEntry = document.getElementById("fpath");
   var projName = fPathEntry.value;
-  var fpath = "PROJ_" + projName;
+  //var fpath = "PROJ_" + projName;
 
-  var rawData = localStorage.getItem(fpath);
+  var projIsIncluded = isProjIncluded(projName);
 
-  // if the project doesn't exist in local storage, alert the user and return immediately
-  if(rawData===null) {
+  var JSONdata = {};
 
-    console.warn("The project '" + projName + "' does not exist.");
-    alert(       "The project '" + projName + "' does not exist.");
-    // reset the projName input to the current one
-    fPathEntry.value = currentProjName;
-    return;
+  // if the algorithm is determined to be an included algorithm, fetch it from the server, otherwise get it out of local storage instead.
+  if(projIsIncluded==1) {
+
+    fetch("./" + "PROJ_" + projName + ".txt")
+    .then(response => {
+
+        return response.text();
+        
+    })
+    .then( data => {
+
+      JSONdata = JSON.parse( data ); 
+      //console.log(JSONdata);
+      setUpProjectFromProjectFile(JSONdata) ;
+      
+    });
+
+  } else {
+
+    var rawData = localStorage.getItem(fpath);
+
+    // if the project doesn't exist in local storage, alert the user and return immediately
+    if(rawData===null) {
+
+      console.warn("The project '" + projName + "' does not exist.");
+      alert(       "The project '" + projName + "' does not exist.");
+      // reset the projName input to the current one
+      fPathEntry.value = currentProjName;
+      return;
+
+    }
+
+    JSONdata = JSON.parse(rawData);
+
+    setUpProjectFromProjectFile(JSONdata) ;
+
 
   }
 
   currentProjName = projName;
 
-  var JSONdata = JSON.parse(rawData);
 
-  setUpProjectFromProjectFile(JSONdata) ;
-
-
-  // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array and then update recentSavedProjects to have the most reent 8.
-  var recentOpenedProjects = ApplicationData.recentOpenedProjects;
-  var yep = 1;
-  for(let i=0; i<recentOpenedProjects.length; i++){
-    if( fpath == recentOpenedProjects[i] ) {
-      yep = 0;
-    }
-  }
-  if( yep == 1 ) {
-    recentOpenedProjects.splice(0,0,fpath);
-  }
-  // most recent 8.
-  recentOpenedProjects = ApplicationData.recentOpenedProjects.slice(0,8); 
-  ApplicationData.recentOpenedProjects = recentOpenedProjects;
-  // save ApplicationData to local storage
-  let ApplicationDataJSON = JSON.stringify(ApplicationData);
-  localStorage.setItem("ApplicationData", ApplicationDataJSON);
+  // // Unless the project nameis already in the recentSavedProjects, put this project name onto the recentSavedProjects array and then update recentSavedProjects to have the most reent 8.
+  // var recentOpenedProjects = ApplicationData.recentOpenedProjects;
+  // var yep = 1;
+  // for(let i=0; i<recentOpenedProjects.length; i++){
+  //   if( fpath == recentOpenedProjects[i] ) {
+  //     yep = 0;
+  //   }
+  // }
+  // if( yep == 1 ) {
+  //   recentOpenedProjects.splice(0,0,fpath);
+  // }
+  // // most recent 8.
+  // recentOpenedProjects = ApplicationData.recentOpenedProjects.slice(0,8); 
+  // ApplicationData.recentOpenedProjects = recentOpenedProjects;
+  // // save ApplicationData to local storage
+  // let ApplicationDataJSON = JSON.stringify(ApplicationData);
+  // localStorage.setItem("ApplicationData", ApplicationDataJSON);
 
 
   
-  currentLayerIndex = Layers.length - 1;  // what was this even doing?
+  currentLayerIndex = Layers.length - 1;  // what was this even doing? (i believe it chooses the top layer in the newly opened project)
 
   handleResize();
 
   // open layer 0 tab
   document.getElementById("Tab97_Layer" + currentLayerIndex + "_Button").click();
-
-
-
-  
 
 }
 
