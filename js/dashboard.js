@@ -9,6 +9,8 @@ noDrawMode = 0;
 ctxIndex = 0;
 ctxToDrawToNow = 0;
 
+VERSION = "1.15g"
+
 window.onload = function () {
 
   //console.log("**Window Loaded**");
