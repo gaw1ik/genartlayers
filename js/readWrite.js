@@ -288,7 +288,7 @@ function loadProject() { // HEY THIS ONLY LOOKS IN LOCAL STORAGE
   /////////////////////////////////////////////// Bring in file info, and the then file data
   var fPathEntry = document.getElementById("fpath");
   var projName = fPathEntry.value;
-  //var fpath = "PROJ_" + projName;
+  var fpath = "PROJ_" + projName;
 
   var projIsIncluded = isProjIncluded(projName);
 
