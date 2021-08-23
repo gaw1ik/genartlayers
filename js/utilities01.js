@@ -7,7 +7,7 @@
 function getRandomInt(min, max) {
     return Math.floor(myrng() * (max - min + 1) + min);
 }
-function getRandomFloat(min, max) {
+function getRandomFloat(min=0, max=1) {
   return (myrng() * (max - min) + min);
 }
 function chooseFromArray(array) {
