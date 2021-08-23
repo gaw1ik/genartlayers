@@ -1,4 +1,6 @@
 ////////////////////////////////////////////////////////////////////
+
+//// i think this function is deprecated
 function onLayerGeomInput() {
 
   var layerIndex = getNamedIndexOfElement("Layer",this);
@@ -179,6 +181,8 @@ function makeGUICodePanel(layer) {
   // layerGeomInput.addEventListener("change", onLayerGeomInput);
 
   // loadCode();
+
+  CodeEditors[layerIndex].setOption( 'firstLineNumber', 2 + Object.keys(object).length );
 
 }
 

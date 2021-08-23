@@ -381,8 +381,6 @@ function assignAlgorithmToLayer(algName, layer) {
   // Update the object parameter values to be the default values
   var object = layer.object;
 
-  object.layerIndex = layerIndex;
-
   var keys = Object.keys(ControlsDict);
 
   // If the object isn't populated yet, that means user is loading an algorithm onto a blank layer. Go through and make a default version of the object based on the ControlsDict. (this is for when you load in a new algorithm mid-project).
@@ -423,7 +421,7 @@ function assignAlgorithmToLayer(algName, layer) {
 
           var className = ControlsDict[key].class;
 
-          if(className==="header") {
+          if(className==="text") {
             // do nothing
           } else{
 
@@ -454,7 +452,7 @@ function assignAlgorithmToLayer(algName, layer) {
         let objectKey = objectKeys[i];
 
         // if the objectKey doesn't exist in the ControlsDict then remove that key from the object...
-        if( ControlsDict[objectKey]===undefined && objectKey!="layerIndex") {
+        if( ControlsDict[objectKey]===undefined) {
 
           delete object[objectKey];
           console.warn("deleted the key '" + objectKey + "' from the object on layer " + layerIndex + " because that parameter was determined to be vestigial.")
@@ -572,9 +570,7 @@ function swapAlgorithmOnLayer(algName, layer) {
   // Empty out the existing layer object
   var object = {};
 
-  //object.layerIndex = layerIndex;
 
-  //console.log("object.layerIndex",object.layerIndex);
 
   
 

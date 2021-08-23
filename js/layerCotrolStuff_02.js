@@ -41,7 +41,6 @@ function addCodeEditor(layer) {
 
 
 
-
   
   // params_editor.name = "paramsEditor";
   // for code editor
@@ -164,6 +163,17 @@ function resetAllCanvasBlursToZero() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 function onAddLayerButtonClick(){
 
   if(Layers.length>7) {
@@ -213,10 +223,12 @@ function onAddLayerButtonClick(){
   // starting at the index of the newly created layer, move the text from each editor up one layer
   //console.log("newLayerIndex",newLayerIndex)
 
-  for(let i=Layers.length-1; i>newLayerIndex; i--) {
+  for(let i=Layers.length-1; i>newLayerIndex-1; i--) {
 
     var codeEditorText = CodeEditors[i-1].getValue();
     CodeEditors[i].setValue(codeEditorText);
+
+    //CodeEditors[i].setOption( 'firstLineNumber', 2 + Object.keys(Layers[i].object).length );
 
     var paramsEditorText = ParamsEditors[i-1].getValue();
     ParamsEditors[i].setValue(paramsEditorText);
@@ -251,6 +263,10 @@ function onAddLayerButtonClick(){
 
 
 function onDeleteLayerButtonClick(){
+
+  if(Layers.length==1) {
+    return;
+  }
 
 
     // clear the canvases on the layer that was just deleted and all above it.
@@ -405,6 +421,9 @@ function onMoveUpLayerButtonClick() {
   
     CodeEditors[currentLayerIndex+1].setValue(layerBelowCodeEditorValue);
     CodeEditors[currentLayerIndex  ].setValue(layerAboveCodeEditorValue);
+
+    //CodeEditors[currentLayerIndex+1].setOption( 'firstLineNumber', 2 + Object.keys(layerBelow.object).length );
+    //CodeEditors[currentLayerIndex  ].setOption( 'firstLineNumber', 2 + Object.keys(layerAbove.object).length );
   
     var layerBelowParamsEditorValue = ParamsEditors[currentLayerIndex  ].getValue();
     var layerAboveParamsEditorValue = ParamsEditors[currentLayerIndex+1].getValue();
@@ -450,8 +469,8 @@ function onMoveDownLayerButtonClick() {
   }
 
   // get the current layers as they are before the swap occurs.
-  var layerBelow = Layers[currentLayerIndex  ];
-  var layerAbove = Layers[currentLayerIndex-1];
+  var layerBelow = Layers[currentLayerIndex-1];
+  var layerAbove = Layers[currentLayerIndex  ];
 
 
   // if there are currently zero or one layers, just don't do anything when this button is pressed. Otherwise, swap the current layer with the layer above it.
@@ -462,8 +481,8 @@ function onMoveDownLayerButtonClick() {
   } else {
 
     // update the Layers object to reflect the change.
-    Layers[currentLayerIndex-1] = layerBelow;
-    Layers[currentLayerIndex  ] = layerAbove;
+    Layers[currentLayerIndex-1] = layerAbove;
+    Layers[currentLayerIndex  ] = layerBelow;
 
 
     // handle the swapping for the editors.
@@ -472,6 +491,9 @@ function onMoveDownLayerButtonClick() {
   
     CodeEditors[currentLayerIndex  ].setValue(layerBelowCodeEditorValue);
     CodeEditors[currentLayerIndex-1].setValue(layerAboveCodeEditorValue);
+
+    //CodeEditors[currentLayerIndex  ].setOption( 'firstLineNumber', 2 + Object.keys(layerBelow.object).length );
+    //CodeEditors[currentLayerIndex-1].setOption( 'firstLineNumber', 2 + Object.keys(layerAbove.object).length );
   
     var layerBelowParamsEditorValue = ParamsEditors[currentLayerIndex-1].getValue();
     var layerAboveParamsEditorValue = ParamsEditors[currentLayerIndex  ].getValue();
