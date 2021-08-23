@@ -377,9 +377,15 @@ function onAddToEndLayerButtonClick() {
 
 function onMoveUpLayerButtonClick() {
 
+  if( currentLayerIndex==Layers.length-1 ){
+    return;
+  }
+
   // get the current layers as they are before the swap occurs.
   var layerBelow = Layers[currentLayerIndex  ];
   var layerAbove = Layers[currentLayerIndex+1];
+
+
 
 
   // if there are currently zero or one layers, just don't do anything when this button is pressed. Otherwise, swap the current layer with the layer above it.
@@ -438,6 +444,10 @@ function onMoveUpLayerButtonClick() {
 
 
 function onMoveDownLayerButtonClick() {
+
+  if( currentLayerIndex==0 ){
+    return;
+  }
 
   // get the current layers as they are before the swap occurs.
   var layerBelow = Layers[currentLayerIndex  ];
