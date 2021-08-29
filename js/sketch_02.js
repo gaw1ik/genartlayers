@@ -22,6 +22,12 @@ function onObjectPropertyInput() {
 
 function drawLayer(layer) {
 
+  xCenterOffset = 1/artboardAR * doc1.xOrigin.value;
+  yCenterOffset = doc1.yOrigin.value;
+
+  //xCenterOffset = 0;
+  //yCenterOffset = 0;
+
   // if noDrawMode, don't draw anything and return immediately...
   if(noDrawMode == 1) {return;}
 

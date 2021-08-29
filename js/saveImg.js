@@ -130,6 +130,28 @@ function exportImg(pageWidth,exportDPI) {
 }
 
 
+function exportImg4Desktop() {
+
+  var pixHeight = 750;
+  var pixWidth = pixHeight / artboardAR;
+
+  canvas4Export.width  = pixWidth;
+  canvas4Export.height = pixHeight;
+
+  artboardW = canvas4Export.width;
+  artboardH = canvas4Export.height;
+
+  combine(pixWidth/150, 150);
+
+  var link = document.getElementById('save_img_link');
+  link.setAttribute('download', 'render.png');
+  link.setAttribute('href', canvas4Export.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  link.click();
+
+  handleResize();
+  
+}
+
 
 
 

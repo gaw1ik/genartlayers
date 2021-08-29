@@ -1,28 +1,3 @@
-// function drawRect(ctx, x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alpha=255, fillMode=0) {
-
-//     var x = x*artboardW;
-//     var y = y*artboardH;
-//     var width = width * artboardW;
-//     var height = height * artboardH;
-
-//     var alpha = alpha/255;
-
-//     ctx.beginPath();
-
-//     ctx.rect(x,y,width,height);
-
-//     if(fillMode==0) {
-//         ctx.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-//         ctx.fill();
-//     } else {
-//         ctx.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-//         ctx.lineWidth = lineWidth*artboardH;
-//         ctx.stroke()
-//     }
-    
-// }
-
-
 function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alpha=255, fillMode=0) {
 
     //let layerIndex = layer.ctxIndex;
@@ -32,10 +7,13 @@ function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alp
     //var thisCtx = CTX[ctxIndex];
     
 
-    var x = x*artboardW;
-    var y = y*artboardH;
-    var width = width * artboardW;
+    var x = (x+xCenterOffset  ) * artboardH;
+    var y = (1-y-yCenterOffset) * artboardH;
+
+    var width  = width  * artboardH;
     var height = height * artboardH;
+
+    y = 1-y;
 
     var alpha = alpha/255;
 
@@ -56,35 +34,56 @@ function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alp
     
 }
 
-// function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alpha=255, fillMode=0) {
+function drawRectSimple(x=0.3, y=0.3, width=0.3, height=0.4) {
 
-//     //let layerIndex = layer.ctxIndex;
+    var x = (x+xCenterOffset  ) * artboardH;
+    var y = (1-y-yCenterOffset) * artboardH;
 
-//     // console.log("ctxIndex",ctxIndex);
+    var width  = width  * artboardH;
+    var height = height * artboardH;
 
-//     var thisCtx = CTX[ctxIndex];
-    
+    var alpha = 1;
 
-//     var x = x*artboardW;
-//     var y = y*artboardH;
-//     var width = width * artboardW;
-//     var height = height * artboardH;
+    ctxToDrawToNow.beginPath();
 
-//     var alpha = alpha/255;
+    ctxToDrawToNow.rect(x,y,width,height);
 
-//     thisCtx.beginPath();
+    ctxToDrawToNow.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
+    ctxToDrawToNow.fill();
 
-//     thisCtx.rect(x,y,width,height);
-
-
-//     if(fillMode==0) {
-//         thisCtx.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-//         thisCtx.fill();
-//     } else {
-//         thisCtx.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
-//         thisCtx.lineWidth = lineWidth*artboardH;
-//         thisCtx.stroke()
-//     }
 
     
-// }
+}
+
+
+
+
+
+function drawCenterRect(x, y, w, h, lineWidth=0.005, hue=0, sat=0, lit=0, alpha=255, fillMode=0) {
+
+    var x = (x + xCenterOffset) * artboardH;
+    var y = (1-y-yCenterOffset) * artboardH;
+
+    var width  = w * artboardH;
+    var height = h * artboardH;
+
+    var alpha = alpha/255;
+
+    ctxToDrawToNow.beginPath();
+
+    ctxToDrawToNow.rect(x-width/2, y-height/2, width, height);
+
+    //console.log(x-width/2,y-height/2,width,height);
+
+
+    if(fillMode==0) {
+        ctxToDrawToNow.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
+        ctxToDrawToNow.fill();
+    } else {
+        ctxToDrawToNow.strokeStyle = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
+        ctxToDrawToNow.lineWidth = lineWidth*artboardH;
+        ctxToDrawToNow.stroke()
+    }
+
+    
+}

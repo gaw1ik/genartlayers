@@ -170,40 +170,46 @@ readJsonButton.addEventListener("click", loadProject );
 function setUpProjectFromProjectFile(JSONdata) {
 
   Layers = JSONdata.Layers;
-  doc1 = JSONdata.doc1;
+  var projectDoc1 = JSONdata.doc1;
 
   //////////////////////////////////////////////// Bring in the Doc object
-  var newDoc = docDict();
+  var defaultDoc1 = docDict();
 
   // doc1 = parsedData.doc1;
-  var keys = Object.keys(doc1);
+  var keys = Object.keys(defaultDoc1);
 
   // document object
   for (let i = 0; i < keys.length; i++) {
 
-    var parameter = keys[i]
+    var parameterName = keys[i]
 
-    if(newDoc[parameter]==null){
+    if(projectDoc1[parameterName]===undefined){
+      projectDoc1[parameterName] = {};
+      projectDoc1[parameterName].value = defaultDoc1[parameterName].default;
       // console.warn("the parameter ",parameter, "was not found in the prototype object for newDoc");
     } else {
-      parameter = keys[i];
-      newDoc[parameter].value = doc1[parameter].value;
+      projectDoc1[parameterName].value = projectDoc1[parameterName].value;
     }
 
-  }
-
-  doc1 = newDoc;
-
-  var keys = Object.keys(doc1);
-  for (let i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    var inputID = "doc_" + "Property" + key + "_Input";
-    // //console.log("key",key)
+    var inputID = "doc_" + "Property" + parameterName + "_Input";
     var element = document.getElementById(inputID);
-    element.value = doc1[key].value;
+    element.value = projectDoc1[parameterName].value;
     updateObjectPropertyIndicator(element);
 
   }
+
+  // console.log("projectDoc1['xOrigin'].value", projectDoc1["xOrigin"].value);
+
+  doc1 = projectDoc1;
+
+  // var keys = Object.keys(doc1);
+  // for (let i = 0; i < keys.length; i++) {
+  //   var key = keys[i];
+    
+  //   // //console.log("key",key)
+
+
+  // }
   /////////////////////////////////////////////////////////////////////////
 
 
@@ -374,10 +380,10 @@ function loadDefaultProject() {
   //console.log("**Load Default Project**");
   
 
-  document.getElementById("fpath").value = "default";
+  document.getElementById("fpath").value = "example01";
 
   // get the default project JSON file from the server
-  fetch("./PROJ_default.json")
+  fetch("./PROJ_example01.txt")
   .then(response => {
     return response.json();
   })

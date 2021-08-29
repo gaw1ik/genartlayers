@@ -5,8 +5,11 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode) {
 
     //var thisCtx = CTX[ctxIndex];
 
-    var x = x*artboardW;
-    var y = y*artboardH;
+    
+
+    var x = (x+xCenterOffset)*artboardH;
+    var y = (1-y-yCenterOffset)*artboardH;
+    
     var rad = rad * artboardH;
 
     var alpha = alpha/255;
@@ -31,6 +34,26 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode) {
         ctxToDrawToNow.lineWidth = lineWidth * artboardH;
         ctxToDrawToNow.stroke()
     }
+    
+}
+
+
+
+function drawCircleSimple(x=0.5, y=0.5, rad=0.3) {
+
+    var x = (x+xCenterOffset)*artboardH;
+    var y = y*artboardH;
+    var rad = rad * artboardH;
+
+    var alpha = 1;
+
+    ctxToDrawToNow.beginPath();
+
+    ctxToDrawToNow.ellipse(x,y,rad,rad,0,0,twoPI);
+
+    ctxToDrawToNow.fillStyle   = 'hsla(' + 0 + ', ' +  10 + '%, ' + 10 + '%,'  + alpha + ')'; 
+    ctxToDrawToNow.fill();
+
     
 }
 

@@ -5,7 +5,7 @@ function drawEllipse(x, y, radX, radY, rotation, lineWidth, hue, sat, lit, alpha
 
     //var thisCtx = CTX[ctxIndex];
 
-    var x = x*artboardW;
+    var x = x*artboardH  + xCenterOffset;
     var y = y*artboardH;
     var radX = radX * artboardH;
     var radY = radY * artboardH;

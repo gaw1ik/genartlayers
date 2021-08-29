@@ -8,8 +8,8 @@ function handleResize() {
 
   var scale = 2;
 
-  var picW = doc1.pageWidth.value;
-  var picH = doc1.pageHeight.value;
+  picW = doc1.pageWidth.value;
+  picH = doc1.pageHeight.value;
 
   // var dpi = doc1.pageDPI.value;
 
@@ -199,6 +199,8 @@ function handleResize() {
   artboardW = canvas0.width;
   artboardH = canvas0.height;
 
+  artboardAR = artBoardAspectRatio;
+
   // draw_wall();
 
   // calcAll();
@@ -220,7 +222,13 @@ function handleResize() {
 
   // var lineWidth = doc1.frameThickness.value;; // inches
   // drawFrame(artboardHeightRatio, lineWidth, yOffset, ctx4Frame);
+
+
+  drawCoordSystem();
+
 }
+
+
 
 
 

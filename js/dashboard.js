@@ -2,26 +2,44 @@
 // handles the window.onload tasks and also sets up event handlers
 
 // GLOBAL VARIABLES
-includedProjNames = ["default","example4Martin"];
-includedAlgNames = ["bg","example01","arcs4Martin"];
+includedProjNames = ["default","example4Martin","example01"];
+includedAlgNames = ["bg","example01","arcs4Martin","arcsA"];
 currentProjName = "default";
 noDrawMode = 0;
 ctxIndex = 0;
 ctxToDrawToNow = 0;
 
+xCenterOffset = 0.5;
+yCenterOffset = 0.5;
+
+//xOrigin = 0.5;
+//yOrigin = 0.5;
+
+axesOn = 1;
+gridOn = 1;
+
 VERSION = "1.15g"
+
+  // useful constants
+  deg2rad = Math.PI/180;
+  twoPI = Math.PI * 2;
+  PI = Math.PI;
+
+  PIo2 = Math.PI/2;
+  PIo4 = Math.PI/4;
+  PIo8 = Math.PI/8;
+  PIo16 = Math.PI/16;
+  PIo32 = Math.PI/32;
+  PIo64 = Math.PI/64;
+
+
+
 
 window.onload = function () {
 
   //console.log("**Window Loaded**");
 
-  // useful constants
-  deg2rad = Math.PI/180;
-  twoPI = Math.PI * 2;
 
-  PIo16 = Math.PI/16;
-  PIo32 = Math.PI/32;
-  PIo64 = Math.PI/64;
 
 
   // make the BIG OL' array of code_editors, CodeEditors.
@@ -116,7 +134,7 @@ window.onload = function () {
 
 
 
-    
+    doc1[key].value = doc1[key].default;
     input.id = inputID
     input.value = doc1[key].value;
     input.min   = doc1[key].min;
@@ -144,6 +162,10 @@ window.onload = function () {
   canvas_5 = document.getElementById("canvas5");
   canvas_6 = document.getElementById("canvas6");
   canvas_7 = document.getElementById("canvas7");
+  canvas_8 = document.getElementById("canvas8");
+
+  
+
   canvas4Export = document.getElementById("canvas4Export");
   canvas4Wall = document.getElementById("canvas4Wall");
   canvas4WallShadow = document.getElementById("canvas4WallShadow");
@@ -151,13 +173,16 @@ window.onload = function () {
   canvas4Frame = document.getElementById("canvas4Frame");
 
   // canvases array
-  canvases = [canvas_0, canvas_1, canvas_2, canvas_3, canvas_4, canvas_5, canvas_6, canvas_7];
+  canvases = [canvas_0, canvas_1, canvas_2, canvas_3, canvas_4, canvas_5, canvas_6, canvas_7, canvas_8];
 
   // get ctx variables from each canvas
   CTX = [];
   for (i = 0; i < canvases.length; i++) {
     CTX[i] = canvases[i].getContext("2d");
   }
+
+
+
 
   ctx4Export = canvas4Export.getContext("2d");
   ctx4WallShadow = canvas4WallShadow.getContext("2d");

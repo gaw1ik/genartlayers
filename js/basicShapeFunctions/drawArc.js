@@ -5,8 +5,8 @@ function drawArc(x, y, radX, radY, rotation, startAngle, endAngle, lineWidth, hu
 
     //var thisCtx = CTX[ctxIndex];
 
-    var x = x * artboardW;
-    var y = y * artboardH;
+    var x = (x+xCenterOffset  ) * artboardH;
+    var y = (1-y-yCenterOffset) * artboardH;
     var radX = radX * artboardH;
     var radY = radY * artboardH;
 

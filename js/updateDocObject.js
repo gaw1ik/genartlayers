@@ -8,7 +8,15 @@ function updateDocObject() {
 
   updateObjectPropertyIndicator(this);
 
-  if (propertyName == "setTheme") {
+  if (propertyName == "xOrigin" || propertyName == "yOrigin") {
+    //console.log("xOrigin or yOrigin inputted");
+    xOrigin = doc1.xOrigin.value;
+    yOrigin = doc1.yOrigin.value;
+    drawCoordSystem();
+    handleResize();
+  }
+
+  else if (propertyName == "setTheme") {
     // //console.log("1");
     setTheme();
   }

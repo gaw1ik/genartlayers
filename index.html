@@ -67,7 +67,19 @@
       <div class="app-container">
 
         <!-- DRAWING -->
-        <div class="app-container-item">
+        <div class="app_left_side_container">
+
+          <div id="drawing_container_tool_bar">
+
+            <button class="drawing_container_tool_bar_button" id="axesOn_Button">
+              <img src="icons/icon - axesOn.svg" width=20 height=20>
+            </button>
+
+            <button class="drawing_container_tool_bar_button" id="gridOn_Button">
+              <img src="icons/icon - gridOn.svg" width=20 height=20>
+            </button>
+
+          </div>
 
           <!-- THE CANVASES -->
           <div id="drawing-container">
@@ -85,6 +97,7 @@
             <canvas class="myCanvas" id="canvas5"></canvas>
             <canvas class="myCanvas" id="canvas6"></canvas>
             <canvas class="myCanvas" id="canvas7"></canvas>
+            <canvas class="myCanvas" id="canvas8"></canvas>
 
             <canvas class="myCanvas" id="canvas4Frame"></canvas>  
             <canvas class="myCanvas" id="canvas4WallShot"></canvas>           
@@ -276,7 +289,7 @@
                     <!-- <input type="range" class="controls_code_toggle" min="0" max="1" step:="1" value="0" id="ControlsCodeToggle"></input> -->
 
                     <!-- <button type="button" class="reseed" id="eval_code_button">Eval</button>   -->
-                    <button type="button" class="save_code_button" id="save_code_button">SaveCode</button>  
+                    <button type="button" class="save_code_button" id="save_code_button">SaveAlg</button>  
                     
                     <!-- <input type="text" id="load_code_name_input"></input>  -->
                   </div>
@@ -361,6 +374,10 @@
     <script src="js/bringInUserAlgs.js"></script>
     <!-- <script src="js/bringInIncludedAlgs.js"></script> -->
     <script src="js/bringInIncludedAlgs_02.js"></script>
+    <script src="js/drawAxes.js"></script>
+    <script src="js/drawGrid.js"></script>
+    <script src="js/drawing_container_tool_bar_stuff.js"></script>
+
 
 
     <!-- Doc -->

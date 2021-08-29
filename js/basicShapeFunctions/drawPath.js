@@ -5,14 +5,18 @@ function drawPath(path, lineWidth, hue, sat, lit, fillMode, close) {
 
     ctxToDrawToNow.beginPath()
 
-    x = path[0][0]*artboardH + (artboardW-artboardH)/2
-    y = path[0][1]*artboardH
+    //var x = (x+xCenterOffset)*artboardH;
+    //var y = (y+yCenterOffset)*artboardH;
+
+    var x = (path[0][0]+xCenterOffset)*artboardH;
+    var y = (1-path[0][1]-yCenterOffset)*artboardH;
+
     ctxToDrawToNow.moveTo(x,y)   
 
     for(let i=1; i<path.length; i++) {
         
-        x = path[i][0]*artboardH  + (artboardW-artboardH)/2
-        y = path[i][1]*artboardH
+        x = (path[i][0]+xCenterOffset)*artboardH;
+        y = (1-path[i][1]-yCenterOffset)*artboardH;
         ctxToDrawToNow.lineTo(x,y)
         // //console.log("[x,y]",[x,y])
     }

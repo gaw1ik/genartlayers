@@ -15,7 +15,7 @@ function drawBezierPath(bezierPath,xOffset,yOffset,lineWidth,hue,sat,lit,fillMod
     ctx.beginPath();
 
     let i = 0;
-    x1  = bezierPath[i][0][0]* + xOffset*artboardW
+    x1  = bezierPath[i][0][0]* + xOffset*artboardH  + xCenterOffset
     y1  = bezierPath[i][0][1]* + yOffset*
 
     ctx.moveTo(x1,y1);
@@ -24,11 +24,11 @@ function drawBezierPath(bezierPath,xOffset,yOffset,lineWidth,hue,sat,lit,fillMod
 
         // x1  = bezierPath[i][0][0]* + xOffset*artboardW
         // y1  = bezierPath[i][0][1]* + yOffset*
-        xc1 = bezierPath[i][1][0]* + xOffset*artboardW;
+        xc1 = bezierPath[i][1][0]* + xOffset*artboardH  + xCenterOffset;
         yc1 = bezierPath[i][1][1]* + yOffset*artboardH;
-        xc2 = bezierPath[i][2][0]* + xOffset*artboardW;
+        xc2 = bezierPath[i][2][0]* + xOffset*artboardH  + xCenterOffset;
         yc2 = bezierPath[i][2][1]* + yOffset*artboardH;
-        x2  = bezierPath[i][3][0]* + xOffset*artboardW;
+        x2  = bezierPath[i][3][0]* + xOffset*artboardH  + xCenterOffset;
         y2  = bezierPath[i][3][1]* + yOffset*artboardH;
 
         ctx.bezierCurveTo( xc1,yc1, xc2,yc2, x2,y2 );
