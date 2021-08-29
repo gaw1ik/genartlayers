@@ -128,7 +128,7 @@
     "Layers": [
         {
             "ctxIndex": 0,
-            "geometry": "bgA",
+            "geometry": "bg",
             "object": {
                 "hue": {
                     "value": 90
