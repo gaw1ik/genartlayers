@@ -7,8 +7,8 @@ function drawCircle(x, y, rad, lineWidth, hue, sat, lit, alpha, fillMode) {
 
     
 
-    var x = (x+xCenterOffset)*artboardH;
-    var y = (1-y-yCenterOffset)*artboardH;
+    var x = (x+xCenterOffset  ) * artboardH;
+    var y = (1-y-yCenterOffset) * artboardH;
     
     var rad = rad * artboardH;
 
