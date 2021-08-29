@@ -107,6 +107,8 @@ rotation is in radians.
 drawPath(path, lineWidth, hue, saturation, lightness, fillMode, close)
 ```
 close is a 0 or 1 value, 1 being close and 0 being do not close.
+
+path is of the form [ [x1,y1], [x2,y2], ... , [xN,yN] ]
 ### Arc
 ```javascript
 drawArc(x, y, radX, radY, rotation, startAngle, endAngle, lineWidth, hue, sat, lit, alpha, fillMode) 
