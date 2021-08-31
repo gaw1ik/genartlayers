@@ -77,6 +77,19 @@ function drawLayer(layer) {
 
 
 
+function blurCanvas(blur) {
+
+  var blurPX = (blur*artboardH);
+
+  var image = canvases[ctxIndex];
+  
+  CTX[ctxIndex].drawImage(image, 0, 0, artboardW, artboardH);
+  
+  CTX[ctxIndex].filter = "blur(" + blurPX.toString() + 'px)';
+
+}
+
+
 
 
 

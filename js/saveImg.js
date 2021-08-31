@@ -125,7 +125,7 @@ function exportImg(pageWidth,exportDPI) {
   link.setAttribute('href', canvas4Export.toDataURL("image/png").replace("image/png", "image/octet-stream"));
   link.click();
 
-  handleResize();
+  //handleResize();
   
 }
 
@@ -533,10 +533,6 @@ function exportIGWallShot(versionNumber) {
   resHeight = 1080;
 
   combineOntoWall(wallWidth,wallHeight,wallHue,wallSat,wallLit,artboardHeightRatio,resWidth,resHeight,yOffset);
-
-  var fileDirectory = 'C:/Users/Brian/OneDrive/Documents/Gen Art/Renders/';
-
-  var fileExtension = ' - ig wall render - ' + versionNumber;
 
   saveAsPNG(canvas4WallShot, fileDirectory, fileExtension);
 

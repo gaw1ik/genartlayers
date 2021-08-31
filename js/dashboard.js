@@ -1,6 +1,9 @@
 // this is more-or-less my main function, but it's currently a little dirty (probably)
 // handles the window.onload tasks and also sets up event handlers
 
+
+VERSION = "1.16d"
+
 // GLOBAL VARIABLES
 includedProjNames = ["default","example4Martin","example01"];
 includedAlgNames = ["bg","example01","arcs4Martin","arcsA"];
@@ -15,22 +18,20 @@ yCenterOffset = 0.5;
 //xOrigin = 0.5;
 //yOrigin = 0.5;
 
-axesOn = 1;
-gridOn = 1;
+axesOn = -1;
+gridOn = -1;
 
-VERSION = "1.15g"
 
-  // useful constants
-  deg2rad = Math.PI/180;
-  twoPI = Math.PI * 2;
-  PI = Math.PI;
-
-  PIo2 = Math.PI/2;
-  PIo4 = Math.PI/4;
-  PIo8 = Math.PI/8;
-  PIo16 = Math.PI/16;
-  PIo32 = Math.PI/32;
-  PIo64 = Math.PI/64;
+// useful constants
+//deg2rad = Math.PI/180;
+twoPI = Math.PI * 2;
+PI = Math.PI;
+PIo2 = Math.PI/2;
+PIo4 = Math.PI/4;
+PIo8 = Math.PI/8;
+PIo16 = Math.PI/16;
+PIo32 = Math.PI/32;
+PIo64 = Math.PI/64;
 
 
 

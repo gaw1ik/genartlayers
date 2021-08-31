@@ -1,6 +1,40 @@
 // a function handling window resize events
 // this function is also triggered at other times, like when a project is opened
 
+
+
+
+function sizeThisCanvas(canvas, width, height, scale) {
+  // Wall Canvas Sizing
+  canvas.style.height = height.toString() + "px";
+  canvas.style.width = width.toString() + "px";
+
+  // var canvas_Left = (drawCont_width  - canvas4Wall_width ) / 2;
+  // var canvas_Top  = (drawCont_height - canvas4Wall_height) / 2;
+  var canvas_Left = 0;
+  var canvas_Top  = 0;
+
+  canvas.style.left = canvas_Left.toString() + "px";
+  canvas.style.top  =  canvas_Top.toString() + "px";
+
+  canvas.height = height * dpr * scale; // HTML
+  canvas.width  = width  * dpr * scale; // HTML
+}
+
+function sizeThisLayerCanvas(thisCanvas, canvasLeft, canvasTop, canvas_style_width, canvas_style_height, scale) {
+  thisCanvas.style.width   = canvas_style_width.toString() + "px";
+  thisCanvas.style.height = canvas_style_height.toString() + "px";
+
+  thisCanvas.style.left = canvasLeft.toString() + "px";
+  thisCanvas.style.top   = canvasTop.toString() + "px";
+
+  thisCanvas.width  = Math.ceil(canvas_style_width  * dpr * scale); // HTML
+  thisCanvas.height = Math.ceil(canvas_style_height * dpr * scale); // HTML
+}
+
+
+
+
 function handleResize() {
   //console.log("**Resize**");
 
@@ -79,121 +113,27 @@ function handleResize() {
   // set the offset position to center it
   var canvasLeft = (drawCont_width - canvas_style_width) / 2;
   var canvasTop = (drawCont_height - canvas_style_height) / 2 - yOffset*canvas4Wall_height;
-  // var canvasTop = 0;
-
-  // set HTML Width/Height of canvases
-  // var scale = (dpi * picW) / canvas_style_width;
-  // var scale = 6;
-
-  // //console.log("scale",scale)
-
-
-    // Wall Canvas Sizing
-    canvas4Wall.style.height = canvas4Wall_height.toString() + "px";
-    canvas4Wall.style.width = canvas4Wall_width.toString() + "px";
-    // canvas4Wall.style.height = drawCont_height.toString() + "px";
-    var canvas4Wall_Left = (drawCont_width  - canvas4Wall_width ) / 2;
-    var canvas4Wall_Top  = (drawCont_height - canvas4Wall_height) / 2;
-    // //console.log("canvas4Wall_Left",canvas4Wall_Left)
-    canvas4Wall.style.left = canvas4Wall_Left.toString() + "px";
-    canvas4Wall.style.top  =  canvas4Wall_Top.toString() + "px";
-  
-    canvas4Wall.height = canvas4Wall_height * dpr * scale; // HTML
-    canvas4Wall.width  = canvas4Wall_width  * dpr * scale; // HTML
 
 
 
-    // Wall Shadow Canvas Sizing
-    canvas4WallShadow.style.height = canvas4Wall_height.toString() + "px";
-    canvas4WallShadow.style.width  = canvas4Wall_width.toString() + "px";
-    // canvas4Wall.style.height = drawCont_height.toString() + "px";
-    var canvas4WallShadow_Left = (drawCont_width  - canvas4Wall_width) / 2;
-    var canvas4Wall_Top        = (drawCont_height - canvas4Wall_height) / 2;
-    // //console.log("canvas4Wall_Left",canvas4Wall_Left)
-    canvas4WallShadow.style.left = canvas4WallShadow_Left.toString() + "px";
-    canvas4WallShadow.style.top  = canvas4Wall_Top.toString() + "px";
-  
-    
-    canvas4WallShadow.height = canvas4Wall_height * dpr * scale; // HTML
-    canvas4WallShadow.width  = canvas4Wall_width  * dpr * scale; // HTML
+  // resize all the named canvases
+  sizeThisCanvas(canvas4Wall, canvas4Wall_width, canvas4Wall_height, scale);
+  sizeThisCanvas(canvas4WallShadow, canvas4Wall_width, canvas4Wall_height, scale);
+  sizeThisCanvas(canvas4WallShot, canvas4Wall_width, canvas4Wall_height, scale);
+  sizeThisCanvas(canvas4Frame, canvas4Wall_width, canvas4Wall_height, scale);
 
 
-
-    // Wall Shot Canvas Sizing
-    canvas4WallShot.style.height = canvas4Wall_height.toString() + "px";
-    canvas4WallShot.style.width = canvas4Wall_width.toString() + "px";
-    // canvas4Wall.style.height = drawCont_height.toString() + "px";
-    var canvas4WallShot_Left = (drawCont_width  - canvas4Wall_width ) / 2;
-    var canvas4WallShot_Top  = (drawCont_height - canvas4Wall_height) / 2;
-    // //console.log("canvas4Wall_Left",canvas4Wall_Left)
-    canvas4WallShot.style.left = canvas4WallShot_Left.toString() + "px";
-    canvas4WallShot.style.top  =  canvas4WallShot_Top.toString() + "px";
-  
-    canvas4WallShot.height = canvas4Wall_height * dpr * scale; // HTML
-    canvas4WallShot.width  = canvas4Wall_width  * dpr * scale; // HTML
-
-
-
-    // Frame Canvas Sizing
-    canvas4Frame.style.height = canvas4Wall_height.toString() + "px";
-    canvas4Frame.style.width = canvas4Wall_width.toString() + "px";
-    // canvas4Wall.style.height = drawCont_height.toString() + "px";
-    var canvas4Frame_Left = (drawCont_width  - canvas4Wall_width ) / 2;
-    var canvas4Frame_Top  = (drawCont_height - canvas4Wall_height) / 2;
-    // //console.log("canvas4Wall_Left",canvas4Wall_Left)
-    canvas4Frame.style.left = canvas4Frame_Left.toString() + "px";
-    canvas4Frame.style.top  =  canvas4Frame_Top.toString() + "px";
-  
-    canvas4Frame.height = canvas4Wall_height * dpr * scale; // HTML
-    canvas4Frame.width  = canvas4Wall_width  * dpr * scale; // HTML
-
-
-
-
-    
   // for all of the layer canvases
   for (let i = 0; i < canvases.length; i++) {
     var thisCanvas = canvases[i];
 
-    thisCanvas.style.width = canvas_style_width.toString() + "px";
-    thisCanvas.style.height = canvas_style_height.toString() + "px";
-
-    thisCanvas.style.left = canvasLeft.toString() + "px";
-    thisCanvas.style.top = canvasTop.toString() + "px";
-
-    thisCanvas.width = Math.ceil(canvas_style_width * dpr * scale); // HTML
-    thisCanvas.height = Math.ceil(canvas_style_height * dpr * scale); // HTML
-
-    // thisCanvas.width = Math.ceil(canvas_style_width * dpr); // HTML
-    // thisCanvas.height = Math.ceil(canvas_style_height * dpr); // HTML
+    sizeThisLayerCanvas(thisCanvas, canvasLeft, canvasTop, canvas_style_width, canvas_style_height, scale)
 
   }
 
   // set HTML Width/Height of canvas4Export
-  canvas4Export.style.width = canvas_style_width.toString() + "px";
-  canvas4Export.style.height = canvas_style_height.toString() + "px";
+  sizeThisLayerCanvas(canvas4Export, canvasLeft, canvasTop, canvas_style_width, canvas_style_height, scale)
 
-  canvas4Export.style.left = canvasLeft.toString() + "px";
-  canvas4Export.style.top = canvasTop.toString() + "px";
-
-  canvas4Export.width = Math.ceil(canvas_style_width * dpr * scale); // HTML
-  canvas4Export.height = Math.ceil(canvas_style_height * dpr * scale); // HTML
-
-  // canvas4Export.width = Math.ceil(canvas_style_width * dpr); // HTML
-  // canvas4Export.height = Math.ceil(canvas_style_height * dpr); // HTML
-
-  // //console.log("canvas4Export.width",canvas4Export.width)
-
-
-
-
-
-
-  // // CSS height
-  // inputContainer.style.height =  drawCont_height.toString() + 'px';
-
-  // artboardW = canvas4Export.width;
-  // artboardH = canvas4Export.height;
 
   // Update the global artboardW and artboardH variables (width and height for calc and draw functions)
   artboardW = canvas0.width;
@@ -201,9 +141,6 @@ function handleResize() {
 
   artboardAR = artBoardAspectRatio;
 
-  // draw_wall();
-
-  // calcAll();
   drawAll();
 
   var wallHue = doc1.wallHue.value;
@@ -217,12 +154,7 @@ function handleResize() {
   var wallShadowBlur    = doc1.wallShadowBlur   .value;
   var wallShadowOpacity = doc1.wallShadowOpacity.value;
   var artboardHeightRatio = doc1.wallPadding.value;
-  // var yOffset = 0.1;
   drawWallShadow(ctx4WallShadow)
-
-  // var lineWidth = doc1.frameThickness.value;; // inches
-  // drawFrame(artboardHeightRatio, lineWidth, yOffset, ctx4Frame);
-
 
   drawCoordSystem();
 
