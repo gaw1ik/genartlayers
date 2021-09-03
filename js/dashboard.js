@@ -2,11 +2,12 @@
 // handles the window.onload tasks and also sets up event handlers
 
 
-VERSION = "1.16d"
+VERSION = "1.16e"
+console.log("Welcome to genartlayers (VERSION ",VERSION," )");
 
 // GLOBAL VARIABLES
-includedProjNames = ["default","example4Martin","example01"];
-includedAlgNames = ["bg","example01","arcs4Martin","arcsA"];
+includedProjNames = ["default","example4Martin","example01","example02"];
+includedAlgNames = ["bg","example01","arcs4Martin","arcsA","example02"];
 currentProjName = "default";
 noDrawMode = 0;
 ctxIndex = 0;
