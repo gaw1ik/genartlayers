@@ -107,13 +107,13 @@
             "value": 34
         },
         "wallPadding": {
-            "default": 0.90,
+            "default": 0.9,
             "min": 0.01,
             "max": 1,
             "step": 0.01,
             "type": "number",
             "class": "number",
-            "value": 0.90
+            "value": 0.9
         },
         "yOffset": {
             "default": 0.01,
@@ -143,43 +143,46 @@
         },
         {
             "ctxIndex": 1,
-            "geometry": "arcsA",
+            "geometry": "arcsX",
             "object": {
                 "seed": {
-                    "value": 1
+                    "value": 8
                 },
                 "N": {
-                    "value": 90
+                    "value": 140
+                },
+                "asdf": {
+                    "value": 0.58
                 },
                 "x": {
-                    "value": 0.1
+                    "value": 0
                 },
                 "y": {
-                    "value": 0.1
+                    "value": 0
                 },
                 "radCirc": {
-                    "value": 0.37
+                    "value": 0.32
                 },
                 "rot": {
                     "value": 0
                 },
+                "lineWidthFraction": {
+                    "value": 0.02
+                },
                 "hueCenter": {
-                    "value": 0
+                    "value": 222
                 },
                 "satCenter": {
                     "value": 50
                 },
                 "litCenter": {
-                    "value": 0
+                    "value": 15
                 },
                 "alpha": {
                     "value": 255
                 },
                 "colorVar": {
                     "value": 10
-                },
-                "lineWidthFraction": {
-                    "value": 0.039
                 }
             },
             "hasCodeError": 0

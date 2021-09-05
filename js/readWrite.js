@@ -380,10 +380,12 @@ function loadDefaultProject() {
   //console.log("**Load Default Project**");
   
 
-  document.getElementById("fpath").value = "example02";
+  document.getElementById("fpath").value = defaultProjName;
+
+  var fileName = "./PROJ_" + defaultProjName + ".txt";
 
   // get the default project JSON file from the server
-  fetch("./PROJ_example02.txt")
+  fetch(fileName)
   .then(response => {
     return response.json();
   })
