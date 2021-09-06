@@ -280,15 +280,19 @@ function onDuplLayerButtonClick(){
     newLayerIndex = currentLayerIndex + 1;
   }
 
+  var originalLayer = Layers[currentLayerIndex]
   // create a blank layer dict
-  var layer = Object.create( Layers[currentLayerIndex] );
+  //var duplicateLayer = { ctxIndex:newLayerIndex, geometry:"", object: {}, hasCodeError:0 };
+  //duplicateLayer = Object.assign( originalLayer );
+
+  var duplicateLayer = JSON.parse(JSON.stringify(originalLayer));
 
   // insert layer into Layers Array at newLayerIndex
-  Layers.splice(newLayerIndex, 0, layer);
+  Layers.splice(newLayerIndex, 0, duplicateLayer);
 
 
   // add a new pair of text editors (params and code) to the code panel
-  addCodeEditor(layer);
+  addCodeEditor(duplicateLayer);
 
   addTabButton();
 
