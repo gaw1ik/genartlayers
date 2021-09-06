@@ -19,6 +19,24 @@ function randomSign() {
 
 
 
+function bez3( t, [x1,y1], [xC1,yC1], [x2,y2] ) {
+    
+  var x = (1-t)**2*x1 + 2*(1-t)*t*xC1 + t**2*x2;
+  var y = (1-t)**2*y1 + 2*(1-t)*t*yC1 + t**2*y2;
+  
+  return [x,y];
+}
+
+
+function bez4( t, [x1,y1], [xC1,yC1], [xC2,yC2], [x2,y2] ) {
+
+  var x = (1-t)**3*x1 + 3*(1-t)**2*t*xC1 + 3*(1-t)*t**2*xC2 + t**3*x2;
+  var y = (1-t)**3*y1 + 3*(1-t)**2*t*yC1 + 3*(1-t)*t**2*yC2 + t**3*y2;
+  
+  return [x,y];
+}
+
+
 
 // function plusOrMinus(amount) {
 //   return (Math.round(myrng()) * 2 - 1) * amount;

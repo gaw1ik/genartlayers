@@ -15,6 +15,9 @@ LayerList_MoveUp_Button.addEventListener("click", onMoveUpLayerButtonClick);
 LayerList_MoveDown_Button = document.getElementById("LayerList_MoveDown_Button");
 LayerList_MoveDown_Button.addEventListener("click", onMoveDownLayerButtonClick);
 
+LayerList_Duplicate_Button = document.getElementById("LayerList_Duplicate_Button");
+LayerList_Duplicate_Button.addEventListener("click", onDuplLayerButtonClick);
+
 
 
 
@@ -253,6 +256,81 @@ function onAddLayerButtonClick(){
 }
 
 
+
+
+
+
+
+
+
+function onDuplLayerButtonClick(){
+
+  if(Layers.length>7) {
+    alert("this version of genartlayers does not allow more than 8 layers! \nSorry :(");
+    return;
+  }
+
+  // variables
+  var newLayerIndex;
+
+  // if Layers is empty, newLayerIndex should be 0. Otherwise, it's always currentLayerIndex + 1.
+  if(Layers.length==0){
+    newLayerIndex = 0;
+  } else {
+    newLayerIndex = currentLayerIndex + 1;
+  }
+
+  // create a blank layer dict
+  var layer = Object.create( Layers[currentLayerIndex] );
+
+  // insert layer into Layers Array at newLayerIndex
+  Layers.splice(newLayerIndex, 0, layer);
+
+
+  // add a new pair of text editors (params and code) to the code panel
+  addCodeEditor(layer);
+
+  addTabButton();
+
+
+  
+
+  updateTabButtons();
+  resetAllCanvasBlursToZero();
+
+
+
+  // starting at the index of the newly created layer, move the text from each editor up one layer
+  //console.log("newLayerIndex",newLayerIndex)
+
+  for(let i=Layers.length-1; i>newLayerIndex-1; i--) {
+
+    var codeEditorText = CodeEditors[i-1].getValue();
+    CodeEditors[i].setValue(codeEditorText);
+
+    //CodeEditors[i].setOption( 'firstLineNumber', 2 + Object.keys(Layers[i].object).length );
+
+    var paramsEditorText = ParamsEditors[i-1].getValue();
+    ParamsEditors[i].setValue(paramsEditorText);
+
+    //console.log("text from", i-1, "being put on ", i);
+
+  }
+
+  ParamsEditors[newLayerIndex].setValue(paramsEditorText);
+  CodeEditors[newLayerIndex].setValue(codeEditorText);
+  
+  ////////////////////////////////////////////////////////////////////////////////
+
+
+  // redraw everything.
+  drawAll();
+
+
+  // then open the tab you just created
+  document.getElementById("Tab97" + "_Layer" + newLayerIndex + "_Button").click();
+
+}
 
 
 
