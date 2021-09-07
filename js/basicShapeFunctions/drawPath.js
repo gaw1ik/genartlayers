@@ -24,6 +24,8 @@ function drawPath(path, lineWidth, hue, sat, lit, alpha, fillMode, close) {
     if(close==1){
         ctxToDrawToNow.closePath();
     }
+
+    var alpha = alpha/255;
     
 
     if(fillMode==0) {
