@@ -1,5 +1,5 @@
 
-function drawPath(path, lineWidth, hue, sat, lit, fillMode, close) {
+function drawPath(path, lineWidth, hue, sat, lit, alpha, fillMode, close) {
 
     // console.log("path",path);
 
@@ -27,10 +27,10 @@ function drawPath(path, lineWidth, hue, sat, lit, fillMode, close) {
     
 
     if(fillMode==0) {
-        ctxToDrawToNow.fillStyle   = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')'; 
+        ctxToDrawToNow.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
         ctxToDrawToNow.fill();
     } else {
-        ctxToDrawToNow.strokeStyle = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')';
+        ctxToDrawToNow.strokeStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
         ctxToDrawToNow.lineWidth = lineWidth*artboardH;
         ctxToDrawToNow.stroke()
     }
@@ -42,7 +42,7 @@ function drawPath(path, lineWidth, hue, sat, lit, fillMode, close) {
 
 
 
-function drawPathW(path, lineWidth, hue, sat, lit, fillMode, close) {
+function drawPathW(path, lineWidth, hue, sat, lit, alpha, fillMode, close) {
 
     // console.log("path",path);
 
@@ -70,10 +70,10 @@ function drawPathW(path, lineWidth, hue, sat, lit, fillMode, close) {
     
 
     if(fillMode==0) {
-        ctxToDrawToNow.fillStyle   = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')'; 
+        ctxToDrawToNow.fillStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
         ctxToDrawToNow.fill();
     } else {
-        ctxToDrawToNow.strokeStyle = 'hsl(' + hue + ', ' +  sat + '%, ' + lit + '%'  +')';
+        ctxToDrawToNow.strokeStyle   = 'hsla(' + hue + ', ' +  sat + '%, ' + lit + '%,'  + alpha + ')'; 
         ctxToDrawToNow.lineWidth = lineWidth*artboardH;
         ctxToDrawToNow.stroke()
     }
