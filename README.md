@@ -104,7 +104,7 @@ drawEllipse(x, y, radX, radY, rotation, lineWidth, hue, sat, lit, alpha, fillMod
 rotation is in radians.
 ### Path
 ```javascript
-drawPath(path, lineWidth, hue, saturation, lightness, fillMode, close)
+drawPath(path, lineWidth, hue, saturation, lightness, alpha, fillMode, close)
 ```
 close is a 0 or 1 value, 1 being close and 0 being do not close.
 
