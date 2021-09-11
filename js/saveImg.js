@@ -47,6 +47,45 @@ function combine(pageWidth, exportDPI) {
 
 
 
+function combinePix() {
+
+  ctx4Export.clearRect(0, 0, artboardW, artboardH); 
+ 
+  // for each layer, draw the image onto canvas4Export. (canvas4Export is a canvas that used to be used to create the dropshadow effect. Now, I just use it for combining the images for export.)
+  for(let i=0; i<Layers.length; i++) {
+
+    
+      var layerIndex = i;
+
+      var layer = Layers[layerIndex];
+
+      ctxToDrawToNow = ctx4Export;
+
+      //var pageHeight = pageWidth * (doc1.pageHeight.value/doc1.pageWidth.value);
+
+      // artboardW = wPix;
+      // artboardH = hPix;
+
+      console.log(artboardW, artboardH);
+
+      //canvases[i].style.width  = Math.ceil(artboardW) + "px"; // HTML width
+      //canvases[i].style.height = Math.ceil(artboardH) + "px"; // HTML height
+
+      canvases[i].width  = Math.ceil(artboardW); // HTML width
+      canvases[i].height = Math.ceil(artboardH); // HTML height
+
+      drawLayer(layer);
+
+      var imageFromOneLayer = canvases[layerIndex];
+
+      ctx4Export.drawImage(imageFromOneLayer, 0, 0, artboardW, artboardH);
+
+  }
+  
+}
+
+
+
 
 
 
@@ -490,28 +529,40 @@ function exportIGWallShot(yOffset, padding) {
   canvas4WallShot.width  = resWidth;
   canvas4WallShot.height = resHeight;
 
-  canvas4Export.width  = resWidth * (1-2*padding);
-  canvas4Export.height = canvas4Export.width;
-
-  drawWall();
+  if(artboardAR<1) { // horizontal
+    canvas4Export.width  = resWidth * (1-2*padding);
+    canvas4Export.height = canvas4Export.width * artboardAR;
+    
+    //var dpi =  resWidth/wInches * wallFraction;
+  } else { // square or vertical
+    canvas4Export.height = resHeight * (1-2*padding);
+    canvas4Export.width = canvas4Export.height / artboardAR;
+    //dpi =  resHeight/wInches * wallFraction;
+  }
 
   var wallFraction = (1-2*padding);
+  //var wInches = 10;
+  
+  artboardW = canvas4Export.width;
+  artboardH = canvas4Export.height;
+  combinePix()
+
+
+  drawWall();
+  
 
   drawWallShadow( yOffset, wallFraction);
-
 
 
   ctx4WallShot.drawImage(canvas4Wall  , 0, 0, resWidth, resHeight);
   ctx4WallShot.drawImage(canvas4WallShadow  , 0, 0, resWidth, resHeight);
 
-  var artboardLeftPosOnWall = padding*resWidth;
-  var artboardTopPosOnWall  = padding*resHeight - yOffset*resHeight;
+  var artboardLeftPosOnWall = (resWidth  - canvas4Export.width )/2;
+  var artboardTopPosOnWall  = (resHeight - canvas4Export.height)/2 - yOffset*resHeight;
   //var artboardWidthOnWall  = resWidth * (1-2*padding);
   //var artboardHeightOnWall = resHeight * (1-2*padding);
 
-  var wInches = 10;
-  var dpi =  resWidth/wInches * wallFraction;
-  combine(wInches, dpi);
+
   console.log(canvas4Export.width, canvas4Export.height)
   ctx4WallShot.drawImage(canvas4Export, artboardLeftPosOnWall, artboardTopPosOnWall);
 
