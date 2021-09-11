@@ -43,7 +43,7 @@ function updateDocObject() {
     // drawWallShadow(wallShadowHeight, wallShadowWidth, wallShadowEllipseWidth, wallShadowBlur, wallShadowOpacity, artboardSizeRatio, yOffset, ctx4WallShadow);
     
     drawWallShadow(ctx4WallShadow);
-    draw_wall(wallHue,wallSat,wallLit,ctx4Wall);
+    drawWall(wallHue,wallSat,wallLit,ctx4Wall);
     handleResize();
   }
 

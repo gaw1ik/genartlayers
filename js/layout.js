@@ -143,18 +143,18 @@ function handleResize() {
 
   drawAll();
 
-  var wallHue = doc1.wallHue.value;
-  var wallSat = doc1.wallSat.value;
-  var wallLit = doc1.wallLit.value;
-  draw_wall(wallHue,wallSat,wallLit,ctx4Wall);
 
-  var wallShadowHeight  = doc1.wallShadowHeight .value;
-  var wallShadowHWidth  = doc1.wallShadowWidth  .value;
-  var wallShadowEllipseWidth = doc1.wallShadowEllipseWidth  .value;
-  var wallShadowBlur    = doc1.wallShadowBlur   .value;
-  var wallShadowOpacity = doc1.wallShadowOpacity.value;
-  var artboardHeightRatio = doc1.wallPadding.value;
-  drawWallShadow(ctx4WallShadow)
+  drawWall();
+
+  // var wallShadowHeight  = doc1.wallShadowHeight .value;
+  // var wallShadowHWidth  = doc1.wallShadowWidth  .value;
+  // var wallShadowEllipseWidth = doc1.wallShadowEllipseWidth  .value;
+  // var wallShadowBlur    = doc1.wallShadowBlur   .value;
+  // var wallShadowOpacity = doc1.wallShadowOpacity.value;
+  // var artboardHeightRatio = doc1.wallPadding.value;
+  var yOffset = doc1.yOffset.value;
+  var wallPadding = doc1.wallPadding.value;
+  drawWallShadow(yOffset,wallPadding);
 
   drawCoordSystem();
 
@@ -165,15 +165,18 @@ function handleResize() {
 
 
 
-function draw_wall(wallHueCenter,wallSatCenter,wallLitCenter,ctx)  
-{
+function drawWall()  {
 
   // // Wall Stuff
   // var hue = doc1.wallHue.value
   // var sat = doc1.wallSat.value
   // var lit = doc1.wallLit.value
 
-  // var ctx = ctx4Wall
+  var ctx = ctx4Wall;
+
+  var wallHue = doc1.wallHue.value;
+  var wallSat = doc1.wallSat.value;
+  var wallLit = doc1.wallLit.value;
 
   var wall_width  = canvas4Wall.width
   var wall_height = canvas4Wall.height;
@@ -195,7 +198,7 @@ function draw_wall(wallHueCenter,wallSatCenter,wallLitCenter,ctx)
   // this part draws a rectangle that covers the entire wall.
   ctx.beginPath()
   ctx.rect(-1*wall_width,-1*wall_height,3*wall_width,3*wall_height)
-  ctx.fillStyle = 'hsl(' + wallHueCenter + ', ' +  wallSatCenter + '%, ' + wallLitCenter + '%'  +')'
+  ctx.fillStyle = 'hsl(' + wallHue + ', ' +  wallSat + '%, ' + wallLit + '%'  +')'
   ctx.fill()
 
   var variation = 30
@@ -228,7 +231,13 @@ function draw_wall(wallHueCenter,wallSatCenter,wallLitCenter,ctx)
 }
 
 
-function drawWallShadow(ctx)  {
+
+
+
+
+function drawWallShadow(yOffset, wallPadding)  {
+
+  var ctx = ctx4WallShadow;
 
   // bring in properties
   var wallShadowHeight  = doc1.wallShadowHeight .value;
@@ -236,8 +245,8 @@ function drawWallShadow(ctx)  {
   var wallShadowEllipseWidth = doc1.wallShadowEllipseWidth  .value;
   var wallShadowBlur    = doc1.wallShadowBlur   .value;
   var wallShadowOpacity = doc1.wallShadowOpacity.value;
-  var wallPadding = doc1.wallPadding.value;
-  var yOffset = doc1.yOffset.value;
+  // var wallPadding = doc1.wallPadding.value;
+  //var yOffset = doc1.yOffset.value;
 
 
   var wall_width  = canvas4WallShadow.width;
