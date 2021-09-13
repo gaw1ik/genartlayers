@@ -252,6 +252,11 @@ function drawWallShadow(yOffset, wallPadding)  {
   var wall_width  = canvas4WallShadow.width;
   var wall_height = canvas4WallShadow.height;
 
+  console.log("wall_width",wall_width)
+  console.log("wall_height",wall_height)
+
+  console.log("wallPadding",wallPadding)
+
 
   // // Shadow stuff
   ctx.clearRect(0,0,wall_width,wall_height);
@@ -261,25 +266,31 @@ function drawWallShadow(yOffset, wallPadding)  {
 
   var artBoardAspectRatio = doc1.pageHeight.value / doc1.pageWidth.value;
 
-  if(wallAspectRatio < artBoardAspectRatio) {
-    var artboardHeight = wallPadding * wall_height;
-    var artboardWidth  = artboardHeight / artBoardAspectRatio;
-  } else {
-    // //console.log("<")
-    var artboardWidth  = wallPadding * wall_width;
-    var artboardHeight = artboardWidth * artBoardAspectRatio;
-  }
+  // if(wallAspectRatio < artBoardAspectRatio) {
+  //   var artboardHeight = wallPadding * wall_height;
+  //   var artboardWidth  = artboardHeight / artBoardAspectRatio;
+  // } else {
+  //   // //console.log("<")
+  //   var artboardWidth  = wallPadding * wall_width;
+  //   var artboardHeight = artboardWidth * artBoardAspectRatio;
+  // }
+
+  console.log("artboardW in drawWallShadow",artboardW)
+  console.log("artboardH in drawWallShadow",artboardH)
 
 
-  var shadow_height = wallShadowHeight * artboardHeight;
-  var shadow_width  = wallShadowWidth  * artboardWidth;
+  var shadow_height = wallShadowHeight * artboardH;
+  var shadow_width  = wallShadowWidth  * artboardW;
   var blur          = wallShadowBlur   * artboardH;
   var opacity       = wallShadowOpacity   ;
 
+  console.log("shadow_height",shadow_height)
+  console.log("shadow_width",shadow_width)
 
 
-  var shadow_ellipse_width  = wallShadowEllipseWidth  *  artboardWidth ;
-  var shadow_ellipse_height = wallShadowEllipseWidth *  artboardHeight;
+
+  var shadow_ellipse_width  = wallShadowEllipseWidth  *  artboardW;
+  var shadow_ellipse_height = wallShadowEllipseWidth *  artboardH;
 
 
   var x0 = ( 0.5         *wall_width  - shadow_width /2);
@@ -305,6 +316,19 @@ function drawWallShadow(yOffset, wallPadding)  {
   ctx.fill()
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

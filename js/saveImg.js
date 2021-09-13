@@ -583,6 +583,130 @@ function exportIGWallShot(yOffset, padding) {
 }
 
 
+
+
+
+
+
+
+function exportDesktopWallShot() {
+
+  var wallW = 1920;
+  var wallH = 1080;
+
+  var yOffset = 0.05;
+
+  var resWidth  = wallW;
+  var resHeight = wallH;
+
+  canvas4Wall.style.width  = resWidth/dpr;
+  canvas4Wall.style.height = resHeight/dpr;
+  canvas4Wall.width  = resWidth;
+  canvas4Wall.height = resHeight;
+
+  canvas4WallShadow.style.width  = resWidth/dpr;
+  canvas4WallShadow.style.height = resHeight/dpr;
+  canvas4WallShadow.width  = resWidth;
+  canvas4WallShadow.height = resHeight;
+
+  canvas4WallShot.style.width  = resWidth/dpr;
+  canvas4WallShot.style.height = resHeight/dpr;
+  canvas4WallShot.width  = resWidth;
+  canvas4WallShot.height = resHeight;
+
+
+
+
+
+  // if(artboardAR<1) { // horizontal
+  //   canvas4Export.width  = resWidth * (1-2*padding);
+  //   canvas4Export.height = canvas4Export.width * artboardAR;
+    
+  //   //var dpi =  resWidth/wInches * wallFraction;
+  // } else { // square or vertical
+  //   canvas4Export.height = resHeight * (1-2*padding);
+  //   canvas4Export.width = canvas4Export.height / artboardAR;
+  //   //dpi =  resHeight/wInches * wallFraction;
+  // }
+
+  var wallAspectRatio = wallH / wallW;
+
+  var artBoardAspectRatio = doc1.pageHeight.value / doc1.pageWidth.value;
+
+  // this is set up so that the artboard always fits inside of a square region that has width (and height) = wallFraction*wallW
+  var wallFraction = 0.3;
+  if(artboardAR>1) { //  if vertical
+    artboardH = wallW*wallFraction;
+    artboardW = artboardH / artboardAR;
+  } else { // if square or horizontal
+    artboardW = wallW*wallFraction;
+    artboardH = artboardW * artboardAR;
+  }
+
+  canvas4Export.width  = artboardW;
+  canvas4Export.height = artboardH;
+
+  //var wInches = 10;
+  
+  // artboardW = canvas4Export.width;
+  // artboardH = canvas4Export.height;
+
+  combinePix();
+
+  drawWall();
+  
+  console.log("wallFraction", wallFraction);
+  drawWallShadow( yOffset   , wallFraction);
+
+
+  ctx4WallShot.drawImage(canvas4Wall  , 0, 0, resWidth, resHeight);
+  ctx4WallShot.drawImage(canvas4WallShadow  , 0, 0, resWidth, resHeight);
+
+  var artboardLeftPosOnWall = (resWidth  - canvas4Export.width )/2;
+  var artboardTopPosOnWall  = (resHeight - canvas4Export.height)/2 - yOffset*resHeight;
+  //var artboardWidthOnWall  = resWidth * (1-2*padding);
+  //var artboardHeightOnWall = resHeight * (1-2*padding);
+
+
+  console.log("artboardW",artboardW);
+  console.log("artboardH",artboardH);
+
+  ctx4WallShot.drawImage(canvas4Export, artboardLeftPosOnWall, artboardTopPosOnWall);
+
+  
+
+
+  // save download dialogue
+  var link = document.getElementById('save_img_link');
+  link.setAttribute('download', 'render.png');
+  link.setAttribute('href', canvas4WallShot.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  link.click();
+
+
+  ctx4WallShot.clearRect(0,0,resWidth,resHeight);
+
+  handleResize();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function exportIGWallShot4Slideshow(versionNumber) {
 
   var wallWidth = doc1.wallWidth.value;
