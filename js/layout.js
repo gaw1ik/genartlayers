@@ -252,10 +252,10 @@ function drawWallShadow(yOffset, wallPadding)  {
   var wall_width  = canvas4WallShadow.width;
   var wall_height = canvas4WallShadow.height;
 
-  console.log("wall_width",wall_width)
-  console.log("wall_height",wall_height)
+  //console.log("wall_width",wall_width)
+  //console.log("wall_height",wall_height)
 
-  console.log("wallPadding",wallPadding)
+  //console.log("wallPadding",wallPadding)
 
 
   // // Shadow stuff
@@ -275,8 +275,8 @@ function drawWallShadow(yOffset, wallPadding)  {
   //   var artboardHeight = artboardWidth * artBoardAspectRatio;
   // }
 
-  console.log("artboardW in drawWallShadow",artboardW)
-  console.log("artboardH in drawWallShadow",artboardH)
+  //console.log("artboardW in drawWallShadow",artboardW)
+  //console.log("artboardH in drawWallShadow",artboardH)
 
 
   var shadow_height = wallShadowHeight * artboardH;
@@ -284,8 +284,8 @@ function drawWallShadow(yOffset, wallPadding)  {
   var blur          = wallShadowBlur   * artboardH;
   var opacity       = wallShadowOpacity   ;
 
-  console.log("shadow_height",shadow_height)
-  console.log("shadow_width",shadow_width)
+  //console.log("shadow_height",shadow_height)
+  //console.log("shadow_width",shadow_width)
 
 
 

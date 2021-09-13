@@ -655,7 +655,7 @@ function exportDesktopWallShot() {
 
   drawWall();
   
-  console.log("wallFraction", wallFraction);
+  //console.log("wallFraction", wallFraction);
   drawWallShadow( yOffset   , wallFraction);
 
 
@@ -668,8 +668,8 @@ function exportDesktopWallShot() {
   //var artboardHeightOnWall = resHeight * (1-2*padding);
 
 
-  console.log("artboardW",artboardW);
-  console.log("artboardH",artboardH);
+  //console.log("artboardW",artboardW);
+  // console.log("artboardH",artboardH);
 
   ctx4WallShot.drawImage(canvas4Export, artboardLeftPosOnWall, artboardTopPosOnWall);
 
