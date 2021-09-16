@@ -286,7 +286,7 @@ input:focus {
 
 #Tab97ControlsPanel{
   /* background-color: #0F192A; */
-  /* background-color: hsl(218, 47%, 11%); */
+  /* background-color: hsl(218, 0%, 5%); */
   /* height: calc( (var(--app_height) - var(--app_padding)*2 - var(--height_window_frame)) *0.7); */
   /* border-top:2px solid black; */
   height:70vh;
@@ -736,18 +736,19 @@ button.redraw:active {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  border-radius: 0px;
+  border-radius: 10px;
+  background-color: hsl(0,0%,5%);
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--clr_text);
-  /* width:3px; */
+  /* width:1px; */
   border-radius: 10px;
-  border: 5px solid rgba(0, 0, 0, 0);
+  border: 2px solid rgba(0, 0, 0, 0);
   border-top: 20px solid rgba(0, 0, 0, 0);
   border-bottom: 20px solid rgba(0, 0, 0, 0);
   padding: 10rem 0;
@@ -1225,6 +1226,7 @@ button.redraw:active {
   border: solid var(--borderThickness);
   /* height: var(--padded_app_height); */
   overflow-y: hidden;
+  overflow-x: hidden;
   /* padding: 4rem 0.5rem 0 0.5rem; */
   /* padding: 0 0.5rem; */
   padding: 0.2rem;
