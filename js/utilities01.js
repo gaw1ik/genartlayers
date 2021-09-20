@@ -19,6 +19,16 @@ function randomSign() {
 
 
 
+
+function lin(  t, [x1,y1], [x2,y2] ) {
+
+  var x = (1-t)*x1 + t*x2;
+  var y = (1-t)*y1 + t*y2;
+
+  return [x,y];
+
+}
+
 function bez3( t, [x1,y1], [xC1,yC1], [x2,y2] ) {
     
   var x = (1-t)**2*x1 + 2*(1-t)*t*xC1 + t**2*x2;

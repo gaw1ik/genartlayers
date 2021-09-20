@@ -2,7 +2,7 @@
 // handles the window.onload tasks and also sets up event handlers
 
 
-VERSION = "1.19d"
+VERSION = "1.19e"
 console.log("Welcome to genartlayers (VERSION ",VERSION," )");
 
 // GLOBAL VARIABLES
