@@ -5,15 +5,17 @@ function drawRect(x, y, width, height, lineWidth=0.005, hue=0, sat=0, lit=0, alp
     // console.log("ctxIndex",ctxIndex);
 
     //var thisCtx = CTX[ctxIndex];
-    
-
-    var x = (x+xCenterOffset  ) * artboardH;
-    var y = (1-y-yCenterOffset) * artboardH;
 
     var width  = width  * artboardH;
     var height = height * artboardH;
+    
 
-    y = 1-y;
+    var x = (x+xCenterOffset  ) * artboardH;
+    var y = (1-y-yCenterOffset) * artboardH - height;
+
+
+
+    //y = 1-y;
 
     var alpha = alpha/255;
 
