@@ -368,6 +368,13 @@ function makeGUIControlsPanel(layer) {
         ControlsDict[key].min = 0;
         ControlsDict[key].max = 360;
         ControlsDict[key].step= 1;
+      } else if (ControlsDict[key].class == "alpha") {
+        input.type = "range";
+        input.className = "slider-lit"; // the CSS class
+        ControlsDict[key].default = 255;
+        ControlsDict[key].min = 0;
+        ControlsDict[key].max = 255;
+        ControlsDict[key].step= 1;
       }
 
       var propertyName = key;
