@@ -329,25 +329,44 @@ function makeGUIControlsPanel(layer) {
       // input.type = object[key].type; (delete this?)
       if (ControlsDict[key].class == "number") {
         input.type = "number";
-        input.className = "number";
+        input.className = "number"; // the CSS class
       } else if (ControlsDict[key].class == "slider") {
         input.type = "range";
-        input.className = "slider";
+        input.className = "slider"; // the CSS class
       } else if (ControlsDict[key].class == "slider-hue") {
         input.type = "range";
-        input.className = "slider-hue";
+        input.className = "slider-hue"; // the CSS class
+        ControlsDict[key].default = 0;
+        ControlsDict[key].min = 0;
+        ControlsDict[key].max = 359;
+        ControlsDict[key].step= 1;
       } else if (ControlsDict[key].class == "slider-sat") {
         input.type = "range";
-        input.className = "slider-sat";
+        input.className = "slider-sat"; // the CSS class
+        ControlsDict[key].default = 0;
+        ControlsDict[key].min = 0;
+        ControlsDict[key].max = 100;
+        ControlsDict[key].step= 1;
       } else if (ControlsDict[key].class == "slider-lit") {
         input.type = "range";
-        input.className = "slider-lit";
+        input.className = "slider-lit"; // the CSS class
+        ControlsDict[key].default = 0;
+        ControlsDict[key].min = 0;
+        ControlsDict[key].max = 100;
+        ControlsDict[key].step= 1;
       } else if (ControlsDict[key].class == "on-off") {
         input.type = "range";
-        input.className = "on-off";
+        input.className = "on-off"; // the CSS class
         ControlsDict[key].default = 0;
         ControlsDict[key].min = 0;
         ControlsDict[key].max = 1;
+        ControlsDict[key].step= 1;
+      } else if (ControlsDict[key].class == "angle") {
+        input.type = "range";
+        input.className = "slider"; // the CSS class
+        ControlsDict[key].default = 0;
+        ControlsDict[key].min = 0;
+        ControlsDict[key].max = 360;
         ControlsDict[key].step= 1;
       }
 
