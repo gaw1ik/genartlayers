@@ -2,7 +2,7 @@
 // handles the window.onload tasks and also sets up event handlers
 
 
-VERSION = "1.20e"
+VERSION = "1.20f"
 console.log("Welcome to genartlayers (VERSION ",VERSION," )");
 
 // GLOBAL VARIABLES
@@ -22,6 +22,8 @@ yCenterOffset = 0.5;
 
 axesOn = -1;
 gridOn = -1;
+
+renderScale = 2;
 
 
 // useful constants

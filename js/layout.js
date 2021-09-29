@@ -40,7 +40,7 @@ function handleResize() {
 
   dpr = window.devicePixelRatio; // global
 
-  var scale = 2;
+  var scale = renderScale;
 
   picW = doc1.pageWidth.value;
   picH = doc1.pageHeight.value;
