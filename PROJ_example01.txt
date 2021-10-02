@@ -143,16 +143,16 @@
         },
         {
             "ctxIndex": 1,
-            "geometry": "arcsX",
+            "geometry": "arcsX_0",
             "object": {
                 "seed": {
-                    "value": 8
+                    "value": 4
                 },
                 "N": {
-                    "value": 140
+                    "value": 180
                 },
                 "asdf": {
-                    "value": 0.58
+                    "value": 0.23
                 },
                 "x": {
                     "value": 0
@@ -161,22 +161,22 @@
                     "value": 0
                 },
                 "radCirc": {
-                    "value": 0.32
+                    "value": 0.3
                 },
-                "rot": {
+                "rotationD": {
                     "value": 0
                 },
                 "lineWidthFraction": {
-                    "value": 0.02
+                    "value": 0.025
                 },
                 "hueCenter": {
-                    "value": 222
+                    "value": 0
                 },
                 "satCenter": {
-                    "value": 50
+                    "value": 47
                 },
                 "litCenter": {
-                    "value": 15
+                    "value": 28
                 },
                 "alpha": {
                     "value": 255

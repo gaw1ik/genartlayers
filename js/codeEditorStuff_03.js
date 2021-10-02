@@ -482,6 +482,7 @@ function assignAlgorithmToLayer(algName, layer) {
 
 function swapAlgorithmOnLayer(algName, layer) {
 
+  //console.log("swapAlgorithmOnLayer");
   // get the layer attibutes.
   var layerIndex = layer.ctxIndex;
   //var geometry = layer.geometry;
@@ -597,15 +598,16 @@ function swapAlgorithmOnLayer(algName, layer) {
   layer.object = object;
  
 
-  // finish by recalculating/redrawing everything
-  drawLayer(layer);
-
   // var ControlsCodeToggle = document.getElementById("ControlsCodeToggle");
   if(currentPanelValue==1) {
       makeGUICodePanel(layer);
   } else {
       makeGUIControlsPanel(layer);
   }
+
+
+  // finish by recalculating/redrawing everything
+  drawLayer(layer);
 
 }
 

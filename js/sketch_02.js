@@ -101,19 +101,17 @@ function updateObjectProperty(input) {
 
   var object = layer.object;
 
-  // Update the property that was changed in the layer 
-  // var id = input.id;
-
   // //console.log("input.id:",input.id);
 
   var propertyName = getPropertyNameFromInput("Property",input);
 
   // console.log("propertyName",propertyName);
 
-
-
   object[propertyName].value = parseFloat(input.value, 10);
+
 }
+
+
 
 function updateObjectPropertyIndicator(input) {
   // Stuff for handling the value indicator on the inputs

@@ -149,13 +149,13 @@
                     "value": 4
                 },
                 "nPoints": {
-                    "value": 3
+                    "value": 2
                 },
                 "r0": {
                     "value": 0.23
                 },
                 "radRatio": {
-                    "value": 3.3
+                    "value": 2.2
                 },
                 "seed": {
                     "value": 16
@@ -179,7 +179,7 @@
                     "value": 0
                 },
                 "rotation": {
-                    "value": 36
+                    "value": 45
                 },
                 "lineWidth": {
                     "value": 0.003
@@ -195,6 +195,12 @@
                 },
                 "colorVary": {
                     "value": 10
+                },
+                "fillMode": {
+                    "value": 1
+                },
+                "alpha": {
+                    "value": 255
                 }
             },
             "hasCodeError": 0

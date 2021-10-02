@@ -108,7 +108,7 @@ function onCodePanelButtonClick() {
 ////////////////////////////////////////////////////////////////////
 function makeGUICodePanel(layer) {
 
-  // First, remove all the headers on the code editors (we'll add them back in where they are needed)
+  // First, remove all the headers on the code editors (we'll add them back in where they are needed later)
   var editor_headers = document.getElementsByClassName("editor_header");
   for(let i=editor_headers.length-1; i>=0; i--) {
     var element = editor_headers[i];
@@ -354,7 +354,14 @@ function makeGUIControlsPanel(layer) {
         ControlsDict[key].min = 0;
         ControlsDict[key].max = 100;
         ControlsDict[key].step= 1;
-      } else if (ControlsDict[key].class == "on-off") {
+      } else if (ControlsDict[key].class == "slider-alpha") {
+        input.type = "range";
+        input.className = "slider-lit"; // the CSS class
+        ControlsDict[key].default = 255;
+        ControlsDict[key].min = 0;
+        ControlsDict[key].max = 255;
+        ControlsDict[key].step= 1;
+      } else if (ControlsDict[key].class == "on-off" || ControlsDict[key].class == "switch") {
         input.type = "range";
         input.className = "on-off"; // the CSS class
         ControlsDict[key].default = 0;
@@ -368,12 +375,19 @@ function makeGUIControlsPanel(layer) {
         ControlsDict[key].min = 0;
         ControlsDict[key].max = 360;
         ControlsDict[key].step= 1;
-      } else if (ControlsDict[key].class == "alpha") {
-        input.type = "range";
-        input.className = "slider-lit"; // the CSS class
-        ControlsDict[key].default = 255;
+      } else if (ControlsDict[key].class == "seed") {
+        input.type = "number";
+        input.className = "number"; // the CSS class
+        ControlsDict[key].default = 1;
+        ControlsDict[key].min = 1;
+        ControlsDict[key].max = 9999;
+        ControlsDict[key].step= 1;
+      } else if (ControlsDict[key].class == "percent") {
+        input.type = "slider";
+        input.className = "slider"; // the CSS class
+        ControlsDict[key].default = 0;
         ControlsDict[key].min = 0;
-        ControlsDict[key].max = 255;
+        ControlsDict[key].max = 100;
         ControlsDict[key].step= 1;
       }
 
@@ -386,10 +400,15 @@ function makeGUIControlsPanel(layer) {
       input.max = ControlsDict[key].max;
       input.step = ControlsDict[key].step;
 
-      // And then assign the value. However, assigning the value is a lil' more complicated... If the parameter is undefined, set it to the default value, otherwise set it to the value.
+      // And then assign the value. However, assigning the value is a lil' more complicated... If the parameter is undefined, set it to the default value, otherwise set it to the value contained in the layer object. Furthermore, if the parameter is defined, but doesn't have a default value assigned, assign it to whatever is currently in the ControlsDict.
       var object = layer.object;
       if(object[key]===undefined) {
         input.value = ControlsDict[key].default;
+      } else if (object[key].value===undefined) {
+        //console.log("the layer object value was undefined")
+        input.value = ControlsDict[key].default;
+        // console.log("ControlsDict[key].default",ControlsDict[key].default)
+        // console.log("input.value",input.value)
       } else {
         input.value = object[key].value;
       }
@@ -407,6 +426,7 @@ function makeGUIControlsPanel(layer) {
       input_section.insertBefore(label, null);
       input_section.appendChild(input);
 
+      updateObjectProperty(input);
       updateObjectPropertyIndicator(input);
 
     }

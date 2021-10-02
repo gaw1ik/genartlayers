@@ -156,7 +156,7 @@ function getPropertyNameFromInput(name,element) {
 function print(variable) {
   // var hello = variable
   var variableAsString = Object.keys({variable})[0];
-  //console.log(variableAsString + ":", variable);
+  console.log(variableAsString + ":", variable);
 }
 
 
