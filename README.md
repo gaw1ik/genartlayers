@@ -1,3 +1,5 @@
+## Check the WIKI for FULL documentation of all the shape functions, parameter classes, etc!
+
 # Intro
 Genartlayers is an app which brings the modern digital art application experience to generative art. Genartlayers transforms your web browser into a generative art powerhouse, providing an environment for coding and manipulating your own generative art algorithms with the modern utilities of a digital art program. 
 
@@ -35,22 +37,7 @@ seed:{class:"number", default:1, min:1, max:1000, step:1}
 ```javascript
 width: {class:"slider", default:0.5, min:0.1, max:1.0, step:0.01}
 ```
-##### slider-hue
-```javascript
-hueCenter1: {class:"slider-hue", default:0, min:0, max:255, step:1}
-```
-##### slider-sat
-```javascript
-satCenter1: {class:"slider-sat", default:50, min:0, max:100, step:1}
-```
-##### slider-lit
-```javascript
-litCenter1: {class:"slider-lit", default:50, min:0, max:100, step:1}
-```
-##### on-off
-```javascript
-fillMode:{class:"on-off"}
-```
+
 
 ### drawFunction
 The drawFunction is the code that tells genartlayers how to draw your art. Code in genartlayers is written in javascript, but there are many simplifications and included functions provided to you in genartlayers which are discussed below.
@@ -109,20 +96,6 @@ drawPath(path, lineWidth, hue, saturation, lightness, alpha, fillMode, close)
 close is a 0 or 1 value, 1 being close and 0 being do not close.
 
 path is of the form [ [x1,y1], [x2,y2], ... , [xN,yN] ]
-### Arc
-```javascript
-drawArc(x, y, radX, radY, rotation, startAngle, endAngle, lineWidth, hue, sat, lit, alpha, fillMode) 
-```
-startAngle and endAngle are in radians.
-### Text
-```javascript
-drawText(text, x, y, fontSize, hue, sat, lit)
-```
-fontSize is in normalized units.
-```javascript
-drawTextPix(text, x, y, fontSizePix, hue, sat, lit)
-```
-fontSize is in pixels (px).
 
 ## Utility  functions:
 Below are the current set of utility functions in genartlayers. This includes many random number utilities as well as some useful conversion functions.
@@ -145,58 +118,12 @@ vary(centerValue, percentage)
 Randomly varies a parameter by a range defined as the parameter's center value plus or minus a percentage of that center value.
 Example: vary(100,15) will give a random value in the range 85-115; (returns a float).
 
-  ```javascript
-varyAbove(parameter, percent)
-```
-Randomly varies a parameter by a range defined as the parameter's center value plus a percentage of that center value.
-
-
-```javascript
-varyUnder(parameter, percent)
-```
-Randomly varies a parameter by a range defined as the parameter's center value minus a percentage of that center value.
-
 ```javascript
 plusOrMinus(centerValue, maxAmount)
 ```
 Returns centerValue plus or minus a randomly selected number in the range 0-maxAmount.
 Example: plusOrMins(50,7) would return a value in the range 43-57;
 
-  
-```javascript
-randomSign() 
-```
-Returns either 1 or -1 at random.
- 
-```javascript
-chooseFromArray(array) 
-```
-Returns a randomly chosen value from an array.
-
-
-### Conversion utilities:
-```javascript
- deg2rad(thetaD)
-```
-Converts the value thetaD (which is assumed to be in degrees) to the equivalent value in radians.
-  
-  ```javascript
- rad2deg(thetaR)
- ```
-Converts the value thetaR (which is assumed to be in radians) to the equivalent value in degrees.
- 
- ```javascript
-normal2range(nValue,min,max)
-```
-Takes a normalized value and places it appropriately in a range bounded by min and max.
-
-Example: normal2range(0.6, 0, 100) will return the value 60.
-```javascript
-range2normal(rValue,min,max)
- ```
- Takes a range value and a range (bounded by min and max) and returns a normalized value.
-
-Example: range2normal(60, 0, 100) will return the value 0.6.
  
 ## Saving Algorithms and Projects
 After you make changes to your code, hit the SaveCode button to implement them. Make sure you give your code a unique name in the text field above the editors. The layer that the code is on should redraw immediately unless there's an error in your code. Pro-tip: open your browser's console (ctrl+shift+i) to debug while you code. The browser console is awesome, and it's where everyone debugs Javascript.
