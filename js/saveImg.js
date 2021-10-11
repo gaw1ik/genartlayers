@@ -591,7 +591,7 @@ function exportIGWallShot(yOffset, padding) {
 
 
 
-function exportDesktopWallShot() {
+function exportDesktopWallShot(wallFraction) {
 
   var wallW = 1920;
   var wallH = 1080;
@@ -636,7 +636,7 @@ function exportDesktopWallShot() {
   var artBoardAspectRatio = doc1.pageHeight.value / doc1.pageWidth.value;
 
   // this is set up so that the artboard always fits inside of a square region that has width (and height) = wallFraction*wallW
-  var wallFraction = 0.3;
+  //var wallFraction = 0.3;
   if(artboardAR>1) { //  if vertical
     artboardH = wallW*wallFraction;
     artboardW = artboardH / artboardAR;
