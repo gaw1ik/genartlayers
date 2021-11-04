@@ -222,11 +222,17 @@ function setUpProjectFromProjectFile(JSONdata) {
   CodeEditors = [];
   ParamsEditors = [];
 
+  // remove all the code editors from the current project
   var Tab97CodePanel = document.getElementById("Tab97CodePanel");
   removeAllChildNodes(Tab97CodePanel);
 
+  // remove all the layer selector buttons from the current project
   var tab_bar_layers_container = document.getElementById("tab-bar-layers-container");
   removeAllChildNodes(tab_bar_layers_container);
+
+  // remove all the layer visibility buttons from the current project
+  var layer_vis_buttons_container = document.getElementById("layer_vis_buttons_container");
+  removeAllChildNodes(layer_vis_buttons_container);
 
 
   //console.log("Layers",Layers);
@@ -286,7 +292,7 @@ function isProjIncluded(projName) {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function loadProject() { // HEY THIS ONLY LOOKS IN LOCAL STORAGE
+function loadProject() {
 
   //console.log("**Load Project**");
 

@@ -19,6 +19,9 @@ LayerList_Duplicate_Button = document.getElementById("LayerList_Duplicate_Button
 LayerList_Duplicate_Button.addEventListener("click", onDuplLayerButtonClick);
 
 
+layerOnCharacter = "\u2713";
+
+
 
 
 
@@ -77,15 +80,12 @@ function addCodeEditor(layer) {
 // This function adds a Tab Button to the Layers Bar for a particular layer
 function addTabButton() {
 
-    // var newLayerIndex = layer.ctxIndex;
-    // var newLayerIndex = currentLayerIndex + 1;
 
-    // var layer = Layers[newLayerIndex];    
+    // APPEND A LAYER SELECT BUTTON
 
-    // //console.log("newLayerIndex",newLayerIndex);
-  
-    var tab_button = document.createElement("BUTTON");
-    tab_button.className = "tablinks";
+    var layer_button = document.createElement("BUTTON");
+    layer_button.className = "tablinks";
+
     // tab_button.id = "Tab97" + "_Layer" + newLayerIndex + "_Button";
     // tab_button.tabindex = layerIndex;
     // tab_button.innerText = newLayerIndex + ". " + layer.geometry;
@@ -94,12 +94,62 @@ function addTabButton() {
     // //console.log("tab_button",tab_button);
     
     // tab_bar_layers_container.insertBefore(tab_button, tab_bar_layers_container.children[Layers.length-newLayerIndex-1] );
-    tab_bar_layers_container.appendChild(tab_button);
-    
+    tab_bar_layers_container.appendChild(layer_button);
+
     // Attach an event listener to the tab button.
-    tab_button.addEventListener("click", openTab);
-  
+    layer_button.addEventListener("click", openTab);
+
+
+
+
+    // APPEND A LAYER VISIBILITY BUTTON
+
+    var layer_vis_button = document.createElement("BUTTON");
+    layer_vis_button.className = "layer_vis_button";
+    layer_vis_button.innerText = layerOnCharacter;
+    //layer_visibility_button.type = "checkbox";
+    //layer_visibility_button.checked = 1;
+
+    layer_vis_buttons_container.appendChild(layer_vis_button);
+
+    // Attach an event listener to the tab button.
+    layer_vis_button.addEventListener("click", onLayerVisButtonClick);
+
+    //tab_bar_layers_container.appendChild(layer_visibility_button);
+    
+
+}
+
+
+
+
+
+
+function onLayerVisButtonClick() {
+
+  var layer_vis_button = this;
+
+  var layerIndex = getLayerIndexFromElement(this);
+
+  var visibility = Layers[layerIndex].visible;
+
+  visibility = visibility * -1; 
+
+  Layers[layerIndex].visible = visibility;
+
+  //console.log("layerIndex",layerIndex);
+
+  // Update the Layer visible property to reflect the current state of the button
+  if( visibility == -1 ) {
+    layer_vis_button.innerText = "";
+  } else if ( visibility == 1 ) {
+    layer_vis_button.innerText = layerOnCharacter;
   }
+  
+  var layer = Layers[layerIndex];  
+  drawLayer(layer);
+  
+}
 
 
 
@@ -115,10 +165,6 @@ function updateTabButtons() {
   // for each layer above the newly created layer, update all the layer info, and tab buttons.
   for(let i=0; i<Layers.length; i++) {
 
-    // var layer = Layers[i];
-
-    // addTabButton();
-
     // Grab this layer
     var layerIndex = i;
     var layer = Layers[layerIndex];
@@ -126,7 +172,8 @@ function updateTabButtons() {
     // Update some info about the layer
     layer.ctxIndex = layerIndex;
 
-    // update the tab buttons
+
+    // UPDATE THE LAYER SELECT BUTTONS
     var tabIndex = Layers.length-1-i;
     //console.log("tabIndex",tabIndex);
     var tab_button = tab_bar_layers_container.children[tabIndex];
@@ -134,6 +181,24 @@ function updateTabButtons() {
     // tab_button.innerText = i + ". " + layer.geometry;
     tab_button.innerText = "[" + i + "]";
 
+
+    // UPDATE THE LAYER VIS BUTTONS
+    var layer_vis_button = layer_vis_buttons_container.children[tabIndex];
+    layer_vis_button.id = "Tab97" + "_Layer" + (i) + "_Vis_Button";
+
+    if(Layers[tabIndex].visible===undefined) {
+      Layers[tabIndex].visible = 1;
+    }
+  
+    if( Layers[tabIndex].visible== -1 ) {
+      layer_vis_button.innerText = "";
+    } else if ( Layers[tabIndex].visible == 1 ) {
+      layer_vis_button.innerText = layerOnCharacter;
+    }
+    
+    
+
+    // HANDLE CODE ERRORS
     if(layer.hasCodeError===1) {
       tab_button.style.color = "red";
       tab_button.style.textDecoration = "line-through";
@@ -195,7 +260,7 @@ function onAddLayerButtonClick(){
   }
 
   // create a blank layer dict
-  var layer = { ctxIndex:newLayerIndex, geometry:"", object: {}, hasCodeError:0 };
+  var layer = { ctxIndex:newLayerIndex, geometry:"", object: {}, hasCodeError:0, visible:1 };
 
   // insert layer into Layers Array at newLayerIndex
   Layers.splice(newLayerIndex, 0, layer);
@@ -225,7 +290,6 @@ function onAddLayerButtonClick(){
 
   // starting at the index of the newly created layer, move the text from each editor up one layer
   //console.log("newLayerIndex",newLayerIndex)
-
   for(let i=Layers.length-1; i>newLayerIndex-1; i--) {
 
     var codeEditorText = CodeEditors[i-1].getValue();
@@ -393,6 +457,7 @@ function onDeleteLayerButtonClick(){
     var tab_bar_layers_container = document.getElementById("tab-bar-layers-container");
 
     tab_bar_layers_container.children[currentLayerIndex].remove();
+    layer_vis_buttons_container.children[currentLayerIndex].remove();
 
     updateTabButtons();
     // resetAllCanvasBlursToZero();
@@ -421,7 +486,7 @@ function onDeleteLayerButtonClick(){
     // redraw everything.
     drawAll();
   
-  }
+}
 
   
 

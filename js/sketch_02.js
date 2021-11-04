@@ -25,22 +25,31 @@ function drawLayer(layer) {
   xCenterOffset = 1/artboardAR * doc1.xOrigin.value;
   yCenterOffset = doc1.yOrigin.value;
 
-  //xCenterOffset = 0;
-  //yCenterOffset = 0;
-
-  // if noDrawMode, don't draw anything and return immediately...
-  if(noDrawMode == 1) {return;}
-
   // get layerIndex
   ctxIndex = layer.ctxIndex; 
   ctxToDrawToNow = CTX[ctxIndex]; 
 
 
   // reset canvas (clears blur)
-  CTX[layer.ctxIndex].filter = "none"; 
+  CTX[ctxIndex].filter = "none";
 
   // clear canvas
-  CTX[layer.ctxIndex].clearRect(0, 0, artboardW, artboardH); 
+  CTX[ctxIndex].clearRect(0, 0, artboardW, artboardH); 
+
+
+  //xCenterOffset = 0;
+  //yCenterOffset = 0;
+
+  // if the layer visibility is set to false, don't draw anything and return immediately...
+  if(layer.visible == -1) {return;}
+
+  // if noDrawMode, don't draw anything and return immediately...
+  if(noDrawMode == 1) {return;}
+
+  // if the layer geometry isn't defined yet (*not the same as undefined), return immediately...
+  if(layer.geometry=='') {return;}
+
+
 
 
 
