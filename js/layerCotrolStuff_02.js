@@ -157,12 +157,12 @@ function updateCodeEditors() {
 }
 
 
-function resetAllCanvasBlursToZero() {
-  for(let i=0; i<Layers.length; i++) {
-    let this_ctx = CTX[i]; 
-    this_ctx.filter = 'none';
-  }
-}
+// function resetAllCanvasBlursToZero() {
+//   for(let i=0; i<Layers.length; i++) {
+//     let this_ctx = CTX[i]; 
+//     this_ctx.filter = 'none';
+//   }
+// }
 
 
 
@@ -219,7 +219,7 @@ function onAddLayerButtonClick(){
   
 
   updateTabButtons();
-  resetAllCanvasBlursToZero();
+  // resetAllCanvasBlursToZero();
 
 
 
@@ -300,7 +300,7 @@ function onDuplLayerButtonClick(){
   
 
   updateTabButtons();
-  resetAllCanvasBlursToZero();
+  // resetAllCanvasBlursToZero();
 
 
 
@@ -395,7 +395,7 @@ function onDeleteLayerButtonClick(){
     tab_bar_layers_container.children[currentLayerIndex].remove();
 
     updateTabButtons();
-    resetAllCanvasBlursToZero();
+    // resetAllCanvasBlursToZero();
 
     // for(let i=currentLayerIndex+1; i<Layers.length; i++) {
 
@@ -522,7 +522,7 @@ function onMoveUpLayerButtonClick() {
 
   // update the tab buttons to reflect the change
   updateTabButtons();
-  resetAllCanvasBlursToZero();
+  // resetAllCanvasBlursToZero();
 
 
   // redraw everything
@@ -595,7 +595,7 @@ function onMoveDownLayerButtonClick() {
 
 
   // redraw everything
-  resetAllCanvasBlursToZero();
+  //resetAllCanvasBlursToZero();
   drawAll();
 
 

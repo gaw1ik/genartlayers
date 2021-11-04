@@ -35,10 +35,15 @@ function drawLayer(layer) {
   ctxIndex = layer.ctxIndex; 
   ctxToDrawToNow = CTX[ctxIndex]; 
 
-  
+
+  // reset canvas (clears blur)
+  CTX[layer.ctxIndex].filter = "none"; 
 
   // clear canvas
   CTX[layer.ctxIndex].clearRect(0, 0, artboardW, artboardH); 
+
+
+
 
   // make a new random number generator
   if(layer.object.seed === undefined) {
