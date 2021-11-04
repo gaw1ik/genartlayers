@@ -383,7 +383,7 @@ function makeGUIControlsPanel(layer) {
         ControlsDict[key].max = 9999;
         ControlsDict[key].step= 1;
       } else if (ControlsDict[key].class == "percent") {
-        input.type = "slider";
+        input.type = "range";
         input.className = "slider"; // the CSS class
         ControlsDict[key].default = 0;
         ControlsDict[key].min = 0;
