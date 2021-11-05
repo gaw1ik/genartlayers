@@ -1238,23 +1238,19 @@ button.redraw:active {
 /* Style the tab */
 .tab-bar {
   display: flex;
-  /* grid-template-rows: 3rem 3rem auto auto; */
+
   flex-direction: column;
-  align-items: end;
+  align-items: center;
   /* justify-content:center; */
   border: solid var(--borderThickness);
-  /* height: var(--padded_app_height); */
+
+  overflow-x: hidden;
   overflow-y: hidden;
-  /* padding: 4rem 0.5rem 0 0.5rem; */
-  /* padding: 0 0.5rem; */
+
   padding: 0.2rem;
 
   width:var(--tab_bar_width);
-  /* height:100%; */
-  /* --tabAlpha: 0.1; */
-  /* height:50px; */
-  /* border: 1px solid #ccc; */
-  /* background-color:hsl(var(--BGHue),50%,90%); */
+
 }
 
 .layers-container {
@@ -1266,6 +1262,8 @@ button.redraw:active {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  align-items:center;
+  justify-content: center;
   width:100%;
   height:100%;
 }
@@ -1275,7 +1273,10 @@ button.redraw:active {
   height: 1.5rem;
   width: 1.5rem;
   color:var(--clr-text);
-  margin: 0px 0.2rem 0.2rem 0.2rem;
+  align-items:center;
+  justify-content: center;
+  /* margin: 0px 0.2rem 0.2rem 0.2rem; */
+  margin: 0.2rem;
   background: none;
   box-shadow: none;
   border: 1px solid black;
@@ -1298,6 +1299,8 @@ button.redraw:active {
   /* height: 15rem; */
   width:100%;
   margin-bottom: 1rem;
+  border-radius:0.5rem;
+  background-color:black;
   /* flex-direction: column; */
   /* align-self:end; */
   /* align-items: flex-end; */
@@ -1313,7 +1316,8 @@ button.redraw:active {
   height:1.2rem;
   padding: 0;
   margin:0.3rem;
-  background-color:var(--clr_input_form_bg);
+  background:none;
+  /* background-color:var(--clr_input_form_bg); */
   color:var(--clr_text);
   border-radius:1rem;
 }
@@ -1391,7 +1395,8 @@ button.redraw:active {
   /* float: left; */
   border-radius: 3px;
   border: 1px solid black;
-  margin: 0px 0px 0.2rem 0;
+  /* margin: 0px 0px 0.2rem 0; */
+  margin: 0.2rem;
   /* box-sizing: border-box; */
   /* outline: none; */
   /* border-bottom: 1px solid var(--clr_btn_border); */
