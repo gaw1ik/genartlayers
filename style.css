@@ -1303,8 +1303,8 @@ button.redraw:active {
   background-color:black;
   /* flex-direction: column; */
   /* align-self:end; */
-  /* align-items: flex-end; */
-  /* justify-content: flex-start; */
+  align-items: center;
+  justify-items: center;
   /* overflow-y:hidden; */
 }
 
@@ -1312,8 +1312,8 @@ button.redraw:active {
   display:flex;
   justify-content: center;
   align-items: center;
-  width:1.2rem;
-  height:1.2rem;
+  width:19px;
+  height:19px;
   padding: 0;
   margin:0.3rem;
   background:none;

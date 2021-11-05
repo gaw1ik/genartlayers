@@ -7,43 +7,43 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="100"
-   height="100"
-   viewBox="0 0 100 100"
-   version="1.1"
-   id="svg8"
+   sodipodi:docname="icon - duplicate.svg"
    inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   sodipodi:docname="icon - duplicate.svg">
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 100 100"
+   height="100"
+   width="100">
   <defs
      id="defs2" />
   <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="2.075944"
-     inkscape:cx="58.397009"
-     inkscape:cy="35.184725"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer2"
-     inkscape:document-rotation="0"
-     showgrid="true"
-     units="px"
-     showborder="true"
-     showguides="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="986"
-     inkscape:window-x="-11"
-     inkscape:window-y="-11"
-     inkscape:window-maximized="1"
-     inkscape:snap-page="true"
+     inkscape:showpageshadow="false"
      borderlayer="true"
-     inkscape:showpageshadow="false">
+     inkscape:snap-page="true"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-11"
+     inkscape:window-x="-11"
+     inkscape:window-height="986"
+     inkscape:window-width="1920"
+     showguides="true"
+     showborder="true"
+     units="px"
+     showgrid="true"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer2"
+     inkscape:document-units="px"
+     inkscape:cy="49.595525"
+     inkscape:cx="51.585229"
+     inkscape:zoom="3.6260556"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#181818"
+     id="base">
     <inkscape:grid
-       type="xygrid"
-       id="grid835" />
+       id="grid835"
+       type="xygrid" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -58,50 +58,35 @@
     </rdf:RDF>
   </metadata>
   <g
-     style="display:none"
-     inkscape:label="Background"
+     id="layer1"
      inkscape:groupmode="layer"
-     id="layer1">
+     inkscape:label="Background"
+     style="display:none">
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.7;stroke-linecap:round;stroke-linejoin:round"
-       id="rect833"
-       width="100"
-       height="100"
+       y="0"
        x="0"
-       y="0" />
+       height="100"
+       width="100"
+       id="rect833"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:12.7;stroke-linecap:round;stroke-linejoin:round" />
   </g>
   <g
-     inkscape:groupmode="layer"
+     inkscape:label="stuff"
      id="layer2"
-     inkscape:label="stuff">
+     inkscape:groupmode="layer">
     <rect
-       style="fill:#f7f7d6;stroke:#000000;stroke-width:1.00157;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       y="15"
+       x="32.5"
+       height="56.875"
+       width="52.500004"
        id="rect849"
-       width="45.641029"
-       height="59.33334"
-       x="33.69231"
-       y="15.769231" />
+       style="fill:#f7f7d6;fill-opacity:0;stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <rect
-       y="24.897436"
-       x="20"
-       height="59.33334"
-       width="45.641029"
+       style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect847"
-       style="fill:#f7f7d6;stroke:#000000;stroke-width:1.00157;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
-    <rect
-       y="40"
-       x="40"
-       height="30"
-       width="5"
-       id="rect855"
-       style="fill:#000000;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1" />
-    <rect
-       transform="rotate(90)"
-       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect857"
-       width="5"
-       height="30"
-       x="52.5"
-       y="-57.5" />
+       width="52.5"
+       height="56.875"
+       x="15"
+       y="28.125002" />
   </g>
 </svg>
