@@ -206,7 +206,6 @@ function onSaveAndEvalAlgorithmButtonClick(){
   params_editor = ParamsEditors[currentLayerIndex];
 
 
-  // //console.log("params_editor.getValue()", params_editor.getValue());
   // Get the algorithm from the code editors.
   var algorithm = {};
   algorithm.params = params_editor.getValue();
@@ -237,6 +236,7 @@ function onSaveAndEvalAlgorithmButtonClick(){
     layer_button.style.textDecoration = "line-through";
   }
   
+  //makeControlsDict()
 
 }
 

@@ -191,6 +191,64 @@ function makeGUICodePanel(layer) {
 
 
 
+function makeControlsDict() {
+  if (ControlsDict[key].class == "number") {
+    ControlsDict[key].default = 0;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 100;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "slider") {
+    ControlsDict[key].default = 0;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 100;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "slider-hue") {
+    ControlsDict[key].default = 0;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 359;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "slider-sat") {
+    ControlsDict[key].default = 0;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 100;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "slider-lit") {
+    ControlsDict[key].default = 0;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 100;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "slider-alpha") {
+    ControlsDict[key].default = 255;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 255;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "on-off" || ControlsDict[key].class == "switch") {
+    ControlsDict[key].default = 0;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 1;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "angle") {
+    ControlsDict[key].default = 0;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 360;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "seed") {
+    ControlsDict[key].default = 1;
+    ControlsDict[key].min = 1;
+    ControlsDict[key].max = 9999;
+    ControlsDict[key].step= 1;
+  } else if (ControlsDict[key].class == "percent") {
+    ControlsDict[key].default = 0;
+    ControlsDict[key].min = 0;
+    ControlsDict[key].max = 100;
+    ControlsDict[key].step= 1;
+  }
+}
+
+
+
+
+
 
 
 ////////////////////////////////////////////////////////////////////
@@ -324,6 +382,7 @@ function makeGUIControlsPanel(layer) {
         label.innerText = key + "()";
       }
       
+      //console.log("key",key);
 
       // select the HTML type and CSS className for the input based on the "class" attribute that the user has defined...
       // input.type = object[key].type; (delete this?)
@@ -334,6 +393,9 @@ function makeGUIControlsPanel(layer) {
         input.type = "range";
         input.className = "slider"; // the CSS class
       } else if (ControlsDict[key].class == "slider-hue") {
+
+        //console.log("hey");
+
         input.type = "range";
         input.className = "slider-hue"; // the CSS class
         ControlsDict[key].default = 0;

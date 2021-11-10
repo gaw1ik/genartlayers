@@ -186,13 +186,13 @@ function updateTabButtons() {
     var layer_vis_button = layer_vis_buttons_container.children[tabIndex];
     layer_vis_button.id = "Tab97" + "_Layer" + (i) + "_Vis_Button";
 
-    if(Layers[tabIndex].visible===undefined) {
-      Layers[tabIndex].visible = 1;
+    if(Layers[i].visible===undefined) {
+      Layers[i].visible = 1;
     }
   
-    if( Layers[tabIndex].visible== -1 ) {
+    if( Layers[i].visible== -1 ) {
       layer_vis_button.innerText = "";
-    } else if ( Layers[tabIndex].visible == 1 ) {
+    } else if ( Layers[i].visible == 1 ) {
       layer_vis_button.innerText = layerOnCharacter;
     }
     
